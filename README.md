@@ -8,10 +8,13 @@
 
 ## Todos
 - Resultate Seite anzeigen am Ende
-    - Kandidaten geranked anzeigen
-    - Vergleich zwischen eigenen Ergebnis und Kandidaten anzeigen
-    - Kandidaten auswählbar machen und dann untereinander vergleichen
+    - Kandidat:innen geranked anzeigen
+    - Vergleich zwischen eigenen Ergebnis und Kandidat:innen anzeigen
+    - Kandidat:innen auswählbar machen und dann untereinander vergleichen
     - Ergebnis speichern in Redis um sie teilbar zu machen
+- Fragebogen Kandidat:innen Modus
+    - Vordefinierten Link pro Kandidat:in definieren
+    - Kandidat:innen haben ein Textfeld für extra Informationen
 - Fragebogen
     - Echte Fragen hinzufügen
     - Barrierefreiheit
