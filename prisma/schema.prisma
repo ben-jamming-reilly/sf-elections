@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+
+model Candidate {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  hash        String   @unique
+  name        String
+  description String    @db.MediumText
+  hasFinished  Boolean  @default(false)
+  answers   CandidateQuestionAnswer[]
+}
+
+model Voter {
+  id          Int      @id @default(autoincrement())
+  hash        String   @unique
+  answers   VoterQuestionAnswer[]
+}
+
+model CandidateQuestionAnswer {
+  id          Int      @id @default(autoincrement())
+  candidate       Candidate    @relation(fields: [candidateId], references: [id])
+  candidateId     Int
+  question    Question @relation(fields: [questionId], references: [id])
+  questionId  Int
+  option Int
+  weighting Int
+  text String @db.MediumText @default("")
+
+  @@index([candidateId, questionId])
+  @@index([candidateId])
+  @@index([questionId])
+}
+
+model VoterQuestionAnswer {
+  id          Int      @id @default(autoincrement())
+  voter       Voter    @relation(fields: [voterId], references: [id])
+  voterId     Int
+  question    Question @relation(fields: [questionId], references: [id])
+  questionId  Int
+  option Int
+  weighting Int
+
+  @@index([voterId, questionId])
+  @@index([voterId])
+  @@index([questionId])
+}
+
+model Question {
+  id         Int      @id @default(autoincrement())
+  title      String
+  description String    @db.MediumText @default("")
+  voters     VoterQuestionAnswer[]
+  candidates CandidateQuestionAnswer[]
+}

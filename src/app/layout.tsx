@@ -14,11 +14,14 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body>
-        <div className={`w-full h-full z-10 bg-brand p-3`}>
-          <div className="bg-white flex flex-col min-h-full rounded-lg  px-5">
-            <div className="lg:w-[800px] max-w-full md:min- flex flex-col min-h-full flex-grow mx-auto gap-10">
+        <div className={`w-full min-h-full z-10 bg-brand p-5`}>
+          <div className="bg-white shadow-md flex flex-col min-h-full rounded-lg px-5">
+            <div className="lg:w-[800px] w-full md:min- flex flex-col min-h-full flex-grow mx-auto gap-10">
               <header className="mt-10">
-                <Link href="/" className="text-2xl text-white bg-brand p-3">
+                <Link
+                  href="/"
+                  className="text-2xl text-white bg-brand p-3 focus-visible:outline-brand outline-offset-2"
+                >
                   SPÖ Vorstandswahl-Kabine
                 </Link>
               </header>
@@ -29,6 +32,7 @@ export default function RootLayout({
                     <a
                       target="_blank"
                       rel="norefeerer noopener"
+                      className="focus-visible:outline-brand outline-offset-2"
                       href="https://www.spoe.at"
                     >
                       SPÖ
@@ -38,16 +42,27 @@ export default function RootLayout({
                     <a
                       target="_blank"
                       rel="norefeerer noopener"
+                      className="focus-visible:outline-brand outline-offset-2"
                       href="https://www.spoe.at/junge-generation"
                     >
                       Junge Generation
                     </a>
                   </li>
                   <li>
-                    <Link href="/impressum">Impressum</Link>
+                    <Link
+                      className="focus-visible:outline-brand outline-offset-2"
+                      href="/impressum"
+                    >
+                      Impressum
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/datenschutz">Datenschutz</Link>
+                    <Link
+                      className="focus-visible:outline-brand outline-offset-2"
+                      href="/datenschutz"
+                    >
+                      Datenschutz
+                    </Link>
                   </li>
                 </ul>
               </footer>

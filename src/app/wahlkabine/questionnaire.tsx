@@ -1,0 +1,282 @@
+"use client";
+
+import { Question } from "@prisma/client";
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePrevious } from "~/hooks/usePrevious";
+import { useQuestionnaireStore } from "~/stores/questionnaire-store";
+import { Loading } from "../ui/loading";
+import { options, weightings } from "~/data/answers";
+
+const variants = {
+  enter: (direction: number) => {
+    return {
+      x: direction > 0 ? 100 : -100,
+      opacity: 0,
+    };
+  },
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? 100 : -100,
+      opacity: 0,
+    };
+  },
+};
+
+export const Questionnaire = ({
+  questions,
+  candidateHash,
+}: {
+  questions: Question[];
+  candidateHash?: string;
+}) => {
+  const router = useRouter();
+  const [hasHydrated, setHasHydrated] = useState(false);
+  const [
+    questionsWithAnswers,
+    setQuestions,
+    slug,
+    setOption,
+    setWeighting,
+    setText,
+    activeIndex,
+    setActiveIndex,
+    save,
+    reset,
+  ] = useQuestionnaireStore((s) => [
+    s.questions,
+    s.setQuestions,
+    s.slug,
+    s.setOption,
+    s.setWeighting,
+    s.setText,
+    s.activeIndex,
+    s.setActiveIndex,
+    s.save,
+    s.reset,
+  ]);
+  const prevIndex = usePrevious(activeIndex);
+
+  // Check if component has hydrated before showing UI
+  // Prevents hydration mismatch error due to localstorage
+  useEffect(() => {
+    setHasHydrated(true);
+  }, [hasHydrated]);
+
+  // Hydrate store with questions from server
+  useEffect(() => {
+    setQuestions(questions);
+  }, [questions]);
+
+  // Redirect once hash is set
+  useEffect(() => {
+    if (slug) {
+      if (candidateHash) {
+        reset();
+      }
+      router.push(candidateHash ? `/${slug}` : `/wahlkabine/${slug}`);
+    }
+  }, [slug]);
+
+  // Derived state
+  const activeQuestion =
+    questionsWithAnswers.length > 0 && questionsWithAnswers[activeIndex];
+
+  const questionAnswered =
+    activeQuestion &&
+    typeof activeQuestion.option !== "undefined" &&
+    typeof activeQuestion.weighting !== "undefined" &&
+    (!candidateHash || activeQuestion.text);
+
+  const direction = prevIndex < activeIndex ? 1 : -1;
+
+  const hasPrevious = activeIndex > 0;
+  const hasNext = activeIndex !== questionsWithAnswers.length - 1;
+
+  // Handlers
+  const handlePrev = () => {
+    if (!hasPrevious) return;
+    setActiveIndex(activeIndex - 1);
+  };
+
+  const handleNext = () => {
+    if (!questionAnswered) return;
+    if (hasNext) {
+      setActiveIndex(activeIndex + 1);
+    } else {
+      save(candidateHash);
+    }
+  };
+
+  const PrevAndNext = (
+    <div className="flex flex-row justify-between items-center w-full">
+      <span>
+        <button
+          onClick={handlePrev}
+          disabled={!hasPrevious}
+          className={clsx(
+            "hover:bg-brand px-6 py-2 hover:text-white  active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            !hasPrevious && "invisible"
+          )}
+        >
+          Zurück
+        </button>
+      </span>
+      <span className="text-lg">
+        {activeIndex + 1} / {questionsWithAnswers.length}
+      </span>
+      <span>
+        <button
+          onClick={handleNext}
+          disabled={!questionAnswered}
+          className={clsx(
+            "hover:bg-brand px-6 py-2 hover:text-white active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            hasNext ? "bg-neutral-200 text-gray-800" : "bg-brand text-white"
+          )}
+        >
+          {hasNext ? "Weiter" : "Ergebnis"}
+        </button>
+      </span>
+    </div>
+  );
+
+  return (
+    <>
+      {hasHydrated && activeQuestion ? (
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.article
+            className="flex flex-col gap-10 items-center"
+            key={`question-${activeQuestion.id}`}
+          >
+            <motion.header
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { duration: 0.2 },
+                opacity: { duration: 0.2 },
+              }}
+              className="w-full"
+            >
+              <div className="text-2xl mb-3 h-[5em]">
+                <span className="text-lg font-semibold">
+                  Frage {activeIndex + 1}:
+                </span>
+                <h1 className="">{activeQuestion.title}</h1>
+              </div>
+            </motion.header>
+
+            {PrevAndNext}
+
+            <section className="flex flex-col gap-10 my-6 w-full">
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl underline underline-offset-4">
+                  Ich stimme:
+                </h2>
+                <ul className="grid w-full border border-brand md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
+                  {options.map((option) => (
+                    <li
+                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
+                      key={`option-${option.value}`}
+                    >
+                      {option.value === activeQuestion.option && (
+                        <motion.span
+                          layoutId="active-option"
+                          // exit={{ opacity:  0 }}
+                          className="absolute inset-0 bg-brand z-10"
+                        />
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          setOption(activeQuestion.id, option.value);
+                        }}
+                        className={clsx(
+                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
+                          option.value === activeQuestion.option &&
+                            " text-white",
+                          typeof activeQuestion.option !== "undefined" &&
+                            "transition-all"
+                        )}
+                      >
+                        {option.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <h2 className="text-xl underline underline-offset-4">
+                  Das ist mir:
+                </h2>
+                <ul className="grid w-full border border-brand md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
+                  {weightings.map((weighting) => (
+                    <li
+                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
+                      key={`weighting-${weighting.value}`}
+                    >
+                      {weighting.value === activeQuestion.weighting && (
+                        <motion.span
+                          layoutId="active-weighting"
+                          // exit={{ opacity:  0 }}
+                          className="absolute inset-0 bg-brand z-10"
+                        />
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          setWeighting(activeQuestion.id, weighting.value);
+                        }}
+                        className={clsx(
+                          "z-20 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
+                          weighting.value === activeQuestion.weighting &&
+                            " text-white",
+                          typeof activeQuestion.weighting !== "undefined" &&
+                            "transition-all"
+                        )}
+                      >
+                        {weighting.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {candidateHash && (
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-xl underline underline-offset-4">
+                    Zusätzliche Informationen:
+                  </h2>
+                  <textarea
+                    value={activeQuestion.text}
+                    className="max-w-full w-full focus-visible:outline-brand outline-offset-2 min-h-[5em] p-2 border border-brand rounded-md"
+                    onChange={(e) => {
+                      setText(activeQuestion.id, e.target.value);
+                    }}
+                  />
+                </div>
+              )}
+            </section>
+
+            {PrevAndNext}
+          </motion.article>
+        </AnimatePresence>
+      ) : (
+        <Loading />
+      )}
+    </>
+  );
+};
