@@ -8,11 +8,17 @@
 - Framer Motion
 
 ## Todos
-- Resultate Seite anzeigen am Ende
-    - [ ] Kandidat:innen geranked anzeigen
-    - [ ] Vergleich zwischen eigenen Ergebnis und Kandidat:innen anzeigen
-    - [ ] Kandidat:innen auswählbar machen und dann untereinander vergleichen
-- Fragebogen Kandidat:innen Modus
+- Allgemein 
+    - [ ] Kategorie pro Frage anzeigen
+    - [ ] UI für alle anzeigen und per 1 click zu einer Frage springen
+    - [ ] Frage skippen erlauben?
+- Wähler:innen Flow
+    - [ ] Falls localstorage data hat: Sharen & Neustarten auf Endseite anzeigen 
+    - Resultat Seite
+        - [ ] Kandidat:innen geranked anzeigen
+        - [ ] Vergleich zwischen eigenen Ergebnis und Kandidat:innen anzeigen
+        - [ ] Kandidat:innen auswählbar machen und dann untereinander vergleichen
+- Kandidat:innen Flow
     - [x] Vordefinierten Link pro Kandidat:in definieren
     - [x] Kandidat:innen haben ein Textfeld für extra Informationen
     - [ ] Fragen bearbeitbar machen?
