@@ -31,6 +31,7 @@ export default async function CandidateWahlkabine({
           : questions
       }
       candidateHash={params.hash}
+      candidateSlug={params.candidateSlug}
     />
   );
 }

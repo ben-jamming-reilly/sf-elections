@@ -47,9 +47,11 @@ const isQuestionAnswered = (question: AnsweredQuestion) => {
 export const Questionnaire = ({
   questions,
   candidateHash,
+  candidateSlug,
 }: {
   questions: AnsweredQuestion[];
   candidateHash?: string;
+  candidateSlug?: string;
 }) => {
   const router = useRouter();
   const [hasHydrated, setHasHydrated] = useState(false);
@@ -257,14 +259,16 @@ export const Questionnaire = ({
                     "Frage noch nicht beantwortet"}
                 </button>
 
-                {slug && (
-                  <Link
-                    className="text-sm hover:underline text-center underline-offset-2"
-                    href={`/${slug}/${candidateHash}?cb=${Date.now()}`}
-                  >
-                    Zur Übersicht
-                  </Link>
-                )}
+                <Link
+                  className={
+                    "text-sm hover:underline text-center underline-offset-2"
+                  }
+                  href={`/${
+                    slug ?? candidateSlug
+                  }/${candidateHash}?cb=${Date.now()}`}
+                >
+                  Zur Übersicht
+                </Link>
               </div>
             )}
 
