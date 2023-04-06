@@ -136,7 +136,7 @@ export const Questionnaire = ({
     if (hasNext) {
       setActiveIndex(activeIndex + 1);
     } else {
-      router.push(`/${candidateHash}/${slug}`);
+      router.push(`/${candidateSlug}/${candidateHash}`);
     }
   };
 
