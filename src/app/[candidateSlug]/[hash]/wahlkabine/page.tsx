@@ -27,6 +27,7 @@ export default async function CandidateWahlkabine({
               id: answer.question.id,
               title: answer.question.title,
               description: answer.question.description,
+              isYesNo: answer.question.isYesNo,
             }))
           : questions
       }

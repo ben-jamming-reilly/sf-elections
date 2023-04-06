@@ -11,7 +11,12 @@ import {
   useQuestionnaireStore,
 } from "~/stores/questionnaire-store";
 import { Loading } from "../ui/loading";
-import { categoryHexForLabel, options, weightings } from "~/data/answers";
+import {
+  categoryHexForLabel,
+  options,
+  weightings,
+  yesNoOptions,
+} from "~/data/answers";
 import Link from "next/link";
 
 const variants = {
@@ -277,37 +282,46 @@ export const Questionnaire = ({
                 <h2 className="text-xl underline underline-offset-4">
                   Ich stimme:
                 </h2>
-                <ul className="grid w-full border border-brand md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
-                  {options.map((option) => (
-                    <li
-                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
-                      key={`option-${option.value}`}
-                    >
-                      {option.value === activeQuestion.option && (
-                        <motion.span
-                          layoutId="active-option"
-                          // exit={{ opacity:  0 }}
-                          className="absolute inset-0 bg-brand z-10"
-                        />
-                      )}
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-
-                          setOption(activeQuestion.id, option.value);
-                        }}
-                        className={clsx(
-                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
-                          option.value === activeQuestion.option &&
-                            " text-white",
-                          typeof activeQuestion.option !== "undefined" &&
-                            "transition-all"
-                        )}
+                <ul
+                  className={clsx(
+                    "grid w-full border border-brand ",
+                    activeQuestion.isYesNo
+                      ? "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2"
+                      : "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4"
+                  )}
+                >
+                  {(activeQuestion.isYesNo ? yesNoOptions : options).map(
+                    (option) => (
+                      <li
+                        className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
+                        key={`option-${option.value}`}
                       >
-                        {option.label}
-                      </button>
-                    </li>
-                  ))}
+                        {option.value === activeQuestion.option && (
+                          <motion.span
+                            layoutId="active-option"
+                            // exit={{ opacity:  0 }}
+                            className="absolute inset-0 bg-brand z-10"
+                          />
+                        )}
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+
+                            setOption(activeQuestion.id, option.value);
+                          }}
+                          className={clsx(
+                            "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
+                            option.value === activeQuestion.option &&
+                              " text-white",
+                            typeof activeQuestion.option !== "undefined" &&
+                              "transition-all"
+                          )}
+                        >
+                          {option.label}
+                        </button>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
 

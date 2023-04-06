@@ -17,6 +17,17 @@ export const options = [
   },
 ];
 
+export const yesNoOptions = [
+  {
+    label: "Nein",
+    value: -3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
+  },
+  {
+    label: "Ja",
+    value: 3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
+  },
+];
+
 export const optionLabelForValue = (value: number) => {
   const option = options.find((option) => option.value === value);
   return option ? option.label : "";

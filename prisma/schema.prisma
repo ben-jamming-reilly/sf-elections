@@ -8,7 +8,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-
 model Candidate {
   id          Int      @id @default(autoincrement())
   slug        String   @unique
@@ -59,6 +58,7 @@ model Question {
   title      String
   category   String @default("")
   description String    @db.MediumText @default("")
+  isYesNo   Boolean   @default(false)
   voters     VoterQuestionAnswer[]
   candidates CandidateQuestionAnswer[]
 }
