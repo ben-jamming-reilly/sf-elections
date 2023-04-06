@@ -1,7 +1,8 @@
 import Link from "next/link";
 import "./globals.css";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SPÖ Wahlkabine",
   description: "SPÖ Wahlkabine",
 };

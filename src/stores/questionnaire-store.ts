@@ -8,12 +8,14 @@ export type AnsweredQuestion = Question & {
   text?: string;
 };
 
-interface QuestionnaireState {
+export interface QuestionnaireState {
   questions: AnsweredQuestion[];
-  setQuestions: (questions: AnsweredQuestion[]) => void;
+  isSaving: boolean;
+  synced: boolean;
   activeIndex: number;
-  setActiveIndex: (index: number) => void;
   slug?: string;
+  setQuestions: (questions: AnsweredQuestion[]) => void;
+  setActiveIndex: (index: number) => void;
   setSlug: (slug: string) => void;
   setOption: (questionId: number, weightingId: number) => void;
   setWeighting: (questionId: number, weightingId: number) => void;
@@ -23,121 +25,136 @@ interface QuestionnaireState {
 }
 
 export const useQuestionnaireStore = create<QuestionnaireState>()(
-  devtools(
-    persist(
-      (set, get) => ({
-        questions: [],
-        setQuestions: (questions: AnsweredQuestion[]) => {
-          set((state) => {
-            return {
-              questions:
-                state.questions.length > 0 ? state.questions : questions,
-            };
+  persist(
+    (set, get) => ({
+      questions: [],
+      isSaving: false,
+      synced: false,
+      setQuestions: (questions: AnsweredQuestion[]) => {
+        set((state) => {
+          return {
+            questions: state.questions.length > 0 ? state.questions : questions,
+          };
+        });
+      },
+      activeIndex: 0,
+      setActiveIndex: (index: number) => {
+        set((state) => {
+          return { activeIndex: index };
+        });
+      },
+      slug: undefined,
+      setSlug: (slug: string) => {
+        set((state) => {
+          return { slug };
+        });
+      },
+      setOption: (questionId: number, weightingId: number) => {
+        set((state) => {
+          const questions = state.questions.map((question) => {
+            if (question.id === questionId) {
+              return {
+                ...question,
+                option: weightingId,
+              };
+            } else {
+              return question;
+            }
           });
-        },
-        activeIndex: 0,
-        setActiveIndex: (index: number) => {
-          set((state) => {
-            return { activeIndex: index };
+          return { questions, synced: false };
+        });
+      },
+      setWeighting: (questionId: number, weightingId: number) => {
+        set((state) => {
+          const questions = state.questions.map((question) => {
+            if (question.id === questionId) {
+              return {
+                ...question,
+                weighting: weightingId,
+              };
+            } else {
+              return question;
+            }
           });
-        },
-        slug: undefined,
-        setSlug: (slug: string) => {
-          set((state) => {
-            return { slug };
+          return { questions, synced: false };
+        });
+      },
+      setText: (questionId: number, text: string) => {
+        set((state) => {
+          if (text.length > 500) return state;
+          const questions = state.questions.map((question) => {
+            if (question.id === questionId) {
+              return {
+                ...question,
+                text,
+              };
+            } else {
+              return question;
+            }
           });
-        },
-        setOption: (questionId: number, weightingId: number) => {
-          set((state) => {
-            const questions = state.questions.map((question) => {
-              if (question.id === questionId) {
-                return {
-                  ...question,
-                  option: weightingId,
-                };
-              } else {
-                return question;
-              }
-            });
-            return { questions };
-          });
-        },
-        setWeighting: (questionId: number, weightingId: number) => {
-          set((state) => {
-            const questions = state.questions.map((question) => {
-              if (question.id === questionId) {
-                return {
-                  ...question,
-                  weighting: weightingId,
-                };
-              } else {
-                return question;
-              }
-            });
-            return { questions };
-          });
-        },
-        setText: (questionId: number, text: string) => {
-          set((state) => {
-            const questions = state.questions.map((question) => {
-              if (question.id === questionId) {
-                return {
-                  ...question,
-                  text,
-                };
-              } else {
-                return question;
-              }
-            });
-            return { questions };
-          });
-        },
-        save: async (candidateHash?: string) => {
-          const path = candidateHash
-            ? `/api/candidate-submit/${candidateHash}`
-            : "/api/voter-submit";
+          return { questions, synced: false };
+        });
+      },
+      save: async (candidateHash?: string) => {
+        const path = candidateHash
+          ? `/api/candidate-submit/${candidateHash}`
+          : "/api/voter-submit";
 
-          fetch(path, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(
-              get().questions.map((q) => ({
-                id: q.id,
-                option: q.option,
-                weighting: q.weighting,
-                text: q?.text,
-              }))
-            ),
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              console.log(res);
-              set((state) => {
-                return {
-                  ...state,
-                  slug: res.slug,
-                };
-              });
-            })
-            .catch((reason) => {
-              console.error(reason);
+        set((state) => {
+          return {
+            isSaving: true,
+          };
+        });
+
+        fetch(path, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+            get().questions.map((q) => ({
+              id: q.id,
+              option: q.option,
+              weighting: q.weighting,
+              text: q?.text,
+            }))
+          ),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            set((state) => {
+              return {
+                ...state,
+                isSaving: false,
+                synced: true,
+                slug: res.slug,
+              };
             });
-        },
-        reset: () => {
-          set((state) => {
-            return {
-              questions: [],
-              activeIndex: 0,
-              slug: undefined,
-            };
+          })
+          .catch((reason) => {
+            console.error(reason);
+
+            set((state) => {
+              return {
+                isSaving: false,
+                synced: false,
+              };
+            });
           });
-        },
-      }),
-      {
-        name: "questionnaire-storage",
-      }
-    )
+      },
+      reset: () => {
+        set((state) => {
+          return {
+            questions: [],
+            activeIndex: 0,
+            slug: undefined,
+          };
+        });
+      },
+    }),
+    {
+      name: "questionnaire-storage",
+    }
   )
 );

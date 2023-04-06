@@ -15,8 +15,9 @@ export const EditQuestionButton = ({
 
   return (
     <button
+      className="block border-brand border px-2 py-2 text-brand rounded-md text-sm"
       onClick={() => {
-        setActiveIndex(questionId);
+        setActiveIndex(questionId - 1);
         router.push(url);
       }}
     >

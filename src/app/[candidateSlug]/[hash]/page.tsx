@@ -72,7 +72,9 @@ export default async function CandidatePreWahlkabine({
                 <h3 className="underline underline-offset-2">
                   Zusätzliche Information:
                 </h3>
-                <p className="py-1 text-lg">{answer.text}</p>
+                <p className="py-1 text-lg">
+                  {answer.text ? answer.text : "---"}
+                </p>
               </div>
 
               <EditQuestionButton

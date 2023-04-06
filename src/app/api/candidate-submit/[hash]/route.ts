@@ -2,13 +2,14 @@ import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError, z } from "zod";
 import { prisma } from "~/lib/prisma";
+import { AnsweredQuestion } from "../../../../stores/questionnaire-store";
 
 const questionWithAnswersSchema = z.array(
   z.object({
     id: z.number(),
     option: z.number().min(-2).max(2),
     weighting: z.number().min(0).max(3),
-    text: z.string(),
+    text: z.string().optional(),
   })
 );
 
@@ -35,7 +36,6 @@ export async function POST(
         hash,
       },
       data: {
-        hasFinished: true,
         answers: {
           createMany: {
             data: validatedData.map((answer) => ({
@@ -47,9 +47,27 @@ export async function POST(
           },
         },
       },
+      include: {
+        answers: {
+          include: {
+            question: true,
+          },
+        },
+      },
     });
 
-    return NextResponse.json({ slug: candidate.slug });
+    return NextResponse.json({
+      questions: candidate.answers.map((answer) => ({
+        id: answer.question.id,
+        option: answer.option,
+        weighting: answer.weighting,
+        text: answer.text,
+        title: answer.question.title,
+        description: answer.question.description,
+        category: answer.question.category,
+      })),
+      slug: candidate.slug,
+    });
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.issues });

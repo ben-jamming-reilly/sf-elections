@@ -22,7 +22,7 @@ export default function Home() {
         Die Wahlkabine ist eine Initiative der Jungen Generation.
       </p>
 
-      <div className="min-h-[60px]">
+      {/* <div className="min-h-[60px]">
         {hasHydrated ? (
           <>
             {slug ? (
@@ -55,7 +55,7 @@ export default function Home() {
         ) : (
           <Loading />
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

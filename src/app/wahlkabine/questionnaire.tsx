@@ -12,6 +12,7 @@ import {
 } from "~/stores/questionnaire-store";
 import { Loading } from "../ui/loading";
 import { categoryHexForLabel, options, weightings } from "~/data/answers";
+import Link from "next/link";
 
 const variants = {
   enter: (direction: number) => {
@@ -54,6 +55,8 @@ export const Questionnaire = ({
     questionsWithAnswers,
     setQuestions,
     slug,
+    isSaving,
+    synced,
     setOption,
     setWeighting,
     setText,
@@ -65,6 +68,8 @@ export const Questionnaire = ({
     s.questions,
     s.setQuestions,
     s.slug,
+    s.isSaving,
+    s.synced,
     s.setOption,
     s.setWeighting,
     s.setText,
@@ -87,14 +92,15 @@ export const Questionnaire = ({
   }, [questions]);
 
   // Redirect once hash is set
-  useEffect(() => {
-    if (slug) {
-      if (candidateHash) {
-        reset();
-      }
-      router.push(candidateHash ? `/${slug}` : `/wahlkabine/${slug}`);
-    }
-  }, [slug]);
+  // Re-add when candidates are done
+  // useEffect(() => {
+  //   if (slug) {
+  //     if (candidateHash) {
+  //       reset();
+  //     }
+  //     router.push(candidateHash ? `/${slug}` : `/wahlkabine/${slug}`);
+  //   }
+  // }, [slug]);
 
   // Derived state
   const activeQuestion =
@@ -143,13 +149,13 @@ export const Questionnaire = ({
       <span>
         <button
           onClick={handleNext}
-          disabled={!hasNext && !allQuestionsAnswered}
+          disabled={!hasNext}
           className={clsx(
-            "hover:underline underline-offset-2 text-center w-[120px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md",
-            hasNext ? "bg-neutral-200 text-gray-800" : "bg-brand text-white"
+            "hover:underline underline-offset-2 text-center w-[120px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md bg-neutral-200 text-gray-800",
+            !hasNext && "invisible"
           )}
         >
-          {hasNext ? "Weiter" : "Ergebnis"}
+          Weiter
         </button>
       </span>
     </div>
@@ -222,6 +228,40 @@ export const Questionnaire = ({
             </div>
 
             {PrevAndNext}
+
+            {candidateHash && (
+              <div className="flex flex-col gap-2">
+                <button
+                  disabled={synced || !allQuestionsAnswered}
+                  className={clsx(
+                    "border-brand disabled:cursor-not-allowed disabled:border-neutral-200 disabled:bg-neutral-50 disabled:text-gray-400 disabled:hover:bg-red-50/50 disabled:hover:text-gray-400 px-2 py-2 rounded-md hover:text-white hover:bg-brand transition-all border bg-red-50/50"
+                  )}
+                  onClick={(e) => {
+                    if (allQuestionsAnswered) {
+                      save(candidateHash);
+                    }
+                  }}
+                >
+                  {synced && "Gespeichert"}
+                  {!synced && isSaving && "Speichern..."}
+                  {!synced && !isSaving && allQuestionsAnswered && "Speichern"}
+                  {!synced && !isSaving && !allQuestionsAnswered && (
+                    <span className="text-red-500">
+                      Fragebogen noch nicht vollständig
+                    </span>
+                  )}
+                </button>
+
+                {slug && (
+                  <Link
+                    className="text-sm hover:underline text-center underline-offset-2"
+                    href={`/${slug}/${candidateHash}`}
+                  >
+                    Zur Übersicht
+                  </Link>
+                )}
+              </div>
+            )}
 
             <section className="flex flex-col gap-10 my-6 w-full">
               <div className="flex flex-col gap-2">
@@ -303,7 +343,11 @@ export const Questionnaire = ({
               {candidateHash && (
                 <div className="flex flex-col gap-2">
                   <h2 className="text-xl underline underline-offset-4">
-                    Zusätzliche Informationen:
+                    Zusätzliche Informationen (
+                    <span className="tabular-nums">
+                      {activeQuestion?.text?.length ?? "0"}/500
+                    </span>{" "}
+                    Zeichen):
                   </h2>
                   <textarea
                     value={activeQuestion.text}

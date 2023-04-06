@@ -9,9 +9,9 @@
 
 ## Todos
 - Allgemein 
-    - [ ] Kategorie pro Frage anzeigen
-    - [ ] UI für alle anzeigen und per 1 click zu einer Frage springen
-    - [ ] Frage skippen erlauben?
+    - [x] Kategorie pro Frage anzeigen
+    - [x] UI für alle anzeigen und per 1 click zu einer Frage springen
+    - [x] Frage skippen erlauben?
 - Wähler:innen Flow
     - [ ] Falls localstorage data hat: Sharen & Neustarten auf Endseite anzeigen 
     - Resultat Seite
@@ -21,9 +21,9 @@
 - Kandidat:innen Flow
     - [x] Vordefinierten Link pro Kandidat:in definieren
     - [x] Kandidat:innen haben ein Textfeld für extra Informationen
-    - [ ] Fragen bearbeitbar machen?
+    - [x] Fragen bearbeitbar machen?
 - Fragebogen
-    - [ ] Echte Fragen hinzufügen
+    - [x] Echte Fragen hinzufügen
     - Barrierefreiheit
         - [ ] `prefers-reduced-motion` beachten
         - [ ] App mit Tastatur testen
@@ -36,4 +36,3 @@
 - Code
     - [ ] Refactor questionnaireStore
         - [ ] Deal with duplicated code for setting option, weighting and text OR use immer
-        - [ ] Create `voterQuestionaireStore` & `candidateQuestionnaireStore` + clean up `<Questionnaire />` to make it a "dumb" component
