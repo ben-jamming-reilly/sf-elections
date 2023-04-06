@@ -100,6 +100,8 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
         ? `/api/candidate-submit/${candidateHash}`
         : "/api/voter-submit";
 
+        if (get().synced) return;
+
       set((state) => {
         return {
           isSaving: true,

@@ -127,14 +127,16 @@ export const Questionnaire = ({
   // Handlers
   const handlePrev = () => {
     if (!hasPrevious) return;
+    save(candidateHash);
     setActiveIndex(activeIndex - 1);
   };
 
   const handleNext = () => {
+    save(candidateHash);
     if (hasNext) {
       setActiveIndex(activeIndex + 1);
-    } else if (allQuestionsAnswered) {
-      save(candidateHash);
+    } else {
+      router.push(`/${candidateHash}/${slug}`);
     }
   };
 
@@ -158,13 +160,12 @@ export const Questionnaire = ({
       <span>
         <button
           onClick={handleNext}
-          disabled={!hasNext}
           className={clsx(
-            "hover:underline underline-offset-2 text-center w-[120px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md bg-neutral-200 text-gray-800",
-            !hasNext && "invisible"
+            "hover:underline underline-offset-2 text-center w-[130px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
+            !hasNext ? "bg-brand text-white" : "bg-neutral-200 text-gray-800"
           )}
         >
-          Weiter
+          {hasNext ? "Weiter" : "Fertig"}
         </button>
       </span>
     </div>
