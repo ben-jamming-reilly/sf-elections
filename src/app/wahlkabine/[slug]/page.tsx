@@ -1,8 +1,13 @@
 import { prisma } from "~/lib/prisma";
 import { notFound } from "next/navigation";
 import { Prisma } from ".prisma/client";
-import { optionLabelForValue, weightingLabelForValue } from "~/data/answers";
+import {
+  categoryHexForLabel,
+  optionLabelForValue,
+  weightingLabelForValue,
+} from "~/data/answers";
 import { CopyCurrentUrl } from "~/app/ui/copy-button";
+import clsx from "clsx";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -42,15 +47,26 @@ export default async function Wahlkabine({
       <ul className="flex flex-col divide-y-2">
         {voterWithAnswers.answers.map((answer) => (
           <li key={answer.id} className="py-5">
-            <span className="text-lg font-semibold">
-              Frage {answer.questionId}:
+            <span
+              className={clsx(
+                "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
+                answer.question.category && "text-white"
+              )}
+              style={{
+                backgroundColor: categoryHexForLabel(answer.question.category),
+              }}
+            >
+              {answer.question.category}
             </span>
-            <h2 className="text-3xl mb-5">{answer.question.title}</h2>
+            <div className="text-lg font-semibold">
+              Frage {answer.questionId}:
+            </div>
+            <h2 className="text-2xl mb-5">{answer.question.title}</h2>
             <div className="grid grid-cols-2 gap-5">
-              <p className="bg-brand text-center px-3 py-2 text-white rounded-md">
-                Stimme ich {optionLabelForValue(answer.option)}
+              <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                Ich stimme {optionLabelForValue(answer.option)}
               </p>
-              <p className="bg-brand text-center px-3 py-2 text-white rounded-md">
+              <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
                 Ist mir {weightingLabelForValue(answer.weighting)}
               </p>
             </div>

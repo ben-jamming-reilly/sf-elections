@@ -2,7 +2,7 @@ import { Question } from "@prisma/client";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-type AnsweredQuestion = Question & {
+export type AnsweredQuestion = Question & {
   option?: number;
   weighting?: number;
   text?: string;

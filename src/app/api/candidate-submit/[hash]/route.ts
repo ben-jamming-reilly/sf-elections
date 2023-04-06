@@ -22,6 +22,14 @@ export async function POST(
   try {
     const validatedData = questionWithAnswersSchema.parse(data);
 
+    await prisma.candidateQuestionAnswer.deleteMany({
+      where: {
+        candidate: {
+          hash,
+        },
+      },
+    });
+
     const candidate = await prisma.candidate.update({
       where: {
         hash,

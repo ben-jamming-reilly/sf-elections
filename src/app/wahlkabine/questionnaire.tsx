@@ -4,11 +4,14 @@ import { Question } from "@prisma/client";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
-import { useQuestionnaireStore } from "~/stores/questionnaire-store";
+import {
+  AnsweredQuestion,
+  useQuestionnaireStore,
+} from "~/stores/questionnaire-store";
 import { Loading } from "../ui/loading";
-import { options, weightings } from "~/data/answers";
+import { categoryHexForLabel, options, weightings } from "~/data/answers";
 
 const variants = {
   enter: (direction: number) => {
@@ -31,11 +34,18 @@ const variants = {
   },
 };
 
+const isQuestionAnswered = (question: AnsweredQuestion) => {
+  return (
+    typeof question.option !== "undefined" &&
+    typeof question.weighting !== "undefined"
+  );
+};
+
 export const Questionnaire = ({
   questions,
   candidateHash,
 }: {
-  questions: Question[];
+  questions: AnsweredQuestion[];
   candidateHash?: string;
 }) => {
   const router = useRouter();
@@ -90,16 +100,14 @@ export const Questionnaire = ({
   const activeQuestion =
     questionsWithAnswers.length > 0 && questionsWithAnswers[activeIndex];
 
-  const questionAnswered =
-    activeQuestion &&
-    typeof activeQuestion.option !== "undefined" &&
-    typeof activeQuestion.weighting !== "undefined" &&
-    (!candidateHash || activeQuestion.text);
-
   const direction = prevIndex < activeIndex ? 1 : -1;
 
   const hasPrevious = activeIndex > 0;
   const hasNext = activeIndex !== questionsWithAnswers.length - 1;
+
+  const allQuestionsAnswered = useMemo(() => {
+    return questionsWithAnswers.every(isQuestionAnswered);
+  }, [questionsWithAnswers]);
 
   // Handlers
   const handlePrev = () => {
@@ -108,10 +116,9 @@ export const Questionnaire = ({
   };
 
   const handleNext = () => {
-    if (!questionAnswered) return;
     if (hasNext) {
       setActiveIndex(activeIndex + 1);
-    } else {
+    } else if (allQuestionsAnswered) {
       save(candidateHash);
     }
   };
@@ -123,7 +130,7 @@ export const Questionnaire = ({
           onClick={handlePrev}
           disabled={!hasPrevious}
           className={clsx(
-            "hover:bg-brand px-6 py-2 hover:text-white  active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            "hover:underline underline-offset-2 text-center w-[120px] px-6 py-2   active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
             !hasPrevious && "invisible"
           )}
         >
@@ -136,9 +143,9 @@ export const Questionnaire = ({
       <span>
         <button
           onClick={handleNext}
-          disabled={!questionAnswered}
+          disabled={!hasNext && !allQuestionsAnswered}
           className={clsx(
-            "hover:bg-brand px-6 py-2 hover:text-white active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            "hover:underline underline-offset-2 text-center w-[120px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md",
             hasNext ? "bg-neutral-200 text-gray-800" : "bg-brand text-white"
           )}
         >
@@ -168,6 +175,17 @@ export const Questionnaire = ({
               }}
               className="w-full"
             >
+              <span
+                className={clsx(
+                  "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
+                  activeQuestion.category && "text-white"
+                )}
+                style={{
+                  backgroundColor: categoryHexForLabel(activeQuestion.category),
+                }}
+              >
+                {activeQuestion.category}
+              </span>
               <div className="text-2xl mb-3 h-[5em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
@@ -175,6 +193,33 @@ export const Questionnaire = ({
                 <h1 className="">{activeQuestion.title}</h1>
               </div>
             </motion.header>
+
+            <div className="">
+              <ul className="flex flex-row flex-wrap gap-4 justify-center">
+                {questionsWithAnswers.map((question, index) => (
+                  <li key={`question-shortcut-${question.id}`}>
+                    <button
+                      className={clsx(
+                        "inline-flex justify-center items-center w-[3em] h-[3em] transition-all underline-offset-2 hover:border-brand hover:underline border",
+                        isQuestionAnswered(question) &&
+                          "bg-brand text-white border-brand",
+                        activeQuestion.id === question.id &&
+                          "underline scale-[0.85]",
+                        !isQuestionAnswered(question) &&
+                          activeQuestion.id === question.id &&
+                          "border-brand bg-transparent hover:text-brand text-brand",
+                        activeQuestion.id !== question.id &&
+                          !isQuestionAnswered(question) &&
+                          "bg-red-50/50 hover:text-brand"
+                      )}
+                      onClick={() => setActiveIndex(index)}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {PrevAndNext}
 

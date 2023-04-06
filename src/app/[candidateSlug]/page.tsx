@@ -2,7 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCandidateFromSlug } from "./get-candidate-from-slug";
 import { CopyCurrentUrl } from "../ui/copy-button";
-import { optionLabelForValue, weightingLabelForValue } from "~/data/answers";
+import {
+  categoryHexForLabel,
+  optionLabelForValue,
+  weightingLabelForValue,
+} from "~/data/answers";
+import clsx from "clsx";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -31,9 +36,22 @@ export default async function CandidateWahlkabine({
           <ul className="flex flex-col divide-y-2">
             {candidate.answers.map((answer) => (
               <li key={answer.id} className="py-5">
-                <span className="text-lg font-semibold">
-                  Frage {answer.questionId}:
+                <span
+                  className={clsx(
+                    "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
+                    answer.question.category && "text-white"
+                  )}
+                  style={{
+                    backgroundColor: categoryHexForLabel(
+                      answer.question.category
+                    ),
+                  }}
+                >
+                  {answer.question.category}
                 </span>
+                <div className="text-lg font-semibold">
+                  Frage {answer.questionId}:
+                </div>
                 <h2 className="text-xl mb-5">{answer.question.title}</h2>
                 <div className="grid grid-cols-2 gap-5">
                   <p className="bg-brand text-center px-3 py-2 text-white rounded-md">

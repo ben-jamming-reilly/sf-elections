@@ -12,7 +12,25 @@ export default async function CandidateWahlkabine({
 }: {
   params: { candidateSlug: string; hash: string };
 }) {
+  const candidate = await getCandidateFromSlug(params.candidateSlug);
   const questions = await prisma.question.findMany();
 
-  return <Questionnaire questions={questions} candidateHash={params.hash} />;
+  return (
+    <Questionnaire
+      questions={
+        candidate?.answers.length && candidate?.answers.length > 0
+          ? candidate?.answers.map((answer) => ({
+              option: answer.option,
+              weighting: answer.weighting,
+              text: answer.text,
+              category: answer.question.category,
+              id: answer.question.id,
+              title: answer.question.title,
+              description: answer.question.description,
+            }))
+          : questions
+      }
+      candidateHash={params.hash}
+    />
+  );
 }

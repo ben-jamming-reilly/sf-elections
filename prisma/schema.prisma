@@ -57,6 +57,7 @@ model VoterQuestionAnswer {
 model Question {
   id         Int      @id @default(autoincrement())
   title      String
+  category   String @default("")
   description String    @db.MediumText @default("")
   voters     VoterQuestionAnswer[]
   candidates CandidateQuestionAnswer[]

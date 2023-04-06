@@ -45,3 +45,36 @@ export const weightingLabelForValue = (value: number) => {
   const weighting = weightings.find((weighting) => weighting.value === value);
   return weighting ? weighting.label : "";
 };
+
+
+export const CATEGORIES = [
+  {
+    label: "Klima & Umwelt",
+    hex: "#38be23",
+  },
+  {
+    label: "Frauen",
+    hex: "#2766d4",
+  },
+  {
+    label: "Demokratie & Mitbestimmung",
+    hex: "#EB5757",
+  },
+  {
+    label: "Arbeit & Soziales",
+    hex: "#e8ce26",
+  },
+  {
+    label: "Internes",
+    hex: "#6FCF97",
+  },
+  {
+    label: "Europa & Internationales",
+    hex: "#BB6BD9",
+  },
+];
+
+export const categoryHexForLabel = (label: string) => {
+  const category = CATEGORIES.find((category) => category.label === label);
+  return category ? category.hex : "";
+};
