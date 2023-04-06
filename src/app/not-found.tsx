@@ -5,8 +5,8 @@ export default function NotFound() {
     <div>
       <h1 className="text-3xl">404 - Seite nicht gefunden</h1>
       <p className="my-2">
-        Die Seite, die Sie aufgerufen haben, konnte nicht gefunden werden. Bitte
-        überprüfen Sie die URL und versuchen Sie es erneut.
+        Die Seite, die du aufgerufen hast, konnte nicht gefunden werden. Bitte
+        überprüfe die URL und versuchen es erneut.
       </p>
       <Link
         href="/"

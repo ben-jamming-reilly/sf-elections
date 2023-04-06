@@ -10,7 +10,7 @@ export default async function CandidateNotFound() {
 
   return (
     <div>
-      <h1 className="text-3xl">Kandidatin:in nicht gefunden</h1>
+      <h1 className="text-3xl">Kandidat:in nicht gefunden</h1>
       <p className="my-2">Die/Der Kandidat:in gibt es nicht.</p>
 
       <h2 className="text-2xl">Kandidat:innen</h2>

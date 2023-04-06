@@ -33,6 +33,11 @@ export const optionLabelForValue = (value: number) => {
   return option ? option.label : "";
 };
 
+export const optionLabelForYesNoValue = (value: number) => {
+  const option = yesNoOptions.find((option) => option.value === value);
+  return option ? option.label : "";
+};
+
 export const weightings = [
   {
     label: "garnicht wichtig",

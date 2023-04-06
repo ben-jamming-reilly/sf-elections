@@ -8,6 +8,7 @@ import {
   weightingLabelForValue,
 } from "~/data/answers";
 import { EditQuestionButton } from "./edit-question-button";
+import { optionLabelForYesNoValue } from "../../../data/answers";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -29,7 +30,7 @@ export default async function CandidatePreWahlkabine({
     <div>
       <h1 className="text-3xl">Wahlkabine für {candidate.name}</h1>
       <p className="my-3">
-        Beantworten Sie die Fragen für die Vorstandswahlkabine!
+        Beantworten die Fragen für die Vorstandswahlkabine!
       </p>
 
       <Link
@@ -65,7 +66,9 @@ export default async function CandidatePreWahlkabine({
               {answer.option && answer.weighting ? (
                 <div className="grid grid-cols-2 gap-5">
                   <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Ich stimme {optionLabelForValue(answer.option)}
+                    {optionLabelForValue(answer.option)
+                      ? `Ich stimme ${optionLabelForValue(answer.option)}`
+                      : optionLabelForYesNoValue(answer.option)}
                   </p>
                   <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
                     Ist mir {weightingLabelForValue(answer.weighting)}
@@ -78,7 +81,7 @@ export default async function CandidatePreWahlkabine({
                   </p>
                 </div>
               )}
-              {answer.option && answer.weighting && (
+              {answer.option && answer.weighting ? (
                 <div className="py-3">
                   <h3 className="underline underline-offset-2">
                     Zusätzliche Information:
@@ -87,7 +90,7 @@ export default async function CandidatePreWahlkabine({
                     {answer.text ? answer.text : "---"}
                   </p>
                 </div>
-              )}
+              ) : null}
               <div className="mt-3">
                 <EditQuestionButton
                   questionId={answer.questionId}

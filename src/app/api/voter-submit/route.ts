@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 
     if (error instanceof Prisma.PrismaClientKnownRequestError)
       return NextResponse.json({
-        error: "Es ist ein Fehler passiert. Bitte probieren Sie es nochmal!",
+        error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
       });
   }
 }
