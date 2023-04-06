@@ -60,6 +60,7 @@ export const Questionnaire = ({
 }) => {
   const router = useRouter();
   const [hasHydrated, setHasHydrated] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const [
     questionsWithAnswers,
     setQuestions,
@@ -111,6 +112,13 @@ export const Questionnaire = ({
   //   }
   // }, [slug]);
 
+  // Redirect to results page when done button is pressed and last question is persisted
+  useEffect(() => {
+    if (redirect && !isSaving && synced) {
+      router.push(`/${candidateSlug}/${candidateHash}?cb=${Date.now()}`);
+    }
+  }, [isSaving, synced, redirect]);
+
   // Derived state
   const activeQuestion =
     questionsWithAnswers.length > 0 && questionsWithAnswers[activeIndex];
@@ -136,7 +144,7 @@ export const Questionnaire = ({
     if (hasNext) {
       setActiveIndex(activeIndex + 1);
     } else {
-      router.push(`/${candidateSlug}/${candidateHash}`);
+      setRedirect(true);
     }
   };
 
@@ -265,16 +273,17 @@ export const Questionnaire = ({
                     "Frage noch nicht beantwortet"}
                 </button>
 
-                <Link
+                <button
                   className={
                     "text-sm hover:underline text-center underline-offset-2"
                   }
-                  href={`/${
-                    slug ?? candidateSlug
-                  }/${candidateHash}?cb=${Date.now()}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setRedirect(true);
+                  }}
                 >
                   Zur Übersicht
-                </Link>
+                </button>
               </div>
             )}
 
