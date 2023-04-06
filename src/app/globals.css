@@ -14,7 +14,7 @@
 
   html,
   body {
-    @apply text-gray-800;
+    @apply text-gray-800 font-sans;
     height: 100%;
   }
 }

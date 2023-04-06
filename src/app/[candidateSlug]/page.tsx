@@ -8,6 +8,7 @@ import {
   weightingLabelForValue,
 } from "~/data/answers";
 import clsx from "clsx";
+import { headers } from "next/headers";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -19,6 +20,7 @@ export default async function CandidateWahlkabine({
 }: {
   params: { candidateSlug: string };
 }) {
+  // headers(); // This is needed to make the page dynamic and not static
   const candidate = await getCandidateFromSlug(params.candidateSlug);
 
   if (!candidate) {

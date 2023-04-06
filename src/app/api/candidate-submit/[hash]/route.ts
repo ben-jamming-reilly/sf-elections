@@ -2,8 +2,6 @@ import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError, z } from "zod";
 import { prisma } from "~/lib/prisma";
-import { AnsweredQuestion } from "../../../../stores/questionnaire-store";
-
 const questionWithAnswersSchema = z.array(
   z.object({
     id: z.number(),
@@ -69,6 +67,7 @@ export async function POST(
       slug: candidate.slug,
     });
   } catch (error) {
+    console.error(error);
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.issues });
     }

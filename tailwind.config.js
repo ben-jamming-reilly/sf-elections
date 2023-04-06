@@ -7,7 +7,13 @@ module.exports = {
         brand: "var(--color-brand)",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: [
+          "var(--font-inter)",
+          "Inter",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
       },
     },
   },

@@ -169,6 +169,33 @@ export const Questionnaire = ({
             className="flex flex-col gap-10 items-center"
             key={`question-${activeQuestion.id}`}
           >
+            <div className="">
+              <ul className="flex flex-row flex-wrap gap-1 md:gap-4 justify-center">
+                {questionsWithAnswers.map((question, index) => (
+                  <li key={`question-shortcut-${question.id}`}>
+                    <button
+                      className={clsx(
+                        "inline-flex justify-center items-center w-[3em] h-[3em] transition-all underline-offset-2 hover:border-brand hover:underline border",
+                        isQuestionAnswered(question) &&
+                          "bg-brand text-white border-brand",
+                        activeQuestion.id === question.id &&
+                          "underline scale-[0.85]",
+                        !isQuestionAnswered(question) &&
+                          activeQuestion.id === question.id &&
+                          "border-brand bg-transparent hover:text-brand text-brand",
+                        activeQuestion.id !== question.id &&
+                          !isQuestionAnswered(question) &&
+                          "bg-red-50/50 hover:text-brand"
+                      )}
+                      onClick={() => setActiveIndex(index)}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <motion.header
               custom={direction}
               variants={variants}
@@ -199,33 +226,6 @@ export const Questionnaire = ({
                 <h1 className="hyphens-auto">{activeQuestion.title}</h1>
               </div>
             </motion.header>
-
-            <div className="">
-              <ul className="flex flex-row flex-wrap gap-1 md:gap-4 justify-center">
-                {questionsWithAnswers.map((question, index) => (
-                  <li key={`question-shortcut-${question.id}`}>
-                    <button
-                      className={clsx(
-                        "inline-flex justify-center items-center w-[3em] h-[3em] transition-all underline-offset-2 hover:border-brand hover:underline border",
-                        isQuestionAnswered(question) &&
-                          "bg-brand text-white border-brand",
-                        activeQuestion.id === question.id &&
-                          "underline scale-[0.85]",
-                        !isQuestionAnswered(question) &&
-                          activeQuestion.id === question.id &&
-                          "border-brand bg-transparent hover:text-brand text-brand",
-                        activeQuestion.id !== question.id &&
-                          !isQuestionAnswered(question) &&
-                          "bg-red-50/50 hover:text-brand"
-                      )}
-                      onClick={() => setActiveIndex(index)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             {PrevAndNext}
 

@@ -1,11 +1,19 @@
 import Link from "next/link";
 import "./globals.css";
 import { Metadata } from "next";
+import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "SPÖ Wahlkabine",
   description: "SPÖ Wahlkabine",
 };
+
+const interFont = Inter({
+  weight: ["400", "700"],
+  display: "block",
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -14,9 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body>
+      <body className={interFont.variable}>
         <div
-          className={`w-full min-h-full z-10 flex flex-col px-5 bg-white border-brand border-[30px]`}
+          className={`w-full min-h-full z-10 flex flex-col px-5 bg-white border-brand border-[10px] md:border-[30px]`}
         >
           <div className="lg:w-[800px] w-full md:min- flex flex-col min-h-full flex-grow mx-auto gap-10">
             <header className="mt-10">
