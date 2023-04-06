@@ -130,7 +130,7 @@ export const Questionnaire = ({
   };
 
   const PrevAndNext = (
-    <div className="flex flex-row justify-between items-center w-full">
+    <div className="flex flex-col gap-2 sm:flex-row justify-between items-center w-full">
       <span>
         <button
           onClick={handlePrev}
@@ -192,16 +192,16 @@ export const Questionnaire = ({
               >
                 {activeQuestion.category}
               </span>
-              <div className="text-2xl mb-3 h-[5em]">
+              <div className="text-2xl mb-3 min-h-[5em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
-                <h1 className="">{activeQuestion.title}</h1>
+                <h1 className="hyphens-auto">{activeQuestion.title}</h1>
               </div>
             </motion.header>
 
             <div className="">
-              <ul className="flex flex-row flex-wrap gap-4 justify-center">
+              <ul className="flex flex-row flex-wrap gap-1 md:gap-4 justify-center">
                 {questionsWithAnswers.map((question, index) => (
                   <li key={`question-shortcut-${question.id}`}>
                     <button

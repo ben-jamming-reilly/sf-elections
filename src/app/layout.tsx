@@ -22,14 +22,14 @@ export default function RootLayout({
             <header className="mt-10">
               <Link
                 href="/"
-                className="text-2xl text-white bg-brand p-3 focus-visible:outline-brand outline-offset-2"
+                className="text-2xl inline-flex text-white bg-brand p-3 focus-visible:outline-brand outline-offset-2"
               >
                 SPÖ Vorstandswahl-Kabine
               </Link>
             </header>
             <main className="flex-grow">{children}</main>
             <footer className="w-full flex justify-center items-center py-5 border-t border-brand">
-              <ul className="flex flex-row gap-3">
+              <ul className="flex flex-row gap-3 justify-center flex-wrap">
                 <li>
                   <a
                     target="_blank"

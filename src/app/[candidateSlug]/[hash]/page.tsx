@@ -34,7 +34,7 @@ export default async function CandidatePreWahlkabine({
 
       <Link
         href={`/${candidate.slug}/${candidate.hash}/wahlkabine`}
-        className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
+        className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-flex text-center transition-all rounded-md focus-visible:outline-brand outline-offset-2"
       >
         Kandidaten-Wahlkabine starten/bearbeiten
       </Link>
@@ -59,7 +59,9 @@ export default async function CandidatePreWahlkabine({
               <div className="text-lg font-semibold">
                 Frage {answer.questionId}:
               </div>
-              <h2 className="text-2xl mb-5">{answer.question.title}</h2>
+              <h2 className="text-2xl mb-5 hyphens-auto">
+                {answer.question.title}
+              </h2>
               <div className="grid grid-cols-2 gap-5">
                 <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
                   Ich stimme {optionLabelForValue(answer.option)}
