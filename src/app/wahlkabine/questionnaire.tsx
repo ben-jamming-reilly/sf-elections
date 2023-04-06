@@ -38,7 +38,9 @@ const variants = {
 const isQuestionAnswered = (question: AnsweredQuestion) => {
   return (
     typeof question.option !== "undefined" &&
-    typeof question.weighting !== "undefined"
+    question.option !== null &&
+    typeof question.weighting !== "undefined" &&
+    question.weighting !== null
   );
 };
 
@@ -232,24 +234,27 @@ export const Questionnaire = ({
             {candidateHash && (
               <div className="flex flex-col gap-2">
                 <button
-                  disabled={synced || !allQuestionsAnswered}
+                  disabled={
+                    synced || !isQuestionAnswered(activeQuestion) || isSaving
+                  }
                   className={clsx(
                     "border-brand disabled:cursor-not-allowed disabled:border-neutral-200 disabled:bg-neutral-50 disabled:text-gray-400 disabled:hover:bg-red-50/50 disabled:hover:text-gray-400 px-2 py-2 rounded-md hover:text-white hover:bg-brand transition-all border bg-red-50/50"
                   )}
                   onClick={(e) => {
-                    if (allQuestionsAnswered) {
-                      save(candidateHash);
-                    }
+                    save(candidateHash);
                   }}
                 >
-                  {synced && "Gespeichert"}
+                  {synced &&
+                    isQuestionAnswered(activeQuestion) &&
+                    "Gespeichert"}
                   {!synced && isSaving && "Speichern..."}
-                  {!synced && !isSaving && allQuestionsAnswered && "Speichern"}
-                  {!synced && !isSaving && !allQuestionsAnswered && (
-                    <span className="text-red-500">
-                      Fragebogen noch nicht vollständig
-                    </span>
-                  )}
+                  {!synced &&
+                    !isSaving &&
+                    isQuestionAnswered(activeQuestion) &&
+                    "Speichern"}
+                  {!isSaving &&
+                    !isQuestionAnswered(activeQuestion) &&
+                    "Frage noch nicht beantwortet"}
                 </button>
 
                 {slug && (

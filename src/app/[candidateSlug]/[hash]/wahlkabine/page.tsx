@@ -18,7 +18,7 @@ export default async function CandidateWahlkabine({
   return (
     <Questionnaire
       questions={
-        candidate?.answers.length && candidate?.answers.length > 0
+        candidate?.answers && candidate?.answers.length > 0
           ? candidate?.answers.map((answer) => ({
               option: answer.option,
               weighting: answer.weighting,

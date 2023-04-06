@@ -62,27 +62,38 @@ export default async function CandidatePreWahlkabine({
               <h2 className="text-2xl mb-5 hyphens-auto">
                 {answer.question.title}
               </h2>
-              <div className="grid grid-cols-2 gap-5">
-                <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                  Ich stimme {optionLabelForValue(answer.option)}
-                </p>
-                <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                  Ist mir {weightingLabelForValue(answer.weighting)}
-                </p>
+              {answer.option && answer.weighting ? (
+                <div className="grid grid-cols-2 gap-5">
+                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                    Ich stimme {optionLabelForValue(answer.option)}
+                  </p>
+                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                    Ist mir {weightingLabelForValue(answer.weighting)}
+                  </p>
+                </div>
+              ) : (
+                <div className="w-full">
+                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                    Diese Frage is nicht beantwortet.
+                  </p>
+                </div>
+              )}
+              {answer.option && answer.weighting && (
+                <div className="py-3">
+                  <h3 className="underline underline-offset-2">
+                    Zusätzliche Information:
+                  </h3>
+                  <p className="py-1 text-lg">
+                    {answer.text ? answer.text : "---"}
+                  </p>
+                </div>
+              )}
+              <div className="mt-3">
+                <EditQuestionButton
+                  questionId={answer.questionId}
+                  url={`/${candidate.slug}/${candidate.hash}/wahlkabine`}
+                />
               </div>
-              <div className="py-3">
-                <h3 className="underline underline-offset-2">
-                  Zusätzliche Information:
-                </h3>
-                <p className="py-1 text-lg">
-                  {answer.text ? answer.text : "---"}
-                </p>
-              </div>
-
-              <EditQuestionButton
-                questionId={answer.questionId}
-                url={`/${candidate.slug}/${candidate.hash}/wahlkabine`}
-              />
             </li>
           ))}
         </ul>

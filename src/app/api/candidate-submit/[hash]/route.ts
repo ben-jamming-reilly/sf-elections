@@ -5,8 +5,8 @@ import { prisma } from "~/lib/prisma";
 const questionWithAnswersSchema = z.array(
   z.object({
     id: z.number(),
-    option: z.number().min(-2).max(2),
-    weighting: z.number().min(0).max(3),
+    option: z.number().min(-2).max(2).optional(),
+    weighting: z.number().min(0).max(3).optional(),
     text: z.string().optional(),
   })
 );

@@ -25,136 +25,136 @@ export interface QuestionnaireState {
 }
 
 export const useQuestionnaireStore = create<QuestionnaireState>()(
-  persist(
-    (set, get) => ({
-      questions: [],
-      isSaving: false,
-      synced: false,
-      setQuestions: (questions: AnsweredQuestion[]) => {
-        set((state) => {
-          return {
-            questions: state.questions.length > 0 ? state.questions : questions,
-          };
+  // persist(
+  (set, get) => ({
+    questions: [],
+    isSaving: false,
+    synced: true,
+    setQuestions: (questions: AnsweredQuestion[]) => {
+      set((state) => {
+        return {
+          questions: state.questions.length > 0 ? state.questions : questions,
+        };
+      });
+    },
+    activeIndex: 0,
+    setActiveIndex: (index: number) => {
+      set((state) => {
+        return { activeIndex: index };
+      });
+    },
+    slug: undefined,
+    setSlug: (slug: string) => {
+      set((state) => {
+        return { slug };
+      });
+    },
+    setOption: (questionId: number, weightingId: number) => {
+      set((state) => {
+        const questions = state.questions.map((question) => {
+          if (question.id === questionId) {
+            return {
+              ...question,
+              option: weightingId,
+            };
+          } else {
+            return question;
+          }
         });
-      },
-      activeIndex: 0,
-      setActiveIndex: (index: number) => {
-        set((state) => {
-          return { activeIndex: index };
+        return { questions, synced: false };
+      });
+    },
+    setWeighting: (questionId: number, weightingId: number) => {
+      set((state) => {
+        const questions = state.questions.map((question) => {
+          if (question.id === questionId) {
+            return {
+              ...question,
+              weighting: weightingId,
+            };
+          } else {
+            return question;
+          }
         });
-      },
-      slug: undefined,
-      setSlug: (slug: string) => {
-        set((state) => {
-          return { slug };
+        return { questions, synced: false };
+      });
+    },
+    setText: (questionId: number, text: string) => {
+      set((state) => {
+        if (text.length > 500) return state;
+        const questions = state.questions.map((question) => {
+          if (question.id === questionId) {
+            return {
+              ...question,
+              text,
+            };
+          } else {
+            return question;
+          }
         });
-      },
-      setOption: (questionId: number, weightingId: number) => {
-        set((state) => {
-          const questions = state.questions.map((question) => {
-            if (question.id === questionId) {
-              return {
-                ...question,
-                option: weightingId,
-              };
-            } else {
-              return question;
-            }
-          });
-          return { questions, synced: false };
-        });
-      },
-      setWeighting: (questionId: number, weightingId: number) => {
-        set((state) => {
-          const questions = state.questions.map((question) => {
-            if (question.id === questionId) {
-              return {
-                ...question,
-                weighting: weightingId,
-              };
-            } else {
-              return question;
-            }
-          });
-          return { questions, synced: false };
-        });
-      },
-      setText: (questionId: number, text: string) => {
-        set((state) => {
-          if (text.length > 500) return state;
-          const questions = state.questions.map((question) => {
-            if (question.id === questionId) {
-              return {
-                ...question,
-                text,
-              };
-            } else {
-              return question;
-            }
-          });
-          return { questions, synced: false };
-        });
-      },
-      save: async (candidateHash?: string) => {
-        const path = candidateHash
-          ? `/api/candidate-submit/${candidateHash}`
-          : "/api/voter-submit";
+        return { questions, synced: false };
+      });
+    },
+    save: async (candidateHash?: string) => {
+      const path = candidateHash
+        ? `/api/candidate-submit/${candidateHash}`
+        : "/api/voter-submit";
 
-        set((state) => {
-          return {
-            isSaving: true,
-          };
-        });
+      set((state) => {
+        return {
+          isSaving: true,
+        };
+      });
 
-        fetch(path, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(
-            get().questions.map((q) => ({
-              id: q.id,
-              option: q.option,
-              weighting: q.weighting,
-              text: q?.text,
-            }))
-          ),
+      fetch(path, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          get().questions.map((q) => ({
+            id: q.id,
+            option: q.option,
+            weighting: q.weighting,
+            text: q?.text,
+          }))
+        ),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          set((state) => {
+            return {
+              ...state,
+              isSaving: false,
+              synced: true,
+              slug: res.slug,
+            };
+          });
         })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res);
-            set((state) => {
-              return {
-                ...state,
-                isSaving: false,
-                synced: true,
-                slug: res.slug,
-              };
-            });
-          })
-          .catch((reason) => {
-            console.error(reason);
+        .catch((reason) => {
+          console.error(reason);
 
-            set((state) => {
-              return {
-                isSaving: false,
-                synced: false,
-              };
-            });
+          set((state) => {
+            return {
+              isSaving: false,
+              synced: false,
+            };
           });
-      },
-      reset: () => {
-        set((state) => {
-          return {
-            questions: [],
-            activeIndex: 0,
-            slug: undefined,
-          };
         });
-      },
-    }),
-    {
-      name: "questionnaire-storage",
-    }
-  )
+    },
+    reset: () => {
+      set((state) => {
+        return {
+          questions: [],
+          activeIndex: 0,
+          slug: undefined,
+        };
+      });
+    },
+  })
+  //   {
+  //     name: "questionnaire-storage",
+  //   }
+  // )
 );

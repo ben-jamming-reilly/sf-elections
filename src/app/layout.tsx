@@ -22,6 +22,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#ce000c" />
+        <meta name="msapplication-navbutton-color" content="#ce000c" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#ce000c" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={interFont.variable}>
         <div
           className={`w-full min-h-full z-10 flex flex-col px-5 bg-white border-brand border-[10px] md:border-[30px]`}

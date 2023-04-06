@@ -31,8 +31,8 @@ model CandidateQuestionAnswer {
   candidateId     Int
   question    Question @relation(fields: [questionId], references: [id])
   questionId  Int
-  option Int
-  weighting Int
+  option Int?
+  weighting Int?
   text String @db.MediumText @default("")
 
   @@index([candidateId, questionId])
