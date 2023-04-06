@@ -36,12 +36,9 @@ export default function RootLayout({
         >
           <div className="lg:w-[800px] w-full md:min- flex flex-col min-h-full flex-grow mx-auto gap-10">
             <header className="mt-10">
-              <Link
-                href="/"
-                className="text-2xl inline-flex text-white bg-brand p-3 focus-visible:outline-brand outline-offset-2"
-              >
+              <div className="text-2xl inline-flex text-white bg-brand p-3 focus-visible:outline-brand outline-offset-2">
                 SPÖ Vorstandswahl-Kabine
-              </Link>
+              </div>
             </header>
             <main className="flex-grow">{children}</main>
             <footer className="w-full flex justify-center items-center py-5 border-t border-brand">
