@@ -255,7 +255,7 @@ export const Questionnaire = ({
                 {slug && (
                   <Link
                     className="text-sm hover:underline text-center underline-offset-2"
-                    href={`/${slug}/${candidateHash}`}
+                    href={`/${slug}/${candidateHash}?cb=${Date.now()}`}
                   >
                     Zur Übersicht
                   </Link>
