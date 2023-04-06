@@ -63,7 +63,7 @@ export default async function CandidatePreWahlkabine({
               <h2 className="text-2xl mb-5 hyphens-auto">
                 {answer.question.title}
               </h2>
-              {answer.option && answer.weighting ? (
+              {answer.option !== null && answer.weighting !== null ? (
                 <div className="grid grid-cols-2 gap-5">
                   <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
                     {optionLabelForValue(answer.option)
