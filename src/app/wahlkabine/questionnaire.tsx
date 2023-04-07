@@ -4,7 +4,7 @@ import { Question } from "@prisma/client";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import {
   AnsweredQuestion,
@@ -89,6 +89,7 @@ export const Questionnaire = ({
     s.reset,
   ]);
   const prevIndex = usePrevious(activeIndex);
+  const questionRef = useRef<HTMLDivElement>(null);
 
   // Check if component has hydrated before showing UI
   // Prevents hydration mismatch error due to localstorage
@@ -100,6 +101,12 @@ export const Questionnaire = ({
   useEffect(() => {
     setQuestions(questions);
   }, [questions]);
+
+  // Scroll question into view
+  useEffect(() => {
+    console.log(questionRef?.current);
+    questionRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [activeIndex]);
 
   // Redirect once hash is set
   // Re-add when candidates are done
@@ -224,6 +231,7 @@ export const Questionnaire = ({
                 x: { duration: 0.2 },
                 opacity: { duration: 0.2 },
               }}
+              ref={questionRef}
               className="w-full"
             >
               <span
@@ -383,6 +391,7 @@ export const Questionnaire = ({
                     Zeichen):
                   </h2>
                   <textarea
+                    autoFocus={false}
                     value={activeQuestion.text}
                     className="max-w-full w-full focus-visible:outline-brand outline-offset-2 min-h-[5em] p-2 border border-brand rounded-md"
                     onChange={(e) => {
