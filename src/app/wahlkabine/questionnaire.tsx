@@ -188,12 +188,12 @@ export const Questionnaire = ({
             key={`question-${activeQuestion.id}`}
           >
             <div className="">
-              <ul className="flex flex-row flex-wrap gap-1 md:gap-4 justify-center">
+              <ul className="flex flex-row flex-wrap gap-1 md:gap-1 justify-center">
                 {questionsWithAnswers.map((question, index) => (
                   <li key={`question-shortcut-${question.id}`}>
                     <button
                       className={clsx(
-                        "inline-flex justify-center items-center w-[3em] h-[3em] transition-all underline-offset-2 hover:border-brand hover:underline border",
+                        "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
                         isQuestionAnswered(question) &&
                           "bg-brand text-white border-brand",
                         activeQuestion.id === question.id &&
