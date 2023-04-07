@@ -5,6 +5,7 @@ import clsx from "clsx";
 import {
   categoryHexForLabel,
   optionLabelForValue,
+  wahlrechtLabelForValue,
   weightingLabelForValue,
 } from "~/data/answers";
 import { EditQuestionButton } from "./edit-question-button";
@@ -66,9 +67,12 @@ export default async function CandidatePreWahlkabine({
               {answer.option !== null && answer.weighting !== null ? (
                 <div className="grid grid-cols-2 gap-5">
                   <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    {optionLabelForValue(answer.option)
-                      ? `Ich stimme ${optionLabelForValue(answer.option)}`
-                      : optionLabelForYesNoValue(answer.option)}
+                    {answer.question.type === "YesNo" &&
+                      optionLabelForYesNoValue(answer.option)}
+                    {answer.question.type === "Range" &&
+                      `Ich stimme ${optionLabelForValue(answer.option)}`}
+                    {answer.question.type === "Wahlrecht" &&
+                      wahlrechtLabelForValue(answer.option)}
                   </p>
                   <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
                     Ist mir {weightingLabelForValue(answer.weighting)}

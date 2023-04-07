@@ -28,6 +28,7 @@ export default async function CandidateWahlkabine({
               title: answer.question.title,
               description: answer.question.description,
               isYesNo: answer.question.isYesNo,
+              type: answer.question.type,
             }))
           : questions
       }
