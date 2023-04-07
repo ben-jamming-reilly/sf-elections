@@ -1,3 +1,4 @@
+import { QuestionType } from "@prisma/client";
 export const options = [
   {
     label: "garnicht zu",
@@ -27,6 +28,43 @@ export const yesNoOptions = [
     value: 3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
 ];
+
+export const wahlrechtOptions = [
+  {
+    label: "Nein nie",
+    value: -10, // Settings a different value to be able to differnentiate. Can normalise afterwards.
+  },
+  {
+    label: "ja nach 10 Jahren Hauptwohnsitz",
+    value: -9,
+  },
+  {
+    label: "ja nach 5 Jahren Hauptwohnsitz",
+    value: -8,
+  },
+  {
+    label: "ja sofort",
+    value: -7,
+  },
+];
+
+export const getOptionsBasedOnType = (type: QuestionType) => {
+  switch (type) {
+    case "YesNo":
+      return yesNoOptions;
+    case "Wahlrecht":
+      return wahlrechtOptions;
+    case "Range":
+      return options;
+    default:
+      return options;
+  }
+};
+
+export const wahlrechtLabelForValue = (value: number) => {
+  const option = wahlrechtOptions.find((option) => option.value === value);
+  return option ? option.label : "";
+};
 
 export const optionLabelForValue = (value: number) => {
   const option = options.find((option) => option.value === value);
@@ -61,7 +99,6 @@ export const weightingLabelForValue = (value: number) => {
   const weighting = weightings.find((weighting) => weighting.value === value);
   return weighting ? weighting.label : "";
 };
-
 
 export const CATEGORIES = [
   {

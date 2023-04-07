@@ -13,6 +13,7 @@ import {
 import { Loading } from "../ui/loading";
 import {
   categoryHexForLabel,
+  getOptionsBasedOnType,
   options,
   weightings,
   yesNoOptions,
@@ -303,43 +304,51 @@ export const Questionnaire = ({
                 <ul
                   className={clsx(
                     "grid w-full border border-brand ",
-                    activeQuestion.isYesNo
-                      ? "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2"
-                      : "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4"
+                    activeQuestion.type === "YesNo" &&
+                      "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2",
+                    activeQuestion.type === "Range" &&
+                      "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4",
+                    activeQuestion.type === "Wahlrecht" &&
+                      "grid-cols-1 grid-rows-4"
                   )}
                 >
-                  {(activeQuestion.isYesNo ? yesNoOptions : options).map(
-                    (option) => (
-                      <li
-                        className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
-                        key={`option-${option.value}`}
-                      >
-                        {option.value === activeQuestion.option && (
-                          <motion.span
-                            layoutId="active-option"
-                            // exit={{ opacity:  0 }}
-                            className="absolute inset-0 bg-brand z-10"
-                          />
-                        )}
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
+                  {getOptionsBasedOnType(activeQuestion.type).map((option) => (
+                    <li
+                      className={clsx(
+                        "relative border-brand last:border-0 bg-red-50/50",
+                        (activeQuestion.type === "Range" ||
+                          activeQuestion.type === "YesNo") &&
+                          "md:border-r border-brand",
+                        activeQuestion.type === "Wahlrecht" &&
+                          "border-b border-brand"
+                      )}
+                      key={`option-${option.value}`}
+                    >
+                      {option.value === activeQuestion.option && (
+                        <motion.span
+                          layoutId="active-option"
+                          // exit={{ opacity:  0 }}
+                          className="absolute inset-0 bg-brand z-10"
+                        />
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
 
-                            setOption(activeQuestion.id, option.value);
-                          }}
-                          className={clsx(
-                            "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
-                            option.value === activeQuestion.option &&
-                              " text-white",
-                            typeof activeQuestion.option !== "undefined" &&
-                              "transition-all"
-                          )}
-                        >
-                          {option.label}
-                        </button>
-                      </li>
-                    )
-                  )}
+                          setOption(activeQuestion.id, option.value);
+                        }}
+                        className={clsx(
+                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
+                          option.value === activeQuestion.option &&
+                            " text-white",
+                          typeof activeQuestion.option !== "undefined" &&
+                            "transition-all"
+                        )}
+                      >
+                        {option.label}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
