@@ -65,7 +65,6 @@ model Question {
   category   String @default("")
   description String    @db.MediumText @default("")
   type       QuestionType @default(YesNo)
-  isYesNo   Boolean   @default(false)
   voters     VoterQuestionAnswer[]
   candidates CandidateQuestionAnswer[]
 }
