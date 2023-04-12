@@ -56,6 +56,10 @@
     - [ ] Über die Wahlkabine
     - [ ] Datenschutz
     - [ ] Impressum
+- Performance
+    - [ ] Cache static data endpoints to prep for possible scale
+        - [ ] Questions
+    - [ ] Use SSG or ISR wherever possible
 - Code
     - [ ] Refactor questionnaireStore
         - [x] Deal with duplicated code for setting option, weighting and text OR use immer
