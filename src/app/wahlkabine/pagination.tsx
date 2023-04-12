@@ -21,11 +21,10 @@ const Pagination = ({
 }) => {
   return (
     <ul
-      className={
-        "flex flex-row flex-wrap gap-1 md:gap-1 justify-center" +
-        " " +
+      className={clsx(
+        "flex flex-row flex-wrap gap-1 md:gap-1 justify-center",
         className
-      }
+      )}
     >
       {questionsWithAnswers.map((question, index) => (
         <li key={`question-shortcut-${question.id}`}>
