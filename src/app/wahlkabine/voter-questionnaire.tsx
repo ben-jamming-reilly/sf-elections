@@ -215,7 +215,7 @@ export const VoterQuestionnaire = ({
               >
                 {activeQuestion.category}
               </span>
-              <div className="text-2xl mb-3 max-md:mb-0 min-md:min-h-[7em]">
+              <div className="text-2xl md:mb-3 md:min-h-[3em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
@@ -223,7 +223,7 @@ export const VoterQuestionnaire = ({
               </div>
             </motion.header>
 
-            <div className="hidden md:block">{PrevAndNext}</div>
+            {/* <div className="hidden md:block">{PrevAndNext}</div> */}
 
             <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
               <div className="flex justify-center items-center">
