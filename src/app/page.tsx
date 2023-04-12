@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useQuestionnaireStore } from "~/stores/questionnaire-store";
 import { Loading } from "./ui/loading";
+import { useVoterQuestionnaireStore } from "~/stores/questionnaire-store-voter";
 
 export default function Home() {
   const [hasHydrated, setHasHydrated] = useState(false);
-  const [slug, reset] = useQuestionnaireStore((s) => [s.slug, s.reset]);
+  const [slug, reset] = useVoterQuestionnaireStore((s) => [s.slug, s.reset]);
 
   useEffect(() => {
     setHasHydrated(true);
@@ -23,7 +23,7 @@ export default function Home() {
         Die Wahlkabine ist eine Initiative der Jungen Generation.
       </p>
 
-      {/* <div className="min-h-[60px]">
+      <div className="min-h-[60px]">
         {hasHydrated ? (
           <>
             {slug ? (
@@ -39,7 +39,7 @@ export default function Home() {
                   onClick={(e) => {
                     reset();
                   }}
-                  className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
+                  className="bg-brand-purple text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
                 >
                   Wahlkabine neu starten
                 </button>
@@ -56,7 +56,7 @@ export default function Home() {
         ) : (
           <Loading />
         )}
-      </div> */}
+      </div>
     </div>
   );
 }

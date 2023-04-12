@@ -5,16 +5,25 @@ import { ZodError, z } from "zod";
 import { prisma } from "~/lib/prisma";
 
 const questionWithAnswersSchema = z.array(
-  z.object({
-    id: z.number(),
-    option: z.number().min(-2).max(2),
-    weighting: z.number().min(0).max(3),
-  })
+  z.discriminatedUnion("skipped", [
+    z.object({
+      id: z.number(),
+      option: z.null(),
+      weighting: z.null(),
+      skipped: z.literal(true),
+    }),
+    z.object({
+      id: z.number(),
+      option: z.number(),
+      weighting: z.number().min(0).max(3),
+      skipped: z.literal(false),
+    }),
+  ])
 );
 
 export async function POST(request: Request) {
   const data = await request.json();
-  const hash = uuidv4();
+  const hash = uuidv4().slice(0, 9);
   console.log(data);
 
   try {
@@ -29,6 +38,7 @@ export async function POST(request: Request) {
               questionId: answer.id,
               option: answer.option,
               weighting: answer.weighting,
+              skipped: answer.skipped,
             })),
           },
         },

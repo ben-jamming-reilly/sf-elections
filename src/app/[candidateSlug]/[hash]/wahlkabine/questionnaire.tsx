@@ -10,7 +10,7 @@ import {
   AnsweredQuestion,
   useQuestionnaireStore,
 } from "~/stores/questionnaire-store";
-import { Loading } from "../ui/loading";
+import { Loading } from "../../../ui/loading";
 import {
   categoryHexForLabel,
   getOptionsBasedOnType,

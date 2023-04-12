@@ -4,6 +4,7 @@
 - Next.js 13
 - Typescript
 - Zustand
+- Zod
 - Tailwind
 - Framer Motion
 
@@ -16,8 +17,18 @@
     - [ ] Falls localstorage data hat: Sharen & Neustarten auf Endseite anzeigen 
     - Resultat Seite
         - [ ] Kandidat:innen geranked anzeigen
-        - [ ] Vergleich zwischen eigenen Ergebnis und Kandidat:innen anzeigen
-        - [ ] Kandidat:innen auswählbar machen und dann untereinander vergleichen
+        - [ ] Vergleich zwischen eigenen Ergebnis und Kandidat:in anzeigen
+        - [ ] Kandidat:innen untereinander vergleichen
+- Portability
+    - [ ] Korrekte Meta Tags auf jeder Seite
+    - [ ] OG Bilder für alle Seiten
+    - [ ] Link kopieren und teilen auf jeder Seite
+- Design
+    - [ ] JG CI übernehmen
+        - [ ] Fonts
+        - [ ] Farben
+        - [ ] Logo
+        - [ ] Grafikençt
 - Kandidat:innen Flow
     - [x] Vordefinierten Link pro Kandidat:in definieren
     - [x] Kandidat:innen haben ein Textfeld für extra Informationen
@@ -35,4 +46,4 @@
     - [ ] Impressum
 - Code
     - [ ] Refactor questionnaireStore
-        - [ ] Deal with duplicated code for setting option, weighting and text OR use immer
+        - [x] Deal with duplicated code for setting option, weighting and text OR use immer

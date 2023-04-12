@@ -1,4 +1,5 @@
 import { QuestionType } from "@prisma/client";
+
 export const options = [
   {
     label: "garnicht zu",

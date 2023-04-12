@@ -13,6 +13,7 @@ model Candidate {
   slug        String   @unique
   hash        String   @unique
   name        String
+  profileImg String? @unique
   description String    @db.MediumText
   hasFinished  Boolean  @default(false)
   answers   CandidateQuestionAnswer[]
@@ -45,8 +46,9 @@ model VoterQuestionAnswer {
   voterId     Int
   question    Question @relation(fields: [questionId], references: [id])
   questionId  Int
-  option Int
-  weighting Int
+  option Int?
+  weighting Int?
+  skipped Boolean @default(false)
 
   @@index([voterId, questionId])
   @@index([voterId])

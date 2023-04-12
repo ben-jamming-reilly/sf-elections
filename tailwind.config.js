@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       colors: {
         brand: "var(--color-brand)",
+        "brand-purple": "var(--color-brand-purple)",
+        "brand-yellow": "var(--color-brand-yellow)",
       },
       fontFamily: {
         sans: [

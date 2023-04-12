@@ -4,7 +4,9 @@
 
 @layer base {
   :root {
-    --color-brand: #ce000c;
+    --color-brand: #e62937;
+    --color-brand-purple: #4a1c6b;
+    --color-brand-yellow: #ffe595;
   }
 
   ::selection {

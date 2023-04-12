@@ -1,6 +1,6 @@
-import { Questionnaire } from "~/app/wahlkabine/questionnaire";
 import { prisma } from "~/lib/prisma";
 import { getCandidateFromSlug } from "../../get-candidate-from-slug";
+import { Questionnaire } from "./questionnaire";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
