@@ -2,6 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{html,ts,tsx,js,jsx}"],
   theme: {
+    screens: {
+      xs: "400px",
+    },
     extend: {
       colors: {
         brand: "var(--color-brand)",

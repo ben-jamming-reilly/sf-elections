@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
+import { Pagination } from "./pagination";
 import {
   categoryHexForLabel,
   getOptionsBasedOnType,
@@ -135,13 +136,13 @@ export const VoterQuestionnaire = ({
   };
 
   const PrevAndNext = (
-    <div className="flex flex-col gap-2 sm:flex-row justify-between items-center w-full">
+    <div className="flex flex-row gap-2 justify-between items-center w-full">
       <span>
         <button
           onClick={handlePrev}
           disabled={!hasPrevious}
           className={clsx(
-            "hover:underline underline-offset-2 text-center w-[130px] px-6 py-2   active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            "hover:underline underline-offset-2 text-center xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
             !hasPrevious && "invisible"
           )}
         >
@@ -160,7 +161,7 @@ export const VoterQuestionnaire = ({
           }
           onClick={handleNext}
           className={clsx(
-            "hover:underline underline-offset-2 text-center transition-all w-[130px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
+            "hover:underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
             !hasNext && allQuestionsAnswered
               ? "bg-brand text-white"
               : "bg-neutral-200 text-gray-800"
@@ -177,38 +178,16 @@ export const VoterQuestionnaire = ({
       {hasHydrated && activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
-            className="flex flex-col gap-10 items-center"
+            className="flex flex-col gap-5 md:gap-10 items-center"
             key={`question-${activeQuestion.id}`}
           >
             <div className="">
-              <ul className="flex flex-row flex-wrap gap-1 md:gap-1 justify-center">
-                {questionsWithAnswers.map((question, index) => (
-                  <li key={`question-shortcut-${question.id}`}>
-                    <button
-                      className={clsx(
-                        "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
-                        isQuestionAnswered(question) &&
-                          !question.skipped &&
-                          "bg-brand text-white border-brand",
-                        isQuestionAnswered(question) &&
-                          question.skipped &&
-                          "bg-neutral-200 text-neutral-500 border-neutral-200 hover:border-neutral-200",
-                        activeQuestion.id === question.id &&
-                          "underline scale-[0.85]",
-                        !isQuestionAnswered(question) &&
-                          activeQuestion.id === question.id &&
-                          "border-brand bg-transparent hover:text-brand text-brand",
-                        activeQuestion.id !== question.id &&
-                          !isQuestionAnswered(question) &&
-                          "bg-red-50/50 hover:text-brand"
-                      )}
-                      onClick={() => setActiveIndex(index)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              <Pagination
+                activeQuestion={activeQuestion}
+                questionsWithAnswers={questionsWithAnswers}
+                setActiveIndex={setActiveIndex}
+                className="hidden md:flex"
+              />
             </div>
 
             <motion.header
@@ -236,7 +215,7 @@ export const VoterQuestionnaire = ({
               >
                 {activeQuestion.category}
               </span>
-              <div className="text-2xl mb-3 min-h-[7em]">
+              <div className="text-2xl mb-3 max-md:mb-0 min-md:min-h-[7em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
@@ -244,9 +223,9 @@ export const VoterQuestionnaire = ({
               </div>
             </motion.header>
 
-            {PrevAndNext}
+            <div className="hidden md:block">{PrevAndNext}</div>
 
-            <section className="flex flex-col gap-10 my-6 w-full">
+            <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
               <div className="flex justify-center items-center">
                 <button
                   disabled={activeQuestion.skipped}
@@ -370,6 +349,13 @@ export const VoterQuestionnaire = ({
             </section>
 
             {PrevAndNext}
+
+            <Pagination
+              activeQuestion={activeQuestion}
+              questionsWithAnswers={questionsWithAnswers}
+              setActiveIndex={setActiveIndex}
+              className="visible md:hidden mt-5"
+            />
           </motion.article>
         </AnimatePresence>
       ) : (
