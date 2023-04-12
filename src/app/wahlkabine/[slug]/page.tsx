@@ -209,7 +209,9 @@ export default async function Wahlkabine({
                   </summary>
                   <ul className="grid grid-cols-1 py-5 sm:grid-cols-2 md:grid-cols-3">
                     {candidates.map((candidate) => (
-                      <li>
+                      <li
+                        key={`candidate-details-${answer.questionId}-${candidate.id}`}
+                      >
                         <div className="text-center flex flex-row items-center font-semibold py-2 gap-3 justify-center">
                           <Image
                             src={`/${candidate.profileImg}`}
