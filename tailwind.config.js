@@ -2,10 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{html,ts,tsx,js,jsx}"],
   theme: {
-    screens: {
-      xs: "400px",
-    },
     extend: {
+      screens: {
+        xs: "400px",
+      },
       colors: {
         brand: "var(--color-brand)",
         "brand-purple": "var(--color-brand-purple)",
