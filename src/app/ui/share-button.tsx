@@ -24,8 +24,8 @@ export const ShareButton = ({ children }: { children: ReactNode }) => {
         try {
           if (navigator.share) {
             await navigator.share({
-              title: "SPÖ Vorstandswahl-Kabine",
-              text: "Finde heraus welche:r Kandidat:in für die SPÖ Vorstandswahl 2023 am Besten zu dir passt.",
+              title: "SPÖ Vorsitzwahl-Kabine",
+              text: "Finde heraus welche:r Kandidat:in für die SPÖ Vorsitzwahl 2023 am Besten zu dir passt.",
               url: window.location.href,
             });
             setCopied(true);

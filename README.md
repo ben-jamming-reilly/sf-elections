@@ -1,4 +1,4 @@
-# SPÖ Vorstandswahl-Kabine 2023
+# SPÖ Vorsitzwahl-Kabine 2023
 
 ## Technologien
 - Next.js 13

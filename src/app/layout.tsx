@@ -40,7 +40,7 @@ export default function RootLayout({
                 href="/"
                 className="text-2xl inline-flex text-white bg-brand p-3 focus-visible:outline-brand outline-offset-2"
               >
-                SPÖ Vorstandswahl-Kabine
+                SPÖ Vorsitzwahl-Kabine
               </Link>
             </header>
             <main className="flex-grow">{children}</main>

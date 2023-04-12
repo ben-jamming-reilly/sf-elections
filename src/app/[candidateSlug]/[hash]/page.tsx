@@ -30,9 +30,7 @@ export default async function CandidatePreWahlkabine({
   return (
     <div>
       <h1 className="text-3xl">Wahlkabine für {candidate.name}</h1>
-      <p className="my-3">
-        Beantworten die Fragen für die Vorstandswahlkabine!
-      </p>
+      <p className="my-3">Beantworten die Fragen für die Vorsitzwahlkabine!</p>
 
       <Link
         href={`/${candidate.slug}/${candidate.hash}/wahlkabine`}

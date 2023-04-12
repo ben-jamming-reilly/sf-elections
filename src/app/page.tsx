@@ -17,8 +17,8 @@ export default function Home() {
   return (
     <div>
       <h1 className="text-3xl">
-        Finde heraus welche:r Kandidat:in für die SPÖ Vorstandswahl 2023 am
-        Besten zu dir passt.
+        Finde heraus welche:r Kandidat:in für die SPÖ Vorsitzwahl 2023 am Besten
+        zu dir passt.
       </h1>
       <p className="my-3">
         Die Wahlkabine ist eine Initiative der Jungen Generation.
