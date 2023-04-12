@@ -177,7 +177,7 @@ export const VoterQuestionnaire = ({
       {hasHydrated && activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
-            className="flex flex-col gap-10 items-center"
+            className="flex flex-col max-md:gap-5 gap-10 items-center"
             key={`question-${activeQuestion.id}`}
           >
             <div className="">
@@ -236,7 +236,7 @@ export const VoterQuestionnaire = ({
               >
                 {activeQuestion.category}
               </span>
-              <div className="text-2xl mb-3 min-h-[7em]">
+              <div className="text-2xl mb-3 max-md:mb-0 min-md:min-h-[7em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
@@ -244,9 +244,9 @@ export const VoterQuestionnaire = ({
               </div>
             </motion.header>
 
-            {PrevAndNext}
+            <div className="max-md:hidden">{PrevAndNext}</div>
 
-            <section className="flex flex-col gap-10 my-6 w-full">
+            <section className="flex flex-col max-md:gap-5 gap-10 max-md:my-3 my-6 w-full">
               <div className="flex justify-center items-center">
                 <button
                   disabled={activeQuestion.skipped}
