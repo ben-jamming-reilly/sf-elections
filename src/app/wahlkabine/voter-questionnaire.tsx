@@ -136,13 +136,13 @@ export const VoterQuestionnaire = ({
   };
 
   const PrevAndNext = (
-    <div className="flex flex-col gap-2 sm:flex-row justify-between items-center w-full">
+    <div className="flex flex-row gap-2 justify-between items-center w-full">
       <span>
         <button
           onClick={handlePrev}
           disabled={!hasPrevious}
           className={clsx(
-            "hover:underline underline-offset-2 text-center w-[130px] px-6 py-2   active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            "hover:underline underline-offset-2 text-center xs  xs:w-[130px] px-3 xs:px-6 py-2   active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
             !hasPrevious && "invisible"
           )}
         >
@@ -161,7 +161,7 @@ export const VoterQuestionnaire = ({
           }
           onClick={handleNext}
           className={clsx(
-            "hover:underline underline-offset-2 text-center transition-all w-[130px] px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
+            "hover:underline underline-offset-2 text-center transition-all xs xs:w-[130px] px-3 xs:px-6 py-2  active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
             !hasNext && allQuestionsAnswered
               ? "bg-brand text-white"
               : "bg-neutral-200 text-gray-800"
@@ -178,7 +178,7 @@ export const VoterQuestionnaire = ({
       {hasHydrated && activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
-            className="flex flex-col max-md:gap-5 gap-10 items-center"
+            className="flex flex-col gap-5 md:gap-10 items-center"
             key={`question-${activeQuestion.id}`}
           >
             <div className="">
@@ -225,7 +225,7 @@ export const VoterQuestionnaire = ({
 
             <div className="hidden md:block">{PrevAndNext}</div>
 
-            <section className="flex flex-col max-md:gap-5 gap-10 max-md:my-3 my-6 w-full">
+            <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
               <div className="flex justify-center items-center">
                 <button
                   disabled={activeQuestion.skipped}
