@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
+import { Pagination } from "./pagination";
 import {
   categoryHexForLabel,
   getOptionsBasedOnType,
@@ -181,34 +182,12 @@ export const VoterQuestionnaire = ({
             key={`question-${activeQuestion.id}`}
           >
             <div className="">
-              <ul className="flex flex-row flex-wrap gap-1 md:gap-1 justify-center">
-                {questionsWithAnswers.map((question, index) => (
-                  <li key={`question-shortcut-${question.id}`}>
-                    <button
-                      className={clsx(
-                        "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
-                        isQuestionAnswered(question) &&
-                          !question.skipped &&
-                          "bg-brand text-white border-brand",
-                        isQuestionAnswered(question) &&
-                          question.skipped &&
-                          "bg-neutral-200 text-neutral-500 border-neutral-200 hover:border-neutral-200",
-                        activeQuestion.id === question.id &&
-                          "underline scale-[0.85]",
-                        !isQuestionAnswered(question) &&
-                          activeQuestion.id === question.id &&
-                          "border-brand bg-transparent hover:text-brand text-brand",
-                        activeQuestion.id !== question.id &&
-                          !isQuestionAnswered(question) &&
-                          "bg-red-50/50 hover:text-brand"
-                      )}
-                      onClick={() => setActiveIndex(index)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              <Pagination
+                activeQuestion={activeQuestion}
+                questionsWithAnswers={questionsWithAnswers}
+                setActiveIndex={setActiveIndex}
+                className="hidden md:flex"
+              />
             </div>
 
             <motion.header
@@ -244,7 +223,7 @@ export const VoterQuestionnaire = ({
               </div>
             </motion.header>
 
-            <div className="max-md:hidden">{PrevAndNext}</div>
+            <div className="hidden md:block">{PrevAndNext}</div>
 
             <section className="flex flex-col max-md:gap-5 gap-10 max-md:my-3 my-6 w-full">
               <div className="flex justify-center items-center">
@@ -370,6 +349,13 @@ export const VoterQuestionnaire = ({
             </section>
 
             {PrevAndNext}
+
+            <Pagination
+              activeQuestion={activeQuestion}
+              questionsWithAnswers={questionsWithAnswers}
+              setActiveIndex={setActiveIndex}
+              className="visible md:hidden mt-5"
+            />
           </motion.article>
         </AnimatePresence>
       ) : (
