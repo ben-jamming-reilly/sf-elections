@@ -21,7 +21,19 @@
         - [ ] Kandidat:innen untereinander vergleichen
 - Portability
     - [ ] Korrekte Meta Tags auf jeder Seite
+        - [ ] Index
+        - [ ] Kandidat:in
+        - [ ] Fragebogen
+        - [ ] Wähler:in Ergebnis
+        - [ ] Wähler:in Vergleich mit Kandidat:in
+        - [ ] Kandidat:in Vergleich mit Kandidat:in
     - [ ] OG Bilder für alle Seiten
+        - [ ] Index
+        - [ ] Kandidat:in
+        - [ ] Fragebogen
+        - [ ] Wähler:in Ergebnis
+        - [ ] Wähler:in Vergleich mit Kandidat:in
+        - [ ] Kandidat:in Vergleich mit Kandidat:in
     - [ ] Link kopieren und teilen auf jeder Seite
 - Design
     - [ ] JG CI übernehmen

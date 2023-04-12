@@ -1,5 +1,9 @@
-import { Loading } from "../ui/loading";
+import { LoadingLogo } from "../ui/loading-logo";
 
 export default function VoterWahlkabineLoading() {
-  return <Loading />;
+  return (
+    <div className="w-full flex justify-center items-center mt-20">
+      <LoadingLogo />
+    </div>
+  );
 }

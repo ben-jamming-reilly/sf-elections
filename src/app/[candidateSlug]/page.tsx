@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCandidateFromSlug } from "./get-candidate-from-slug";
-import { CopyCurrentUrl } from "../ui/copy-button";
 import {
   categoryHexForLabel,
   optionLabelForValue,
@@ -9,6 +8,7 @@ import {
 } from "~/data/answers";
 import clsx from "clsx";
 import { headers } from "next/headers";
+import { ShareButton } from "../ui/share-button";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -33,7 +33,7 @@ export default async function CandidateWahlkabine({
       {candidate.hasFinished ? (
         <div className="mt-10">
           <div className="my-5">
-            <CopyCurrentUrl />
+            <ShareButton>Teilen</ShareButton>
           </div>
           <ul className="flex flex-col divide-y-2">
             {candidate.answers.map((answer) => (

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Loading } from "./ui/loading";
 import { useVoterQuestionnaireStore } from "~/stores/questionnaire-store-voter";
+import { ResetButton } from "./ui/reset-button";
 
 export default function Home() {
   const [hasHydrated, setHasHydrated] = useState(false);
@@ -35,14 +36,7 @@ export default function Home() {
                   Dein Ergebnis
                 </Link>
 
-                <button
-                  onClick={(e) => {
-                    reset();
-                  }}
-                  className="bg-brand-purple text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
-                >
-                  Wahlkabine neu starten
-                </button>
+                <ResetButton>Wahlkabine neu starten</ResetButton>
               </div>
             ) : (
               <Link

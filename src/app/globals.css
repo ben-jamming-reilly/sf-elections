@@ -35,4 +35,33 @@
       transform: scale(1);
     }
   }
+
+  .bounce-loading {
+    animation: bounceLoading 2.5s linear infinite;
+  }
+
+  @keyframes bounceLoading {
+    0% {
+      transform: translateY(0);
+    }
+
+    15% {
+      transform: translateY(10%);}
+
+    35% {
+      transform: translateY(-5%);
+    }
+
+    65% {
+      transform: translateY(5%);
+    }
+
+    85% {
+      transform: translateY(10%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
 }

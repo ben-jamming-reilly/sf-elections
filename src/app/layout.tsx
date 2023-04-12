@@ -25,9 +25,9 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ce000c" />
-        <meta name="msapplication-navbutton-color" content="#ce000c" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="#ce000c" />
+        <meta name="theme-color" content="#e62937" />
+        <meta name="msapplication-navbutton-color" content="#e62937" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#e62937" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={interFont.variable}>

@@ -10,6 +10,8 @@ import {
   weightingLabelForValue,
 } from "~/data/answers";
 import Link from "next/link";
+import { ShareButton } from "~/app/ui/share-button";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 export const metadata = {
   title: "Vergleich | SPÖ Wahlkabine",
@@ -44,12 +46,16 @@ export default async function Wahlkabine({
 
   return (
     <div>
-      <Link
-        href={`/wahlkabine/${params.slug}`}
-        className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md mb-10"
-      >
-        Zurück zur Übersicht
-      </Link>
+      <div className="flex flex-row items-center gap-2 mb-10">
+        <Link
+          href={`/wahlkabine/${params.slug}`}
+          className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center justify-center transition-all rounded-md text-brand gap-2"
+        >
+          <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
+          Zurück zur Übersicht
+        </Link>
+        <ShareButton>Teilen</ShareButton>
+      </div>
 
       <h1 className="text-4xl font-medium">Vergleich mit {candidate.name}</h1>
 
