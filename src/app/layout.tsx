@@ -2,6 +2,7 @@ import Link from "next/link";
 import "./globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "SPÖ Wahlkabine",
@@ -29,6 +30,10 @@ export default function RootLayout({
         <meta name="msapplication-navbutton-color" content="#ce000c" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#ce000c" />
         <link rel="icon" href="/favicon.ico" />
+        <Script
+          data-domain="spoe-wahlkabine.vercel.app"
+          src="/js/script.js"
+        ></Script>
       </head>
       <body className={interFont.variable}>
         <div
