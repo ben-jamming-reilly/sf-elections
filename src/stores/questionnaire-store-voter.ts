@@ -38,7 +38,10 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       setQuestions: (questions: VoterAnsweredQuestion[]) => {
         set((state) => {
           return {
-            questions: state.questions.length > 0 ? state.questions : questions,
+            questions:
+              state.questions.length > questions.length
+                ? state.questions
+                : questions,
           };
         });
       },
