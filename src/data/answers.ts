@@ -127,7 +127,7 @@ export const CATEGORIES = [
   },
   {
     label: "Bildung",
-    hex: "#d738fb",
+    hex: "#c16926",
   },
 ];
 
