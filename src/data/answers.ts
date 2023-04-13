@@ -125,6 +125,10 @@ export const CATEGORIES = [
     label: "Europa & Internationales",
     hex: "#BB6BD9",
   },
+  {
+    label: "Bildung",
+    hex: "#d738fb",
+  },
 ];
 
 export const categoryHexForLabel = (label: string) => {
