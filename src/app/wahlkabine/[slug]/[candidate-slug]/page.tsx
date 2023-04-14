@@ -16,6 +16,7 @@ import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 import { OptionResult } from "~/app/ui/option-result";
 import { WeightingResult } from "~/app/ui/weighting-result";
 import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
+import { calculateScore } from "~/data/calucate-score";
 
 export const metadata = {
   title: "Vergleich | SPÖ Wahlkabine",
@@ -48,6 +49,14 @@ export default async function Wahlkabine({
     notFound();
   }
 
+  const matchScore = calculateScore(
+    voterWithAnswers.answers!,
+    candidate.answers
+  );
+
+  const maxScore = candidate.answers.length * 1.15;
+  const percentage = Math.round((matchScore / maxScore) * 100);
+
   return (
     <div>
       <div className="flex flex-row items-center gap-2 mb-10">
@@ -62,7 +71,7 @@ export default async function Wahlkabine({
       </div>
 
       <h1 className="text-3xl md:text-4xl font-medium">
-        Vergleich mit {candidate.name}
+        Match mit {candidate.name}: {percentage}%
       </h1>
 
       <ul className="flex flex-col divide-y-2">
