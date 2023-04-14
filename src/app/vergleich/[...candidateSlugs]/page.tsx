@@ -27,7 +27,7 @@ const getCandidatesFromSlugs = cache(async (candidateSlugs: string[]) => {
   });
 });
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
   params: {
