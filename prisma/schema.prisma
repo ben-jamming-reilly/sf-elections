@@ -39,7 +39,6 @@ model CandidateQuestionAnswer {
   @@index([candidateId])
   @@index([questionId])
 }
-
 model VoterQuestionAnswer {
   id          Int      @id @default(autoincrement())
   voter       Voter    @relation(fields: [voterId], references: [id])

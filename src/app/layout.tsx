@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const interFont = Inter({
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "block",
   variable: "--font-inter",
   subsets: ["latin"],

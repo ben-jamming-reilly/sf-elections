@@ -23,7 +23,7 @@ const questionWithAnswersSchema = z.array(
 
 export async function POST(request: Request) {
   const data = await request.json();
-  const hash = uuidv4().slice(0, 9);
+  const hash = uuidv4().slice(0, 8);
   console.log(data);
 
   try {

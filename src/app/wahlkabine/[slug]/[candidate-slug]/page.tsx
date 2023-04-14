@@ -12,6 +12,10 @@ import {
 import Link from "next/link";
 import { ShareButton } from "~/app/ui/share-button";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
+import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
+import { OptionResult } from "~/app/ui/option-result";
+import { WeightingResult } from "~/app/ui/weighting-result";
+import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 
 export const metadata = {
   title: "Vergleich | SPÖ Wahlkabine",
@@ -57,79 +61,65 @@ export default async function Wahlkabine({
         <ShareButton>Teilen</ShareButton>
       </div>
 
-      <h1 className="text-4xl font-medium">Vergleich mit {candidate.name}</h1>
+      <h1 className="text-3xl md:text-4xl font-medium">
+        Vergleich mit {candidate.name}
+      </h1>
 
       <ul className="flex flex-col divide-y-2">
         {voterWithAnswers.answers.map((answer, index) => (
           <li key={answer.id} className="py-5">
-            <span
-              className={clsx(
-                "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
-                answer.question.category && "text-white"
-              )}
-              style={{
-                backgroundColor: categoryHexForLabel(answer.question.category),
-              }}
-            >
-              {answer.question.category}
-            </span>
+            {answer.question.category && (
+              <QuestionCategoryLabel category={answer.question.category} />
+            )}
             <div className="text-lg font-semibold">
               Frage {answer.questionId}:
             </div>
-            <h2 className="text-2xl mb-5 hyphens-auto">
+            <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto">
               {answer.question.title}
             </h2>
 
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-1 py-5 sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-1">
-                <div>Deine Antwort:</div>
+                <div className="text-center top-0 bg-white py-2">
+                  Deine Antwort:
+                </div>
                 {answer.option !== null && answer.weighting !== null ? (
-                  <div className="grid grid-cols-2 gap-5">
-                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                      {answer.question.type === "YesNo" &&
-                        optionLabelForYesNoValue(answer.option)}
-                      {answer.question.type === "Range" &&
-                        `Ich stimme ${optionLabelForValue(answer.option)}`}
-                      {answer.question.type === "Wahlrecht" &&
-                        wahlrechtLabelForValue(answer.option)}
-                    </p>
-                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                      Ist mir {weightingLabelForValue(answer.weighting)}
-                    </p>
+                  <div className="grid grid-cols-1 grid-rows-2 gap-5">
+                    <OptionResult
+                      value={answer.option}
+                      type={answer.question.type}
+                    />
+                    <WeightingResult value={answer.weighting!} />
                   </div>
                 ) : (
                   <div className="w-full">
-                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                      Diese Frage hast du nicht beantwortet.
-                    </p>
+                    <QuestionUnansweredResult />
                   </div>
                 )}
               </div>
 
               <div className="flex flex-col gap-1">
-                <div>
+                <div className="text-center top-0 bg-white py-2">
                   Anwort von{" "}
                   <strong className="font-semibold">{candidate.name}</strong>:
                 </div>
-                <div className="grid grid-cols-2 gap-5">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    {candidate.answers[index]?.question.type === "YesNo" &&
-                      optionLabelForYesNoValue(
-                        candidate.answers[index].option!
-                      )}
-                    {candidate.answers[index]?.question.type === "Range" &&
-                      `Ich stimme ${optionLabelForValue(
-                        candidate.answers[index].option!
-                      )}`}
-                    {candidate.answers[index]?.question.type === "Wahlrecht" &&
-                      wahlrechtLabelForValue(candidate.answers[index].option!)}
-                  </p>
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Ist mir{" "}
-                    {weightingLabelForValue(
-                      candidate.answers[index].weighting!
-                    )}
-                  </p>
+                <div className="">
+                  {candidate.answers[index].option !== null &&
+                  candidate.answers[index].weighting !== null ? (
+                    <div className="grid grid-cols-1 grid-rows-2 gap-5">
+                      <OptionResult
+                        value={candidate.answers[index].option!}
+                        type={candidate.answers[index]?.question.type}
+                      />
+                      <WeightingResult
+                        value={candidate.answers[index].weighting!}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full">
+                      <QuestionUnansweredResult />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

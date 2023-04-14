@@ -1,10 +1,13 @@
 import { prisma } from "~/lib/prisma";
 import { notFound } from "next/navigation";
 import {
+  ScaleOptionValueType,
+  WahlrechtValueType,
+  WeightingValueType,
   categoryHexForLabel,
-  optionLabelForValue,
-  optionLabelForYesNoValue,
-  wahlrechtLabelForValue,
+  getScaleOptionTendency,
+  getWahlrechtOptionTendency,
+  getWeightingTendency,
   weightingLabelForValue,
 } from "~/data/answers";
 import clsx from "clsx";
@@ -17,43 +20,78 @@ import {
   VoterQuestionAnswer,
 } from "@prisma/client";
 import { ShareButton } from "~/app/ui/share-button";
-import { Loading } from "~/app/ui/loading";
+import { OptionResult } from "~/app/ui/option-result";
+import { WeightingResult } from "~/app/ui/weighting-result";
+import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
+import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
   description: "SPÖ Wahlkabine",
 };
 
-/**
- * Returns number depending on match
- * 0 = no match
- * 1 = match
- * 2 = same answer
- *
- * @param voterAnswer
- * @param candidateAnswer
- * @returns
- */
-const calculateDistnace = (
-  voterAnswer: VoterQuestionAnswer & {
-    question: Question;
-  },
-  candidateAnswer: CandidateQuestionAnswer & {
-    question: Question;
-  }
+const calculateWeightingRelevancy = (
+  voterWeighting: WeightingValueType,
+  candidateWeighting: WeightingValueType
 ) => {
-  if (voterAnswer.skipped) return 0;
+  if (voterWeighting === candidateWeighting) return 0.15;
 
-  if (voterAnswer.question.category === "YesNo") {
-    if (voterAnswer.option === candidateAnswer.option) return 2;
-    return Math.abs(voterAnswer.option! - candidateAnswer.option!);
+  if (
+    (voterWeighting === 0 && candidateWeighting === 3) ||
+    (voterWeighting === 3 && candidateWeighting === 0)
+  )
+    return 0;
+
+  if (
+    getWeightingTendency(voterWeighting) ===
+    getWeightingTendency(candidateWeighting)
+  ) {
+    return 0.075;
+  } else {
+    return 0.025;
   }
+};
 
-  if (voterAnswer.question.category === "Wahlrecht") {
-    return Math.abs(voterAnswer.option! - candidateAnswer.option!);
+const calculateMatchForScaleOption = (
+  voterAnswer: ScaleOptionValueType,
+  candidateAnswer: ScaleOptionValueType
+) => {
+  if (voterAnswer === candidateAnswer) return 1;
+  if (
+    (voterAnswer === -2 && candidateAnswer === 2) ||
+    (voterAnswer === 2 && candidateAnswer === -2)
+  )
+    return 0;
+
+  if (
+    getScaleOptionTendency(voterAnswer) ===
+    getScaleOptionTendency(candidateAnswer)
+  ) {
+    return 0.7;
+  } else {
+    return 0.2;
   }
+};
 
-  return Math.abs(voterAnswer.option! + candidateAnswer.option!);
+const calculateMatchForWahlrechtOption = (
+  voterAnswer: WahlrechtValueType,
+  candidateAnswer: WahlrechtValueType
+) => {
+  if (voterAnswer === candidateAnswer) return 1;
+  if (
+    (voterAnswer === -10 && [-9, -8, -7].includes(candidateAnswer)) ||
+    ([-9, -8, -7].includes(voterAnswer) && candidateAnswer === -10)
+  )
+    return 0;
+
+  if (
+    getWahlrechtOptionTendency(voterAnswer) ===
+    getWahlrechtOptionTendency(candidateAnswer)
+  ) {
+    return 0.7;
+  } else {
+    return 0.2;
+  }
 };
 
 const calculateScore = (
@@ -72,11 +110,36 @@ const calculateScore = (
 
     if (voterAnswer.skipped) return;
 
-    if (candidateAnswer) {
-      score +=
-        Math.abs(voterAnswer.option! + candidateAnswer.option!) *
-        voterAnswer.weighting!;
+    if (voterAnswer.question.category === "YesNo") {
+      if (voterAnswer.option === candidateAnswer?.option) {
+        score += 1;
+      }
     }
+
+    if (voterAnswer.question.category === "Scale") {
+      const matchScore = calculateMatchForScaleOption(
+        voterAnswer.option! as ScaleOptionValueType,
+        candidateAnswer!.option! as ScaleOptionValueType
+      );
+
+      score += matchScore;
+    }
+
+    if (voterAnswer.question.category === "Wahlrecht") {
+      const matchScore = calculateMatchForWahlrechtOption(
+        voterAnswer.option! as WahlrechtValueType,
+        candidateAnswer!.option! as WahlrechtValueType
+      );
+
+      score += matchScore;
+    }
+
+    const weightingRelevancy = calculateWeightingRelevancy(
+      voterAnswer.weighting! as WeightingValueType,
+      candidateAnswer!.weighting! as WeightingValueType
+    );
+
+    score += weightingRelevancy;
   });
   return score;
 };
@@ -106,9 +169,18 @@ export default async function Wahlkabine({
     notFound();
   }
 
-  // console.log(
-  //   candidates.map((c) => calculateScore(voterWithAnswers.answers!, c.answers))
-  // );
+  console.log(
+    candidates.map((c) => calculateScore(voterWithAnswers.answers!, c.answers))
+  );
+
+  const candidatesWithScore = candidates
+    .map((candidate) => {
+      return {
+        ...candidate,
+        score: calculateScore(voterWithAnswers.answers!, candidate.answers),
+      };
+    })
+    .sort((a, b) => b.score - a.score);
 
   return (
     <div>
@@ -119,7 +191,7 @@ export default async function Wahlkabine({
       <section className="my-10">
         <h2 className="text-4xl">Die Kandidat:innen</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {candidates.map((candidate, index) => (
+          {candidatesWithScore.map((candidate, index) => (
             <li key={candidate.id} className="py-5 rounded-md">
               <div className="">
                 <Link
@@ -158,22 +230,12 @@ export default async function Wahlkabine({
 
       <section>
         <h2 className="text-4xl">Deine Antworten:</h2>
-        <ul className="flex flex-col divide-y-2">
+        <ul className="flex flex-col gap-16 py-10">
           {voterWithAnswers.answers.map((answer, index) => (
-            <li key={answer.id} className="py-5">
-              <span
-                className={clsx(
-                  "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
-                  answer.question.category && "text-white"
-                )}
-                style={{
-                  backgroundColor: categoryHexForLabel(
-                    answer.question.category
-                  ),
-                }}
-              >
-                {answer.question.category}
-              </span>
+            <li key={answer.id} className="">
+              {answer.question.category && (
+                <QuestionCategoryLabel category={answer.question.category} />
+              )}
               <div className="text-lg font-semibold">
                 Frage {answer.questionId}:
               </div>
@@ -182,33 +244,28 @@ export default async function Wahlkabine({
               </h2>
               {answer.option !== null && answer.weighting !== null ? (
                 <div className="grid grid-cols-2 gap-5">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2 inline-flex items-center justify-center">
-                    {answer.question.type === "YesNo" &&
-                      optionLabelForYesNoValue(answer.option)}
-                    {answer.question.type === "Range" &&
-                      `Ich stimme ${optionLabelForValue(answer.option)}`}
-                    {answer.question.type === "Wahlrecht" &&
-                      wahlrechtLabelForValue(answer.option)}
-                  </p>
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2 inline-flex items-center justify-center">
-                    Ist mir {weightingLabelForValue(answer.weighting)}
-                  </p>
+                  <OptionResult
+                    value={answer.option}
+                    type={answer.question.type}
+                  />
+                  <WeightingResult value={answer.weighting!} />
                 </div>
               ) : (
                 <div className="w-full">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Diese Frage wurde nicht beantwortet.
-                  </p>
+                  <QuestionUnansweredResult />
                 </div>
               )}
 
               <div className="mt-5">
-                <details key={`candidate-details-${answer.questionId}`}>
-                  <summary className="cursor-pointer text-lg font-semibold">
+                <details
+                  key={`candidate-details-${answer.questionId}`}
+                  className=""
+                >
+                  <summary className="cursor-pointer font-semibold py-2 border-b border-gray-800">
                     Antworten der Kandidat:innen:
                   </summary>
-                  <ul className="grid grid-cols-1 py-5 sm:grid-cols-2 md:grid-cols-3">
-                    {candidates.map((candidate) => (
+                  <ul className="grid grid-cols-1 py-5 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                    {candidatesWithScore.map((candidate) => (
                       <li
                         key={`candidate-details-${answer.questionId}-${candidate.id}`}
                       >
@@ -216,36 +273,20 @@ export default async function Wahlkabine({
                           <Image
                             src={`/${candidate.profileImg}`}
                             alt={`Profilebild von ${candidate.name}`}
-                            width={30}
-                            height={30}
+                            width={35}
+                            height={35}
                             className="rounded-full"
                           />
                           {candidate.name}
                         </div>
-                        <div className="grid grid-cols-1 grid-rows-2 divide-y divide-red-100">
-                          <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2 inline-flex items-center justify-center">
-                            {candidate.answers[index].question.type ===
-                              "YesNo" &&
-                              optionLabelForYesNoValue(
-                                candidate.answers[index].option!
-                              )}
-                            {candidate.answers[index].question.type ===
-                              "Range" &&
-                              `Ich stimme ${optionLabelForValue(
-                                candidate.answers[index].option!
-                              )}`}
-                            {candidate.answers[index].question.type ===
-                              "Wahlrecht" &&
-                              wahlrechtLabelForValue(
-                                candidate.answers[index].option!
-                              )}
-                          </p>
-                          <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2 inline-flex items-center justify-center">
-                            Ist mir{" "}
-                            {weightingLabelForValue(
-                              candidate.answers[index].weighting!
-                            )}
-                          </p>
+                        <div className="grid grid-cols-1 grid-rows-2 gap-3">
+                          <OptionResult
+                            value={candidate.answers[index].option!}
+                            type={candidate.answers[index].question.type}
+                          />
+                          <WeightingResult
+                            value={candidate.answers[index].weighting!}
+                          />
                         </div>
                       </li>
                     ))}

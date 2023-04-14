@@ -1,5 +1,11 @@
 import { QuestionType } from "@prisma/client";
 
+export type ScaleOptionValueType = typeof options[number]["value"];
+
+export const getScaleOptionTendency = (option: ScaleOptionValueType) => {
+  return option > 0 ? "positive" : "negative";
+};
+
 export const options = [
   {
     label: "garnicht zu",
@@ -17,7 +23,7 @@ export const options = [
     label: "voll zu",
     value: 2,
   },
-];
+] as const;
 
 export const yesNoOptions = [
   {
@@ -28,7 +34,13 @@ export const yesNoOptions = [
     label: "Ja",
     value: 3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
-];
+] as const;
+
+export type WahlrechtValueType = typeof wahlrechtOptions[number]["value"];
+
+export const getWahlrechtOptionTendency = (option: WahlrechtValueType) => {
+  return option === -10 ? "negative" : "positive";
+};
 
 export const wahlrechtOptions = [
   {
@@ -47,7 +59,7 @@ export const wahlrechtOptions = [
     label: "ja sofort",
     value: -7,
   },
-];
+] as const;
 
 export const getOptionsBasedOnType = (type: QuestionType) => {
   switch (type) {
@@ -77,6 +89,13 @@ export const optionLabelForYesNoValue = (value: number) => {
   return option ? option.label : "";
 };
 
+export const getWeightingTendency = (weighting: WeightingValueType) => {
+  if (weighting === 0 || weighting === 1) return "negative";
+  if (weighting === 2 || weighting === 3) return "positive";
+};
+
+export type WeightingValueType = typeof weightings[number]["value"];
+
 export const weightings = [
   {
     label: "garnicht wichtig",
@@ -94,7 +113,7 @@ export const weightings = [
     label: "sehr wichtig",
     value: 3,
   },
-];
+] as const;
 
 export const weightingLabelForValue = (value: number) => {
   const weighting = weightings.find((weighting) => weighting.value === value);

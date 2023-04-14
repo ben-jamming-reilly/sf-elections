@@ -16,6 +16,7 @@ import {
   VoterAnsweredQuestion,
   useVoterQuestionnaireStore,
 } from "~/stores/questionnaire-store-voter";
+import { QuestionCategoryLabel } from "../ui/question-category-label";
 
 const variants = {
   enter: (direction: number) => {
@@ -204,17 +205,7 @@ export const VoterQuestionnaire = ({
               ref={questionRef}
               className="w-full"
             >
-              <span
-                className={clsx(
-                  "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
-                  activeQuestion.category && "text-white"
-                )}
-                style={{
-                  backgroundColor: categoryHexForLabel(activeQuestion.category),
-                }}
-              >
-                {activeQuestion.category}
-              </span>
+              <QuestionCategoryLabel category={activeQuestion.category} />
               <div className="text-2xl md:mb-3 md:min-h-[3em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
