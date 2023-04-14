@@ -105,7 +105,6 @@ export const Questionnaire = ({
 
   // Scroll question into view
   useEffect(() => {
-    console.log(questionRef?.current);
     questionRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeIndex]);
 

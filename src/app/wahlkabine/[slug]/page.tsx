@@ -42,10 +42,6 @@ export default async function Wahlkabine({
     notFound();
   }
 
-  console.log(
-    candidates.map((c) => calculateScore(voterWithAnswers.answers!, c.answers))
-  );
-
   const maxScore = voterWithAnswers.answers.length * 1.15;
   const candidatesWithScore = candidates
     .map((candidate) => {
@@ -63,13 +59,15 @@ export default async function Wahlkabine({
 
   return (
     <div>
-      <div className="my-5 flex flex-row">
-        <ShareButton>Teilen</ShareButton>
+      <div className="my-5 flex flex-row items-center justify-center">
+        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
+          Teil dein Ergebnis
+        </ShareButton>
       </div>
 
       <section className="my-10">
         <h2 className="text-4xl">Die Kandidat:innen</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {candidatesWithScore.map((candidate, index) => (
             <li key={candidate.id} className="py-5 rounded-md relative">
               <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">

@@ -58,7 +58,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         });
       },
       updateQuestion: (questionId, data) => {
-        console.log({ data });
         set((state) => {
           const hasOption = Object.hasOwn(data, "option");
           const hasWeighting = Object.hasOwn(data, "weighting");
@@ -125,7 +124,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         })
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
             set((state) => {
               return {
                 isSaving: false,

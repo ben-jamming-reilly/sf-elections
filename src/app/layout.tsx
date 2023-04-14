@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 
-export const metadata: Metadata = {
-  title: "SPÖ Wahlkabine",
+export const metadata = {
+  title: "SPÖ Vorsitz Wahlkabine | Junge Generation Wien",
   description: "SPÖ Wahlkabine",
 };
 

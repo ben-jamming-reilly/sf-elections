@@ -17,6 +17,7 @@ import { OptionResult } from "~/app/ui/option-result";
 import { WeightingResult } from "~/app/ui/weighting-result";
 import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import { calculateScore } from "~/data/calucate-score";
+import Image from "next/image";
 
 export const metadata = {
   title: "Vergleich | SPÖ Wahlkabine",
@@ -67,12 +68,45 @@ export default async function Wahlkabine({
           <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
           Zurück zur Übersicht
         </Link>
-        <ShareButton>Teilen</ShareButton>
+        <ShareButton title={`Schau wie gut ${candidate.name} zu mir passt!`}>
+          Teilen
+        </ShareButton>
       </div>
 
-      <h1 className="text-3xl md:text-4xl font-medium">
-        Match mit {candidate.name}: {percentage}%
-      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-3">
+        <div key={candidate.id} className="py-5 rounded-md relative">
+          <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
+            {percentage}%
+          </span>
+          <div className="">
+            <Link
+              href={`/wahlkabine/${candidate.slug}`}
+              className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md"
+            >
+              <Image
+                src={`/${candidate.profileImg}`}
+                alt={`Profilebild von ${candidate.name}`}
+                width={300}
+                height={300}
+                className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
+              />
+            </Link>
+            <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
+              {candidate.name}
+            </h2>
+            <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-gray-800">
+              <p className="prose mb-5">{candidate.description}</p>
+
+              <Link
+                className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
+                href={`/${candidate.slug}`}
+              >
+                Profile
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <ul className="flex flex-col divide-y-2">
         {voterWithAnswers.answers.map((answer, index) => (
@@ -108,9 +142,18 @@ export default async function Wahlkabine({
               </div>
 
               <div className="flex flex-col gap-1">
-                <div className="text-center top-0 bg-white py-2">
+                <div className="justify-center inline-flex flex-row items-center gap-2 mb-2 top-0 bg-white">
                   Anwort von{" "}
-                  <strong className="font-semibold">{candidate.name}</strong>:
+                  <span className="inline-flex items-center gap-1">
+                    <Image
+                      src={`/${candidate.profileImg}`}
+                      width={30}
+                      height={30}
+                      alt={`${candidate.name} Profilbild`}
+                      className="rounded-full"
+                    />
+                    <strong className="font-semibold">{candidate.name}:</strong>
+                  </span>
                 </div>
                 <div className="">
                   {candidate.answers[index].option !== null &&

@@ -10,6 +10,10 @@ import {
 } from "~/data/answers";
 import { EditQuestionButton } from "./edit-question-button";
 import { optionLabelForYesNoValue } from "../../../data/answers";
+import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
+import { OptionResult } from "~/app/ui/option-result";
+import { WeightingResult } from "~/app/ui/weighting-result";
+import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -40,22 +44,10 @@ export default async function CandidatePreWahlkabine({
       </Link>
 
       <section className="mt-10">
-        <ul className="flex flex-col divide-y-2">
+        <ul className="flex flex-col gap-16 py-10">
           {candidate.answers.map((answer) => (
-            <li key={answer.id} className="py-5">
-              <span
-                className={clsx(
-                  "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
-                  answer.question.category && "text-white"
-                )}
-                style={{
-                  backgroundColor: categoryHexForLabel(
-                    answer.question.category
-                  ),
-                }}
-              >
-                {answer.question.category}
-              </span>
+            <li key={answer.id}>
+              <QuestionCategoryLabel category={answer.question.category} />
               <div className="text-lg font-semibold">
                 Frage {answer.questionId}:
               </div>
@@ -63,24 +55,16 @@ export default async function CandidatePreWahlkabine({
                 {answer.question.title}
               </h2>
               {answer.option !== null && answer.weighting !== null ? (
-                <div className="grid grid-cols-2 gap-5">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    {answer.question.type === "YesNo" &&
-                      optionLabelForYesNoValue(answer.option)}
-                    {answer.question.type === "Range" &&
-                      `Ich stimme ${optionLabelForValue(answer.option)}`}
-                    {answer.question.type === "Wahlrecht" &&
-                      wahlrechtLabelForValue(answer.option)}
-                  </p>
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Ist mir {weightingLabelForValue(answer.weighting)}
-                  </p>
+                <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
+                  <OptionResult
+                    value={answer.option}
+                    type={answer.question.type}
+                  />
+                  <WeightingResult value={answer.weighting!} />
                 </div>
               ) : (
                 <div className="w-full">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Diese Frage is nicht beantwortet.
-                  </p>
+                  <QuestionUnansweredResult />
                 </div>
               )}
               {answer.option && answer.weighting ? (

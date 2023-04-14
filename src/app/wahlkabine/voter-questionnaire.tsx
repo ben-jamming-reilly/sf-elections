@@ -40,11 +40,6 @@ const variants = {
 };
 
 const isQuestionAnswered = (question: VoterAnsweredQuestion) => {
-  console.log(
-    question.id,
-    (question.option !== null && question.weighting !== null) ||
-      question.skipped
-  );
   return (
     (question.option !== null && question.weighting !== null) ||
     question.skipped
@@ -97,7 +92,6 @@ export const VoterQuestionnaire = ({
 
   // Scroll question into view
   useEffect(() => {
-    console.log(questionRef?.current);
     questionRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeIndex]);
 

@@ -2,11 +2,11 @@ import { prisma } from "~/lib/prisma";
 import { VoterQuestionnaire } from "./voter-questionnaire";
 
 export const metadata = {
-  title: "SPÖ Wahlkabine",
+  title: "SPÖ Vorsitz Wahlkabine | Junge Generation Wien",
   description: "SPÖ Wahlkabine",
 };
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export default async function Wahlkabine() {
   const questions = await prisma.question.findMany();

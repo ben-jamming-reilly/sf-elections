@@ -4,7 +4,15 @@ import clsx from "clsx";
 import { ReactNode, useEffect, useState } from "react";
 import { ShareIcon } from "@heroicons/react/24/outline";
 
-export const ShareButton = ({ children }: { children: ReactNode }) => {
+export const ShareButton = ({
+  children,
+  title,
+  text,
+}: {
+  children: ReactNode;
+  title: string;
+  text?: string;
+}) => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -24,8 +32,8 @@ export const ShareButton = ({ children }: { children: ReactNode }) => {
         try {
           if (navigator.share) {
             await navigator.share({
-              title: "SPÖ Vorstandswahl-Kabine",
-              text: "Finde heraus welche:r Kandidat:in für die SPÖ Vorstandswahl 2023 am Besten zu dir passt.",
+              title,
+              text,
               url: window.location.href,
             });
             setCopied(true);

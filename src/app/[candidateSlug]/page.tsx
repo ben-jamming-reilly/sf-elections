@@ -9,6 +9,11 @@ import {
 import clsx from "clsx";
 import { headers } from "next/headers";
 import { ShareButton } from "../ui/share-button";
+import { EditQuestionButton } from "./[hash]/edit-question-button";
+import { OptionResult } from "../ui/option-result";
+import { WeightingResult } from "../ui/weighting-result";
+import { QuestionUnansweredResult } from "../ui/question-unanswered-result";
+import { QuestionCategoryLabel } from "../ui/question-category-label";
 
 export const metadata = {
   title: "SPÖ Wahlkabine",
@@ -29,49 +34,38 @@ export default async function CandidateWahlkabine({
 
   return (
     <section>
-      <h1 className="text-3xl">Wahlkabine für {candidate.name}</h1>
+      <h1 className="text-3xl">Wahlkabinen Antworten von {candidate.name}</h1>
       {candidate.hasFinished ? (
         <div className="mt-10">
-          <div className="my-5">
-            <ShareButton>Teilen</ShareButton>
+          <div className="my-5 flex flex-row items-center justify-center">
+            <ShareButton title={`Wahlkabinen Antworten von ${candidate.name}`}>
+              Profil von {candidate.name} teilen
+            </ShareButton>
           </div>
-          <ul className="flex flex-col divide-y-2">
+          <ul className="flex flex-col gap-16 py-10">
             {candidate.answers.map((answer) => (
-              <li key={answer.id} className="py-5">
-                <span
-                  className={clsx(
-                    "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
-                    answer.question.category && "text-white"
-                  )}
-                  style={{
-                    backgroundColor: categoryHexForLabel(
-                      answer.question.category
-                    ),
-                  }}
-                >
-                  {answer.question.category}
-                </span>
+              <li key={answer.id}>
+                <QuestionCategoryLabel category={answer.question.category} />
                 <div className="text-lg font-semibold">
                   Frage {answer.questionId}:
                 </div>
-                <h2 className="text-xl mb-5">{answer.question.title}</h2>
-                {answer.option && answer.weighting ? (
-                  <div className="grid grid-cols-2 gap-5">
-                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                      Ich stimme {optionLabelForValue(answer.option)}
-                    </p>
-                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                      Ist mir {weightingLabelForValue(answer.weighting)}
-                    </p>
+                <h2 className="text-2xl mb-5 hyphens-auto">
+                  {answer.question.title}
+                </h2>
+                {answer.option !== null && answer.weighting !== null ? (
+                  <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
+                    <OptionResult
+                      value={answer.option}
+                      type={answer.question.type}
+                    />
+                    <WeightingResult value={answer.weighting!} />
                   </div>
                 ) : (
                   <div className="w-full">
-                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                      Diese Frage is nicht beantwortet.
-                    </p>
+                    <QuestionUnansweredResult />
                   </div>
                 )}
-                {answer.option && answer.weighting && (
+                {answer.option && answer.weighting ? (
                   <div className="py-3">
                     <h3 className="underline underline-offset-2">
                       Zusätzliche Information:
@@ -80,7 +74,7 @@ export default async function CandidateWahlkabine({
                       {answer.text ? answer.text : "---"}
                     </p>
                   </div>
-                )}
+                ) : null}
               </li>
             ))}
           </ul>

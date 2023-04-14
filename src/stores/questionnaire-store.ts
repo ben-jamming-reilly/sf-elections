@@ -124,7 +124,6 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
           set((state) => {
             return {
               ...state,

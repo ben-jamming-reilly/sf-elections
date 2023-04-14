@@ -96,7 +96,6 @@ export const calculateScore = (
     if (voterAnswer.skipped) return;
 
     if (voterAnswer.question.type === "YesNo") {
-      console.log(voterAnswer.option, candidateAnswer?.option);
       if (voterAnswer.option === candidateAnswer?.option) {
         score += 1;
       }
