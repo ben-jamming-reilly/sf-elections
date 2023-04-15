@@ -58,10 +58,10 @@
   }
 
   button {
-    @apply rounded-md bg-surface-200;
+    @apply rounded-md bg-surface-200 active:scale-95;
   }
   button:disabled {
-    @apply text-gray-400 bg-surface-300;
+    @apply text-gray-400 bg-surface-300 active:scale-100 cursor-not-allowed hover:no-underline;
   }
 }
 

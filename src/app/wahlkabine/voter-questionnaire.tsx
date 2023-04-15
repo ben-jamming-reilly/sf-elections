@@ -215,7 +215,7 @@ export const VoterQuestionnaire = ({
                 <button
                   disabled={activeQuestion.skipped}
                   className={clsx(
-                    "border-neutral-200 disabled:border-0 border px-4 rounded-md py-2 text-neutral-500 hover:border-gray-800 transition-all active:scale-95",
+                    "border-neutral-200 disabled:border-0 border px-4 rounded-md py-2 text-neutral-500 hover:border-gray-800 transition-all",
                     activeQuestion.skipped && "border-gray-800 text-gray-800"
                   )}
                   onClick={(e) => {
@@ -249,11 +249,11 @@ export const VoterQuestionnaire = ({
                   {getOptionsBasedOnType(activeQuestion.type).map((option) => (
                     <li
                       className={clsx(
-                        "relative mb-2 md:mb-0 md:mr-2 last:mr-0",
+                        "relative",
                         (activeQuestion.type === "Range" ||
                           activeQuestion.type === "YesNo") &&
-                          "",
-                        activeQuestion.type === "Wahlrecht" && ""
+                          "mb-2 md:mb-0 md:mr-2 last:mr-0",
+                        activeQuestion.type === "Wahlrecht" && "mb-2"
                       )}
                       key={`option-${option.value}`}
                     >
