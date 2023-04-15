@@ -143,7 +143,7 @@ export default async function Wahlkabine({
                     {candidatesWithScore.map((candidate) => (
                       <li
                         key={`candidate-details-${answer.questionId}-${candidate.id}`}
-                        className="bg-surface-200 p-3"
+                        className="bg-surface-200 p-3 rounded-lg"
                       >
                         <div className="text-center flex flex-row items-center font-semibold py-2 gap-3 justify-center">
                           <Image
