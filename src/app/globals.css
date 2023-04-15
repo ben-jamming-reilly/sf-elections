@@ -2,11 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: AdriaGrotesk;
+  src: url("/fonts/AdriaGrotesk-Black.otf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: AdriaGrotesk;
+  src: url("/fonts/AdriaGrotesk-Black.otf");
+  font-weight: bold;
+}
+
 @layer base {
   :root {
+    --color-font: #ffffff;
     --color-brand: #e62937;
     --color-brand-purple: #4a1c6b;
     --color-brand-yellow: #ffe595;
+
+    /** CSS DARK THEME PRIMARY COLORS */
+    --color-primary-100: #e62937;
+    --color-primary-200: #ed4c4b;
+    --color-primary-300: #f3675f;
+    --color-primary-400: #f97f74;
+    --color-primary-500: #fd958a;
+    --color-primary-600: #ffaba0;
+      /** CSS DARK THEME SURFACE COLORS */
+    --color-surface-100: #121212;
+    --color-surface-200: #282828;
+    --color-surface-300: #3f3f3f;
+    --color-surface-400: #575757;
+    --color-surface-500: #717171;
+    --color-surface-600: #8b8b8b;
+      /** CSS DARK THEME MIXED SURFACE COLORS */
+    --color-surface-mixed-100: #261816;
+    --color-surface-mixed-200: #3b2d2b;
+    --color-surface-mixed-300: #514442;
+    --color-surface-mixed-400: #675c5a;
+    --color-surface-mixed-500: #7f7573;
+    --color-surface-mixed-600: #978f8d;
   }
 
   ::selection {
@@ -18,6 +53,8 @@
   body {
     @apply text-gray-800 font-sans;
     height: 100%;
+    color: var(--color-font);
+    background-color: var(--color-surface-100);
   }
 }
 

@@ -204,7 +204,9 @@ export const VoterQuestionnaire = ({
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
-                <h1 className="hyphens-auto">{activeQuestion.title}</h1>
+                <h1 className="hyphens-auto font-brand">
+                  {activeQuestion.title}
+                </h1>
               </div>
             </motion.header>
 

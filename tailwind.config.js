@@ -19,6 +19,7 @@ module.exports = {
           "Arial",
           "sans-serif",
         ],
+        brand: ["AdriaGrotesk"],
       },
     },
   },
