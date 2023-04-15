@@ -234,12 +234,12 @@ export const VoterQuestionnaire = ({
                 </button>
               </div>
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl underline underline-offset-4">
+                <h2 className="text-xl font-brand underline underline-offset-4">
                   Ich stimme:
                 </h2>
                 <ul
                   className={clsx(
-                    "grid w-full border border-brand ",
+                    "grid w-full bg-surface-200 border border-brand rounded-md",
                     activeQuestion.type === "YesNo" &&
                       "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2",
                     activeQuestion.type === "Range" &&
@@ -251,10 +251,10 @@ export const VoterQuestionnaire = ({
                   {getOptionsBasedOnType(activeQuestion.type).map((option) => (
                     <li
                       className={clsx(
-                        "relative border-brand last:border-0 bg-red-50/50",
+                        "relative border-brand last:border-0 ",
                         (activeQuestion.type === "Range" ||
                           activeQuestion.type === "YesNo") &&
-                          "md:border-r border-brand",
+                          "border-b md:border-b-0 md:border-r border-brand",
                         activeQuestion.type === "Wahlrecht" &&
                           "border-b border-brand"
                       )}
@@ -279,7 +279,7 @@ export const VoterQuestionnaire = ({
                           );
                         }}
                         className={clsx(
-                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
+                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand hover:bg-surface-300 outline-offset-2",
                           option.value === activeQuestion.option &&
                             " text-white",
                           activeQuestion.option !== null && "transition-all"
@@ -293,13 +293,13 @@ export const VoterQuestionnaire = ({
               </div>
 
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl underline underline-offset-4">
+                <h2 className="text-xl font-brand underline underline-offset-4">
                   Das ist mir:
                 </h2>
-                <ul className="grid w-full border border-brand md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
+                <ul className="grid w-full border border-brand rounded-md md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
                   {weightings.map((weighting) => (
                     <li
-                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
+                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0"
                       key={`weighting-${weighting.value}`}
                     >
                       {weighting.value === activeQuestion.weighting && (
@@ -321,7 +321,7 @@ export const VoterQuestionnaire = ({
                           );
                         }}
                         className={clsx(
-                          "z-20 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
+                          "z-20 relative text-lg w-full bg-surface-200 hover:bg-surface-300 focus-visible:outline-brand outline-offset-2 text-center py-4",
                           weighting.value === activeQuestion.weighting &&
                             " text-white",
                           activeQuestion.weighting !== null && "transition-all"
