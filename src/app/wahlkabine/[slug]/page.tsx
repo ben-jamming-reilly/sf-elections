@@ -106,17 +106,15 @@ export default async function Wahlkabine({
       </section>
 
       <section>
-        <h2 className="text-4xl">Deine Antworten:</h2>
+        <h2 className="text-4xl font-brand">Deine Antworten:</h2>
         <ul className="flex flex-col gap-16 py-10">
           {voterWithAnswers.answers.map((answer, index) => (
             <li key={answer.id} className="">
               {answer.question.category && (
                 <QuestionCategoryLabel category={answer.question.category} />
               )}
-              <div className="text-lg mt-3 font-semibold">
-                Frage {answer.questionId}:
-              </div>
-              <h2 className="text-2xl mb-5 hyphens-auto">
+              <div className="text-lg mt-3">Frage {answer.questionId}:</div>
+              <h2 className="text-2xl font-brand mb-5 hyphens-auto">
                 {answer.question.title}
               </h2>
               {answer.option !== null && answer.weighting !== null ? (
