@@ -239,7 +239,7 @@ export const VoterQuestionnaire = ({
                 </h2>
                 <ul
                   className={clsx(
-                    "grid w-full bg-surface-200 border border-brand rounded-md",
+                    "grid w-full",
                     activeQuestion.type === "YesNo" &&
                       "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2",
                     activeQuestion.type === "Range" &&
@@ -251,22 +251,14 @@ export const VoterQuestionnaire = ({
                   {getOptionsBasedOnType(activeQuestion.type).map((option) => (
                     <li
                       className={clsx(
-                        "relative border-brand last:border-0 ",
+                        "relative mb-2 md:mb-0 md:mr-2 last:mr-0",
                         (activeQuestion.type === "Range" ||
                           activeQuestion.type === "YesNo") &&
-                          "border-b md:border-b-0 md:border-r border-brand",
-                        activeQuestion.type === "Wahlrecht" &&
-                          "border-b border-brand"
+                          "",
+                        activeQuestion.type === "Wahlrecht" && ""
                       )}
                       key={`option-${option.value}`}
                     >
-                      {option.value === activeQuestion.option && (
-                        <motion.span
-                          layoutId="active-option"
-                          // exit={{ opacity:  0 }}
-                          className="absolute inset-0 bg-brand z-10"
-                        />
-                      )}
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -279,9 +271,10 @@ export const VoterQuestionnaire = ({
                           );
                         }}
                         className={clsx(
-                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand hover:bg-surface-300 outline-offset-2",
-                          option.value === activeQuestion.option &&
-                            " text-white",
+                          "z-10 relative text-lg w-full text-center py-4 focus-visible:bg-primary-100",
+                          option.value === activeQuestion.option
+                            ? " text-white bg-primary-100 font-bold"
+                            : "hover:bg-surface-300",
                           activeQuestion.option !== null && "transition-all"
                         )}
                       >
@@ -296,19 +289,12 @@ export const VoterQuestionnaire = ({
                 <h2 className="text-xl font-brand underline underline-offset-4">
                   Das ist mir:
                 </h2>
-                <ul className="grid w-full border border-brand rounded-md md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
+                <ul className="grid w-full md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
                   {weightings.map((weighting) => (
                     <li
-                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0"
+                      className="relative mb-2 md:mb-0 md:mr-2 last:mb-0 last:mr-0"
                       key={`weighting-${weighting.value}`}
                     >
-                      {weighting.value === activeQuestion.weighting && (
-                        <motion.span
-                          layoutId="active-weighting"
-                          // exit={{ opacity:  0 }}
-                          className="absolute inset-0 bg-brand z-10"
-                        />
-                      )}
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -321,9 +307,10 @@ export const VoterQuestionnaire = ({
                           );
                         }}
                         className={clsx(
-                          "z-20 relative text-lg w-full bg-surface-200 hover:bg-surface-300 focus-visible:outline-brand outline-offset-2 text-center py-4",
-                          weighting.value === activeQuestion.weighting &&
-                            " text-white",
+                          "z-20 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
+                          weighting.value === activeQuestion.weighting
+                            ? " text-white bg-primary-100 font-bold"
+                            : "hover:bg-surface-300",
                           activeQuestion.weighting !== null && "transition-all"
                         )}
                       >

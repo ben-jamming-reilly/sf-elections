@@ -56,6 +56,13 @@
     color: var(--color-font);
     background-color: var(--color-surface-100);
   }
+
+  button {
+    @apply rounded-md bg-surface-200;
+  }
+  button:disabled {
+    @apply text-gray-400 bg-surface-300;
+  }
 }
 
 @layer components {
