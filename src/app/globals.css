@@ -58,10 +58,15 @@
   }
 
   button {
-    @apply rounded-md bg-surface-200 hover:bg-surface-300 active:scale-95;
+    @apply rounded-md bg-surface-200;
   }
   button:disabled {
     @apply text-gray-400 bg-surface-300 active:scale-100 cursor-not-allowed hover:no-underline;
+  }
+  @media (hover) {
+    button {
+      @apply hover:bg-surface-300 active:scale-95;
+    }
   }
 }
 
