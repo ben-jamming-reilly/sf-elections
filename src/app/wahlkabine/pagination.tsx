@@ -30,7 +30,7 @@ const Pagination = ({
         <li key={`question-shortcut-${question.id}`}>
           <button
             className={clsx(
-              "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border border-surface-400",
+              "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
               isQuestionAnswered(question) &&
                 !question.skipped &&
                 "bg-primary-100 hover:bg-primary-200 border-primary-100",
@@ -40,7 +40,10 @@ const Pagination = ({
               activeQuestion.id === question.id && "underline scale-[0.875]",
               !isQuestionAnswered(question) &&
                 activeQuestion.id === question.id &&
-                "border-primary-100"
+                "border-primary-100",
+              !isQuestionAnswered(question) &&
+                activeQuestion.id !== question.id &&
+                "border-surface-400"
             )}
             onClick={() => setActiveIndex(index)}
           >
