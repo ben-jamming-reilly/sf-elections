@@ -113,7 +113,7 @@ export default async function Wahlkabine({
               {answer.question.category && (
                 <QuestionCategoryLabel category={answer.question.category} />
               )}
-              <div className="text-lg font-semibold">
+              <div className="text-lg mt-3 font-semibold">
                 Frage {answer.questionId}:
               </div>
               <h2 className="text-2xl mb-5 hyphens-auto">
