@@ -70,7 +70,7 @@ export default async function Wahlkabine({
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {candidatesWithScore.map((candidate, index) => (
             <li key={candidate.id} className="py-5 rounded-md relative">
-              <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
+              <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-primary-100 tabular-nums inline-flex justify-center items-center">
                 {candidate.scorePercentage}%
               </span>
               <div className="">
@@ -86,14 +86,14 @@ export default async function Wahlkabine({
                     className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
                   />
                 </Link>
-                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
+                <h2 className="text-2xl bg-primary-100 font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
                   {index + 1}. {candidate.name}
                 </h2>
-                <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-gray-800">
+                <div className="p-5 z-20 relative bg-surface-300 rounded-br-md rounded-bl-md border-t-0">
                   <p className="prose mb-5">{candidate.description}</p>
 
                   <Link
-                    className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
+                    className="inline-block transition-all bg-primary-100 px-4 py-2 hover:underline rounded-md"
                     href={`/wahlkabine/${params.slug}/${candidate.slug}`}
                   >
                     Vergleichen
