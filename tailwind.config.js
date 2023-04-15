@@ -22,6 +22,12 @@ module.exports = {
         "surface-400": "var(--color-surface-400)",
         "surface-500": "var(--color-surface-500)",
         "surface-600": "var(--color-surface-600)",
+        "mixed-100": "var(--color-surface-mixed-100)",
+        "mixed-200": "var(--color-surface-mixed-200)",
+        "mixed-300": "var(--color-surface-mixed-300)",
+        "mixed-400": "var(--color-surface-mixed-400)",
+        "mixed-500": "var(--color-surface-mixed-500)",
+        "mixed-600": "var(--color-surface-mixed-600)",
       },
       fontFamily: {
         sans: [

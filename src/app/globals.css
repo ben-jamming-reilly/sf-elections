@@ -36,12 +36,12 @@
     --color-surface-500: #717171;
     --color-surface-600: #8b8b8b;
     /** CSS DARK THEME MIXED SURFACE COLORS */
-    /* --color-surface-mixed-100: #261816;
+    --color-surface-mixed-100: #261816;
     --color-surface-mixed-200: #3b2d2b;
     --color-surface-mixed-300: #514442;
     --color-surface-mixed-400: #675c5a;
     --color-surface-mixed-500: #7f7573;
-    --color-surface-mixed-600: #978f8d; */
+    --color-surface-mixed-600: #978f8d;
   }
 
   ::selection {

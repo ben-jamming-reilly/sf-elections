@@ -137,7 +137,7 @@ export const VoterQuestionnaire = ({
           onClick={handlePrev}
           disabled={!hasPrevious}
           className={clsx(
-            "hover:underline underline-offset-2 text-center xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            "hover:underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg",
             !hasPrevious && "invisible"
           )}
         >
@@ -156,10 +156,8 @@ export const VoterQuestionnaire = ({
           }
           onClick={handleNext}
           className={clsx(
-            "hover:underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
-            !hasNext && allQuestionsAnswered
-              ? "bg-brand text-white"
-              : "bg-neutral-200 text-gray-800"
+            "hover:underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border-2 border-brand hover:bg-primary-100 disabled:border-0 disabled:hover:bg-surface-300",
+            !hasNext && allQuestionsAnswered ? "" : ""
           )}
         >
           {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
