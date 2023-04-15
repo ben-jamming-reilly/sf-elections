@@ -215,7 +215,7 @@ export const VoterQuestionnaire = ({
                 <button
                   disabled={activeQuestion.skipped}
                   className={clsx(
-                    "border-neutral-200 disabled:border-0 border px-4 rounded-md py-2 text-neutral-500 hover:border-gray-800 transition-all",
+                    "px-4 py-2",
                     activeQuestion.skipped && "border-gray-800 text-gray-800"
                   )}
                   onClick={(e) => {
@@ -270,9 +270,8 @@ export const VoterQuestionnaire = ({
                         }}
                         className={clsx(
                           "z-10 relative text-lg w-full text-center py-4 focus-visible:bg-primary-100",
-                          option.value === activeQuestion.option
-                            ? " text-white bg-primary-100 font-bold"
-                            : "hover:bg-surface-300",
+                          option.value === activeQuestion.option &&
+                            " text-white bg-primary-100 hover:bg-primary-100 font-bold",
                           activeQuestion.option !== null && "transition-all"
                         )}
                       >
@@ -306,9 +305,8 @@ export const VoterQuestionnaire = ({
                         }}
                         className={clsx(
                           "z-20 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
-                          weighting.value === activeQuestion.weighting
-                            ? " text-white bg-primary-100 font-bold"
-                            : "hover:bg-surface-300",
+                          weighting.value === activeQuestion.weighting &&
+                            " text-white bg-primary-100 hover:bg-primary-100 font-bold",
                           activeQuestion.weighting !== null && "transition-all"
                         )}
                       >
