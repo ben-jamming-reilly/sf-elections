@@ -40,7 +40,7 @@
         - [ ] Fonts
         - [ ] Farben
         - [ ] Logo
-        - [ ] Grafikençt
+        - [ ] Grafiken
 - Kandidat:innen Flow
     - [x] Vordefinierten Link pro Kandidat:in definieren
     - [x] Kandidat:innen haben ein Textfeld für extra Informationen
