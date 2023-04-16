@@ -38,8 +38,8 @@ export default function RootLayout({
       </head>
       <body className={interFont.variable}>
         <div className={`w-full min-h-full z-10 flex flex-col`}>
-          <div className="lg:w-[800px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
-            <header className="flex flex-col md:flex-row items-center md:items-end  bg-primary-100 font-brand p-3">
+          <header className="w-full bg-primary-100 mb-5">
+            <div className="mx-auto lg:w-[800px] flex flex-col md:flex-row items-center md:items-end font-brand p-3">
               <Link
                 href="/"
                 className="text-3xl text-center sm:text-right leading-none font-bold inline-flex focus-visible:outline-brand outline-offset-2"
@@ -64,7 +64,9 @@ export default function RootLayout({
                   />
                 </a>
               </div>
-            </header>
+            </div>
+          </header>
+          <div className="lg:w-[800px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
             <main className="flex-grow px-5">{children}</main>
             <footer className="w-full flex justify-center items-center py-5 border-t border-brand">
               <ul className="flex flex-row gap-3 justify-center flex-wrap">
