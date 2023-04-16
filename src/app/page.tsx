@@ -29,19 +29,18 @@ export default function Home() {
           <>
             {slug ? (
               <div className="flex flex-row gap-5">
+                <ResetButton>Wahlkabine neu starten</ResetButton>
                 <Link
                   href={`/wahlkabine/${slug}`}
-                  className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
+                  className="bg-brand text-white px-3 py-2 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
                 >
                   Dein Ergebnis
                 </Link>
-
-                <ResetButton>Wahlkabine neu starten</ResetButton>
               </div>
             ) : (
               <Link
                 href="/wahlkabine"
-                className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md"
+                className="bg-brand text-white px-3 py-2 inline-block transition-all rounded-md"
               >
                 Wahlkabine starten
               </Link>
