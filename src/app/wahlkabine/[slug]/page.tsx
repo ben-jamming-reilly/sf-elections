@@ -173,6 +173,12 @@ export default async function Wahlkabine({
           ))}
         </ul>
       </section>
+
+      <div className="my-5 flex flex-row items-center justify-center">
+        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
+          Teil dein Ergebnis
+        </ShareButton>
+      </div>
     </div>
   );
 }
