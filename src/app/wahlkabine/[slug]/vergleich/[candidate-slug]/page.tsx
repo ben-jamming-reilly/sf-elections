@@ -1,14 +1,5 @@
-import { prisma } from "~/lib/prisma";
-import { getVoterViaHash } from "../../get-voter-via-hash";
+import { getVoterViaHash } from "../../../get-voter-via-hash";
 import { notFound } from "next/navigation";
-import clsx from "clsx";
-import {
-  categoryHexForLabel,
-  optionLabelForValue,
-  optionLabelForYesNoValue,
-  wahlrechtLabelForValue,
-  weightingLabelForValue,
-} from "~/data/answers";
 import Link from "next/link";
 import { ShareButton } from "~/app/ui/share-button";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
@@ -16,47 +7,50 @@ import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 import { OptionResult } from "~/app/ui/option-result";
 import { WeightingResult } from "~/app/ui/weighting-result";
 import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
-import { calculateScore } from "~/data/calucate-score";
 import Image from "next/image";
+import { rateCandidate } from "../../rate-candidates";
+import { getCandidateWithQuestions } from "./get-candidate-with-question";
 
-export const metadata = {
-  title: "Vergleich | SPÖ Wahlkabine",
-  description: "SPÖ Wahlkabine",
-};
-
-export default async function Wahlkabine({
-  params,
-}: {
+export type WahlkabineResultCandidate = {
   params: {
     slug: string;
     "candidate-slug": string;
   };
-}) {
+};
+
+export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   const voterWithAnswers = await getVoterViaHash(params.slug);
-  const candidate = await prisma.candidate.findUnique({
-    where: {
-      slug: params["candidate-slug"],
-    },
-    include: {
-      answers: {
-        include: {
-          question: true,
-        },
-      },
-    },
-  });
+  const candidate = await getCandidateWithQuestions(params["candidate-slug"]);
 
   if (!candidate || !candidate.hasFinished || !voterWithAnswers) {
     notFound();
   }
 
-  const matchScore = calculateScore(
+  const candidateWithScore = rateCandidate(
     voterWithAnswers.answers!,
-    candidate.answers
+    candidate
   );
 
-  const maxScore = candidate.answers.length * 1.15;
-  const percentage = Math.round((matchScore / maxScore) * 100);
+  return {
+    title: `Mein Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
+    description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%`,
+  };
+}
+
+export default async function WahlkabineResultCandidate({
+  params,
+}: WahlkabineResultCandidate) {
+  const voterWithAnswers = await getVoterViaHash(params.slug);
+  const candidate = await getCandidateWithQuestions(params["candidate-slug"]);
+
+  if (!candidate || !candidate.hasFinished || !voterWithAnswers) {
+    notFound();
+  }
+
+  const candidateWithScore = rateCandidate(
+    voterWithAnswers.answers!,
+    candidate
+  );
 
   return (
     <div>
@@ -68,38 +62,40 @@ export default async function Wahlkabine({
           <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
           Zurück zur Übersicht
         </Link>
-        <ShareButton title={`Schau wie gut ${candidate.name} zu mir passt!`}>
+        <ShareButton
+          title={`Schau wie gut ${candidateWithScore.name} zu mir passt!`}
+        >
           Teilen
         </ShareButton>
       </div>
 
       <section className="grid grid-cols-1 md:grid-cols-3">
-        <div key={candidate.id} className="py-5 rounded-md relative">
+        <div key={candidateWithScore.id} className="py-5 rounded-md relative">
           <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
-            {percentage}%
+            {candidateWithScore.scorePercentage}%
           </span>
           <div className="">
             <Link
-              href={`/wahlkabine/${candidate.slug}`}
+              href={`/${candidateWithScore.slug}`}
               className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md"
             >
               <Image
-                src={`/${candidate.profileImg}`}
-                alt={`Profilebild von ${candidate.name}`}
+                src={`/${candidateWithScore.profileImg}`}
+                alt={`Profilebild von ${candidateWithScore.name}`}
                 width={300}
                 height={300}
                 className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
               />
             </Link>
             <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
-              {candidate.name}
+              {candidateWithScore.name}
             </h2>
             <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-gray-800">
-              <p className="prose mb-5">{candidate.description}</p>
+              <p className="prose mb-5">{candidateWithScore.description}</p>
 
               <Link
                 className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
-                href={`/${candidate.slug}`}
+                href={`/${candidateWithScore.slug}`}
               >
                 Profile
               </Link>
@@ -146,25 +142,27 @@ export default async function Wahlkabine({
                   Anwort von{" "}
                   <span className="inline-flex items-center gap-1">
                     <Image
-                      src={`/${candidate.profileImg}`}
+                      src={`/${candidateWithScore.profileImg}`}
                       width={30}
                       height={30}
-                      alt={`${candidate.name} Profilbild`}
+                      alt={`${candidateWithScore.name} Profilbild`}
                       className="rounded-full"
                     />
-                    <strong className="font-semibold">{candidate.name}:</strong>
+                    <strong className="font-semibold">
+                      {candidateWithScore.name}:
+                    </strong>
                   </span>
                 </div>
                 <div className="">
-                  {candidate.answers[index].option !== null &&
-                  candidate.answers[index].weighting !== null ? (
+                  {candidateWithScore.answers[index].option !== null &&
+                  candidateWithScore.answers[index].weighting !== null ? (
                     <div className="grid grid-cols-1 grid-rows-2 gap-5">
                       <OptionResult
-                        value={candidate.answers[index].option!}
-                        type={candidate.answers[index]?.question.type}
+                        value={candidateWithScore.answers[index].option!}
+                        type={candidateWithScore.answers[index]?.question.type}
                       />
                       <WeightingResult
-                        value={candidate.answers[index].weighting!}
+                        value={candidateWithScore.answers[index].weighting!}
                       />
                     </div>
                   ) : (

@@ -1,7 +1,4 @@
-import { prisma } from "~/lib/prisma";
 import { notFound } from "next/navigation";
-
-import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
 import { getVoterViaHash } from "../get-voter-via-hash";
@@ -10,52 +7,52 @@ import { OptionResult } from "~/app/ui/option-result";
 import { WeightingResult } from "~/app/ui/weighting-result";
 import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
-import { calculateScore } from "~/data/calucate-score";
+import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
+import { rateCandidates } from "./rate-candidates";
 
-export const metadata = {
-  title: "SPÖ Wahlkabine",
-  description: "SPÖ Wahlkabine",
-};
-
-export default async function Wahlkabine({
-  params,
-}: {
+export type WahlkabineResultProps = {
   params: {
     slug: string;
   };
-}) {
+};
+
+export async function generateMetadata({ params }: WahlkabineResultProps) {
   const voterWithAnswers = await getVoterViaHash(params.slug);
-  const candidates = await prisma.candidate.findMany({
-    where: {
-      hasFinished: true,
-    },
-    include: {
-      answers: {
-        include: {
-          question: true,
-        },
-      },
-    },
-  });
 
   if (!voterWithAnswers) {
     notFound();
   }
 
-  const maxScore = voterWithAnswers.answers.length * 1.15;
-  const candidatesWithScore = candidates
-    .map((candidate) => {
-      return {
-        ...candidate,
-        score: calculateScore(voterWithAnswers.answers!, candidate.answers),
-        scorePercentage: Math.round(
-          (calculateScore(voterWithAnswers.answers!, candidate.answers) /
-            maxScore) *
-            100
-        ),
-      };
-    })
-    .sort((a, b) => b.score - a.score);
+  const candidates = await getCandidatesWithQuestions();
+
+  const candidatesWithScore = rateCandidates(
+    voterWithAnswers.answers,
+    candidates
+  );
+
+  return {
+    title: `Ergebnis der Wahlkabine | SPÖ Vorsitz Wahlkabine`,
+    description: `Mein Resultat: ${candidatesWithScore
+      .map((c) => `${c.name}: ${c.scorePercentage}%`)
+      .join(", ")}`,
+  };
+}
+
+export default async function WahlkabineResult({
+  params,
+}: WahlkabineResultProps) {
+  const voterWithAnswers = await getVoterViaHash(params.slug);
+
+  if (!voterWithAnswers) {
+    notFound();
+  }
+
+  const candidates = await getCandidatesWithQuestions();
+
+  const candidatesWithScore = rateCandidates(
+    voterWithAnswers.answers,
+    candidates
+  );
 
   return (
     <div>
@@ -75,8 +72,8 @@ export default async function Wahlkabine({
               </span>
               <div className="">
                 <Link
-                  href={`/wahlkabine/${candidate.slug}`}
                   className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md"
+                  href={`/${candidate.slug}`}
                 >
                   <Image
                     src={`/${candidate.profileImg}`}
@@ -94,7 +91,7 @@ export default async function Wahlkabine({
 
                   <Link
                     className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
-                    href={`/wahlkabine/${params.slug}/${candidate.slug}`}
+                    href={`/wahlkabine/${params.slug}/vergleich/${candidate.slug}`}
                   >
                     Vergleichen
                   </Link>

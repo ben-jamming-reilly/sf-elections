@@ -1,31 +1,33 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCandidateFromSlug } from "./get-candidate-from-slug";
-import {
-  categoryHexForLabel,
-  optionLabelForValue,
-  weightingLabelForValue,
-} from "~/data/answers";
-import clsx from "clsx";
-import { headers } from "next/headers";
 import { ShareButton } from "../ui/share-button";
-import { EditQuestionButton } from "./[hash]/edit-question-button";
 import { OptionResult } from "../ui/option-result";
 import { WeightingResult } from "../ui/weighting-result";
 import { QuestionUnansweredResult } from "../ui/question-unanswered-result";
 import { QuestionCategoryLabel } from "../ui/question-category-label";
 
-export const metadata = {
-  title: "SPÖ Wahlkabine",
-  description: "SPÖ Wahlkabine",
+export const revalidate = 3600; // 1 hour
+
+export type CandidateProfileProps = {
+  params: { candidateSlug: string };
 };
 
-export default async function CandidateWahlkabine({
+export async function generateMetadata({ params }: CandidateProfileProps) {
+  const candidate = await getCandidateFromSlug(params.candidateSlug);
+
+  if (!candidate) {
+    notFound();
+  }
+
+  return {
+    title: `${candidate.name} | SPÖ Vorsitzwahl-Kabine`,
+    description: `Wahlkabine Antworten von ${candidate.name}`,
+  };
+}
+
+export default async function CandidateProfile({
   params,
-}: {
-  params: { candidateSlug: string };
-}) {
-  // headers(); // This is needed to make the page dynamic and not static
+}: CandidateProfileProps) {
   const candidate = await getCandidateFromSlug(params.candidateSlug);
 
   if (!candidate) {
@@ -65,12 +67,12 @@ export default async function CandidateWahlkabine({
                     <QuestionUnansweredResult />
                   </div>
                 )}
-                {answer.option && answer.weighting ? (
-                  <div className="py-3">
-                    <h3 className="underline underline-offset-2">
+                {answer.text ? (
+                  <div className=" my-3">
+                    <h3 className="py-1 underline underline-offset-2">
                       Zusätzliche Information:
                     </h3>
-                    <p className="py-1 text-lg">
+                    <p className="p-3 bg-neutral-100 py-1 text-lg">
                       {answer.text ? answer.text : "---"}
                     </p>
                   </div>
