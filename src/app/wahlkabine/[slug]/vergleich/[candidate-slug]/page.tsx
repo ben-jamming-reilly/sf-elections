@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   );
 
   return {
-    title: `Mein Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
-    description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%`,
+    title: `Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
+    description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
   };
 }
 
@@ -54,7 +54,7 @@ export default async function WahlkabineResultCandidate({
 
   return (
     <div>
-      <div className="flex flex-row items-center gap-2 mb-10">
+      <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
         <Link
           href={`/wahlkabine/${params.slug}`}
           className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center justify-center transition-all rounded-md text-brand gap-2"
@@ -69,32 +69,42 @@ export default async function WahlkabineResultCandidate({
         </ShareButton>
       </div>
 
-      <section className="grid grid-cols-1 md:grid-cols-3">
-        <div key={candidateWithScore.id} className="py-5 rounded-md relative">
-          <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
+      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800">
+        Vergleich mit {candidate.name}
+      </h1>
+
+      <section className="flex justify-center mt-10">
+        <div
+          key={candidateWithScore.id}
+          className={
+            "w-full min-w-[250px] max-w-[350px] rounded-md relative flex flex-col"
+          }
+        >
+          <span className="absolute z-30 rounded-full w-14 h-14 top-3 left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
             {candidateWithScore.scorePercentage}%
           </span>
           <div className="">
             <Link
               href={`/${candidateWithScore.slug}`}
-              className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md"
+              className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md aspect-square"
             >
               <Image
                 src={`/${candidateWithScore.profileImg}`}
                 alt={`Profilebild von ${candidateWithScore.name}`}
                 width={300}
                 height={300}
+                priority
                 className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
               />
             </Link>
-            <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
+            <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
               {candidateWithScore.name}
             </h2>
-            <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-gray-800">
+            <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-brand">
               <p className="prose mb-5">{candidateWithScore.description}</p>
 
               <Link
-                className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
+                className="selection:bg-brand-purple border selection:text-white inline-block active:scale-95 transition-all text-brand-purple border-brand-purple px-4 py-2 rounded-md hover:bg-brand-purple hover:text-white"
                 href={`/${candidateWithScore.slug}`}
               >
                 Profile
@@ -104,9 +114,9 @@ export default async function WahlkabineResultCandidate({
         </div>
       </section>
 
-      <ul className="flex flex-col divide-y-2">
+      <ul className="flex flex-col gap-16 py-10">
         {voterWithAnswers.answers.map((answer, index) => (
-          <li key={answer.id} className="py-5">
+          <li key={answer.id} className="">
             {answer.question.category && (
               <QuestionCategoryLabel category={answer.question.category} />
             )}

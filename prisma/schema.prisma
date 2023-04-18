@@ -17,12 +17,27 @@ model Candidate {
   description String    @db.MediumText
   hasFinished  Boolean  @default(false)
   answers   CandidateQuestionAnswer[]
+  voterMatches VoterCandidateMatch[]
 }
 
 model Voter {
   id          Int      @id @default(autoincrement())
   hash        String   @unique
   answers   VoterQuestionAnswer[]
+  candidateMatches VoterCandidateMatch[]
+}
+
+model VoterCandidateMatch {
+  id          Int      @id @default(autoincrement())
+  voter       Voter    @relation(fields: [voterId], references: [id])
+  voterId     Int
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  candidateId Int
+  scorePercentageRaw       Float
+
+  @@index([voterId, candidateId])
+  @@index([voterId])
+  @@index([candidateId])
 }
 
 model CandidateQuestionAnswer {
@@ -39,6 +54,7 @@ model CandidateQuestionAnswer {
   @@index([candidateId])
   @@index([questionId])
 }
+
 model VoterQuestionAnswer {
   id          Int      @id @default(autoincrement())
   voter       Voter    @relation(fields: [voterId], references: [id])

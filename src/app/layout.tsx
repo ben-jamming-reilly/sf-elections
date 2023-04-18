@@ -39,7 +39,7 @@ export default function RootLayout({
         <div
           className={`w-full min-h-full z-10 flex flex-col px-5 bg-white border-brand border-[10px] md:border-[30px]`}
         >
-          <div className="lg:w-[800px] w-full md:min- flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
+          <div className="lg:w-[1000px] w-full md:min- flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
             <header className="mt-10">
               <Link
                 href="/"

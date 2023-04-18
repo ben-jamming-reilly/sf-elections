@@ -2,6 +2,9 @@ import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
+import { getCandidatesWithQuestions } from "~/app/wahlkabine/[slug]/get-candidates-with-questions";
+import { rateCandidate } from "~/app/wahlkabine/[slug]/rate-candidates";
+import { getVoterViaHash } from "~/app/wahlkabine/get-voter-via-hash";
 import { prisma } from "~/lib/prisma";
 
 const questionWithAnswersSchema = z.array(
@@ -28,6 +31,8 @@ export async function POST(request: Request) {
   try {
     const validatedData = questionWithAnswersSchema.parse(data);
 
+    const candidates = await getCandidatesWithQuestions();
+
     const voter = await prisma.voter.create({
       data: {
         hash: hash,
@@ -42,6 +47,22 @@ export async function POST(request: Request) {
           },
         },
       },
+      include: {
+        answers: {
+          include: {
+            question: true,
+          },
+        },
+      },
+    });
+
+    await prisma.voterCandidateMatch.createMany({
+      data: candidates.map((candidate) => ({
+        candidateId: candidate.id,
+        voterId: voter.id,
+        scorePercentageRaw: rateCandidate(voter.answers, candidate)
+          .scorePercentageRaw,
+      })),
     });
 
     return NextResponse.json({ slug: voter.hash });

@@ -173,7 +173,7 @@ export const VoterQuestionnaire = ({
       {hasHydrated && activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
-            className="flex flex-col gap-5 md:gap-10 items-center"
+            className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
             key={`question-${activeQuestion.id}`}
           >
             <div className="">

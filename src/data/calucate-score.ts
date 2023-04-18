@@ -2,11 +2,9 @@ import {
   ScaleOptionValueType,
   WahlrechtValueType,
   WeightingValueType,
-  categoryHexForLabel,
   getScaleOptionTendency,
   getWahlrechtOptionTendency,
   getWeightingTendency,
-  weightingLabelForValue,
 } from "~/data/answers";
 
 import {
@@ -93,7 +91,12 @@ export const calculateScore = (
       (candidateAnswer) => candidateAnswer.questionId === voterAnswer.questionId
     );
 
-    if (voterAnswer.skipped) return;
+    if (
+      voterAnswer.skipped ||
+      (candidateAnswer?.option === null && candidateAnswer.weighting === null)
+    ) {
+      return;
+    }
 
     if (voterAnswer.question.type === "YesNo") {
       if (voterAnswer.option === candidateAnswer?.option) {

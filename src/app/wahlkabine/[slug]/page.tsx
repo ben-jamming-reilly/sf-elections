@@ -9,6 +9,7 @@ import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
 import { rateCandidates } from "./rate-candidates";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 
 export type WahlkabineResultProps = {
   params: {
@@ -56,41 +57,53 @@ export default async function WahlkabineResult({
 
   return (
     <div>
-      <div className="my-5 flex flex-row items-center justify-center">
+      <div className="flex pb-5 sm:flex-row flex-col gap-5 items-center justify-center">
+        <Link
+          href={`/`}
+          className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center justify-center transition-all rounded-md text-brand gap-2"
+        >
+          <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
+          Zur Startseite
+        </Link>
         <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
-          Teil dein Ergebnis
+          Teilen
         </ShareButton>
       </div>
 
+      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800">
+        Die Kandidat:innen
+      </h1>
+
       <section className="my-10">
-        <h2 className="text-4xl">Die Kandidat:innen</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <ul className="flex flex-row scroll-mx-5  overflow-x-auto snap-x gap-5 snap-mandatory lg:gap-10 my-10 max-w-full">
           {candidatesWithScore.map((candidate, index) => (
-            <li key={candidate.id} className="py-5 rounded-md relative">
-              <span className="absolute z-30 rounded-full w-14 h-14 top-2 -left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
+            <li
+              key={candidate.id}
+              className="md:flex-1 min-w-[250px] snap-start rounded-md relative flex flex-col"
+            >
+              <span className="absolute z-30 rounded-full w-14 h-14 top-2 left-2 bg-brand text-white tabular-nums inline-flex justify-center items-center">
                 {candidate.scorePercentage}%
               </span>
-              <div className="">
+              <div className="flex-grow flex flex-col">
                 <Link
-                  className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md"
+                  className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md aspect-square"
                   href={`/${candidate.slug}`}
                 >
                   <Image
                     src={`/${candidate.profileImg}`}
                     alt={`Profilebild von ${candidate.name}`}
-                    width={300}
-                    height={300}
+                    fill
+                    priority
                     className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
                   />
                 </Link>
-                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
+                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
                   {index + 1}. {candidate.name}
                 </h2>
-                <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-gray-800">
+                <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start rounded-br-md rounded-bl-md">
                   <p className="prose mb-5">{candidate.description}</p>
-
                   <Link
-                    className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
+                    className="border  selection:bg-brand-purple  selection:text-white inline-block active:scale-95 transition-all text-brand-purple border-brand-purple px-4 py-2 rounded-md hover:bg-brand-purple hover:text-white"
                     href={`/wahlkabine/${params.slug}/vergleich/${candidate.slug}`}
                   >
                     Vergleichen
@@ -103,7 +116,6 @@ export default async function WahlkabineResult({
       </section>
 
       <section>
-        <h2 className="text-4xl">Deine Antworten:</h2>
         <ul className="flex flex-col gap-16 py-10">
           {voterWithAnswers.answers.map((answer, index) => (
             <li key={answer.id} className="">

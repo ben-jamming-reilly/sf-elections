@@ -6,7 +6,6 @@ import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 import { ShareButton } from "~/app/ui/share-button";
 import { WeightingResult } from "~/app/ui/weighting-result";
 import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
-import Head from "next/head";
 import { Metadata } from "next";
 
 export const revalidate = 3600; // 1 hour
@@ -79,37 +78,41 @@ export default async function CandidateComparison({
               .map((c) => c.name)
               .join(" und ")}`}
           </h1>
-          <ul className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {candidates.map((candidate) => (
-              <li key={candidate.id} className="py-5 rounded-md relative">
-                <div className="">
-                  <Link
-                    href={`/${candidate.slug}`}
-                    className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md"
-                  >
-                    <Image
-                      src={`/${candidate.profileImg}`}
-                      alt={`Profilebild von ${candidate.name}`}
-                      width={300}
-                      height={300}
-                      className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
-                    />
-                  </Link>
-                  <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-[110%] -translate-x-[5%] shadow-md">
-                    {candidate.name}
-                  </h2>
-                  <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-gray-800">
-                    <p className="prose mb-5">{candidate.description}</p>
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-10 my-10">
+            {candidates
+              .sort((c) => Math.random() - Math.random())
+              .map((candidate) => (
+                <li
+                  key={candidate.id}
+                  className="flex-1 rounded-md relative flex flex-col"
+                >
+                  <div className="flex-grow flex flex-col">
                     <Link
-                      className="text-white selection:text-brand-purple selection:bg-white inline-block active:scale-95 transition-all bg-brand-purple px-4 py-2 rounded-md hover:underline"
+                      className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md aspect-square"
                       href={`/${candidate.slug}`}
                     >
-                      Profile
+                      <Image
+                        src={`/${candidate.profileImg}`}
+                        alt={`Profilebild von ${candidate.name}`}
+                        fill
+                        className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
+                      />
                     </Link>
+                    <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
+                      {candidate.name}
+                    </h2>
+                    <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start">
+                      <p className="prose mb-5">{candidate.description}</p>
+                      <Link
+                        className="border  selection:bg-brand-purple  selection:text-white inline-block active:scale-95 transition-all text-brand-purple border-brand-purple px-4 py-2 rounded-md hover:bg-brand-purple hover:text-white"
+                        href={`/${candidate.slug}`}
+                      >
+                        Profile
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))}
           </ul>
         </section>
 

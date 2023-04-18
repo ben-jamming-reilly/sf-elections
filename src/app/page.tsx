@@ -1,18 +1,8 @@
-"use client";
+import { getCandidates } from "./get-candidates";
+import { QuestionaireButton } from "./questionaire-button";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Loading } from "./ui/loading";
-import { useVoterQuestionnaireStore } from "~/stores/questionnaire-store-voter";
-import { ResetButton } from "./ui/reset-button";
-
-export default function Home() {
-  const [hasHydrated, setHasHydrated] = useState(false);
-  const [slug, reset] = useVoterQuestionnaireStore((s) => [s.slug, s.reset]);
-
-  useEffect(() => {
-    setHasHydrated(true);
-  }, [hasHydrated]);
+export default async function Home() {
+  const candidates = await getCandidates();
 
   return (
     <div>
@@ -25,31 +15,7 @@ export default function Home() {
       </p>
 
       <div className="min-h-[60px]">
-        {hasHydrated ? (
-          <>
-            {slug ? (
-              <div className="flex flex-row gap-5">
-                <Link
-                  href={`/wahlkabine/${slug}`}
-                  className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
-                >
-                  Dein Ergebnis
-                </Link>
-
-                <ResetButton>Wahlkabine neu starten</ResetButton>
-              </div>
-            ) : (
-              <Link
-                href="/wahlkabine"
-                className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md"
-              >
-                Wahlkabine starten
-              </Link>
-            )}
-          </>
-        ) : (
-          <Loading />
-        )}
+        <QuestionaireButton />
       </div>
     </div>
   );

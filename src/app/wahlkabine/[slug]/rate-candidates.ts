@@ -16,18 +16,39 @@ type CandidateWithAnswers = Candidate & {
   })[];
 };
 
+const getAnsweredQuestionsLength = (
+  voterAnswers: VoterAnswer[],
+  candidateAnswers: CandidateWithAnswers["answers"]
+) => {
+  return candidateAnswers.filter((answer) => {
+    const voterAnswer = voterAnswers.find(
+      (voterAnswer) => voterAnswer.questionId === answer.questionId
+    );
+
+    return (
+      !voterAnswer?.skipped &&
+      answer.option !== null &&
+      answer.weighting !== null
+    );
+  }).length;
+};
+
 export const rateCandidate = (
   voterAnswers: VoterAnswer[],
   candidate: CandidateWithAnswers
 ) => {
-  const maxScore = voterAnswers.length * 1.15;
+  const maxScore =
+    getAnsweredQuestionsLength(voterAnswers, candidate.answers) * 1.15;
+
+  const score = calculateScore(voterAnswers, candidate.answers);
+  const scorePercentageRaw = (score / maxScore) * 100;
+  const scorePercentage = Math.round(scorePercentageRaw);
 
   return {
     ...candidate,
-    score: calculateScore(voterAnswers, candidate.answers),
-    scorePercentage: Math.round(
-      (calculateScore(voterAnswers, candidate.answers) / maxScore) * 100
-    ),
+    score,
+    scorePercentage,
+    scorePercentageRaw,
   };
 };
 

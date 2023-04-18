@@ -1,18 +1,22 @@
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div>
-      <h1 className="text-3xl">404 - Seite nicht gefunden</h1>
-      <p className="my-2">
+    <div className="text-center max-w-[800px] mx-auto">
+      <h1 className="text-4xl pb-4 border-b-2 border-gray-800">
+        Diese Seite gibt es nicht!
+      </h1>
+      <p className="my-4">
         Die Seite, die du aufgerufen hast, konnte nicht gefunden werden. Bitte
         überprüfe die URL und versuchen es erneut.
       </p>
       <Link
         href="/"
-        className="bg-brand px-4 my-3 text-white py-2 text-lg hover:bg-brand/90 active:bg-brand/80 active:scale-95 inline-block transition-all"
+        className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center text-lg justify-center transition-all rounded-md text-brand gap-2"
       >
-        Zurück zur Startseite
+        <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
+        Zur Startseite
       </Link>
     </div>
   );
