@@ -132,7 +132,7 @@ export const VoterQuestionnaire = ({
           onClick={handlePrev}
           disabled={!hasPrevious}
           className={clsx(
-            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand disabled:border-transparent hover:text-white disabled:hover:bg-surface-300 rounded-md",
+            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:border-gray-800 disabled:hover:bg-surface-300 rounded-md",
             !hasPrevious && "invisible"
           )}
         >
@@ -151,7 +151,7 @@ export const VoterQuestionnaire = ({
           }
           onClick={handleNext}
           className={clsx(
-            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand disabled:border-transparent hover:text-white disabled:hover:bg-surface-300 rounded-md",
+            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:border-gray-800 disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:bg-surface-300 rounded-md",
             !hasNext && allQuestionsAnswered ? "!bg-brand" : ""
           )}
         >
@@ -210,7 +210,7 @@ export const VoterQuestionnaire = ({
                 <button
                   disabled={activeQuestion.skipped}
                   className={clsx(
-                    "px-4 py-2 notouch:hover:active:scale-95 dark:disabled:text-gray-400 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline rounded-md dark:bg-surface-200 dark:border-none border-gray-800 text-gray-800 border dark:text-white text-brand transition-all",
+                    "px-4 py-2 notouch:hover:active:scale-95 dark:disabled:text-gray-400 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:no-underline rounded-md dark:bg-surface-200 dark:border-none border-gray-800 text-gray-800 border dark:text-white text-brand transition-all",
                     activeQuestion.skipped && "border-gray-800 text-gray-800"
                   )}
                   onClick={(e) => {
