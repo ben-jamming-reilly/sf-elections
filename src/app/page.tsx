@@ -29,6 +29,7 @@ export default async function Home() {
           sizes="(max-width: 640px) 100vw, 640px"
           src={"/artwork.png"}
           width={2000}
+          priority
           height={2000}
           alt=""
         />
