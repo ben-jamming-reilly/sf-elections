@@ -44,7 +44,7 @@
 - Kandidat:innen Flow
     - [x] Vordefinierten Link pro Kandidat:in definieren
     - [x] Kandidat:innen haben ein Textfeld für extra Informationen
-    - [x] Fragen bearbeitbar machen?
+    - [x] Fragen bearbeitbar machen ?
 - Fragebogen
     - [x] Echte Fragen hinzufügen
     - Barrierefreiheit
