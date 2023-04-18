@@ -8,7 +8,9 @@ import { QuestionCategoryLabel } from "../ui/question-category-label";
 import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
+import { BackButton } from "../ui/back-button";
+import { getCandidates } from "../get-candidates";
+import { SecondaryLink } from "../ui/secondary-link";
 
 export const revalidate = 3600; // 1 hour
 
@@ -38,25 +40,24 @@ export default async function CandidateProfile({
     notFound();
   }
 
+  const candidates = await getCandidates();
+  const randomOtherCandidates = candidates
+    .filter((c) => c.id !== candidate.id)
+    .sort((c) => Math.random() - Math.random());
+
   return (
     <section>
       {candidate.hasFinished ? (
         <div className="mb-5">
           <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
-            <Link
-              href={`/`}
-              className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center justify-center transition-all rounded-md text-brand gap-2"
-            >
-              <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
-              Zur Startseite
-            </Link>
+            <BackButton href={`/`}>Zur Startseite</BackButton>
 
             <ShareButton title={`Wahlkabinen Antworten von ${candidate.name}`}>
               Teilen
             </ShareButton>
           </div>
 
-          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800">
+          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
             Profil von {candidate.name}
           </h1>
 
@@ -93,6 +94,26 @@ export default async function CandidateProfile({
             </div>
           </section>
 
+          <div className="flex flex-col gap-4 items-center py-5 ">
+            <h2 className="text-xl block font-medium underline underline-offset-2">
+              Vergleichen mit:
+            </h2>
+            <ul className="flex flex-row gap-3">
+              {randomOtherCandidates.map((c) => (
+                <li key={c.id}>
+                  <SecondaryLink href={`vergleich/${candidate.slug}/${c.slug}`}>
+                    {c.name}
+                  </SecondaryLink>
+                </li>
+              ))}
+            </ul>
+            <SecondaryLink
+              href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
+            >
+              {randomOtherCandidates.map((c) => c.name).join(" & ")}
+            </SecondaryLink>
+          </div>
+
           <ul className="flex flex-col gap-16 py-10">
             {candidate.answers.map((answer) => (
               <li key={answer.id}>
@@ -121,7 +142,7 @@ export default async function CandidateProfile({
                     <h3 className="py-1 underline underline-offset-2">
                       Zusätzliche Information:
                     </h3>
-                    <p className="p-3 bg-neutral-100 py-1 text-lg">
+                    <p className="p-3 bg-neutral-200 rounded-sm dark:bg-surface-300 text-lg">
                       {answer.text ? answer.text : "---"}
                     </p>
                   </div>

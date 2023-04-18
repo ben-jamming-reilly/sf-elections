@@ -17,6 +17,7 @@ import {
   useVoterQuestionnaireStore,
 } from "~/stores/questionnaire-store-voter";
 import { QuestionCategoryLabel } from "../ui/question-category-label";
+import { useHasHydrated } from "~/hooks/useHasHydrated";
 
 const variants = {
   enter: (direction: number) => {
@@ -52,7 +53,7 @@ export const VoterQuestionnaire = ({
   questions: VoterAnsweredQuestion[];
 }) => {
   const router = useRouter();
-  const [hasHydrated, setHasHydrated] = useState(false);
+  const hasHydrated = useHasHydrated();
   const [
     questionsWithAnswers,
     setQuestions,
@@ -78,12 +79,6 @@ export const VoterQuestionnaire = ({
   ]);
   const prevIndex = usePrevious(activeIndex);
   const questionRef = useRef<HTMLDivElement>(null);
-
-  // Check if component has hydrated before showing UI
-  // Prevents hydration mismatch error due to localstorage
-  useEffect(() => {
-    setHasHydrated(true);
-  }, [hasHydrated]);
 
   // Hydrate store with questions from server
   useEffect(() => {
@@ -137,7 +132,7 @@ export const VoterQuestionnaire = ({
           onClick={handlePrev}
           disabled={!hasPrevious}
           className={clsx(
-            "hover:underline underline-offset-2 text-center xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 bg-neutral-200 text-gray-800 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:active:scale-100 text-lg rounded-md",
+            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand disabled:border-transparent hover:text-white disabled:hover:bg-surface-300 rounded-md",
             !hasPrevious && "invisible"
           )}
         >
@@ -156,10 +151,8 @@ export const VoterQuestionnaire = ({
           }
           onClick={handleNext}
           className={clsx(
-            "hover:underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 disabled:bg-neutral-100 disabled:text-gray-800/20 disabled:cursor-not-allowed disabled:hover:no-underline disabled:active:scale-100 text-lg rounded-md ",
-            !hasNext && allQuestionsAnswered
-              ? "bg-brand text-white"
-              : "bg-neutral-200 text-gray-800"
+            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand disabled:border-transparent hover:text-white disabled:hover:bg-surface-300 rounded-md",
+            !hasNext && allQuestionsAnswered ? "!bg-brand" : ""
           )}
         >
           {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
@@ -200,11 +193,13 @@ export const VoterQuestionnaire = ({
               className="w-full"
             >
               <QuestionCategoryLabel category={activeQuestion.category} />
-              <div className="text-2xl md:mb-3 md:min-h-[3em]">
+              <div className="text-2xl md:mb-3 md:min-h-[5em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
-                <h1 className="hyphens-auto">{activeQuestion.title}</h1>
+                <h1 className="hyphens-auto font-brand">
+                  {activeQuestion.title}
+                </h1>
               </div>
             </motion.header>
 
@@ -215,7 +210,7 @@ export const VoterQuestionnaire = ({
                 <button
                   disabled={activeQuestion.skipped}
                   className={clsx(
-                    "border-neutral-200 disabled:border-0 border px-4 rounded-md py-2 text-neutral-500 hover:border-gray-800 transition-all active:scale-95",
+                    "px-4 py-2 notouch:hover:active:scale-95 dark:disabled:text-gray-400 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline rounded-md dark:bg-surface-200 dark:border-none border-gray-800 text-gray-800 border dark:text-white text-brand transition-all",
                     activeQuestion.skipped && "border-gray-800 text-gray-800"
                   )}
                   onClick={(e) => {
@@ -232,12 +227,12 @@ export const VoterQuestionnaire = ({
                 </button>
               </div>
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl underline underline-offset-4">
+                <h2 className="text-xl font-brand underline underline-offset-4">
                   Ich stimme:
                 </h2>
                 <ul
                   className={clsx(
-                    "grid w-full border border-brand ",
+                    "grid w-full",
                     activeQuestion.type === "YesNo" &&
                       "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2",
                     activeQuestion.type === "Range" &&
@@ -249,22 +244,14 @@ export const VoterQuestionnaire = ({
                   {getOptionsBasedOnType(activeQuestion.type).map((option) => (
                     <li
                       className={clsx(
-                        "relative border-brand last:border-0 bg-red-50/50",
+                        "relative",
                         (activeQuestion.type === "Range" ||
                           activeQuestion.type === "YesNo") &&
-                          "md:border-r border-brand",
-                        activeQuestion.type === "Wahlrecht" &&
-                          "border-b border-brand"
+                          "mb-2 md:mb-0 md:mr-2 last:mr-0",
+                        activeQuestion.type === "Wahlrecht" && "mb-2"
                       )}
                       key={`option-${option.value}`}
                     >
-                      {option.value === activeQuestion.option && (
-                        <motion.span
-                          layoutId="active-option"
-                          // exit={{ opacity:  0 }}
-                          className="absolute inset-0 bg-brand z-10"
-                        />
-                      )}
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -277,10 +264,9 @@ export const VoterQuestionnaire = ({
                           );
                         }}
                         className={clsx(
-                          "z-20 relative text-lg w-full text-center py-4 focus-visible:outline-brand outline-offset-2",
+                          "z-10 rounded-md transition-all notouch:hover:active:scale-95 dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full text-center py-4 focus-visible:bg-brand",
                           option.value === activeQuestion.option &&
-                            " text-white",
-                          activeQuestion.option !== null && "transition-all"
+                            " text-white !bg-brand !border-brand hover:opacity-90"
                         )}
                       >
                         {option.label}
@@ -291,22 +277,15 @@ export const VoterQuestionnaire = ({
               </div>
 
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl underline underline-offset-4">
+                <h2 className="text-xl font-brand underline underline-offset-4">
                   Das ist mir:
                 </h2>
-                <ul className="grid w-full border border-brand md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
+                <ul className="grid w-full md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
                   {weightings.map((weighting) => (
                     <li
-                      className="relative border-b md:border-b-0 md:border-r border-brand last:border-0 bg-red-50/50"
+                      className="relative mb-2 md:mb-0 md:mr-2 last:mb-0 last:mr-0"
                       key={`weighting-${weighting.value}`}
                     >
-                      {weighting.value === activeQuestion.weighting && (
-                        <motion.span
-                          layoutId="active-weighting"
-                          // exit={{ opacity:  0 }}
-                          className="absolute inset-0 bg-brand z-10"
-                        />
-                      )}
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -319,10 +298,9 @@ export const VoterQuestionnaire = ({
                           );
                         }}
                         className={clsx(
-                          "z-20 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
+                          "z-20 rounded-md dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
                           weighting.value === activeQuestion.weighting &&
-                            " text-white",
-                          activeQuestion.weighting !== null && "transition-all"
+                            " text-white !bg-brand !border-brand hover:opacity-90"
                         )}
                       >
                         {weighting.label}

@@ -33,17 +33,17 @@ const Pagination = ({
               "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
               isQuestionAnswered(question) &&
                 !question.skipped &&
-                "bg-brand text-white border-brand",
+                "bg-brand hover:bg-primary-200 text-white border-brand",
               isQuestionAnswered(question) &&
                 question.skipped &&
-                "bg-neutral-200 text-neutral-500 border-neutral-200 hover:border-neutral-200",
-              activeQuestion.id === question.id && "underline scale-[0.85]",
+                "bg-surface-400 border-surface-600 text-white hover:opacity-80 hover:border-surface-600",
+              activeQuestion.id === question.id && "underline scale-[0.875]",
               !isQuestionAnswered(question) &&
                 activeQuestion.id === question.id &&
-                "border-brand bg-transparent hover:text-brand text-brand",
-              activeQuestion.id !== question.id &&
-                !isQuestionAnswered(question) &&
-                "bg-red-50/50 hover:text-brand"
+                "border-brand text-brand",
+              !isQuestionAnswered(question) &&
+                activeQuestion.id !== question.id &&
+                "border-surface-400"
             )}
             onClick={() => setActiveIndex(index)}
           >

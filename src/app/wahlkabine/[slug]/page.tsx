@@ -10,6 +10,7 @@ import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
 import { rateCandidates } from "./rate-candidates";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
+import { BackButton } from "~/app/ui/back-button";
 
 export type WahlkabineResultProps = {
   params: {
@@ -58,19 +59,13 @@ export default async function WahlkabineResult({
   return (
     <div>
       <div className="flex pb-5 sm:flex-row flex-col gap-5 items-center justify-center">
-        <Link
-          href={`/`}
-          className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center justify-center transition-all rounded-md text-brand gap-2"
-        >
-          <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
-          Zur Startseite
-        </Link>
+        <BackButton href={`/`}>Zur Startseite</BackButton>
         <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
           Teilen
         </ShareButton>
       </div>
 
-      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800">
+      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
         Die Kandidat:innen
       </h1>
 
@@ -79,7 +74,7 @@ export default async function WahlkabineResult({
           {candidatesWithScore.map((candidate, index) => (
             <li
               key={candidate.id}
-              className="md:flex-1 min-w-[250px] snap-start rounded-md relative flex flex-col"
+              className="md:flex-1 min-w-[250px] max-w-[350px] snap-start rounded-md relative flex flex-col"
             >
               <span className="absolute z-30 rounded-full w-14 h-14 top-2 left-2 bg-brand text-white tabular-nums inline-flex justify-center items-center">
                 {candidate.scorePercentage}%
@@ -103,7 +98,7 @@ export default async function WahlkabineResult({
                 <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start rounded-br-md rounded-bl-md">
                   <p className="prose mb-5">{candidate.description}</p>
                   <Link
-                    className="border  selection:bg-brand-purple  selection:text-white inline-block active:scale-95 transition-all text-brand-purple border-brand-purple px-4 py-2 rounded-md hover:bg-brand-purple hover:text-white"
+                    className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
                     href={`/wahlkabine/${params.slug}/vergleich/${candidate.slug}`}
                   >
                     Vergleichen
@@ -122,10 +117,8 @@ export default async function WahlkabineResult({
               {answer.question.category && (
                 <QuestionCategoryLabel category={answer.question.category} />
               )}
-              <div className="text-lg font-semibold">
-                Frage {answer.questionId}:
-              </div>
-              <h2 className="text-2xl mb-5 hyphens-auto">
+              <div className="text-lg mt-3">Frage {answer.questionId}:</div>
+              <h2 className="text-2xl font-brand mb-5 hyphens-auto">
                 {answer.question.title}
               </h2>
               {answer.option !== null && answer.weighting !== null ? (
@@ -154,8 +147,12 @@ export default async function WahlkabineResult({
                     {candidatesWithScore.map((candidate) => (
                       <li
                         key={`candidate-details-${answer.questionId}-${candidate.id}`}
+                        className="dark:bg-surface-200 p-3 rounded-md"
                       >
-                        <div className="text-center flex flex-row items-center font-semibold py-2 gap-3 justify-center">
+                        <Link
+                          href={`/${candidate.slug}`}
+                          className="text-center flex flex-row items-center font-semibold pb-3 gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                        >
                           <Image
                             src={`/${candidate.profileImg}`}
                             alt={`Profilebild von ${candidate.name}`}
@@ -164,16 +161,23 @@ export default async function WahlkabineResult({
                             className="rounded-full"
                           />
                           {candidate.name}
-                        </div>
-                        <div className="grid grid-cols-1 grid-rows-2 gap-3">
-                          <OptionResult
-                            value={candidate.answers[index].option!}
-                            type={candidate.answers[index].question.type}
-                          />
-                          <WeightingResult
-                            value={candidate.answers[index].weighting!}
-                          />
-                        </div>
+                        </Link>
+                        {candidate.answers[index].option !== null &&
+                        candidate.answers[index].weighting !== null ? (
+                          <div className="grid grid-cols-1 grid-rows-2 gap-3">
+                            <OptionResult
+                              value={candidate.answers[index].option!}
+                              type={candidate.answers[index].question.type}
+                            />
+                            <WeightingResult
+                              value={candidate.answers[index].weighting!}
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-full flex items-center justify-center">
+                            <QuestionUnansweredResult />
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -183,6 +187,13 @@ export default async function WahlkabineResult({
           ))}
         </ul>
       </section>
+
+      <div className="flex pt-5 sm:flex-row flex-col gap-5 items-center justify-center">
+        <BackButton href={`/`}>Zur Startseite</BackButton>
+        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
+          Teilen
+        </ShareButton>
+      </div>
     </div>
   );
 }

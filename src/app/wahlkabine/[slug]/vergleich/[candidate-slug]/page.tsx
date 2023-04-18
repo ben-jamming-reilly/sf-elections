@@ -10,6 +10,7 @@ import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import Image from "next/image";
 import { rateCandidate } from "../../rate-candidates";
 import { getCandidateWithQuestions } from "./get-candidate-with-question";
+import { BackButton } from "~/app/ui/back-button";
 
 export type WahlkabineResultCandidate = {
   params: {
@@ -55,13 +56,9 @@ export default async function WahlkabineResultCandidate({
   return (
     <div>
       <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
-        <Link
-          href={`/wahlkabine/${params.slug}`}
-          className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center justify-center transition-all rounded-md text-brand gap-2"
-        >
-          <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
-          Zurück zur Übersicht
-        </Link>
+        <BackButton href={`/wahlkabine/${params.slug}`}>
+          Zur Übersicht
+        </BackButton>
         <ShareButton
           title={`Schau wie gut ${candidateWithScore.name} zu mir passt!`}
         >
@@ -69,7 +66,7 @@ export default async function WahlkabineResultCandidate({
         </ShareButton>
       </div>
 
-      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800">
+      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
         Vergleich mit {candidate.name}
       </h1>
 
@@ -91,8 +88,7 @@ export default async function WahlkabineResultCandidate({
               <Image
                 src={`/${candidateWithScore.profileImg}`}
                 alt={`Profilebild von ${candidateWithScore.name}`}
-                width={300}
-                height={300}
+                fill
                 priority
                 className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
               />
@@ -100,14 +96,14 @@ export default async function WahlkabineResultCandidate({
             <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
               {candidateWithScore.name}
             </h2>
-            <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 bg-white border-brand">
+            <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 border-brand">
               <p className="prose mb-5">{candidateWithScore.description}</p>
 
               <Link
-                className="selection:bg-brand-purple border selection:text-white inline-block active:scale-95 transition-all text-brand-purple border-brand-purple px-4 py-2 rounded-md hover:bg-brand-purple hover:text-white"
+                className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
                 href={`/${candidateWithScore.slug}`}
               >
-                Profile
+                {`${candidate.name}s Antworten`}
               </Link>
             </div>
           </div>
@@ -120,17 +116,15 @@ export default async function WahlkabineResultCandidate({
             {answer.question.category && (
               <QuestionCategoryLabel category={answer.question.category} />
             )}
-            <div className="text-lg font-semibold">
-              Frage {answer.questionId}:
-            </div>
-            <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto">
+            <div className="text-lg">Frage {answer.questionId}:</div>
+            <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-brand">
               {answer.question.title}
             </h2>
 
-            <div className="grid grid-cols-1 py-5 sm:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1">
-                <div className="text-center top-0 bg-white py-2">
-                  Deine Antwort:
+            <div className="grid grid-cols-1 py-5 sm:grid-cols-2 dark:gap-5 gap-7">
+              <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md">
+                <div className="text-center inline-flex items-center  justify-center font-semibold pb-3 -translate-x-[15px]">
+                  <span className="h-[30px] w-[30px]" /> Deine Antwort:
                 </div>
                 {answer.option !== null && answer.weighting !== null ? (
                   <div className="grid grid-cols-1 grid-rows-2 gap-5">
@@ -147,22 +141,22 @@ export default async function WahlkabineResultCandidate({
                 )}
               </div>
 
-              <div className="flex flex-col gap-1">
-                <div className="justify-center inline-flex flex-row items-center gap-2 mb-2 top-0 bg-white">
-                  Anwort von{" "}
-                  <span className="inline-flex items-center gap-1">
-                    <Image
-                      src={`/${candidateWithScore.profileImg}`}
-                      width={30}
-                      height={30}
-                      alt={`${candidateWithScore.name} Profilbild`}
-                      className="rounded-full"
-                    />
-                    <strong className="font-semibold">
-                      {candidateWithScore.name}:
-                    </strong>
-                  </span>
-                </div>
+              <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md">
+                <Link
+                  href={`/${candidate.slug}`}
+                  className="text-center flex flex-row items-center font-semibold pb-3 gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                >
+                  <Image
+                    src={`/${candidateWithScore.profileImg}`}
+                    width={30}
+                    height={30}
+                    alt={`${candidateWithScore.name} Profilbild`}
+                    className="rounded-full"
+                  />
+                  <strong className="font-semibold">
+                    {candidateWithScore.name}:
+                  </strong>
+                </Link>
                 <div className="">
                   {candidateWithScore.answers[index].option !== null &&
                   candidateWithScore.answers[index].weighting !== null ? (

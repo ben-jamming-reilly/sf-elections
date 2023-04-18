@@ -1,6 +1,6 @@
 export const QuestionUnansweredResult = () => {
   return (
-    <p className="border-brand bg-gray-100 text-center px-3 py-2 text-gray-800/90">
+    <p className="border-2 text-surface-600 border-surface-600 rounded-md text-center px-3 py-2">
       Diese Frage wurde nicht beantwortet.
     </p>
   );
