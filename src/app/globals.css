@@ -59,9 +59,9 @@
     @apply rounded-md bg-surface-200;
   } */
   
-  button {
+  /* button {
     @apply dark:disabled:text-gray-400 dark:disabled:bg-surface-300 disabled:active:scale-100 disabled:cursor-not-allowed disabled:hover:no-underline;
-  }
+  } */
 
   /* @media (hover) {
     button {

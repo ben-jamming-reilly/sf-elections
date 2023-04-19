@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import Image from "next/image";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SPÖ Vorsitz Wahlkabine | Junge Generation Wien",
   description: "SPÖ Wahlkabine",
 };
@@ -70,12 +70,12 @@ export default function RootLayout({
           <div className="lg:w-[1000px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
             <main className="flex-grow px-5">{children}</main>
             <footer className="w-full flex justify-center items-center py-5 border-t-2 border-brand">
-              <ul className="flex flex-col gap-3 items-center justify-center sm:flex-row flex-wrap hover:text-brand">
+              <ul className="flex flex-col gap-3 items-center justify-center sm:flex-row flex-wrap">
                 <li>
                   <a
                     target="_blank"
                     rel="norefeerer noopener"
-                    className="focus-visible:outline-brand outline-offset-2"
+                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                     href="https://www.spoe.at"
                   >
                     SPÖ
@@ -85,7 +85,7 @@ export default function RootLayout({
                   <a
                     target="_blank"
                     rel="norefeerer noopener"
-                    className="focus-visible:outline-brand outline-offset-2"
+                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                     href="https://junge-generation.at/"
                   >
                     Junge Generation Wien
@@ -93,7 +93,7 @@ export default function RootLayout({
                 </li>
                 <li>
                   <Link
-                    className="focus-visible:outline-brand outline-offset-2"
+                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                     href="/impressum"
                   >
                     Impressum
@@ -101,7 +101,7 @@ export default function RootLayout({
                 </li>
                 <li>
                   <Link
-                    className="focus-visible:outline-brand outline-offset-2"
+                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                     href="/datenschutz"
                   >
                     Datenschutz

@@ -190,7 +190,7 @@ export const VoterQuestionnaire = ({
                 opacity: { duration: 0.2 },
               }}
               ref={questionRef}
-              className="w-full"
+              className="w-full scroll-mt-28 md:scroll-mt-10"
             >
               <QuestionCategoryLabel category={activeQuestion.category} />
               <div className="text-2xl md:mb-3 md:min-h-[5em]">
