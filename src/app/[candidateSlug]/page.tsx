@@ -36,7 +36,7 @@ export default async function CandidateWahlkabine({
             <CopyCurrentUrl />
           </div>
           <ul className="flex flex-col divide-y-2">
-            {candidate.answers.map((answer) => (
+            {candidate.answers.map((answer, index) => (
               <li key={answer.id} className="py-5">
                 <span
                   className={clsx(
@@ -51,9 +51,7 @@ export default async function CandidateWahlkabine({
                 >
                   {answer.question.category}
                 </span>
-                <div className="text-lg font-semibold">
-                  Frage {answer.questionId}:
-                </div>
+                <div className="text-lg font-semibold">Frage {index}:</div>
                 <h2 className="text-xl mb-5">{answer.question.title}</h2>
                 {answer.option && answer.weighting ? (
                   <div className="grid grid-cols-2 gap-5">
