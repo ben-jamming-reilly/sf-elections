@@ -43,66 +43,68 @@ export default async function CandidatePreWahlkabine({
 
       <section className="mt-10">
         <ul className="flex flex-col divide-y-2">
-          {candidate.answers.map((answer) => (
-            <li key={answer.id} className="py-5">
-              <span
-                className={clsx(
-                  "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
-                  answer.question.category && "text-white"
+          {candidate.answers
+            .sort((a, b) => a.question.order - b.question.order)
+            .map((answer) => (
+              <li key={answer.id} className="py-5">
+                <span
+                  className={clsx(
+                    "inline-block px-2 py-1 text-sm mb-2 h-[2em]",
+                    answer.question.category && "text-white"
+                  )}
+                  style={{
+                    backgroundColor: categoryHexForLabel(
+                      answer.question.category
+                    ),
+                  }}
+                >
+                  {answer.question.category}
+                </span>
+                <div className="text-lg font-semibold">
+                  Frage {answer.questionId}:
+                </div>
+                <h2 className="text-2xl mb-5 hyphens-auto">
+                  {answer.question.title}
+                </h2>
+                {answer.option !== null && answer.weighting !== null ? (
+                  <div className="grid grid-cols-2 gap-5">
+                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                      {answer.question.type === "YesNo" &&
+                        optionLabelForYesNoValue(answer.option)}
+                      {answer.question.type === "Range" &&
+                        `Ich stimme ${optionLabelForValue(answer.option)}`}
+                      {answer.question.type === "Wahlrecht" &&
+                        wahlrechtLabelForValue(answer.option)}
+                    </p>
+                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                      Ist mir {weightingLabelForValue(answer.weighting)}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="w-full">
+                    <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
+                      Diese Frage is nicht beantwortet.
+                    </p>
+                  </div>
                 )}
-                style={{
-                  backgroundColor: categoryHexForLabel(
-                    answer.question.category
-                  ),
-                }}
-              >
-                {answer.question.category}
-              </span>
-              <div className="text-lg font-semibold">
-                Frage {answer.questionId}:
-              </div>
-              <h2 className="text-2xl mb-5 hyphens-auto">
-                {answer.question.title}
-              </h2>
-              {answer.option !== null && answer.weighting !== null ? (
-                <div className="grid grid-cols-2 gap-5">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    {answer.question.type === "YesNo" &&
-                      optionLabelForYesNoValue(answer.option)}
-                    {answer.question.type === "Range" &&
-                      `Ich stimme ${optionLabelForValue(answer.option)}`}
-                    {answer.question.type === "Wahlrecht" &&
-                      wahlrechtLabelForValue(answer.option)}
-                  </p>
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Ist mir {weightingLabelForValue(answer.weighting)}
-                  </p>
+                {answer.option && answer.weighting ? (
+                  <div className="py-3">
+                    <h3 className="underline underline-offset-2">
+                      Zusätzliche Information:
+                    </h3>
+                    <p className="py-1 text-lg">
+                      {answer.text ? answer.text : "---"}
+                    </p>
+                  </div>
+                ) : null}
+                <div className="mt-3">
+                  <EditQuestionButton
+                    questionId={answer.questionId}
+                    url={`/${candidate.slug}/${candidate.hash}/wahlkabine`}
+                  />
                 </div>
-              ) : (
-                <div className="w-full">
-                  <p className="border-brand bg-red-50/50 text-center px-3 py-2 text-gray-800 underline underline-offset-2">
-                    Diese Frage is nicht beantwortet.
-                  </p>
-                </div>
-              )}
-              {answer.option && answer.weighting ? (
-                <div className="py-3">
-                  <h3 className="underline underline-offset-2">
-                    Zusätzliche Information:
-                  </h3>
-                  <p className="py-1 text-lg">
-                    {answer.text ? answer.text : "---"}
-                  </p>
-                </div>
-              ) : null}
-              <div className="mt-3">
-                <EditQuestionButton
-                  questionId={answer.questionId}
-                  url={`/${candidate.slug}/${candidate.hash}/wahlkabine`}
-                />
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
       </section>
     </div>
