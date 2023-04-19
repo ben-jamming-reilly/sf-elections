@@ -82,7 +82,7 @@ model Question {
   category   String @default("")
   description String    @db.MediumText @default("")
   type       QuestionType @default(YesNo)
-  order      Int @unique
+  order      Int
   voters     VoterQuestionAnswer[]
   candidates CandidateQuestionAnswer[]
 }
