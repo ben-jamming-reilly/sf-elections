@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col h-full">
       <div>
-        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 font-brand border-gray-800 dark:border-white">
           Finde heraus welche:r Kandidat:in für die SPÖ Vorsitzwahl 2023 am
           Besten zu dir passt.
         </h1>

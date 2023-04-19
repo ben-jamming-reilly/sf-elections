@@ -20,7 +20,9 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function Wahlkabine() {
-  const questions = await prisma.question.findMany();
+  const questions = await prisma.question.findMany({
+    orderBy: { order: "asc" },
+  });
 
   return (
     <VoterQuestionnaire
