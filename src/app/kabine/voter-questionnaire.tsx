@@ -312,7 +312,6 @@ export const VoterQuestionnaire = ({
             className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
             key={`question-${activeQuestion.id}`}
           >
-            {activeIndex}
             <div className="">
               <Pagination
                 activeQuestion={activeQuestion}
