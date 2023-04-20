@@ -65,13 +65,13 @@ export default async function WahlkabineResult({
     <div>
       <div className="flex pb-5 sm:flex-row flex-col gap-5 items-center justify-center">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
+        <ShareButton title="Schau welche*r SPÖ Vorsitz Kandidat*in am Besten zu mir passt!">
           Teilen
         </ShareButton>
       </div>
 
       <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
-        Die Kandidat:innen
+        Die Kandidat*innen
       </h1>
 
       <section className="my-10">
@@ -151,7 +151,7 @@ export default async function WahlkabineResult({
                     className=""
                   >
                     <summary className="cursor-pointer font-semibold py-2 border-gray-800">
-                      Antworten der Kandidat:innen:
+                      Antworten der Kandidat*innen:
                     </summary>
                     <ul className="grid grid-cols-1 py-5  gap-5">
                       {candidatesWithScore.map((candidate) => (
@@ -205,7 +205,7 @@ export default async function WahlkabineResult({
 
       <div className="flex pt-5 sm:flex-row flex-col gap-5 items-center justify-center">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat:in am Besten zu mir passt!">
+        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat*in am Besten zu mir passt!">
           Teilen
         </ShareButton>
       </div>
