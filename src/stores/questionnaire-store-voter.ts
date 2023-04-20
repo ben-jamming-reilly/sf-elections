@@ -201,7 +201,7 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       },
     }),
     {
-      name: "voter-questionnaire-storage-20-04-2023",
+      name: "voter-questionnaire-storage-20-04-2023-v2",
     }
   )
 );

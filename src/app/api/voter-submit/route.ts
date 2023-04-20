@@ -24,8 +24,8 @@ const questionWithAnswersSchema = z.array(
 );
 
 const dataForStatsSchema = z.object({
-  age: z.number().min(0).max(120).nullable(),
-  gender: z.enum(["m", "f", "x"]).nullable(),
+  age: z.number().min(0).max(120).nullable().optional(),
+  gender: z.enum(["m", "f", "x"]).nullable().optional(),
   state: z
     .enum([
       "Wien",
@@ -38,8 +38,9 @@ const dataForStatsSchema = z.object({
       "Vorarlberg",
       "Burgenland",
     ])
-    .nullable(),
-  isPartyMember: z.boolean().nullable(),
+    .nullable()
+    .optional(),
+  isPartyMember: z.boolean().nullable().optional(),
 });
 
 export async function POST(request: Request) {
@@ -65,10 +66,10 @@ export async function POST(request: Request) {
       data: {
         hash: hash,
         hasAcceptedTos: true,
-        age: validatedDataForStats.age,
-        state: validatedDataForStats.state,
-        gender: validatedDataForStats.gender,
-        isPartyMember: validatedDataForStats.isPartyMember,
+        age: validatedDataForStats.age ?? null,
+        state: validatedDataForStats.state ?? null,
+        gender: validatedDataForStats.gender ?? null,
+        isPartyMember: validatedDataForStats.isPartyMember ?? null,
         answers: {
           createMany: {
             data: validatedQuestionsWithAnswers.map((answer) => ({
