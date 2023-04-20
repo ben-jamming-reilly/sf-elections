@@ -95,6 +95,9 @@ export async function GET(request: Request) {
           staleIfError: "1d",
         }),
       },
+      height: 600,
+      width: 1200,
+      debug: true,
     }
   );
 }
