@@ -48,9 +48,12 @@ export async function POST(request: Request) {
   const hash = uuidv4().slice(0, 8);
 
   if (!data.hasAcceptedTos) {
-    return NextResponse.json({
-      error: "Bitte akzeptiere die Nutzungsbedingungen!",
-    });
+    return NextResponse.json(
+      {
+        error: "Bitte akzeptiere die Nutzungsbedingungen!",
+      },
+      { status: 400 }
+    );
   }
 
   try {
@@ -106,8 +109,11 @@ export async function POST(request: Request) {
     }
 
     if (error instanceof Prisma.PrismaClientKnownRequestError)
-      return NextResponse.json({
-        error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
-      });
+      return NextResponse.json(
+        {
+          error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
+        },
+        { status: 400 }
+      );
   }
 }

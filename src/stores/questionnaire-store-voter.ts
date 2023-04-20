@@ -174,6 +174,7 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
             });
           })
           .catch((reason) => {
+            alert(reason);
             console.error(reason);
 
             set((state) => {
@@ -201,7 +202,7 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       },
     }),
     {
-      name: "voter-questionnaire-storage-20-04-2023-v2",
+      name: "voter-questionnaire-storage-20-04-2023-v3",
     }
   )
 );
