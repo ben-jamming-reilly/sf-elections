@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   );
 
   return {
-    title: `Ergebnis der Wahlkabine | SPÖ Vorsitz Wahlkabine`,
+    title: `Ergebnis der Vorsitzbefragungs-Kabine | SPÖ Vorsitz Vorsitzbefragungs-Kabine`,
     description: `Mein Resultat: ${candidatesWithScore
       .map((c) => `${c.name}: ${c.scorePercentage}%`)
       .join(", ")}`,
@@ -104,7 +104,7 @@ export default async function WahlkabineResult({
                   <p className="prose mb-5">{candidate.description}</p>
                   <Link
                     className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
-                    href={`/wahlkabine/${params.slug}/vergleich/${candidate.slug}`}
+                    href={`/kabine/${params.slug}/vergleich/${candidate.slug}`}
                   >
                     Vergleichen
                   </Link>

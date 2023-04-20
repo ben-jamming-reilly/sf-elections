@@ -101,7 +101,7 @@ export const VoterQuestionnaire = ({
   // Re-add when candidates are done
   useEffect(() => {
     if (slug) {
-      router.push(`/wahlkabine/${slug}`);
+      router.push(`/kabine/${slug}`);
     }
   }, [slug]);
 
@@ -174,13 +174,13 @@ export const VoterQuestionnaire = ({
     return (
       <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
         <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
-          Wahlkabine Information
+          Vorsitzbefragungs-Kabine Information
         </h1>
         <p className="max-w-[50ch] mx-auto text-lg">
           <ul className="list-disc ml-4 mb-3">
             <li>
-              Diese Wahlkabine dient der demokratischen Meinungsbildung in der
-              SPÖ.
+              Diese Vorsitzbefragungs-Kabine dient der demokratischen
+              Meinungsbildung in der SPÖ.
             </li>
             <li>
               Wir erfassen <strong>keine</strong> personenbezogenen Daten.
@@ -192,7 +192,7 @@ export const VoterQuestionnaire = ({
             <li>Niemand wird deine Eingabe mit dir verknüpfen können.</li>
             <li>Du bist anonym.</li>
           </ul>
-          Für mehre Informationen kannst du die{" "}
+          Für mehr Informationen kannst du die{" "}
           <Link
             className="text-brand underline-offset-2 hover:underline"
             href="/datenschutz"
@@ -241,7 +241,9 @@ export const VoterQuestionnaire = ({
               data.gender === EMPTY_ANSWER ? null : (data.gender as string),
             state: data.state === EMPTY_ANSWER ? null : (data.state as string),
             isPartyMember:
-              data.partyMember === EMPTY_ANSWER ? null : data.party === "yes",
+              data.partyMember === EMPTY_ANSWER
+                ? null
+                : data.partyMember === "yes",
           });
         }}
       >
@@ -258,7 +260,7 @@ export const VoterQuestionnaire = ({
               type="number"
               name="age"
               placeholder="Dein Alter"
-              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-2"
+              className="appearance-none text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-2"
             />
           </label>
           <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
@@ -267,7 +269,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="gender"
-              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -281,7 +283,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="state"
-              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -301,7 +303,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="partyMember"
-              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="no">Ich bin kein Parteimitglied</option>
@@ -314,7 +316,7 @@ export const VoterQuestionnaire = ({
           type="submit"
           className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
         >
-          Abschicken
+          Weiter
         </button>
       </form>
     );

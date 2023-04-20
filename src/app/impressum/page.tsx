@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Impressum | SPÖ Vorsitz Wahlkabine",
-  description: "SPÖ Wahlkabine",
+  title: "Impressum | SPÖ Vorsitzbefragungs-Kabine",
+  description: "SPÖ Vorsitzbefragungs-Kabine",
 };
 
 export default function Home() {
@@ -43,8 +43,8 @@ export default function Home() {
           </a>
         </p>
         <p>
-          <strong>Vorsitzende:</strong> Mag. Alexander Ackerl <br />
-          <strong>Landessekretärin:</strong> Phillip Zimmerman
+          <strong>Vorsitzender:</strong> Mag. Alexander Ackerl <br />
+          <strong>Landessekretär:</strong> Phillip Zimmerman
         </p>
         <p>
           <strong>Grundlegende Richtung:</strong> Die Website der Jungen

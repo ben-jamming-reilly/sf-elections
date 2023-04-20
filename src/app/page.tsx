@@ -11,11 +11,12 @@ export default async function Home() {
     <div className="flex flex-col h-full">
       <div>
         <h1 className="text-4xl my-5 pb-4 text-center border-b-2 font-brand border-gray-800 dark:border-white">
-          Finde heraus welche:r Kandidat:in für die SPÖ Vorsitzwahl 2023 am
+          Finde heraus welche:r Kandidat:in für die SPÖ Vorsitzbefragung 2023 am
           Besten zu dir passt.
         </h1>
         <p className="my-3 text-2xl text-center">
-          Die Wahlkabine ist eine Initiative der Jungen Generation.
+          Die Vorsitzbefragungs-Kabine ist eine Initiative der Jungen
+          Generation.
         </p>
 
         <div className="min-h-[60px] text-center text-xl">

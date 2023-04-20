@@ -6,8 +6,8 @@ import Script from "next/script";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "SPÖ Vorsitz Wahlkabine | Junge Generation Wien",
-  description: "SPÖ Wahlkabine",
+  title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
+  description: "SPÖ Vorsitzbefragungs-Kabine",
 };
 
 const interFont = Inter({

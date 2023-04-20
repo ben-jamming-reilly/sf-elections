@@ -3,8 +3,8 @@ import { VoterQuestionnaire } from "./voter-questionnaire";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SPÖ Vorsitz Wahlkabine | Junge Generation Wien",
-  description: "SPÖ Wahlkabine",
+  title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
+  description: "SPÖ Vorsitzbefragungs-Kabine",
   openGraph: {
     images: [
       {

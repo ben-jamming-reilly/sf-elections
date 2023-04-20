@@ -75,7 +75,7 @@ export default async function CandidateComparison({
             title={`Vergleich zwischen ${randomCandidates
               .map((c) => c.name)
               .join(" und ")}`}
-            text="Schau dir die Antworten der Kandidat*innen an für die SPÖ Vorsitzwahl Kabine an."
+            text="Schau dir die Antworten der Kandidat*innen an für die SPÖ Vorsitzbefragung Kabine an."
           >
             Seite teilen
           </ShareButton>

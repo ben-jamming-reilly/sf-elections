@@ -2,7 +2,7 @@ import { ImageResponse } from "next/server";
 
 export const size = { width: 1200, height: 600 };
 export const alt =
-  "SPÖ Vorsitz Wahlkabine – Finde heraus welche:r Kandidat:in am besten zu dir passt!";
+  "SPÖ Vorsitzbefragungs-Kabine – Finde heraus welche:r Kandidat:in am besten zu dir passt!";
 export const contentType = "image/png";
 
 export default async function og() {
@@ -21,7 +21,7 @@ export default async function og() {
             background: "#e62937",
           }}
         >
-          SPÖ Vorsitz Wahlkabine
+          SPÖ Vorsitzbefragungs-Kabine
         </h1>
         <p tw="text-3xl">
           Finde heraus welche:r Kandidat:in am besten zu dir passt!

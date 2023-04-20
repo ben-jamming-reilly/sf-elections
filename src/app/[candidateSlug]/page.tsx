@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   }
 
   return {
-    title: `${candidate.name} | SPÖ Vorsitzwahl-Kabine`,
-    description: `Wahlkabine Antworten von ${candidate.name}`,
+    title: `${candidate.name} | SPÖ Vorsitzbefragungs-Kabine`,
+    description: `Vorsitzbefragungs-Kabine Antworten von ${candidate.name}`,
   };
 }
 
@@ -53,7 +53,9 @@ export default async function CandidateProfile({
           <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
             <BackButton href={`/`}>Zur Startseite</BackButton>
 
-            <ShareButton title={`Wahlkabinen Antworten von ${candidate.name}`}>
+            <ShareButton
+              title={`Vorsitzbefragungs-Kabinen Antworten von ${candidate.name}`}
+            >
               Teilen
             </ShareButton>
           </div>

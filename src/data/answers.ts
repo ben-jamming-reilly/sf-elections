@@ -8,31 +8,31 @@ export const getScaleOptionTendency = (option: ScaleOptionValueType) => {
 
 export const options = [
   {
-    label: "garnicht zu",
-    value: -2,
-  },
-  {
-    label: "eher nicht zu",
-    value: -1,
+    label: "voll zu",
+    value: 2,
   },
   {
     label: "eher zu",
     value: 1,
   },
   {
-    label: "voll zu",
-    value: 2,
+    label: "eher nicht zu",
+    value: -1,
+  },
+  {
+    label: "gar nicht zu",
+    value: -2,
   },
 ] as const;
 
 export const yesNoOptions = [
   {
-    label: "Nein",
-    value: -3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
-  },
-  {
     label: "Ja",
     value: 3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
+  },
+  {
+    label: "Nein",
+    value: -3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
 ] as const;
 
@@ -44,20 +44,20 @@ export const getWahlrechtOptionTendency = (option: WahlrechtValueType) => {
 
 export const wahlrechtOptions = [
   {
-    label: "Nein nie",
-    value: -10, // Settings a different value to be able to differnentiate. Can normalise afterwards.
-  },
-  {
-    label: "ja nach 10 Jahren Hauptwohnsitz",
-    value: -9,
+    label: "ja sofort",
+    value: -7,
   },
   {
     label: "ja nach 5 Jahren Hauptwohnsitz",
     value: -8,
   },
   {
-    label: "ja sofort",
-    value: -7,
+    label: "ja nach 10 Jahren Hauptwohnsitz",
+    value: -9,
+  },
+  {
+    label: "Nein nie",
+    value: -10, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
 ] as const;
 
@@ -98,20 +98,20 @@ export type WeightingValueType = typeof weightings[number]["value"];
 
 export const weightings = [
   {
-    label: "garnicht wichtig",
-    value: 0,
-  },
-  {
-    label: "eher nicht wichtig",
-    value: 1,
+    label: "sehr wichtig",
+    value: 3,
   },
   {
     label: "eher wichtig",
     value: 2,
   },
   {
-    label: "sehr wichtig",
-    value: 3,
+    label: "eher nicht wichtig",
+    value: 1,
+  },
+  {
+    label: "gar nicht wichtig",
+    value: 0,
   },
 ] as const;
 

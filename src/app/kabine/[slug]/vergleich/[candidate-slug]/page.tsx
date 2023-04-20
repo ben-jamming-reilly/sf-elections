@@ -57,9 +57,7 @@ export default async function WahlkabineResultCandidate({
   return (
     <div>
       <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
-        <BackButton href={`/wahlkabine/${params.slug}`}>
-          Zur Übersicht
-        </BackButton>
+        <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
         <ShareButton
           title={`Schau wie gut ${candidateWithScore.name} zu mir passt!`}
         >

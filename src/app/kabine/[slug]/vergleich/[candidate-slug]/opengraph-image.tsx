@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/server";
 import { WahlkabineResultCandidate } from "./page";
-import { getVoterViaHash } from "~/app/wahlkabine/get-voter-via-hash";
+import { getVoterViaHash } from "~/app/kabine/get-voter-via-hash";
 import { getCandidateWithQuestions } from "./get-candidate-with-question";
 import { notFound } from "next/navigation";
 import { rateCandidate } from "../../rate-candidates";

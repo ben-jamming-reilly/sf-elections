@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Datenschutz | SPÖ Vorsitz Wahlkabine",
-  description: "SPÖ Wahlkabine",
+  title: "Datenschutz | SPÖ Vorsitzbefragungs-Kabine",
+  description: "SPÖ Vorsitzbefragungs-Kabine",
 };
 
 export default function Datenschutz() {
