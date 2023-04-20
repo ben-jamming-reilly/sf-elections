@@ -176,18 +176,22 @@ export const VoterQuestionnaire = ({
         <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
           Wahlkabine Information
         </h1>
-        <p className="max-w-[50ch] mx-auto">
-          Diese Wahlkabine dient der demokratischen Meinungsbildung in der SPÖ.
-          <br />
-          Wir sammeln deine Daten nicht.
-          <br />
-          Niemand wird deine politischen Ansichten bzw. dein Ergebnis zu sehen
-          bekommen. <br />
-          Niemand wird deine Eingabe mit dir verknüpfen können.
-          <br />
-          Du bist anonym.
-          <br />
-          <br />
+        <p className="max-w-[50ch] mx-auto text-lg">
+          <ul className="list-disc ml-4 mb-3">
+            <li>
+              Diese Wahlkabine dient der demokratischen Meinungsbildung in der
+              SPÖ.
+            </li>
+            <li>
+              Wir erfassen <strong>keine</strong> personenbezogenen Daten.
+            </li>
+            <li>
+              Niemand wird deine politischen Ansichten bzw. dein Ergebnis zu
+              sehen bekommen.
+            </li>
+            <li>Niemand wird deine Eingabe mit dir verknüpfen können.</li>
+            <li>Du bist anonym.</li>
+          </ul>
           Für mehre Informationen kannst du die{" "}
           <Link
             className="text-brand underline-offset-2 hover:underline"
@@ -241,26 +245,29 @@ export const VoterQuestionnaire = ({
           });
         }}
       >
-        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
+        <h1 className="text-4xl my-5 text-center border-b-2 border-gray-800 dark:border-white w-full">
           Anonyme Informationen für die Statistik
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mx-auto">
           <label htmlFor="age" className="flex-1 flex flex-col gap-1">
-            <span className="underline">Alter:</span>
+            <span className="underline underline-offset-2 text-lg">Alter:</span>
             <input
               min={6}
               max={120}
               step={1}
               type="number"
               name="age"
-              className="border-brand border outline-brand px-2 py-1"
+              placeholder="Dein Alter"
+              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-2"
             />
           </label>
           <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
-            <span className="underline">Geschlecht:</span>
+            <span className="underline underline-offset-2 text-lg">
+              Geschlecht:
+            </span>
             <select
               name="gender"
-              className="border-brand border outline-brand px-2 py-1"
+              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -269,10 +276,12 @@ export const VoterQuestionnaire = ({
             </select>
           </label>
           <label htmlFor="state" className="flex-1 flex flex-col gap-1">
-            <span className="underline">Bundesland:</span>
+            <span className="underline underline-offset-2 text-lg">
+              Bundesland:
+            </span>
             <select
               name="state"
-              className="border-brand border outline-brand px-2 py-1"
+              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -287,10 +296,12 @@ export const VoterQuestionnaire = ({
             </select>
           </label>
           <label htmlFor="partyMember" className="flex-1 flex flex-col gap-1">
-            <span className="underline">SPÖ Parteimitglied:</span>
+            <span className="underline underline-offset-2 text-lg">
+              SPÖ Parteimitglied:
+            </span>
             <select
               name="partyMember"
-              className="border-brand border outline-brand px-2 py-1"
+              className="text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="no">Ich bin kein Parteimitglied</option>
