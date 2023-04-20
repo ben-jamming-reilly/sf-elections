@@ -41,7 +41,8 @@ export const rateCandidate = (
     getAnsweredQuestionsLength(voterAnswers, candidate.answers) * 1.15;
 
   const score = calculateScore(voterAnswers, candidate.answers);
-  const scorePercentageRaw = (score / maxScore) * 100;
+  console.log({ score, maxScore });
+  const scorePercentageRaw = maxScore !== 0 ? (score / maxScore) * 100 : 0;
   const scorePercentage = Math.round(scorePercentageRaw);
 
   return {

@@ -13,6 +13,15 @@ export interface QuestionnaireState {
   isSaving: boolean;
   activeIndex: number;
   slug?: string;
+  dataForStats: {
+    age?: number | null;
+    gender?: string | null;
+    state?: string | null;
+    isPartyMember?: boolean | null;
+  };
+  dataForStatsAnswered: () => boolean;
+  hasAcceptedTos: boolean;
+  acceptTos: () => void;
   setQuestions: (questions: VoterAnsweredQuestion[]) => void;
   updateQuestion: (
     questionId: number,
@@ -28,6 +37,7 @@ export interface QuestionnaireState {
   skip: (questionId: number) => void;
   save: () => void;
   reset: () => void;
+  setDataForStats: (data: Partial<QuestionnaireState["dataForStats"]>) => void;
 }
 
 export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
@@ -46,6 +56,36 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         });
       },
       activeIndex: 0,
+      hasAcceptedTos: false,
+      acceptTos: () => {
+        set((state) => {
+          return {
+            hasAcceptedTos: true,
+          };
+        });
+      },
+      dataForStats: {
+        age: undefined,
+        state: undefined,
+        gender: undefined,
+        isPartyMember: undefined,
+      },
+      dataForStatsAnswered: () => {
+        console.log(get().dataForStats);
+        return Object.values(get().dataForStats).every(
+          (v) => typeof v !== "undefined"
+        );
+      },
+      setDataForStats: (data: Partial<QuestionnaireState["dataForStats"]>) => {
+        set((state) => {
+          return {
+            dataForStats: {
+              ...state.dataForStats,
+              ...data,
+            },
+          };
+        });
+      },
       setActiveIndex: (index: number) => {
         set((state) => {
           return { activeIndex: index };
@@ -113,14 +153,16 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(
-            get().questions.map((q) => ({
+          body: JSON.stringify({
+            questionsWithAnswers: get().questions.map((q) => ({
               id: q.id,
               option: q.option,
               weighting: q.weighting,
               skipped: q.skipped,
-            }))
-          ),
+            })),
+            dataForStats: get().dataForStats,
+            hasAcceptedTos: get().hasAcceptedTos,
+          }),
         })
           .then((res) => res.json())
           .then((res) => {
@@ -144,6 +186,13 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       reset: () => {
         set((state) => {
           return {
+            dataForStats: {
+              age: undefined,
+              state: undefined,
+              gender: undefined,
+              isPartyMember: undefined,
+            },
+            hasAcceptedTos: false,
             questions: [],
             activeIndex: 0,
             slug: undefined,

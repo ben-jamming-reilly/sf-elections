@@ -23,6 +23,11 @@ model Candidate {
 model Voter {
   id          Int      @id @default(autoincrement())
   hash        String   @unique
+  age Int?
+  gender String?
+  state String?
+  isPartyMember Boolean?
+  hasAcceptedTos Boolean?
   answers   VoterQuestionAnswer[]
   candidateMatches VoterCandidateMatch[]
 }

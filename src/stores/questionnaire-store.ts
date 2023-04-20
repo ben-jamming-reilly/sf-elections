@@ -30,6 +30,13 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
     questions: [],
     isSaving: false,
     synced: true,
+    dataForStats: {
+      acceptedTos: false,
+      age: null,
+      state: null,
+      gender: null,
+      isPartyMember: null,
+    },
     setQuestions: (questions: AnsweredQuestion[]) => {
       set((state) => {
         return {
@@ -100,7 +107,7 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
         ? `/api/candidate-submit/${candidateHash}`
         : "/api/voter-submit";
 
-        if (get().synced) return;
+      if (get().synced) return;
 
       set((state) => {
         return {

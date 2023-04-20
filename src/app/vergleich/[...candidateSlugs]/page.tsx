@@ -122,56 +122,89 @@ export default async function CandidateComparison({
 
         <section>
           <ul className="flex flex-col gap-16 py-10">
-            {candidates[0]?.answers.map((answer, index) => (
-              <li key={answer.id} className="py-5">
-                {answer.question.category && (
-                  <QuestionCategoryLabel category={answer.question.category} />
-                )}
-                <div className="text-lg font-semibold">Frage {index + 1}:</div>
-                <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto">
-                  {answer.question.title}
-                </h2>
+            {candidates[0]?.answers
+              .sort((a, b) => a.question.order - b.question.order)
+              .map((answer, index) => (
+                <li key={answer.id} className="py-5">
+                  {answer.question.category && (
+                    <QuestionCategoryLabel
+                      category={answer.question.category}
+                    />
+                  )}
+                  <div className="text-lg font-semibold">
+                    Frage {index + 1}:
+                  </div>
+                  <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto">
+                    {answer.question.title}
+                  </h2>
 
-                <ul className="grid grid-cols-1 py-5  gap-5">
-                  {randomCandidates.map((candidate) => (
-                    <li
-                      className="flex-1 space-y-4"
-                      key={`candidate-details-${answer.questionId}-${candidate.id}`}
-                    >
-                      <div className="text-center flex flex-row items-center font-semibold py-2 gap-3 justify-center">
-                        <Image
-                          src={`/${candidate.profileImg}`}
-                          alt={`Profilebild von ${candidate.name}`}
-                          width={35}
-                          height={35}
-                          className="rounded-full"
-                        />
-                        {candidate.name}
-                      </div>
-                      {candidate.answers[index].option !== null &&
-                      candidate.answers[index].weighting !== null ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <OptionResult
-                            value={candidate.answers[index].option!}
-                            type={candidate.answers[index].question.type}
+                  <ul className="grid grid-cols-1 py-5  gap-5">
+                    {randomCandidates.map((candidate) => (
+                      <li
+                        className="flex-1 space-y-4"
+                        key={`candidate-details-${answer.questionId}-${candidate.id}`}
+                      >
+                        <Link
+                          href={`/${candidate.slug}`}
+                          className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                        >
+                          <Image
+                            src={`/${candidate.profileImg}`}
+                            alt={`Profilebild von ${candidate.name}`}
+                            width={35}
+                            height={35}
+                            className="rounded-full"
                           />
-                          <WeightingResult
-                            value={candidate.answers[index].weighting!}
+                          {candidate.name}
+                        </Link>
+                        {candidate.answers.sort(
+                          (a, b) => a.question.order - b.question.order
+                        )[index].option !== null &&
+                        candidate.answers.sort(
+                          (a, b) => a.question.order - b.question.order
+                        )[index].weighting !== null ? (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <OptionResult
+                              value={
+                                candidate.answers.sort(
+                                  (a, b) => a.question.order - b.question.order
+                                )[index].option!
+                              }
+                              type={
+                                candidate.answers.sort(
+                                  (a, b) => a.question.order - b.question.order
+                                )[index].question.type
+                              }
+                            />
+                            <WeightingResult
+                              value={
+                                candidate.answers.sort(
+                                  (a, b) => a.question.order - b.question.order
+                                )[index].weighting!
+                              }
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-full flex items-center justify-center">
+                            <QuestionUnansweredResult />
+                          </div>
+                        )}
+                        {candidate.answers.sort(
+                          (a, b) => a.question.order - b.question.order
+                        )[index].text && (
+                          <QuestionInfo
+                            text={
+                              candidate.answers.sort(
+                                (a, b) => a.question.order - b.question.order
+                              )[index].text
+                            }
                           />
-                        </div>
-                      ) : (
-                        <div className="w-full flex items-center justify-center">
-                          <QuestionUnansweredResult />
-                        </div>
-                      )}
-                      {candidate.answers[index].text && (
-                        <QuestionInfo text={candidate.answers[index].text} />
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
           </ul>
         </section>
       </div>

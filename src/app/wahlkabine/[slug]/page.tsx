@@ -59,7 +59,7 @@ export default async function WahlkabineResult({
       (a, b) => a.question.order - b.question.order
     ),
     candidates
-  );
+  ).sort((a, b) => b.scorePercentageRaw - a.scorePercentageRaw);
 
   return (
     <div>
@@ -79,7 +79,7 @@ export default async function WahlkabineResult({
           {candidatesWithScore.map((candidate, index) => (
             <li
               key={candidate.id}
-              className="md:flex-1 min-w-[250px] max-w-[350px] snap-start rounded-md relative flex flex-col"
+              className="md:flex-1 min-w-[250px] max-w-[375px] snap-start rounded-md relative flex flex-col"
             >
               <span className="absolute z-30 rounded-full w-14 h-14 top-2 left-2 bg-brand text-white tabular-nums inline-flex justify-center items-center">
                 {candidate.scorePercentage}%
@@ -94,10 +94,10 @@ export default async function WahlkabineResult({
                     alt={`Profilebild von ${candidate.name}`}
                     fill
                     priority
-                    className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
+                    className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow"
                   />
                 </Link>
-                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
+                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-1 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
                   {index + 1}. {candidate.name}
                 </h2>
                 <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start rounded-br-md rounded-bl-md">
@@ -115,11 +115,10 @@ export default async function WahlkabineResult({
         </ul>
       </section>
 
-      <h2 className="text-3xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
-        Fragen und Antworten
-      </h2>
-
       <section>
+        <h2 className="text-3xl pt-10 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+          Fragen und Antworten
+        </h2>
         <ul className="flex flex-col gap-16 py-10">
           {voterWithAnswers.answers
             .sort((a, b) => a.question.order - b.question.order)
@@ -173,15 +172,15 @@ export default async function WahlkabineResult({
                             />
                             {candidate.name}
                           </Link>
-                          {candidate.answers[index].option !== null &&
-                          candidate.answers[index].weighting !== null ? (
+                          {candidate.answers[index]?.option !== null &&
+                          candidate.answers[index]?.weighting !== null ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <OptionResult
-                                value={candidate.answers[index].option!}
-                                type={candidate.answers[index].question.type}
+                                value={candidate.answers[index]?.option!}
+                                type={candidate.answers[index]?.question.type}
                               />
                               <WeightingResult
-                                value={candidate.answers[index].weighting!}
+                                value={candidate.answers[index]?.weighting!}
                               />
                             </div>
                           ) : (
@@ -189,9 +188,9 @@ export default async function WahlkabineResult({
                               <QuestionUnansweredResult />
                             </div>
                           )}
-                          {candidate.answers[index].text && (
+                          {candidate.answers[index]?.text && (
                             <QuestionInfo
-                              text={candidate.answers[index].text}
+                              text={candidate.answers[index]?.text}
                             />
                           )}
                         </li>

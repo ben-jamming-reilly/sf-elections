@@ -3,21 +3,18 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
 import { Pagination } from "./pagination";
-import {
-  categoryHexForLabel,
-  getOptionsBasedOnType,
-  weightings,
-} from "~/data/answers";
+import { getOptionsBasedOnType, weightings } from "~/data/answers";
 import {
   VoterAnsweredQuestion,
   useVoterQuestionnaireStore,
 } from "~/stores/questionnaire-store-voter";
 import { QuestionCategoryLabel } from "../ui/question-category-label";
 import { useHasHydrated } from "~/hooks/useHasHydrated";
+import Link from "next/link";
 
 const variants = {
   enter: (direction: number) => {
@@ -65,6 +62,11 @@ export const VoterQuestionnaire = ({
     save,
     slug,
     isSaving,
+    dataForStats,
+    setDataForStats,
+    hasAcceptedTos,
+    acceptTos,
+    dataForStatsAnswered,
   ] = useVoterQuestionnaireStore((s) => [
     s.questions,
     s.setQuestions,
@@ -76,6 +78,11 @@ export const VoterQuestionnaire = ({
     s.save,
     s.slug,
     s.isSaving,
+    s.dataForStats,
+    s.setDataForStats,
+    s.hasAcceptedTos,
+    s.acceptTos,
+    s.dataForStatsAnswered,
   ]);
   const prevIndex = usePrevious(activeIndex);
   const questionRef = useRef<HTMLDivElement>(null);
@@ -152,7 +159,9 @@ export const VoterQuestionnaire = ({
           onClick={handleNext}
           className={clsx(
             "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:border-gray-800 disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:bg-surface-300 rounded-md",
-            !hasNext && allQuestionsAnswered ? "!bg-brand" : ""
+            !hasNext && allQuestionsAnswered
+              ? "!bg-brand !border-brand !text-white hover:opacity-90"
+              : ""
           )}
         >
           {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
@@ -161,9 +170,148 @@ export const VoterQuestionnaire = ({
     </div>
   );
 
+  if (hasHydrated && !hasAcceptedTos) {
+    return (
+      <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
+          Wahlkabine Information
+        </h1>
+        <p className="max-w-[50ch] mx-auto">
+          Diese Wahlkabine dient der demokratischen Meinungsbildung in der SPÖ.
+          <br />
+          Wir sammeln deine Daten nicht.
+          <br />
+          Niemand wird deine politischen Ansichten bzw. dein Ergebnis zu sehen
+          bekommen. <br />
+          Niemand wird deine Eingabe mit dir verknüpfen können.
+          <br />
+          Du bist anonym.
+          <br />
+          <br />
+          Für mehre Informationen kannst du die{" "}
+          <Link
+            className="text-brand underline-offset-2 hover:underline"
+            href="/datenschutz"
+          >
+            Datenschutzerklärung hier lesen
+          </Link>
+          .
+          <br />
+          <br />
+          <button
+            onClick={() => {
+              acceptTos();
+            }}
+            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+          >
+            Ich habe die Information gelesen und verstanden.
+          </button>
+        </p>
+      </div>
+    );
+  }
+
+  if (!hasHydrated) {
+    return (
+      <div className="w-full h-[500px]">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (hasHydrated && !dataForStatsAnswered()) {
+    return (
+      <form
+        className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.target as HTMLFormElement);
+          const data = Object.fromEntries(formData);
+          console.log(data);
+
+          const EMPTY_ANSWER = "no_answer";
+
+          setDataForStats({
+            age: data.age === "" ? null : parseInt(data.age as string),
+            gender:
+              data.gender === EMPTY_ANSWER ? null : (data.gender as string),
+            state: data.state === EMPTY_ANSWER ? null : (data.state as string),
+            isPartyMember:
+              data.partyMember === EMPTY_ANSWER ? null : data.party === "yes",
+          });
+        }}
+      >
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
+          Anonyme Informationen für die Statistik
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+          <label htmlFor="age" className="flex-1 flex flex-col gap-1">
+            <span className="underline">Alter:</span>
+            <input
+              min={6}
+              max={120}
+              step={1}
+              type="number"
+              name="age"
+              className="border-brand border outline-brand px-2 py-1"
+            />
+          </label>
+          <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
+            <span className="underline">Geschlecht:</span>
+            <select
+              name="gender"
+              className="border-brand border outline-brand px-2 py-1"
+            >
+              <option value="no_answer">Bitte auswählen</option>
+              <option value="w">Weiblich</option>
+              <option value="x">Diverse</option>
+              <option value="m">Männlich</option>
+            </select>
+          </label>
+          <label htmlFor="state" className="flex-1 flex flex-col gap-1">
+            <span className="underline">Bundesland:</span>
+            <select
+              name="state"
+              className="border-brand border outline-brand px-2 py-1"
+            >
+              <option value="no_answer">Bitte auswählen</option>
+              <option value="Burgenland">Burgenland</option>
+              <option value="Kärnten">Kärnten</option>
+              <option value="Niederösterreich">Niederösterreich</option>
+              <option value="Oberösterreich">Oberösterreich</option>
+              <option value="Salzburg">Salzburg</option>
+              <option value="Steiermark">Steiermark</option>
+              <option value="Tirol">Tirol</option>
+              <option value="Vorarlberg">Vorarlberg</option>
+              <option value="Wien">Wien</option>
+            </select>
+          </label>
+          <label htmlFor="partyMember" className="flex-1 flex flex-col gap-1">
+            <span className="underline">SPÖ Parteimitglied:</span>
+            <select
+              name="partyMember"
+              className="border-brand border outline-brand px-2 py-1"
+            >
+              <option value="no_answer">Bitte auswählen</option>
+              <option value="no">Ich bin kein Parteimitglied</option>
+              <option value="yes">Ich bin Parteimitglied</option>
+            </select>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+        >
+          Abschicken
+        </button>
+      </form>
+    );
+  }
+
   return (
     <>
-      {hasHydrated && activeQuestion ? (
+      {activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
             className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
@@ -321,9 +469,7 @@ export const VoterQuestionnaire = ({
             />
           </motion.article>
         </AnimatePresence>
-      ) : (
-        <Loading />
-      )}
+      ) : null}
     </>
   );
 };

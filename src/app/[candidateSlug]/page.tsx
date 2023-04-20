@@ -116,35 +116,37 @@ export default async function CandidateProfile({
           </div>
 
           <ul className="flex flex-col gap-16 py-10">
-            {candidate.answers.map((answer) => (
-              <li key={answer.id}>
-                <QuestionCategoryLabel category={answer.question.category} />
-                <div className="text-lg font-semibold">
-                  Frage {answer.questionId}:
-                </div>
-                <h2 className="text-2xl mb-5 hyphens-auto">
-                  {answer.question.title}
-                </h2>
-                {answer.option !== null && answer.weighting !== null ? (
-                  <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
-                    <OptionResult
-                      value={answer.option}
-                      type={answer.question.type}
-                    />
-                    <WeightingResult value={answer.weighting!} />
+            {candidate.answers
+              .sort((a, b) => a.question.order - b.question.order)
+              .map((answer, index) => (
+                <li key={answer.id}>
+                  <QuestionCategoryLabel category={answer.question.category} />
+                  <div className="text-lg font-semibold">
+                    Frage {index + 1}:
                   </div>
-                ) : (
-                  <div className="w-full">
-                    <QuestionUnansweredResult />
-                  </div>
-                )}
-                {answer.text ? (
-                  <div className=" my-3">
-                    <QuestionInfo open text={answer.text} />
-                  </div>
-                ) : null}
-              </li>
-            ))}
+                  <h2 className="text-2xl mb-5 hyphens-auto">
+                    {answer.question.title}
+                  </h2>
+                  {answer.option !== null && answer.weighting !== null ? (
+                    <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
+                      <OptionResult
+                        value={answer.option}
+                        type={answer.question.type}
+                      />
+                      <WeightingResult value={answer.weighting!} />
+                    </div>
+                  ) : (
+                    <div className="w-full">
+                      <QuestionUnansweredResult />
+                    </div>
+                  )}
+                  {answer.text ? (
+                    <div className=" my-3">
+                      <QuestionInfo open text={answer.text} />
+                    </div>
+                  ) : null}
+                </li>
+              ))}
           </ul>
         </div>
       ) : (
