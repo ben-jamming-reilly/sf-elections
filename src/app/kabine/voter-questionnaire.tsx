@@ -96,7 +96,7 @@ export const VoterQuestionnaire = ({
   useLayoutEffect(() => {
     if (!navigator.userAgent.match(/Android/i)) {
       questionRef.current?.scrollIntoView({
-        behavior: "auto",
+        behavior: "smooth",
         block: "center",
       });
     }
@@ -106,7 +106,9 @@ export const VoterQuestionnaire = ({
   // Re-add when candidates are done
   useEffect(() => {
     if (slug) {
-      router.push(`/kabine/${slug}`);
+      router.push(`/kabine/${slug}`, {
+        forceOptimisticNavigation: true,
+      });
     }
   }, [slug]);
 
@@ -289,6 +291,17 @@ export const VoterQuestionnaire = ({
     );
   }
 
+  if (hasHydrated && (isSaving || slug)) {
+    return (
+      <div className="flex flex-col fixed inset-0 h-screen justify-center items-center max-w-[800px] mx-auto">
+        <p className="text-3xl sm:text-4xl md:text-5xl text-center">
+          Du bist <span className="text-brand font-bold">Team SPÖ! ❤️</span>
+        </p>
+        <p className="md:text-xl">Ergebnis wird berechnet...</p>
+      </div>
+    );
+  }
+
   console.log(activeQuestion);
 
   return (
@@ -324,7 +337,7 @@ export const VoterQuestionnaire = ({
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
               <QuestionCategoryLabel category={activeQuestion.category} />
-              <div className="text-2xl md:mb-3 md:min-h-[5em]">
+              <div className="text-2xl md:mb-3 md:min-h-[3em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
