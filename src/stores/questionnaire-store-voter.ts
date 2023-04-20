@@ -56,6 +56,13 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         });
       },
       activeIndex: 0,
+      setActiveIndex: (index: number) => {
+        set((state) => {
+          return {
+            activeIndex: index,
+          };
+        });
+      },
       hasAcceptedTos: false,
       acceptTos: () => {
         set((state) => {
@@ -71,7 +78,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         isPartyMember: undefined,
       },
       dataForStatsAnswered: () => {
-        console.log(get().dataForStats);
         return Object.values(get().dataForStats).every(
           (v) => typeof v !== "undefined"
         );
@@ -84,11 +90,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
               ...data,
             },
           };
-        });
-      },
-      setActiveIndex: (index: number) => {
-        set((state) => {
-          return { activeIndex: index };
         });
       },
       slug: undefined,

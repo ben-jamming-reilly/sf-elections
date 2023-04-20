@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
 import { Pagination } from "./pagination";
@@ -93,8 +93,13 @@ export const VoterQuestionnaire = ({
   }, [questions]);
 
   // Scroll question into view
-  useEffect(() => {
-    questionRef?.current?.scrollIntoView({ behavior: "smooth" });
+  useLayoutEffect(() => {
+    if (!navigator.userAgent.match(/Android/i)) {
+      questionRef.current?.scrollIntoView({
+        behavior: "auto",
+        block: "center",
+      });
+    }
   }, [activeIndex]);
 
   // Redirect once hash is set
@@ -125,6 +130,7 @@ export const VoterQuestionnaire = ({
   };
 
   const handleNext = () => {
+    console.log("handleNext", { hasNext, activeIndex });
     if (hasNext) {
       setActiveIndex(activeIndex + 1);
     } else if (allQuestionsAnswered) {
@@ -132,198 +138,158 @@ export const VoterQuestionnaire = ({
     }
   };
 
-  const PrevAndNext = (
-    <div className="flex flex-row gap-2 justify-between items-center w-full">
-      <span>
-        <button
-          onClick={handlePrev}
-          disabled={!hasPrevious}
-          className={clsx(
-            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:border-gray-800 disabled:hover:bg-surface-300 rounded-md",
-            !hasPrevious && "invisible"
-          )}
-        >
-          Zurück
-        </button>
-      </span>
-      <span className="text-lg">
-        {activeIndex + 1} / {questionsWithAnswers.length}
-      </span>
-      <span>
-        <button
-          disabled={
-            hasNext
-              ? !activeQuestion || !isQuestionAnswered(activeQuestion)
-              : !allQuestionsAnswered
-          }
-          onClick={handleNext}
-          className={clsx(
-            "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:border-gray-800 disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:bg-surface-300 rounded-md",
-            !hasNext && allQuestionsAnswered
-              ? "!bg-brand !border-brand !text-white hover:opacity-90"
-              : ""
-          )}
-        >
-          {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
-        </button>
-      </span>
-    </div>
-  );
+  if (!hasHydrated) {
+    return (
+      <div className="w-full h-[500px]">
+        <Loading />
+      </div>
+    );
+  }
 
-    if (!hasHydrated) {
-      return (
-        <div className="w-full h-[500px]">
-          <Loading />
-        </div>
-      );
-    }
-
-    if (hasHydrated && !hasAcceptedTos) {
-      return (
-        <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
-          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
-            Vorsitzbefragungs-Kabine Information
-          </h1>
-          <p className="max-w-[50ch] mx-auto text-lg">
-            <ul className="list-disc ml-4 mb-3">
-              <li>
-                Diese Vorsitzbefragungs-Kabine dient der demokratischen
-                Meinungsbildung in der SPÖ.
-              </li>
-              <li>
-                Wir erfassen <strong>keine</strong> personenbezogenen Daten.
-              </li>
-              <li>
-                Niemand wird deine politischen Ansichten bzw. dein Ergebnis zu
-                sehen bekommen.
-              </li>
-              <li>Niemand wird deine Eingabe mit dir verknüpfen können.</li>
-              <li>Du bist anonym.</li>
-            </ul>
-            Für mehr Informationen kannst du die{" "}
-            <Link
-              className="text-brand underline-offset-2 hover:underline"
-              href="/datenschutz"
-            >
-              Datenschutzerklärung hier lesen
-            </Link>
-            .
-            <br />
-            <br />
-            <button
-              onClick={() => {
-                acceptTos();
-              }}
-              className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
-            >
-              Ich habe die Information gelesen und verstanden.
-            </button>
-          </p>
-        </div>
-      );
-    }
-
-    if (hasHydrated && !dataForStatsAnswered()) {
-      return (
-        <form
-          className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target as HTMLFormElement);
-            const data = Object.fromEntries(formData);
-            console.log(data);
-
-            const EMPTY_ANSWER = "no_answer";
-
-            setDataForStats({
-              age: data.age === "" ? null : parseInt(data.age as string),
-              gender:
-                data.gender === EMPTY_ANSWER ? null : (data.gender as string),
-              state:
-                data.state === EMPTY_ANSWER ? null : (data.state as string),
-              isPartyMember:
-                data.partyMember === EMPTY_ANSWER
-                  ? null
-                  : data.partyMember === "yes",
-            });
-          }}
-        >
-          <h1 className="text-4xl my-5 text-center border-b-2 border-gray-800 dark:border-white w-full">
-            Anonyme Informationen für die Statistik
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mx-auto">
-            <label htmlFor="age" className="flex-1 flex flex-col gap-1">
-              <span className="underline underline-offset-2 text-lg">
-                Alter:
-              </span>
-              <input
-                min={6}
-                max={120}
-                step={1}
-                type="number"
-                name="age"
-                placeholder="Dein Alter"
-                className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-2"
-              />
-            </label>
-            <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
-              <span className="underline underline-offset-2 text-lg">
-                Geschlecht:
-              </span>
-              <select
-                name="gender"
-                className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
-              >
-                <option value="no_answer">Bitte auswählen</option>
-                <option value="w">Weiblich</option>
-                <option value="x">Diverse</option>
-                <option value="m">Männlich</option>
-              </select>
-            </label>
-            <label htmlFor="state" className="flex-1 flex flex-col gap-1">
-              <span className="underline underline-offset-2 text-lg">
-                Bundesland:
-              </span>
-              <select
-                name="state"
-                className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
-              >
-                <option value="no_answer">Bitte auswählen</option>
-                <option value="Burgenland">Burgenland</option>
-                <option value="Kärnten">Kärnten</option>
-                <option value="Niederösterreich">Niederösterreich</option>
-                <option value="Oberösterreich">Oberösterreich</option>
-                <option value="Salzburg">Salzburg</option>
-                <option value="Steiermark">Steiermark</option>
-                <option value="Tirol">Tirol</option>
-                <option value="Vorarlberg">Vorarlberg</option>
-                <option value="Wien">Wien</option>
-              </select>
-            </label>
-            <label htmlFor="partyMember" className="flex-1 flex flex-col gap-1">
-              <span className="underline underline-offset-2 text-lg">
-                SPÖ Parteimitglied:
-              </span>
-              <select
-                name="partyMember"
-                className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
-              >
-                <option value="no_answer">Bitte auswählen</option>
-                <option value="no">Ich bin kein Parteimitglied</option>
-                <option value="yes">Ich bin Parteimitglied</option>
-              </select>
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+  if (hasHydrated && !hasAcceptedTos) {
+    return (
+      <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
+          Vorsitzbefragungs-Kabine Information
+        </h1>
+        <p className="max-w-[50ch] mx-auto text-lg">
+          <ul className="list-disc ml-4 mb-3">
+            <li>
+              Diese Vorsitzbefragungs-Kabine dient der demokratischen
+              Meinungsbildung in der SPÖ.
+            </li>
+            <li>
+              Wir erfassen <strong>keine</strong> personenbezogenen Daten.
+            </li>
+            <li>
+              Niemand wird deine politischen Ansichten bzw. dein Ergebnis zu
+              sehen bekommen.
+            </li>
+            <li>Niemand wird deine Eingabe mit dir verknüpfen können.</li>
+            <li>Du bist anonym.</li>
+          </ul>
+          Für mehr Informationen kannst du die{" "}
+          <Link
+            className="text-brand underline-offset-2 hover:underline"
+            href="/datenschutz"
           >
-            Weiter
+            Datenschutzerklärung hier lesen
+          </Link>
+          .
+          <br />
+          <br />
+          <button
+            onClick={() => {
+              acceptTos();
+            }}
+            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+          >
+            Ich habe die Information gelesen und verstanden.
           </button>
-        </form>
-      );
-    }
+        </p>
+      </div>
+    );
+  }
+
+  if (hasHydrated && !dataForStatsAnswered()) {
+    return (
+      <form
+        className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData(e.target as HTMLFormElement);
+          const data = Object.fromEntries(formData);
+
+          const EMPTY_ANSWER = "no_answer";
+
+          setDataForStats({
+            age: data.age === "" ? null : parseInt(data.age as string),
+            gender:
+              data.gender === EMPTY_ANSWER ? null : (data.gender as string),
+            state: data.state === EMPTY_ANSWER ? null : (data.state as string),
+            isPartyMember:
+              data.partyMember === EMPTY_ANSWER
+                ? null
+                : data.partyMember === "yes",
+          });
+        }}
+      >
+        <h1 className="text-4xl my-5 text-center border-b-2 border-gray-800 dark:border-white w-full">
+          Anonyme Informationen für die Statistik
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mx-auto">
+          <label htmlFor="age" className="flex-1 flex flex-col gap-1">
+            <span className="underline underline-offset-2 text-lg">Alter:</span>
+            <input
+              min={6}
+              max={120}
+              step={1}
+              type="number"
+              name="age"
+              placeholder="Dein Alter"
+              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-2"
+            />
+          </label>
+          <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
+            <span className="underline underline-offset-2 text-lg">
+              Geschlecht:
+            </span>
+            <select
+              name="gender"
+              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+            >
+              <option value="no_answer">Bitte auswählen</option>
+              <option value="w">Weiblich</option>
+              <option value="x">Diverse</option>
+              <option value="m">Männlich</option>
+            </select>
+          </label>
+          <label htmlFor="state" className="flex-1 flex flex-col gap-1">
+            <span className="underline underline-offset-2 text-lg">
+              Bundesland:
+            </span>
+            <select
+              name="state"
+              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+            >
+              <option value="no_answer">Bitte auswählen</option>
+              <option value="Burgenland">Burgenland</option>
+              <option value="Kärnten">Kärnten</option>
+              <option value="Niederösterreich">Niederösterreich</option>
+              <option value="Oberösterreich">Oberösterreich</option>
+              <option value="Salzburg">Salzburg</option>
+              <option value="Steiermark">Steiermark</option>
+              <option value="Tirol">Tirol</option>
+              <option value="Vorarlberg">Vorarlberg</option>
+              <option value="Wien">Wien</option>
+            </select>
+          </label>
+          <label htmlFor="partyMember" className="flex-1 flex flex-col gap-1">
+            <span className="underline underline-offset-2 text-lg">
+              SPÖ Parteimitglied:
+            </span>
+            <select
+              name="partyMember"
+              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+            >
+              <option value="no_answer">Bitte auswählen</option>
+              <option value="no">Ich bin kein Parteimitglied</option>
+              <option value="yes">Ich bin Parteimitglied</option>
+            </select>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+        >
+          Weiter
+        </button>
+      </form>
+    );
+  }
+
+  console.log(activeQuestion);
 
   return (
     <>
@@ -333,6 +299,7 @@ export const VoterQuestionnaire = ({
             className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
             key={`question-${activeQuestion.id}`}
           >
+            {activeIndex}
             <div className="">
               <Pagination
                 activeQuestion={activeQuestion}
@@ -366,8 +333,6 @@ export const VoterQuestionnaire = ({
                 </h1>
               </div>
             </motion.header>
-
-            {/* <div className="hidden md:block">{PrevAndNext}</div> */}
 
             <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
               <div className="flex justify-center items-center">
@@ -418,14 +383,9 @@ export const VoterQuestionnaire = ({
                     >
                       <button
                         onClick={(e) => {
-                          e.preventDefault();
+                          console.log("clicked option", e);
 
-                          setOption(
-                            activeQuestion.id,
-                            activeQuestion.option === option.value
-                              ? null
-                              : option.value
-                          );
+                          setOption(activeQuestion.id, option.value);
                         }}
                         className={clsx(
                           "z-10 rounded-md transition-all notouch:hover:active:scale-95 dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full text-center py-4 focus-visible:bg-brand",
@@ -452,14 +412,8 @@ export const VoterQuestionnaire = ({
                     >
                       <button
                         onClick={(e) => {
-                          e.preventDefault();
-
-                          setWeighting(
-                            activeQuestion.id,
-                            activeQuestion.weighting === weighting.value
-                              ? null
-                              : weighting.value
-                          );
+                          console.log("cicked weighting", e);
+                          setWeighting(activeQuestion.id, weighting.value);
                         }}
                         className={clsx(
                           "z-20 rounded-md dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
@@ -475,7 +429,46 @@ export const VoterQuestionnaire = ({
               </div>
             </section>
 
-            {PrevAndNext}
+            <div className="flex flex-row gap-2 justify-between items-center w-full">
+              <span>
+                <button
+                  onClick={(e) => {
+                    handlePrev();
+                  }}
+                  disabled={!hasPrevious}
+                  className={clsx(
+                    "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:border-gray-800 disabled:hover:bg-surface-300 rounded-md",
+                    !hasPrevious && "invisible"
+                  )}
+                >
+                  Zurück
+                </button>
+              </span>
+              <span className="text-lg">
+                {activeIndex + 1} / {questionsWithAnswers.length}
+              </span>
+              <span>
+                <button
+                  disabled={
+                    hasNext
+                      ? !activeQuestion || !isQuestionAnswered(activeQuestion)
+                      : !allQuestionsAnswered
+                  }
+                  onClick={(e) => {
+                    console.log("Next!");
+                    handleNext();
+                  }}
+                  className={clsx(
+                    "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:border-gray-800 disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:bg-surface-300 rounded-md",
+                    !hasNext && allQuestionsAnswered
+                      ? "!bg-brand !border-brand !text-white hover:opacity-90"
+                      : ""
+                  )}
+                >
+                  {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
+                </button>
+              </span>
+            </div>
 
             <Pagination
               activeQuestion={activeQuestion}
