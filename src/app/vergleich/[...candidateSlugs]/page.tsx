@@ -9,6 +9,8 @@ import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
 import { Metadata } from "next";
 import { SecondaryLink } from "~/app/ui/secondary-link";
 import { BackButton } from "~/app/ui/back-button";
+import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
+import { QuestionInfo } from "~/app/ui/question-info";
 
 export const revalidate = 3600; // 1 hour
 
@@ -120,22 +122,20 @@ export default async function CandidateComparison({
 
         <section>
           <ul className="flex flex-col gap-16 py-10">
-            {candidates[0]?.answers.map((answer) => (
+            {candidates[0]?.answers.map((answer, index) => (
               <li key={answer.id} className="py-5">
                 {answer.question.category && (
                   <QuestionCategoryLabel category={answer.question.category} />
                 )}
-                <div className="text-lg font-semibold">
-                  Frage {answer.questionId}:
-                </div>
+                <div className="text-lg font-semibold">Frage {index + 1}:</div>
                 <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto">
                   {answer.question.title}
                 </h2>
 
-                <ul className="flex flex-col md:flex-row w-full gap-5 lg:gap-10">
-                  {randomCandidates.map((candidate, index) => (
+                <ul className="grid grid-cols-1 py-5  gap-5">
+                  {randomCandidates.map((candidate) => (
                     <li
-                      className="flex-1"
+                      className="flex-1 space-y-4"
                       key={`candidate-details-${answer.questionId}-${candidate.id}`}
                     >
                       <div className="text-center flex flex-row items-center font-semibold py-2 gap-3 justify-center">
@@ -148,15 +148,25 @@ export default async function CandidateComparison({
                         />
                         {candidate.name}
                       </div>
-                      <div className="grid grid-cols-1 grid-rows-2 gap-3">
-                        <OptionResult
-                          value={candidate.answers[index].option!}
-                          type={candidate.answers[index].question.type}
-                        />
-                        <WeightingResult
-                          value={candidate.answers[index].weighting!}
-                        />
-                      </div>
+                      {candidate.answers[index].option !== null &&
+                      candidate.answers[index].weighting !== null ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <OptionResult
+                            value={candidate.answers[index].option!}
+                            type={candidate.answers[index].question.type}
+                          />
+                          <WeightingResult
+                            value={candidate.answers[index].weighting!}
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full flex items-center justify-center">
+                          <QuestionUnansweredResult />
+                        </div>
+                      )}
+                      {candidate.answers[index].text && (
+                        <QuestionInfo text={candidate.answers[index].text} />
+                      )}
                     </li>
                   ))}
                 </ul>

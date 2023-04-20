@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { BackButton } from "../ui/back-button";
 import { getCandidates } from "../get-candidates";
 import { SecondaryLink } from "../ui/secondary-link";
+import { QuestionInfo } from "../ui/question-info";
 
 export const revalidate = 3600; // 1 hour
 
@@ -139,12 +140,7 @@ export default async function CandidateProfile({
                 )}
                 {answer.text ? (
                   <div className=" my-3">
-                    <h3 className="py-1 underline underline-offset-2">
-                      Zusätzliche Information:
-                    </h3>
-                    <p className="p-3 bg-neutral-200 rounded-sm dark:bg-surface-300 text-lg">
-                      {answer.text ? answer.text : "---"}
-                    </p>
+                    <QuestionInfo open text={answer.text} />
                   </div>
                 ) : null}
               </li>

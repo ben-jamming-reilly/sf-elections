@@ -11,6 +11,7 @@ import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
 import { rateCandidates } from "./rate-candidates";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import { BackButton } from "~/app/ui/back-button";
+import { QuestionInfo } from "~/app/ui/question-info";
 
 export type WahlkabineResultProps = {
   params: {
@@ -28,7 +29,9 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   const candidates = await getCandidatesWithQuestions();
 
   const candidatesWithScore = rateCandidates(
-    voterWithAnswers.answers,
+    voterWithAnswers.answers.sort(
+      (a, b) => a.question.order - b.question.order
+    ),
     candidates
   );
 
@@ -52,7 +55,9 @@ export default async function WahlkabineResult({
   const candidates = await getCandidatesWithQuestions();
 
   const candidatesWithScore = rateCandidates(
-    voterWithAnswers.answers,
+    voterWithAnswers.answers.sort(
+      (a, b) => a.question.order - b.question.order
+    ),
     candidates
   );
 
@@ -110,81 +115,92 @@ export default async function WahlkabineResult({
         </ul>
       </section>
 
+      <h2 className="text-3xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+        Fragen und Antworten
+      </h2>
+
       <section>
         <ul className="flex flex-col gap-16 py-10">
-          {voterWithAnswers.answers.map((answer, index) => (
-            <li key={answer.id} className="">
-              {answer.question.category && (
-                <QuestionCategoryLabel category={answer.question.category} />
-              )}
-              <div className="text-lg mt-3">Frage {answer.questionId}:</div>
-              <h2 className="text-2xl font-brand mb-5 hyphens-auto">
-                {answer.question.title}
-              </h2>
-              {answer.option !== null && answer.weighting !== null ? (
-                <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
-                  <OptionResult
-                    value={answer.option}
-                    type={answer.question.type}
-                  />
-                  <WeightingResult value={answer.weighting!} />
-                </div>
-              ) : (
-                <div className="w-full">
-                  <QuestionUnansweredResult />
-                </div>
-              )}
+          {voterWithAnswers.answers
+            .sort((a, b) => a.question.order - b.question.order)
+            .map((answer, index) => (
+              <li key={answer.id} className="">
+                {answer.question.category && (
+                  <QuestionCategoryLabel category={answer.question.category} />
+                )}
+                <div className="text-lg mt-3">Frage {index + 1}:</div>
+                <h2 className="text-2xl font-brand mb-5 hyphens-auto">
+                  {answer.question.title}
+                </h2>
+                {answer.option !== null && answer.weighting !== null ? (
+                  <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
+                    <OptionResult
+                      value={answer.option}
+                      type={answer.question.type}
+                    />
+                    <WeightingResult value={answer.weighting!} />
+                  </div>
+                ) : (
+                  <div className="w-full">
+                    <QuestionUnansweredResult />
+                  </div>
+                )}
 
-              <div className="mt-5">
-                <details
-                  key={`candidate-details-${answer.questionId}`}
-                  className=""
-                >
-                  <summary className="cursor-pointer font-semibold py-2 border-gray-800">
-                    Antworten der Kandidat:innen:
-                  </summary>
-                  <ul className="grid grid-cols-1 py-5 sm:grid-cols-2 md:grid-cols-3 gap-5">
-                    {candidatesWithScore.map((candidate) => (
-                      <li
-                        key={`candidate-details-${answer.questionId}-${candidate.id}`}
-                        className="dark:bg-surface-200 p-3 rounded-md"
-                      >
-                        <Link
-                          href={`/${candidate.slug}`}
-                          className="text-center flex flex-row items-center font-semibold pb-3 gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                <div className="mt-5">
+                  <details
+                    key={`candidate-details-${answer.questionId}`}
+                    className=""
+                  >
+                    <summary className="cursor-pointer font-semibold py-2 border-gray-800">
+                      Antworten der Kandidat:innen:
+                    </summary>
+                    <ul className="grid grid-cols-1 py-5  gap-5">
+                      {candidatesWithScore.map((candidate) => (
+                        <li
+                          key={`candidate-details-${answer.questionId}-${candidate.id}`}
+                          className="dark:bg-surface-200 p-3 rounded-md space-y-4"
                         >
-                          <Image
-                            src={`/${candidate.profileImg}`}
-                            alt={`Profilebild von ${candidate.name}`}
-                            width={35}
-                            height={35}
-                            className="rounded-full"
-                          />
-                          {candidate.name}
-                        </Link>
-                        {candidate.answers[index].option !== null &&
-                        candidate.answers[index].weighting !== null ? (
-                          <div className="grid grid-cols-1 grid-rows-2 gap-3">
-                            <OptionResult
-                              value={candidate.answers[index].option!}
-                              type={candidate.answers[index].question.type}
+                          <Link
+                            href={`/${candidate.slug}`}
+                            className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                          >
+                            <Image
+                              src={`/${candidate.profileImg}`}
+                              alt={`Profilebild von ${candidate.name}`}
+                              width={35}
+                              height={35}
+                              className="rounded-full"
                             />
-                            <WeightingResult
-                              value={candidate.answers[index].weighting!}
+                            {candidate.name}
+                          </Link>
+                          {candidate.answers[index].option !== null &&
+                          candidate.answers[index].weighting !== null ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              <OptionResult
+                                value={candidate.answers[index].option!}
+                                type={candidate.answers[index].question.type}
+                              />
+                              <WeightingResult
+                                value={candidate.answers[index].weighting!}
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-full flex items-center justify-center">
+                              <QuestionUnansweredResult />
+                            </div>
+                          )}
+                          {candidate.answers[index].text && (
+                            <QuestionInfo
+                              text={candidate.answers[index].text}
                             />
-                          </div>
-                        ) : (
-                          <div className="w-full flex items-center justify-center">
-                            <QuestionUnansweredResult />
-                          </div>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </div>
-            </li>
-          ))}
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </div>
+              </li>
+            ))}
         </ul>
       </section>
 
