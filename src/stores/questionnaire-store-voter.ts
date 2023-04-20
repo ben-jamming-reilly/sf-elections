@@ -99,9 +99,9 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       },
       updateQuestion: (questionId, data) => {
         set((state) => {
-          const hasOption = Object.hasOwn(data, "option");
-          const hasWeighting = Object.hasOwn(data, "weighting");
-          const hasSkipped = Object.hasOwn(data, "skipped");
+          const hasOption = data.hasOwnProperty("option");
+          const hasWeighting = data.hasOwnProperty("weighting");
+          const hasSkipped = data.hasOwnProperty("skipped");
 
           if ((hasOption && hasSkipped) || (hasWeighting && hasSkipped)) {
             return { questions: state.questions };
