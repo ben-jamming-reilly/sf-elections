@@ -7,6 +7,9 @@ import type { WahlkabineResultProps } from "~/app/kabine/[slug]/page";
 import type { CandidateComparisonProps } from "~/app/vergleich/[...candidateSlugs]/page";
 import { rateCandidates } from "~/app/kabine/[slug]/rate-candidates";
 import { getCandidatesFromSlugs } from "~/app/vergleich/[...candidateSlugs]/get-candidates-from-slugs";
+import { FetchCandidatesResponse } from "./fetch-candidates/route";
+
+const baseURL = process.env.VERCEL_URL ?? "http://localhost:3001";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -37,9 +40,15 @@ const ogTypes = {
       return new Response("Not found", { status: 404 });
     }
 
-    const candidates = await getCandidatesFromSlugs(params.candidateSlugs);
+    const randomCandidates = (
+      await fetch(`${baseURL}/api/og/fetch-candidates`, {
+        next: {
+          revalidate: 3600,
+        },
+      }).then((res) => res.json() as FetchCandidatesResponse)
+    ).filter((c) => params.candidateSlugs.includes(c.slug));
 
-    if (candidates.length !== params.candidateSlugs.length) {
+    if (randomCandidates.length !== params.candidateSlugs.length) {
       return new Response("Not found", { status: 404 });
     }
 
@@ -53,8 +62,8 @@ const ogTypes = {
             gap: "50px",
           }}
         >
-          {candidates.map((candidate) => (
-            <div tw="flex flex-col">
+          {randomCandidates.map((candidate) => (
+            <div key={candidate.id} tw="flex flex-col">
               <div
                 style={{
                   width: 400,

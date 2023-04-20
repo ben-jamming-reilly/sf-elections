@@ -1,32 +1,19 @@
 import { ImageResponse } from "next/server";
-import { getVoterViaHash } from "../get-voter-via-hash";
-import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
-import { rateCandidates } from "./rate-candidates";
-import { WahlkabineResultProps } from "./page";
 import { cacheHeader } from "pretty-cache-header";
+import { FetchCandidatesResponse } from "./api/og/fetch-candidates/route";
 
 export const size = { width: 1200, height: 600 };
-export const contentType = "image/png";
+export const alt =
+  "SPÖ Vorsitzbefragungs-Kabine – Finde heraus welche*r Kandidat*in am besten zu dir passt!";
 
 const baseURL = process.env.VERCEL_URL ?? "http://localhost:3001";
 
-export default async function og({ params }: WahlkabineResultProps) {
-  // const voterWithAnswers = await getVoterViaHash(params.slug);
+export const contentType = "image/png";
 
-  // if (!voterWithAnswers) {
-  //   return new Response("Not found", { status: 404 });
-  // }
-
-  // const candidates = await getCandidatesWithQuestions();
-
-  // const candidatesWithScore = rateCandidates(
-  //   voterWithAnswers.answers,
-  //   candidates
-  // );
-
-  // const sortedCandidatesWithScore = candidatesWithScore.sort(
-  //   (a, b) => a.scorePercentageRaw - b.scorePercentageRaw
-  // );
+export default async function og() {
+  const randomCandidates = await fetch(
+    `${baseURL}/api/og/fetch-candidates`
+  ).then((res) => res.json() as FetchCandidatesResponse);
 
   return new ImageResponse(
     (
@@ -49,7 +36,7 @@ export default async function og({ params }: WahlkabineResultProps) {
         </div>
         <div tw="flex flex-col z-10 relative">
           <ul tw="flex flex-row mb-3">
-            {/* {sortedCandidatesWithScore.map((candidate) => (
+            {randomCandidates.map((candidate) => (
               <li
                 key={candidate.id}
                 tw="border-4 mr-3 last:mr-0 rounded-full overflow-hidden"
@@ -59,12 +46,12 @@ export default async function og({ params }: WahlkabineResultProps) {
               >
                 <img
                   className="rounded-full block"
-                  src={`baseURL`}/og_assets/${candidate.profileImg}`}
+                  src={`${baseURL}/og_assets/${candidate.profileImg}`}
                   width={100}
                   height={100}
                 />
               </li>
-            ))} */}
+            ))}
           </ul>
           <h1
             style={{
@@ -93,7 +80,9 @@ export default async function og({ params }: WahlkabineResultProps) {
           }}
         >
           <img
-            src={`${baseURL}/og_assets/icon-blockwhite.png`}
+            src={`${
+              process.env.VERCEL_URL ?? "http://localhost:3001"
+            }/og_assets/icon-blockwhite.png`}
             width={200}
             height={40}
             tw="relative z-20 mr-3"
@@ -113,16 +102,3 @@ export default async function og({ params }: WahlkabineResultProps) {
     }
   );
 }
-
-
-            // <div tw="flex flex-col">
-            //   <h1
-            //     tw="text-3xl py-2 px-5 justify-start self-start text-white"
-            //     style={{
-            //       background: "#e62937",
-            //     }}
-            //   >
-            //     {candidate.name}
-            //   </h1>
-            //   <span>{candidate.scorePercentage}%</span>
-            // </div>
