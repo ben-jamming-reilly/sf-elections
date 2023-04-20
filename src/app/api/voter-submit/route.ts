@@ -25,21 +25,8 @@ const questionWithAnswersSchema = z.array(
 
 const dataForStatsSchema = z.object({
   age: z.number().min(0).max(120).nullable().optional(),
-  gender: z.enum(["m", "f", "x"]).nullable().optional(),
-  state: z
-    .enum([
-      "Wien",
-      "Kärnten",
-      "Niederösterreich",
-      "Oberösterreich",
-      "Salzburg",
-      "Steiermark",
-      "Tirol",
-      "Vorarlberg",
-      "Burgenland",
-    ])
-    .nullable()
-    .optional(),
+  gender: z.string().nullable().optional(),
+  state: z.string().nullable().optional(),
   isPartyMember: z.boolean().nullable().optional(),
 });
 
