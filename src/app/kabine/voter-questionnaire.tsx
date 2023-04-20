@@ -414,7 +414,7 @@ export const VoterQuestionnaire = ({
                           "mb-2 md:mb-0 md:mr-2 last:mr-0",
                         activeQuestion.type === "Wahlrecht" && "mb-2"
                       )}
-                      key={`option-${option.value}`}
+                      key={`${activeQuestion.id}-option-${option.value}`}
                     >
                       <button
                         onClick={(e) => {
@@ -448,7 +448,7 @@ export const VoterQuestionnaire = ({
                   {weightings.map((weighting) => (
                     <li
                       className="relative mb-2 md:mb-0 md:mr-2 last:mb-0 last:mr-0"
-                      key={`weighting-${weighting.value}`}
+                      key={`${activeQuestion.id}-weighting-${weighting.value}`}
                     >
                       <button
                         onClick={(e) => {
