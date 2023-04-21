@@ -230,7 +230,7 @@ export const VoterQuestionnaire = ({
               type="number"
               name="age"
               placeholder="Dein Alter"
-              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-2"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-2"
             />
           </label>
           <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
@@ -239,7 +239,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="gender"
-              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -253,7 +253,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="state"
-              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -273,7 +273,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="partyMember"
-              className="appearance-none dark:bg-white text-lg border-brand border outline-brand dark:border-2 dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="no">Ich bin kein Parteimitglied</option>
