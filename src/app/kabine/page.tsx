@@ -5,13 +5,6 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
   description: "SPÖ Vorsitzbefragungs-Kabine",
-  openGraph: {
-    images: [
-      {
-        url: "/api/og?type=wahlkabine",
-      },
-    ],
-  },
   twitter: {
     card: "summary_large_image",
   },

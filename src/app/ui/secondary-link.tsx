@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 export const SecondaryLink = ({
   href,
   children,

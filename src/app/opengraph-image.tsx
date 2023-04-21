@@ -1,10 +1,8 @@
-import clsx from "clsx";
 import { ImageResponse, NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
-import { BASE_URL } from "~/app/api/og/baseUrl";
-import { FetchCandidatesWithScoresResponse } from "~/app/api/og/fetch-candidates-with-scores/route";
-import { FetchCandidateBySlugResponse } from "../api/og/fetch-candidate-by-slug/route";
-import { boldFont, regularFont } from "../api/og/fonts";
+import { FetchCandidatesResponse } from "./api/og/fetch-candidates/route";
+import { BASE_URL } from "./api/og/baseUrl";
+import { boldFont, regularFont } from "./api/og/fonts";
 
 export const size = { width: 1200, height: 600 };
 export const alt =
@@ -12,29 +10,25 @@ export const alt =
 
 export const contentType = "image/png";
 
-export default async function og({
-  params,
-}: {
-  params: { candidateSlug: string };
-}) {
+export default async function og() {
   const [regularFontData, boldFontData] = await Promise.all([
     regularFont,
     boldFont,
   ]);
 
-  const candidate = await fetch(
-    `${BASE_URL}/api/og/fetch-candidate-by-slug?slug=${params.candidateSlug}`
-  )
-    .then((res) => res.json() as FetchCandidateBySlugResponse)
+  const randomCandidates = await fetch(`${BASE_URL}/api/og/fetch-candidates`, {
+    next: {
+      revalidate: 36000,
+    },
+  })
+    .then((res) => res.json() as FetchCandidatesResponse)
     .catch((e) => {
       console.error(e);
     });
 
-  if (!candidate) {
+  if (!randomCandidates) {
     return NextResponse.json({ status: 404 });
   }
-
-  console.log(candidate);
 
   return new ImageResponse(
     (
@@ -45,33 +39,40 @@ export default async function og({
         }}
       >
         <div tw="flex flex-col justify-center items-center relative">
-          <div tw="flex flex-row justify-center items-center">
-            <div
-              key={candidate.id}
-              tw={"rounded-sm flex relative"}
-              style={{
-                borderColor: "#e62937",
-              }}
-            >
-              <img
-                tw="rounded-sm"
-                src={`${BASE_URL}/og_assets/${candidate.profileImg}`}
-                width={250}
-                height={250}
-              />
-            </div>
-          </div>
+          <ul tw="flex flex-row mb-3 justify-center items-center">
+            {randomCandidates.map((candidate) => (
+              <li
+                key={candidate.id}
+                tw="border-4 mr-3 last:mr-0 rounded-full overflow-hidden"
+                style={{
+                  borderColor: "#e62937",
+                }}
+              >
+                <img
+                  className="rounded-full block"
+                  src={`${BASE_URL}/og_assets/mini/${candidate.profileImg}`}
+                  width={100}
+                  height={100}
+                />
+              </li>
+            ))}
+          </ul>
           <h1
             style={{
               background: "#e62937",
             }}
-            tw="text-5xl py-3 flex flex-col rounded-md  px-6 text-white"
+            tw="text-7xl py-3 flex flex-col rounded-md  px-6 text-white"
           >
-            {candidate.name}
+            SPÖ Vorsitzbefragungs-Kabine
           </h1>
-          <p tw="text-2xl flex">
-            <span tw="bg-white flex text-gray-800 px-6 py-1">
-              Finde heraus welche*r Kandidat*in am Besten zu dir passt!
+          <p
+            tw="text-3xl "
+            style={{
+              height: "100px",
+            }}
+          >
+            <span tw="bg-white text-gray-800 px-6 py-3">
+              Finde heraus welche*r Kandidat*in am besten zu dir passt!
             </span>
           </p>
         </div>
@@ -95,7 +96,7 @@ export default async function og({
           >
             mitentscheiden.at
           </div>
-          <div tw="flex mr-2 mb-2 absolute bottom-0 right-0 text-white text-3xl">
+          <div tw="flex mr-2 mb-2 text-white absolute bottom-0 right-0 text-3xl">
             <img
               src={`${BASE_URL}/og_assets/artwork.png`}
               width={150}

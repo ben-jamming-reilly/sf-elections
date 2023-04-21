@@ -12,6 +12,7 @@ import { rateCandidate } from "../../rate-candidates";
 import { getCandidateWithQuestions } from "./get-candidate-with-question";
 import { BackButton } from "~/app/ui/back-button";
 import { QuestionInfo } from "~/app/ui/question-info";
+import { DownloadImageLink } from "~/app/ui/download-image-link";
 
 export type WahlkabineResultCandidate = {
   params: {
@@ -63,6 +64,12 @@ export default async function WahlkabineResultCandidate({
         >
           Teilen
         </ShareButton>
+        <DownloadImageLink
+          title={`spoe-vorsitzwahlkabine-vergleich-${candidateWithScore.name}.jpg`}
+          href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidateWithScore.slug}`}
+        >
+          Bild herunterladen
+        </DownloadImageLink>
       </div>
 
       <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
@@ -92,7 +99,7 @@ export default async function WahlkabineResultCandidate({
                 className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
               />
             </Link>
-            <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
+            <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full">
               {candidateWithScore.name}
             </h2>
             <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 border-brand">
@@ -180,6 +187,21 @@ export default async function WahlkabineResultCandidate({
           </li>
         ))}
       </ul>
+
+      <div className="flex sm:flex-row flex-col gap-5 pt-5 items-center justify-center">
+        <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
+        <ShareButton
+          title={`Schau wie gut ${candidateWithScore.name} zu mir passt!`}
+        >
+          Teilen
+        </ShareButton>
+        <DownloadImageLink
+          title={`spoe-vorsitzwahlkabine-vergleich-${candidateWithScore.name}.jpg`}
+          href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidateWithScore.slug}`}
+        >
+          Bild herunterladen
+        </DownloadImageLink>
+      </div>
     </div>
   );
 }

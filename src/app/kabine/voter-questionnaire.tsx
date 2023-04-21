@@ -15,6 +15,7 @@ import {
 import { QuestionCategoryLabel } from "../ui/question-category-label";
 import { useHasHydrated } from "~/hooks/useHasHydrated";
 import Link from "next/link";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const variants = {
   enter: (direction: number) => {
@@ -449,10 +450,11 @@ export const VoterQuestionnaire = ({
                   }}
                   disabled={!hasPrevious}
                   className={clsx(
-                    "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:border-gray-800 disabled:hover:bg-surface-300 rounded-md",
+                    " notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
                     !hasPrevious && "invisible"
                   )}
                 >
+                  <ArrowLeftIcon className="inline-block w-5 h-5 mr-1" />
                   Zurück
                 </button>
               </span>
@@ -471,13 +473,14 @@ export const VoterQuestionnaire = ({
                     handleNext();
                   }}
                   className={clsx(
-                    "hover:underline notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:border-gray-800 disabled:hover:no-underline underline-offset-2 text-center transition-all xs:w-[130px] px-3 xs:px-6 py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white disabled:hover:bg-surface-300 rounded-md",
+                    "notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
                     !hasNext && allQuestionsAnswered
                       ? "!bg-brand !border-brand !text-white hover:opacity-90"
                       : ""
                   )}
                 >
                   {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
+                  <ArrowRightIcon className=" inline-block w-5 h-5 ml-1 stroke-2" />
                 </button>
               </span>
             </div>
