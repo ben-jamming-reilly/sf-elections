@@ -15,8 +15,8 @@ export default async function Home() {
           Besten zu dir passt.
         </h1>
         <p className="my-3 text-2xl text-center">
-          Die Vorsitzbefragungs-Kabine ist eine Initiative der Jungen
-          Generation.
+          Die Vorsitzbefragungs-Kabine ist eine Initiative der Jungen Generation
+          Wien.
         </p>
 
         <div className="min-h-[60px] text-center text-xl">
