@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/server";
+import { ImageResponse, NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
 import { FetchCandidatesResponse } from "./api/og/fetch-candidates/route";
 import { BASE_URL } from "./api/og/baseUrl";
@@ -10,9 +10,19 @@ export const alt =
 export const contentType = "image/png";
 
 export default async function og() {
-  const randomCandidates = await fetch(
-    `${BASE_URL}/api/og/fetch-candidates`
-  ).then((res) => res.json() as FetchCandidatesResponse);
+  const randomCandidates = await fetch(`${BASE_URL}/api/og/fetch-candidates`, {
+    next: {
+      revalidate: 36000,
+    },
+  })
+    .then((res) => res.json() as FetchCandidatesResponse)
+    .catch((e) => {
+      console.error(e);
+    });
+
+  if (!randomCandidates) {
+    return NextResponse.json({ status: 404 });
+  }
 
   return new ImageResponse(
     (
