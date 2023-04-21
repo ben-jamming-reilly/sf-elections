@@ -48,7 +48,7 @@ export default function RootLayout({
                 href="/"
                 className="text-2xl [@media(min-width:300px)]:text-3xl w-full md:w-fit py-3 md:py-0 bg-brand fixed top-0 md:static text-center leading-none font-bold focus-visible:outline-brand outline-offset-2"
               >
-                SPÖ Vorsitzwahl-Kabine
+                SPÖ Vorsitzbefragungs-Kabine
               </Link>
               <div className="flex md:mt-1 items-end mt-12">
                 <span className="mr-2 md:mx-2 [@media(min-width:300px)]:block hidden">
