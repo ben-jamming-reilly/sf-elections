@@ -29,8 +29,7 @@ export default function Kalkulation() {
           <br />
           <br />
           Am Ende wird ein Prozentsatz berechnet, der darstellt, wie sehr die
-          Antworten der Nutzer*innen mit jenen der Kandiat*innen
-          übereinstimmen."
+          Antworten der Nutzer*innen mit jenen der Kandiat*innen übereinstimmen.
         </p>
         <div className="w-full overflow-x-auto">
           <table className="border border-slate-300 dark:border-surface-500 border-separate">
