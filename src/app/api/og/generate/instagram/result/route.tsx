@@ -13,6 +13,10 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: "Slug not found" }, { status: 404 });
   }
 
+  console.log(process.env);
+
+  console.log(BASE_URL);
+
   const sortedCandidates = await fetch(
     `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${slug}`
   )
