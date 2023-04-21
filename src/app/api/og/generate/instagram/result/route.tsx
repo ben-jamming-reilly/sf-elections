@@ -4,18 +4,20 @@ import { FetchCandidateBySlugResponse } from "../../../fetch-candidate-by-slug/r
 import { cacheHeader } from "pretty-cache-header";
 import { FetchCandidatesWithScoresResponse } from "../../../fetch-candidates-with-scores/route";
 import clsx from "clsx";
+import { boldFont, regularFont } from "../../../fonts";
 
 export async function GET(request: Request) {
+  const [regularFontData, boldFontData] = await Promise.all([
+    regularFont,
+    boldFont,
+  ]);
+
   const url = new URL(request.url);
   const slug = url.searchParams.get("slug");
 
   if (!slug) {
     return NextResponse.json({ message: "Slug not found" }, { status: 404 });
   }
-
-  console.log(process.env);
-
-  console.log(BASE_URL);
 
   const sortedCandidates = await fetch(
     `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${slug}`
@@ -150,6 +152,18 @@ export async function GET(request: Request) {
     {
       width: 1080,
       height: 1920,
+      fonts: [
+        {
+          name: "Inter",
+          data: regularFontData,
+          weight: 400,
+        },
+        {
+          name: "Inter",
+          data: boldFontData,
+          weight: 700,
+        },
+      ],
       headers: {
         "cache-control": cacheHeader({
           sMaxage: "1d",
@@ -161,3 +175,7 @@ export async function GET(request: Request) {
     }
   );
 }
+
+export const config = {
+  runtime: "edge",
+};
