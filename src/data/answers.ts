@@ -103,7 +103,7 @@ export const CATEGORIES = [
   },
   {
     label: "Arbeit & Soziales",
-    hex: "#e8ce26",
+    hex: "#b1ae1f",
   },
   {
     label: "Internes",
