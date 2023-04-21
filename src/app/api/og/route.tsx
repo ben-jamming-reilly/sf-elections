@@ -6,6 +6,7 @@ import { FetchCandidatesResponse } from "./fetch-candidates/route";
 import { cacheHeader } from "pretty-cache-header";
 import { BASE_URL } from "./baseUrl";
 import clsx from "clsx";
+import { boldFont, regularFont } from "./fonts";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -35,6 +36,11 @@ const ogTypes = {
     if (params.candidateSlugs.length < 2) {
       return NextResponse.json({ message: "Not found" }, { status: 404 });
     }
+
+    const [regularFontData, boldFontData] = await Promise.all([
+      regularFont,
+      boldFont,
+    ]);
 
     const randomCandidates = (
       await fetch(`${BASE_URL}/api/og/fetch-candidates`, {
@@ -138,8 +144,24 @@ const ogTypes = {
             staleIfError: "1d",
           }),
         },
+        fonts: [
+          {
+            name: "Inter",
+            data: regularFontData,
+            weight: 400,
+          },
+          {
+            name: "Inter",
+            data: boldFontData,
+            weight: 700,
+          },
+        ],
         debug: process.env.NODE_ENV === "development",
       }
     );
   },
 } as const;
+
+export const config = {
+  runtime: "edge",
+};

@@ -2,6 +2,7 @@ import { ImageResponse, NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { FetchCandidateAndVoterViaSlugs } from "~/app/api/og/fetch-candidate-and-voter/route";
+import { boldFont, regularFont } from "~/app/api/og/fonts";
 
 export const size = { width: 1200, height: 600 };
 export const alt =
@@ -14,6 +15,10 @@ export default async function og({
 }: {
   params: { ["candidate-slug"]: string; slug: string };
 }) {
+  const [regularFontData, boldFontData] = await Promise.all([
+    regularFont,
+    boldFont,
+  ]);
   const data = await fetch(
     `${BASE_URL}/api/og/fetch-candidate-and-voter?slug=${params.slug}&candidateSlug=${params["candidate-slug"]}`
   )
@@ -27,8 +32,6 @@ export default async function og({
   }
 
   const { candidate, scorePercentage } = data;
-
-  console.log(candidate);
 
   return new ImageResponse(
     (
@@ -107,7 +110,23 @@ export default async function og({
           staleIfError: "1d",
         }),
       },
+      fonts: [
+        {
+          name: "Inter",
+          data: regularFontData,
+          weight: 400,
+        },
+        {
+          name: "Inter",
+          data: boldFontData,
+          weight: 700,
+        },
+      ],
       debug: process.env.NODE_ENV === "development",
     }
   );
 }
+
+export const config = {
+  runtime: "edge",
+};

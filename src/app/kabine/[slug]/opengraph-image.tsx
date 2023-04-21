@@ -3,6 +3,7 @@ import { ImageResponse, NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { FetchCandidatesWithScoresResponse } from "~/app/api/og/fetch-candidates-with-scores/route";
+import { boldFont, regularFont } from "~/app/api/og/fonts";
 
 export const size = { width: 1200, height: 600 };
 export const alt =
@@ -11,6 +12,11 @@ export const alt =
 export const contentType = "image/png";
 
 export default async function og({ params }: { params: { slug: string } }) {
+  const [regularFontData, boldFontData] = await Promise.all([
+    regularFont,
+    boldFont,
+  ]);
+
   const sortedCandidates = await fetch(
     `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${params.slug}`
   )
@@ -131,7 +137,23 @@ export default async function og({ params }: { params: { slug: string } }) {
           staleIfError: "1d",
         }),
       },
+      fonts: [
+        {
+          name: "Inter",
+          data: regularFontData,
+          weight: 400,
+        },
+        {
+          name: "Inter",
+          data: boldFontData,
+          weight: 700,
+        },
+      ],
       debug: process.env.NODE_ENV === "development",
     }
   );
 }
+
+export const config = {
+  runtime: "edge",
+};

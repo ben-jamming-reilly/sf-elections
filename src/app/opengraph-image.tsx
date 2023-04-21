@@ -2,6 +2,7 @@ import { ImageResponse, NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
 import { FetchCandidatesResponse } from "./api/og/fetch-candidates/route";
 import { BASE_URL } from "./api/og/baseUrl";
+import { boldFont, regularFont } from "./api/og/fonts";
 
 export const size = { width: 1200, height: 600 };
 export const alt =
@@ -10,6 +11,11 @@ export const alt =
 export const contentType = "image/png";
 
 export default async function og() {
+  const [regularFontData, boldFontData] = await Promise.all([
+    regularFont,
+    boldFont,
+  ]);
+
   const randomCandidates = await fetch(`${BASE_URL}/api/og/fetch-candidates`, {
     next: {
       revalidate: 36000,
@@ -108,7 +114,23 @@ export default async function og() {
           staleIfError: "1d",
         }),
       },
+      fonts: [
+        {
+          name: "Inter",
+          data: regularFontData,
+          weight: 400,
+        },
+        {
+          name: "Inter",
+          data: boldFontData,
+          weight: 700,
+        },
+      ],
       debug: process.env.NODE_ENV === "development",
     }
   );
 }
+
+export const config = {
+  runtime: "edge",
+};

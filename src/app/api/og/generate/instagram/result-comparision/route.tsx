@@ -3,8 +3,14 @@ import { BASE_URL } from "../../../baseUrl";
 import { FetchCandidateBySlugResponse } from "../../../fetch-candidate-by-slug/route";
 import { cacheHeader } from "pretty-cache-header";
 import { FetchCandidateAndVoterViaSlugs } from "../../../fetch-candidate-and-voter/route";
+import { boldFont, regularFont } from "../../../fonts";
 
 export async function GET(request: Request) {
+  const [regularFontData, boldFontData] = await Promise.all([
+    regularFont,
+    boldFont,
+  ]);
+
   const url = new URL(request.url);
   const candidateSlug = url.searchParams.get("candidateSlug");
   const slug = url.searchParams.get("slug");
@@ -110,7 +116,23 @@ export async function GET(request: Request) {
           staleIfError: "1d",
         }),
       },
+      fonts: [
+        {
+          name: "Inter",
+          data: regularFontData,
+          weight: 400,
+        },
+        {
+          name: "Inter",
+          data: boldFontData,
+          weight: 700,
+        },
+      ],
       debug: process.env.NODE_ENV === "development",
     }
   );
 }
+
+export const config = {
+  runtime: "edge",
+};

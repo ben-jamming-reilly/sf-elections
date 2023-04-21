@@ -139,7 +139,7 @@ export async function GET(request: Request) {
                       }}
                       tw="py-3 px-4 rounded-md text-white"
                     >
-                      Match: {candidate.scorePercentage}%!
+                      Match: {candidate.scorePercentage}%
                     </span>
                   </p>
                 </div>
