@@ -37,6 +37,9 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   return {
     title: `Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
     description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
+    twitter: {
+      card: "summary_large_image",
+    },
   };
 }
 

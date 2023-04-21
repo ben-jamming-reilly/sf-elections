@@ -7,7 +7,11 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
-  description: "SPÖ Vorsitzbefragungs-Kabine",
+  description:
+    "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 const interFont = Inter({
