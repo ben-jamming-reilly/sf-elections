@@ -36,47 +36,15 @@ export const yesNoOptions = [
   },
 ] as const;
 
-export type WahlrechtValueType = typeof wahlrechtOptions[number]["value"];
-
-export const getWahlrechtOptionTendency = (option: WahlrechtValueType) => {
-  return option === -10 ? "negative" : "positive";
-};
-
-export const wahlrechtOptions = [
-  {
-    label: "ja sofort",
-    value: -7,
-  },
-  {
-    label: "ja nach 5 Jahren Hauptwohnsitz",
-    value: -8,
-  },
-  {
-    label: "ja nach 10 Jahren Hauptwohnsitz",
-    value: -9,
-  },
-  {
-    label: "Nein nie",
-    value: -10, // Settings a different value to be able to differnentiate. Can normalise afterwards.
-  },
-] as const;
-
 export const getOptionsBasedOnType = (type: QuestionType) => {
   switch (type) {
     case "YesNo":
       return yesNoOptions;
-    case "Wahlrecht":
-      return wahlrechtOptions;
     case "Range":
       return options;
     default:
       return options;
   }
-};
-
-export const wahlrechtLabelForValue = (value: number) => {
-  const option = wahlrechtOptions.find((option) => option.value === value);
-  return option ? option.label : "";
 };
 
 export const optionLabelForValue = (value: number) => {

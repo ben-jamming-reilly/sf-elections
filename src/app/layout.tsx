@@ -63,6 +63,7 @@ export default function RootLayout({
                   <Image
                     src="/icon-block-white.png"
                     height={36}
+                    priority
                     width={181.83}
                     className="object-contain flex-1"
                     alt="JG Logo"

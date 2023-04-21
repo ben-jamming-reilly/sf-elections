@@ -378,9 +378,7 @@ export const VoterQuestionnaire = ({
                     activeQuestion.type === "YesNo" &&
                       "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2",
                     activeQuestion.type === "Range" &&
-                      "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4",
-                    activeQuestion.type === "Wahlrecht" &&
-                      "grid-cols-1 grid-rows-4"
+                      "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4"
                   )}
                 >
                   {getOptionsBasedOnType(activeQuestion.type).map((option) => (
@@ -389,8 +387,7 @@ export const VoterQuestionnaire = ({
                         "relative",
                         (activeQuestion.type === "Range" ||
                           activeQuestion.type === "YesNo") &&
-                          "mb-2 md:mb-0 md:mr-2 last:mr-0",
-                        activeQuestion.type === "Wahlrecht" && "mb-2"
+                          "mb-2 md:mb-0 md:mr-2 last:mr-0"
                       )}
                       key={`${activeQuestion.id}-option-${option.value}`}
                     >

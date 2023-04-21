@@ -1,9 +1,7 @@
 import {
   ScaleOptionValueType,
-  WahlrechtValueType,
   WeightingValueType,
   getScaleOptionTendency,
-  getWahlrechtOptionTendency,
   getWeightingTendency,
 } from "~/data/answers";
 
@@ -56,27 +54,6 @@ const calculateMatchForScaleOption = (
   }
 };
 
-const calculateMatchForWahlrechtOption = (
-  voterAnswer: WahlrechtValueType,
-  candidateAnswer: WahlrechtValueType
-) => {
-  if (voterAnswer === candidateAnswer) return 1;
-  if (
-    (voterAnswer === -10 && [-9, -8, -7].includes(candidateAnswer)) ||
-    ([-9, -8, -7].includes(voterAnswer) && candidateAnswer === -10)
-  )
-    return 0;
-
-  if (
-    getWahlrechtOptionTendency(voterAnswer) ===
-    getWahlrechtOptionTendency(candidateAnswer)
-  ) {
-    return 0.7;
-  } else {
-    return 0.2;
-  }
-};
-
 export const calculateScore = (
   voterAnswers: (VoterQuestionAnswer & {
     question: Question;
@@ -108,15 +85,6 @@ export const calculateScore = (
       const matchScore = calculateMatchForScaleOption(
         voterAnswer.option! as ScaleOptionValueType,
         candidateAnswer!.option! as ScaleOptionValueType
-      );
-
-      score += matchScore;
-    }
-
-    if (voterAnswer.question.type === "Wahlrecht") {
-      const matchScore = calculateMatchForWahlrechtOption(
-        voterAnswer.option! as WahlrechtValueType,
-        candidateAnswer!.option! as WahlrechtValueType
       );
 
       score += matchScore;

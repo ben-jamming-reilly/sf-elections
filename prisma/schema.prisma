@@ -79,7 +79,6 @@ model VoterQuestionAnswer {
 enum QuestionType {
   YesNo
   Range
-  Wahlrecht
 }
 
 model Question {

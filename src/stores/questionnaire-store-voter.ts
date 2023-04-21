@@ -78,8 +78,10 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         isPartyMember: undefined,
       },
       dataForStatsAnswered: () => {
-        return Object.values(get().dataForStats).every(
-          (v) => typeof v !== "undefined"
+        return (
+          Object.values(get().dataForStats).every(
+            (v) => typeof v !== "undefined"
+          ) && Object.keys(get().dataForStats).length > 0
         );
       },
       setDataForStats: (data: Partial<QuestionnaireState["dataForStats"]>) => {
