@@ -112,6 +112,14 @@ export default function RootLayout({
                     Datenschutz
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
+                    href="/kalkulation"
+                  >
+                    Kalkulation
+                  </Link>
+                </li>
               </ul>
             </footer>
           </div>

@@ -31,42 +31,44 @@ export default function Kalkulation() {
           Am Ende wird ein Prozentsatz berechnet auf Basis der Anzahl der
           beantworteten Fragen.
         </p>
-        <table className="border border-slate-300 border-separate">
-          <thead className="bg-brand-yellow">
-            <tr>
-              <th className="p-2"></th>
-              <th className="p-2 text-center font-medium">Gleiche Antwort</th>
-              <th className="p-2 text-center font-medium">Gleiche Tendenz</th>
-              <th className="p-2 text-center font-medium">Andere Tendenz</th>
-              <th className="p-2 text-center font-medium">
-                Gegensätzliche Antwort
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="p-2 bg-brand-yellow px-3">Ja/Nein</td>
-              <td className="p-2 text-center">1</td>
-              <td className="p-2 text-center">-</td>
-              <td className="p-2 text-center">-</td>
-              <td className="p-2 text-center">0</td>
-            </tr>
-            <tr>
-              <td className="p-2 bg-brand-yellow px-3">Zustimmung</td>
-              <td className="p-2 text-center">1</td>
-              <td className="p-2 text-center">0.7</td>
-              <td className="p-2 text-center">0.2</td>
-              <td className="p-2 text-center">0</td>
-            </tr>
-            <tr>
-              <td className="p-2 bg-brand-yellow px-3">Wichtigkeit</td>
-              <td className="p-2 text-center">0.15</td>
-              <td className="p-2 text-center">0.075</td>
-              <td className="p-2 text-center">0.025</td>
-              <td className="p-2 text-center">0</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="w-full overflow-x-auto">
+          <table className="border border-slate-300 border-separate">
+            <thead className="bg-brand-yellow">
+              <tr>
+                <th className="p-2"></th>
+                <th className="p-2 text-center font-medium">Gleiche Antwort</th>
+                <th className="p-2 text-center font-medium">Gleiche Tendenz</th>
+                <th className="p-2 text-center font-medium">Andere Tendenz</th>
+                <th className="p-2 text-center font-medium">
+                  Gegensätzliche Antwort
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-2 bg-brand-yellow px-3">Ja/Nein</td>
+                <td className="p-2 text-center">1</td>
+                <td className="p-2 text-center">-</td>
+                <td className="p-2 text-center">-</td>
+                <td className="p-2 text-center">0</td>
+              </tr>
+              <tr>
+                <td className="p-2 bg-brand-yellow px-3">Zustimmung</td>
+                <td className="p-2 text-center">1</td>
+                <td className="p-2 text-center">0.7</td>
+                <td className="p-2 text-center">0.2</td>
+                <td className="p-2 text-center">0</td>
+              </tr>
+              <tr>
+                <td className="p-2 bg-brand-yellow px-3">Wichtigkeit</td>
+                <td className="p-2 text-center">0.15</td>
+                <td className="p-2 text-center">0.075</td>
+                <td className="p-2 text-center">0.025</td>
+                <td className="p-2 text-center">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>
           Der Code für die Berechnung der Ergebnisse ist open-source und kann
           auf{" "}
