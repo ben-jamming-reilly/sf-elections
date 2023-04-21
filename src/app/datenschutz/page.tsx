@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Datenschutz() {
   return (
-    <section className="w-[50ch] mx-auto">
+    <section className="w-[50ch] max-w-full mx-auto">
       <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
         Datenschutz
       </h1>
