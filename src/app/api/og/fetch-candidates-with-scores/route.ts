@@ -22,14 +22,20 @@ export async function GET(request: Request) {
 
   const voterWithAnswers = await getVoterViaHash(slug);
   if (!voterWithAnswers) {
-    return new Response("Not found", { status: 404 });
+    return NextResponse.json({ message: "Not found" }, { status: 404 });
   }
   const candidates = await getCandidatesWithQuestions();
   const candidatesWithScore = rateCandidates(
     voterWithAnswers.answers,
     candidates
   );
-  return candidatesWithScore.sort(
-    (a, b) => a.scorePercentageRaw - b.scorePercentageRaw
+  return NextResponse.json(
+    candidatesWithScore
+      .map((candidate) => ({
+        ...candidate,
+        answers: [],
+      }))
+      .sort((a, b) => b.scorePercentageRaw - a.scorePercentageRaw),
+    { status: 200 }
   );
 }

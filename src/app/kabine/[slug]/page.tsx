@@ -12,6 +12,8 @@ import { rateCandidates } from "./rate-candidates";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import { BackButton } from "~/app/ui/back-button";
 import { QuestionInfo } from "~/app/ui/question-info";
+import { SecondaryLink } from "~/app/ui/secondary-link";
+import { DownloadImageLink } from "~/app/ui/download-image-link";
 
 export type WahlkabineResultProps = {
   params: {
@@ -68,6 +70,12 @@ export default async function WahlkabineResult({
         <ShareButton title="Schau welche*r SPÖ Vorsitz Kandidat*in am Besten zu mir passt!">
           Teilen
         </ShareButton>
+        <DownloadImageLink
+          title="spoe-vorsitzwahlkabine-resultat.jpg"
+          href={`/api/og/generate/instagram/result?slug=${params.slug}`}
+        >
+          Bild herunterladen
+        </DownloadImageLink>
       </div>
 
       <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
@@ -208,6 +216,12 @@ export default async function WahlkabineResult({
         <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat*in am Besten zu mir passt!">
           Teilen
         </ShareButton>
+        <DownloadImageLink
+          title="spoe-vorsitzwahlkabine-resultat.jpg"
+          href={`/api/og/generate/instagram/result?slug=${params.slug}`}
+        >
+          Bild herunterladen
+        </DownloadImageLink>
       </div>
     </div>
   );
