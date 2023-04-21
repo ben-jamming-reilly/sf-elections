@@ -22,7 +22,7 @@ const Pagination = ({
   return (
     <ul
       className={clsx(
-        "flex flex-row flex-wrap gap-1 md:gap-1 justify-center",
+        "flex flex-row flex-wrap gap-3 sm:gap-2 md:gap-1 justify-center",
         className
       )}
     >

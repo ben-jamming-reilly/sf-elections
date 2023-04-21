@@ -106,8 +106,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
           const hasWeighting = data.hasOwnProperty("weighting");
           const hasSkipped = data.hasOwnProperty("skipped");
 
-          // console.log({ hasOption, hasWeighting, hasSkipped, data }})
-
           if ((hasOption && hasSkipped) || (hasWeighting && hasSkipped)) {
             return { questions: state.questions };
           }

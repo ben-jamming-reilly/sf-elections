@@ -133,7 +133,6 @@ export const VoterQuestionnaire = ({
   };
 
   const handleNext = () => {
-    console.log("handleNext", { hasNext, activeIndex });
     if (hasNext) {
       setActiveIndex(activeIndex + 1);
     } else if (allQuestionsAnswered) {
@@ -303,8 +302,6 @@ export const VoterQuestionnaire = ({
     );
   }
 
-  console.log(activeQuestion);
-
   return (
     <>
       {activeQuestion ? (
@@ -393,8 +390,6 @@ export const VoterQuestionnaire = ({
                     >
                       <button
                         onClick={(e) => {
-                          console.log("clicked option", e);
-
                           setOption(activeQuestion.id, option.value);
                         }}
                         className={clsx(
@@ -422,7 +417,6 @@ export const VoterQuestionnaire = ({
                     >
                       <button
                         onClick={(e) => {
-                          console.log("cicked weighting", e);
                           setWeighting(activeQuestion.id, weighting.value);
                         }}
                         className={clsx(
@@ -439,47 +433,42 @@ export const VoterQuestionnaire = ({
               </div>
             </section>
 
-            <div className="flex flex-row gap-2 justify-between items-center w-full">
-              <span>
-                <button
-                  onClick={(e) => {
-                    handlePrev();
-                  }}
-                  disabled={!hasPrevious}
-                  className={clsx(
-                    " notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
-                    !hasPrevious && "invisible"
-                  )}
-                >
-                  <ArrowLeftIcon className="inline-block w-5 h-5 mr-1" />
-                  Zurück
-                </button>
-              </span>
+            <div className="flex flex-col xs:flex-row gap-2 justify-between items-center w-full">
+              <button
+                onClick={(e) => {
+                  handlePrev();
+                }}
+                disabled={!hasPrevious}
+                className={clsx(
+                  " notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
+                  !hasPrevious && "invisible"
+                )}
+              >
+                <ArrowLeftIcon className="inline-block w-5 h-5 mr-1" />
+                Zurück
+              </button>
               <span className="text-lg">
                 {activeIndex + 1} / {questionsWithAnswers.length}
               </span>
-              <span>
-                <button
-                  disabled={
-                    hasNext
-                      ? !activeQuestion || !isQuestionAnswered(activeQuestion)
-                      : !allQuestionsAnswered
-                  }
-                  onClick={(e) => {
-                    console.log("Next!");
-                    handleNext();
-                  }}
-                  className={clsx(
-                    "notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
-                    !hasNext && allQuestionsAnswered
-                      ? "!bg-brand !border-brand !text-white hover:opacity-90"
-                      : ""
-                  )}
-                >
-                  {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
-                  <ArrowRightIcon className=" inline-block w-5 h-5 ml-1 stroke-2" />
-                </button>
-              </span>
+              <button
+                disabled={
+                  hasNext
+                    ? !activeQuestion || !isQuestionAnswered(activeQuestion)
+                    : !allQuestionsAnswered
+                }
+                onClick={(e) => {
+                  handleNext();
+                }}
+                className={clsx(
+                  "notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
+                  !hasNext && allQuestionsAnswered
+                    ? "!bg-brand !border-brand !text-white hover:opacity-90"
+                    : ""
+                )}
+              >
+                {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
+                <ArrowRightIcon className=" inline-block w-5 h-5 ml-1 stroke-2" />
+              </button>
             </div>
 
             <Pagination
