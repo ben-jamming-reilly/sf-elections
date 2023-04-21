@@ -183,15 +183,34 @@ export default async function WahlkabineResult({
                             />
                             {candidate.name}
                           </Link>
-                          {candidate.answers[index]?.option !== null &&
-                          candidate.answers[index]?.weighting !== null ? (
+                          {candidate.answers.sort(
+                            (a, b) => a.question.order - b.question.order
+                          )[index]?.option !== null &&
+                          candidate.answers.sort(
+                            (a, b) => a.question.order - b.question.order
+                          )[index]?.weighting !== null ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <OptionResult
-                                value={candidate.answers[index]?.option!}
-                                type={candidate.answers[index]?.question.type}
+                                value={
+                                  candidate.answers.sort(
+                                    (a, b) =>
+                                      a.question.order - b.question.order
+                                  )[index]?.option!
+                                }
+                                type={
+                                  candidate.answers.sort(
+                                    (a, b) =>
+                                      a.question.order - b.question.order
+                                  )[index]?.question.type
+                                }
                               />
                               <WeightingResult
-                                value={candidate.answers[index]?.weighting!}
+                                value={
+                                  candidate.answers.sort(
+                                    (a, b) =>
+                                      a.question.order - b.question.order
+                                  )[index]?.weighting!
+                                }
                               />
                             </div>
                           ) : (
@@ -199,9 +218,15 @@ export default async function WahlkabineResult({
                               <QuestionUnansweredResult />
                             </div>
                           )}
-                          {candidate.answers[index]?.text && (
+                          {candidate.answers.sort(
+                            (a, b) => a.question.order - b.question.order
+                          )[index]?.text && (
                             <QuestionInfo
-                              text={candidate.answers[index]?.text}
+                              text={
+                                candidate.answers.sort(
+                                  (a, b) => a.question.order - b.question.order
+                                )[index]?.text
+                              }
                             />
                           )}
                         </li>
