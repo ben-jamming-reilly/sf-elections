@@ -28,6 +28,7 @@ model Voter {
   state String?
   isPartyMember Boolean?
   hasAcceptedTos Boolean?
+  createdAt DateTime @default(now())
   answers   VoterQuestionAnswer[]
   candidateMatches VoterCandidateMatch[]
 }

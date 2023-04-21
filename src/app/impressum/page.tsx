@@ -2,7 +2,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Impressum | SPÖ Vorsitzbefragungs-Kabine",
-  description: "SPÖ Vorsitzbefragungs-Kabine",
+  description:
+    "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function Impressumg() {

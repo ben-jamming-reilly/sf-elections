@@ -38,10 +38,13 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   );
 
   return {
-    title: `Ergebnis der Vorsitzbefragungs-Kabine | SPÖ Vorsitz Vorsitzbefragungs-Kabine`,
+    title: `Mein Ergebnis bei der Vorsitzbefragungs-Kabine | SPÖ Vorsitz Vorsitzbefragungs-Kabine`,
     description: `Mein Resultat: ${candidatesWithScore
       .map((c) => `${c.name}: ${c.scorePercentage}%`)
       .join(", ")}`,
+    twitter: {
+      card: "summary_large_image",
+    },
   };
 }
 
