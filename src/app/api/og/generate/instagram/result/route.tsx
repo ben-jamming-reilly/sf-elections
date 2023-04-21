@@ -79,7 +79,7 @@ export async function GET(request: Request) {
               color: "#e62937",
               borderBottom: "4px solid #e62937",
             }}
-            tw="my-6 px-4 text-5xl rounded-md"
+            tw="my-6 font-bold uppercase px-4 text-6xl rounded-md"
           >
             Mein Ergebnis
           </h1>
@@ -127,17 +127,17 @@ export async function GET(request: Request) {
                     style={{
                       background: "#e62937",
                     }}
-                    tw="text-4xl text-left py-3 flex flex-col rounded-md w-full  px-6 text-white"
+                    tw="text-6xl text-left py-3 flex flex-col rounded-md w-full  px-6 text-white"
                   >
                     {candidate.name}
                   </h1>
                   {/* <p tw="flex">{candidate.description}</p> */}
-                  <p tw="text-3xl flex flex-row items-center justify-start">
+                  <p tw="text-5xl flex flex-row items-center justify-start">
                     <span
                       style={{
                         background: "#e62937",
                       }}
-                      tw="py-3 px-4 rounded-md text-white"
+                      tw="py-3 px-4 rounded-md text-white font-bold"
                     >
                       Match: {candidate.scorePercentage}%
                     </span>
