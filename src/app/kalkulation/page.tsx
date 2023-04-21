@@ -25,11 +25,12 @@ export default function Kalkulation() {
           <br />
           Pro Frage wird bis zu 1.15 Punkte für eine*n Kandidat*in zugewiesen.
           Bis zu 1 Punkt für die Antwort und bis zu 0.15 Punkte für die
-          Gewichtung.
+          Relevanz.
           <br />
           <br />
-          Am Ende wird ein Prozentsatz berechnet auf Basis der Anzahl der
-          beantworteten Fragen.
+          Am Ende wird ein Prozentsatz berechnet, der darstellt, wie sehr die
+          Antworten der Nutzer*innen mit jenen der Kandiat*innen
+          übereinstimmen."
         </p>
         <div className="w-full overflow-x-auto">
           <table className="border border-slate-300 dark:border-surface-500 border-separate">
