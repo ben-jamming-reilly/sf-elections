@@ -27,6 +27,8 @@ export async function GET(request: Request) {
       console.error(e);
     });
 
+    console.log(sortedCandidates);
+
   if (!sortedCandidates) {
     return NextResponse.json({ status: 500 });
   }

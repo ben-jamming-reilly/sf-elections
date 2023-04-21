@@ -27,6 +27,8 @@ export async function GET(request: Request) {
       console.error(e);
     });
 
+    console.log(data);
+
   if (!data || !data.candidate || !data.scorePercentage) {
     return NextResponse.json({ status: 404 });
   }
