@@ -16,21 +16,14 @@ const calculateWeightingRelevancy = (
   candidateWeighting: WeightingValueType
 ) => {
   if (voterWeighting === candidateWeighting) return 0.15;
-
-  if (
-    (voterWeighting === 0 && candidateWeighting === 3) ||
-    (voterWeighting === 3 && candidateWeighting === 0)
-  )
-    return 0;
-
   if (
     getWeightingTendency(voterWeighting) ===
     getWeightingTendency(candidateWeighting)
   ) {
     return 0.075;
-  } else {
-    return 0.025;
   }
+
+  return 0;
 };
 
 const calculateMatchForScaleOption = (
@@ -39,19 +32,13 @@ const calculateMatchForScaleOption = (
 ) => {
   if (voterAnswer === candidateAnswer) return 1;
   if (
-    (voterAnswer === -2 && candidateAnswer === 2) ||
-    (voterAnswer === 2 && candidateAnswer === -2)
-  )
-    return 0;
-
-  if (
     getScaleOptionTendency(voterAnswer) ===
     getScaleOptionTendency(candidateAnswer)
   ) {
     return 0.7;
-  } else {
-    return 0.2;
   }
+
+  return 0;
 };
 
 export const calculateScore = (

@@ -60,7 +60,7 @@ export default function Kalkulation() {
                 </td>
                 <td className="p-2 text-center">1</td>
                 <td className="p-2 text-center">0.7</td>
-                <td className="p-2 text-center">0.2</td>
+                <td className="p-2 text-center">0</td>
                 <td className="p-2 text-center">0</td>
               </tr>
               <tr>
@@ -69,7 +69,7 @@ export default function Kalkulation() {
                 </td>
                 <td className="p-2 text-center">0.15</td>
                 <td className="p-2 text-center">0.075</td>
-                <td className="p-2 text-center">0.025</td>
+                <td className="p-2 text-center">0</td>
                 <td className="p-2 text-center">0</td>
               </tr>
             </tbody>
