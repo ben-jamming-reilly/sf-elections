@@ -68,14 +68,14 @@ export default async function CandidateProfile({
             <div
               key={candidate.id}
               className={clsx(
-                "w-full min-w-[250px] max-w-[350px] snap-start rounded-md relative flex flex-col"
+                "w-full min-w-[250px] max-w-[350px] snap-start rounded-md relative flex flex-col overflow-clip"
               )}
             >
               <Link
                 href={`/${candidate.slug}`}
                 className={"flex-grow flex flex-col group"}
               >
-                <div className="transition-all  rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md aspect-square">
+                <div className="transition-all block z-10 relative w-full overflow-clip aspect-square">
                   <Image
                     src={`/${candidate.profileImg}`}
                     alt={`Profilebild von ${candidate.name}`}
@@ -90,9 +90,9 @@ export default async function CandidateProfile({
                 <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
                   {candidate.name}
                 </h2>
-                <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start">
+                {/* <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start">
                   <p className="prose mb-5">{candidate.description}</p>
-                </div>
+                </div> */}
               </Link>
             </div>
           </section>

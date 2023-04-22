@@ -105,9 +105,7 @@ export default async function WahlkabineResultCandidate({
             <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full">
               {candidateWithScore.name}
             </h2>
-            <div className="p-5 border-2 z-20 relative rounded-br-md rounded-bl-md border-t-0 border-brand">
-              <p className="prose mb-5">{candidateWithScore.description}</p>
-
+            <div className="p-5 border-2 z-20 relative items-center flex justify-center rounded-br-md rounded-bl-md border-t-0 border-brand">
               <Link
                 className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
                 href={`/${candidateWithScore.slug}`}
@@ -125,7 +123,7 @@ export default async function WahlkabineResultCandidate({
             {answer.question.category && (
               <QuestionCategoryLabel category={answer.question.category} />
             )}
-            <div className="text-lg">Frage {answer.questionId}:</div>
+            <div className="text-lg">Frage {index + 1}:</div>
             <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-brand">
               {answer.question.title}
             </h2>

@@ -108,9 +108,11 @@ export default async function CandidateComparison({
                   <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
                     {candidate.name}
                   </h2>
-                  <div className="p-5 flex-grow border-2 border-brand rounded-bl-md rounded-br-md flex flex-col justify-between items-start">
-                    <p className="prose mb-5">{candidate.description}</p>
-                    <SecondaryLink href={`/${candidate.slug}`}>
+                  <div className="p-5 border-2 border-brand rounded-bl-md rounded-br-md flex flex-col items-center text-center flex-grow justify-center">
+                    <SecondaryLink
+                      className="flex-grow flex justify-center items-center"
+                      href={`/${candidate.slug}`}
+                    >
                       {`${candidate.name}s Antworten`}
                     </SecondaryLink>
                   </div>

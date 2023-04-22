@@ -108,11 +108,10 @@ export default async function WahlkabineResult({
                     className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow"
                   />
                 </Link>
-                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-1 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
+                <h2 className="text-2xl bg-brand flex-grow flex items-center justify-center text-white font-medium hyphens-auto px-1 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
                   {index + 1}. {candidate.name}
                 </h2>
-                <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start rounded-br-md rounded-bl-md">
-                  <p className="prose mb-5">{candidate.description}</p>
+                <div className="p-5 flex-grow  flex flex-col justify-between items-center rounded-br-md rounded-bl-md border-2 border-brand">
                   <Link
                     className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
                     href={`/kabine/${params.slug}/vergleich/${candidate.slug}`}
@@ -157,10 +156,7 @@ export default async function WahlkabineResult({
                 )}
 
                 <div className="mt-5">
-                  <details
-                    key={`candidate-details-${answer.questionId}`}
-                    className=""
-                  >
+                  <details key={`candidate-details-${answer.questionId}`}>
                     <summary className="cursor-pointer font-semibold py-2 border-gray-800">
                       Antworten der Kandidat*innen:
                     </summary>

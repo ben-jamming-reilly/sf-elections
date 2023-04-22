@@ -34,8 +34,6 @@ export default async function og({
     return NextResponse.json({ status: 404 });
   }
 
-  console.log(candidate);
-
   return new ImageResponse(
     (
       <div
