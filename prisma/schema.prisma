@@ -55,6 +55,7 @@ model CandidateQuestionAnswer {
   option Int?
   weighting Int?
   text String @db.MediumText @default("")
+  changedQuestionDisclaimer String? @db.MediumText
 
   @@index([candidateId, questionId])
   @@index([candidateId])

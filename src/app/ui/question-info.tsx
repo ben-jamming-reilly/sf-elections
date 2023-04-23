@@ -6,9 +6,11 @@ import useMediaQuery from "~/hooks/useMediaQuery";
 export const QuestionInfo = ({
   text,
   open,
+  disclosure,
 }: {
   text: string;
   open?: boolean;
+  disclosure?: string | null;
 }) => {
   // TODO: change open bbased on breakpoint
   const isMobile = useMediaQuery("(max-width: 640px)");
@@ -21,7 +23,14 @@ export const QuestionInfo = ({
         )}
       >
         <summary className="cursor-pointer">Zusätzliche Information</summary>
-        <p className="mt-3 px-3">{text}</p>
+        <p className="mt-3 px-3">
+          {disclosure && (
+            <>
+              <strong>{disclosure}</strong> <br />
+            </>
+          )}
+          {text}
+        </p>
       </details>
     </>
   );

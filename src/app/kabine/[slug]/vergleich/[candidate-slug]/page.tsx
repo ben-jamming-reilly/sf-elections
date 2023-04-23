@@ -211,9 +211,23 @@ export default async function WahlkabineResultCandidate({
                   )}
                   {candidateWithScore.answers.sort(
                     (a, b) => a.question.order - b.question.order
-                  )[index].text && (
-                    <QuestionInfo text={candidate.answers[index].text} />
-                  )}
+                  )[index].text ||
+                  candidateWithScore.answers.sort(
+                    (a, b) => a.question.order - b.question.order
+                  )[index].changedQuestionDisclaimer ? (
+                    <QuestionInfo
+                      text={
+                        candidateWithScore.answers.sort(
+                          (a, b) => a.question.order - b.question.order
+                        )[index].text
+                      }
+                      disclosure={
+                        candidateWithScore.answers.sort(
+                          (a, b) => a.question.order - b.question.order
+                        )[index].changedQuestionDisclaimer
+                      }
+                    />
+                  ) : null}
                 </div>
               </div>
             </li>

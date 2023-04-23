@@ -152,9 +152,13 @@ export default async function CandidateProfile({
                       <QuestionUnansweredResult />
                     </div>
                   )}
-                  {answer.text ? (
+                  {answer.text || answer.changedQuestionDisclaimer ? (
                     <div className=" my-3">
-                      <QuestionInfo open text={answer.text} />
+                      <QuestionInfo
+                        open
+                        text={answer.text}
+                        disclosure={answer.changedQuestionDisclaimer}
+                      />
                     </div>
                   ) : null}
                 </li>
