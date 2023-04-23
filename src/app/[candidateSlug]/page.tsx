@@ -29,6 +29,16 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   return {
     title: `${candidate.name} | SPÖ Vorsitzbefragungs-Kabine`,
     description: `Vorsitzbefragungs-Kabine Antworten von ${candidate.name}`,
+    twitter: {
+      card: "summary_large_image",
+      site: "mitentscheiden.at",
+      images: [
+        {
+          url: `https://mitentscheiden.at/${params.candidateSlug}/opengraph-image`,
+          alt: "SPÖ Vorsitzbefragungs-Kabine",
+        },
+      ],
+    },
   };
 }
 

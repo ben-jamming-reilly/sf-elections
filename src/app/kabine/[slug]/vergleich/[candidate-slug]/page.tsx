@@ -39,6 +39,13 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
     description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
     twitter: {
       card: "summary_large_image",
+      site: "mitentscheiden.at",
+      images: [
+        {
+          url: `https://mitentscheiden.at/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
+          alt: "SPÖ Vorsitzbefragungs-Kabine",
+        },
+      ],
     },
   };
 }

@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
   twitter: {
     card: "summary_large_image",
+    site: "mitentscheiden.at",
+    images: [
+      {
+        url: "https://mitentscheiden.at/opengraph-image",
+        alt: "SPÖ Vorsitzbefragungs-Kabine",
+      },
+    ],
   },
 };
 

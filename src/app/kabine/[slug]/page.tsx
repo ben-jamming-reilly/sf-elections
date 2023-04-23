@@ -44,6 +44,13 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
       .join(", ")}`,
     twitter: {
       card: "summary_large_image",
+      site: "mitentscheiden.at",
+      images: [
+        {
+          url: `https://mitentscheiden.at/${params.slug}/opengraph-image`,
+          alt: "SPÖ Vorsitzbefragungs-Kabine",
+        },
+      ],
     },
   };
 }

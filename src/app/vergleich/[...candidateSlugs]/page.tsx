@@ -11,6 +11,7 @@ import { SecondaryLink } from "~/app/ui/secondary-link";
 import { BackButton } from "~/app/ui/back-button";
 import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import { QuestionInfo } from "~/app/ui/question-info";
+import { BASE_URL } from "~/app/api/og/baseUrl";
 
 export const revalidate = 3600; // 1 hour
 
@@ -37,7 +38,7 @@ export async function generateMetadata({
     openGraph: {
       images: [
         {
-          url: `/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
+          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
             ","
           )}`,
         },
@@ -45,6 +46,15 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
+      site: "mitentscheiden.at",
+      images: [
+        {
+          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
+            ","
+          )}`,
+          alt: "SPÖ Vorsitzbefragungs-Kabine",
+        },
+      ],
     },
   };
 }
