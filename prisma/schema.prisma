@@ -13,15 +13,37 @@ model Candidate {
   slug        String   @unique
   hash        String   @unique
   name        String
+  profileImg String? @unique
   description String    @db.MediumText
   hasFinished  Boolean  @default(false)
   answers   CandidateQuestionAnswer[]
+  voterMatches VoterCandidateMatch[]
 }
 
 model Voter {
   id          Int      @id @default(autoincrement())
   hash        String   @unique
+  age Int?
+  gender String?
+  state String?
+  isPartyMember Boolean?
+  hasAcceptedTos Boolean?
+  createdAt DateTime @default(now())
   answers   VoterQuestionAnswer[]
+  candidateMatches VoterCandidateMatch[]
+}
+
+model VoterCandidateMatch {
+  id          Int      @id @default(autoincrement())
+  voter       Voter    @relation(fields: [voterId], references: [id])
+  voterId     Int
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  candidateId Int
+  scorePercentageRaw       Float
+
+  @@index([voterId, candidateId])
+  @@index([voterId])
+  @@index([candidateId])
 }
 
 model CandidateQuestionAnswer {
@@ -45,8 +67,9 @@ model VoterQuestionAnswer {
   voterId     Int
   question    Question @relation(fields: [questionId], references: [id])
   questionId  Int
-  option Int
-  weighting Int
+  option Int?
+  weighting Int?
+  skipped Boolean @default(false)
 
   @@index([voterId, questionId])
   @@index([voterId])
@@ -56,7 +79,6 @@ model VoterQuestionAnswer {
 enum QuestionType {
   YesNo
   Range
-  Wahlrecht
 }
 
 model Question {
@@ -65,7 +87,7 @@ model Question {
   category   String @default("")
   description String    @db.MediumText @default("")
   type       QuestionType @default(YesNo)
-  order      Int @unique
+  order      Int
   voters     VoterQuestionAnswer[]
   candidates CandidateQuestionAnswer[]
 }

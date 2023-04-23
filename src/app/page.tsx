@@ -1,62 +1,40 @@
-"use client";
+import Image from "next/image";
+import { getCandidates } from "./get-candidates";
+import { QuestionaireButton } from "./questionaire-button";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useQuestionnaireStore } from "~/stores/questionnaire-store";
-import { Loading } from "./ui/loading";
+export const revalidate = 3600; // 1 hour
 
-export default function Home() {
-  const [hasHydrated, setHasHydrated] = useState(false);
-  const [slug, reset] = useQuestionnaireStore((s) => [s.slug, s.reset]);
-
-  useEffect(() => {
-    setHasHydrated(true);
-  }, [hasHydrated]);
+export default async function Home() {
+  // const candidates = await getCandidates();
 
   return (
-    <div>
-      <h1 className="text-3xl">
-        Finde heraus welche:r Kandidat:in für die SPÖ Vorstandswahl 2023 am
-        Besten zu dir passt.
-      </h1>
-      <p className="my-3">
-        Die Wahlkabine ist eine Initiative der Jungen Generation.
-      </p>
+    <div className="flex flex-col h-full">
+      <div>
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 font-brand border-gray-800 dark:border-white">
+          Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am
+          Besten zu dir passt.
+        </h1>
+        <p className="my-3 text-2xl text-center">
+          Die Vorsitzbefragungs-Kabine ist eine Initiative der Jungen Generation
+          Wien.
+        </p>
 
-      {/* <div className="min-h-[60px]">
-        {hasHydrated ? (
-          <>
-            {slug ? (
-              <div className="flex flex-row gap-5">
-                <Link
-                  href={`/wahlkabine/${slug}`}
-                  className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
-                >
-                  Dein Ergebnis
-                </Link>
+        <div className="min-h-[60px] text-center text-xl">
+          <QuestionaireButton />
+        </div>
+      </div>
 
-                <button
-                  onClick={(e) => {
-                    reset();
-                  }}
-                  className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
-                >
-                  Wahlkabine neu starten
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="/wahlkabine"
-                className="bg-brand text-white px-3 py-2 hover:bg-brand/90 active:scale-95 inline-block transition-all rounded-md"
-              >
-                Wahlkabine starten
-              </Link>
-            )}
-          </>
-        ) : (
-          <Loading />
-        )}
-      </div> */}
+      <div className="flex flex-grow justify-end pt-20 items-grow">
+        <Image
+          className="w-full max-w-screen-sm"
+          sizes="(max-width: 640px) 100vw, 640px"
+          src={"/artwork.png"}
+          width={2000}
+          priority
+          height={2000}
+          alt=""
+        />
+      </div>
     </div>
   );
 }
