@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
       site: "mitentscheiden.at",
       images: [
         {
-          url: `https://mitentscheiden.at/${params.slug}/opengraph-image`,
+          url: `https://mitentscheiden.at/kabine/${params.slug}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
         },
       ],
