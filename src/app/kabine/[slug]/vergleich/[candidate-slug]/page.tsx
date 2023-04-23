@@ -125,75 +125,95 @@ export default async function WahlkabineResultCandidate({
       </section>
 
       <ul className="flex flex-col gap-16 py-10">
-        {voterWithAnswers.answers.map((answer, index) => (
-          <li key={answer.id} className="">
-            {answer.question.category && (
-              <QuestionCategoryLabel category={answer.question.category} />
-            )}
-            <div className="text-lg">Frage {index + 1}:</div>
-            <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-brand">
-              {answer.question.title}
-            </h2>
+        {voterWithAnswers.answers
+          .sort((a, b) => a.question.order - b.question.order)
+          .map((answer, index) => (
+            <li key={answer.id} className="">
+              {answer.question.category && (
+                <QuestionCategoryLabel category={answer.question.category} />
+              )}
+              <div className="text-lg">Frage {index + 1}:</div>
+              <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-brand">
+                {answer.question.title}
+              </h2>
 
-            <div className="grid grid-cols-1 py-5  gap-5">
-              <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md space-y-4">
-                <div className="text-center inline-flex items-center  justify-center font-semibold -translate-x-[15px]">
-                  <span className="h-[30px] w-[30px]" /> Deine Antwort:
+              <div className="grid grid-cols-1 py-5  gap-5">
+                <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md space-y-4">
+                  <div className="text-center inline-flex items-center  justify-center font-semibold -translate-x-[15px]">
+                    <span className="h-[30px] w-[30px]" /> Deine Antwort:
+                  </div>
+                  {answer.option !== null && answer.weighting !== null ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <OptionResult
+                        value={answer.option}
+                        type={answer.question.type}
+                      />
+                      <WeightingResult value={answer.weighting!} />
+                    </div>
+                  ) : (
+                    <div className="w-full">
+                      <QuestionUnansweredResult />
+                    </div>
+                  )}
                 </div>
-                {answer.option !== null && answer.weighting !== null ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <OptionResult
-                      value={answer.option}
-                      type={answer.question.type}
-                    />
-                    <WeightingResult value={answer.weighting!} />
-                  </div>
-                ) : (
-                  <div className="w-full">
-                    <QuestionUnansweredResult />
-                  </div>
-                )}
-              </div>
 
-              <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md space-y-4">
-                <Link
-                  href={`/${candidate.slug}`}
-                  className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
-                >
-                  <Image
-                    src={`/${candidateWithScore.profileImg}`}
-                    width={30}
-                    height={30}
-                    alt={`${candidateWithScore.name} Profilbild`}
-                    className="rounded-full"
-                  />
-                  <strong className="font-semibold">
-                    {candidateWithScore.name}:
-                  </strong>
-                </Link>
-                {candidateWithScore.answers[index].option !== null &&
-                candidateWithScore.answers[index].weighting !== null ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <OptionResult
-                      value={candidateWithScore.answers[index].option!}
-                      type={candidateWithScore.answers[index]?.question.type}
+                <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md space-y-4">
+                  <Link
+                    href={`/${candidate.slug}`}
+                    className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                  >
+                    <Image
+                      src={`/${candidateWithScore.profileImg}`}
+                      width={30}
+                      height={30}
+                      alt={`${candidateWithScore.name} Profilbild`}
+                      className="rounded-full"
                     />
-                    <WeightingResult
-                      value={candidateWithScore.answers[index].weighting!}
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full">
-                    <QuestionUnansweredResult />
-                  </div>
-                )}
-                {candidateWithScore.answers[index].text && (
-                  <QuestionInfo text={candidate.answers[index].text} />
-                )}
+                    <strong className="font-semibold">
+                      {candidateWithScore.name}:
+                    </strong>
+                  </Link>
+                  {candidateWithScore.answers.sort(
+                    (a, b) => a.question.order - b.question.order
+                  )[index].option !== null &&
+                  candidateWithScore.answers.sort(
+                    (a, b) => a.question.order - b.question.order
+                  )[index].weighting !== null ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <OptionResult
+                        value={
+                          candidateWithScore.answers.sort(
+                            (a, b) => a.question.order - b.question.order
+                          )[index].option!
+                        }
+                        type={
+                          candidateWithScore.answers.sort(
+                            (a, b) => a.question.order - b.question.order
+                          )[index]?.question.type
+                        }
+                      />
+                      <WeightingResult
+                        value={
+                          candidateWithScore.answers.sort(
+                            (a, b) => a.question.order - b.question.order
+                          )[index].weighting!
+                        }
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full">
+                      <QuestionUnansweredResult />
+                    </div>
+                  )}
+                  {candidateWithScore.answers.sort(
+                    (a, b) => a.question.order - b.question.order
+                  )[index].text && (
+                    <QuestionInfo text={candidate.answers[index].text} />
+                  )}
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
 
       <div className="flex sm:flex-row flex-col gap-5 pt-5 items-center justify-center">
