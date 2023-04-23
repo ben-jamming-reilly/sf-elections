@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Image from "next/image";
+import EasterEgg from "./easter-egg";
 
 export const metadata: Metadata = {
   title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
@@ -35,10 +36,7 @@ export default function RootLayout({
         <meta name="msapplication-navbutton-color" content="#e62937" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#e62937" />
         <link rel="icon" href="/favicon.ico" />
-        <Script
-          data-domain="spoe-wahlkabine.vercel.app"
-          src="/js/script.js"
-        ></Script>
+        <Script data-domain="mitentscheiden.at" src="/js/script.js"></Script>
       </head>
       <body className={interFont.variable}>
         <div className={`w-full min-h-full z-10 flex flex-col`}>
@@ -46,9 +44,9 @@ export default function RootLayout({
             <div className="mx-auto lg:w-[1000px] flex flex-col md:flex-row items-center md:items-end justify-between font-brand gap-y-2 p-3">
               <Link
                 href="/"
-                className="text-2xl [@media(min-width:300px)]:text-3xl w-full md:w-fit py-3 md:py-0 bg-brand fixed top-0 md:static text-center leading-none font-bold focus-visible:outline-brand outline-offset-2"
+                className="text-2xl [@media(min-width:300px)]:text-3xl w-full md:w-fit py-3 md:py-0 bg-brand fixed top-0 md:static text-center leading-none font-bold focus-visible:outline-brand outline-offset-2 hyphens-manual"
               >
-                SPÖ Vorsitzbefragungs-Kabine
+                SPÖ Vorsitz&shy;befragungs-Kabine
               </Link>
               <div className="flex md:mt-1 items-end mt-12">
                 <span className="mr-2 md:mx-2 [@media(min-width:300px)]:block hidden">
@@ -124,6 +122,7 @@ export default function RootLayout({
             </footer>
           </div>
         </div>
+        <EasterEgg />
       </body>
     </html>
   );
