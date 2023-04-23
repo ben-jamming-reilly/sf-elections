@@ -12,11 +12,16 @@ export const metadata: Metadata = {
     "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
   twitter: {
     card: "summary_large_image",
+    title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
+    description:
+      "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
     site: "mitentscheiden.at",
     images: [
       {
         url: "https://mitentscheiden.at/opengraph-image",
         alt: "SPÖ Vorsitzbefragungs-Kabine",
+        width: 1200,
+        height: 630,
       },
     ],
   },

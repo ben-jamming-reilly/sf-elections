@@ -47,12 +47,20 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       site: "mitentscheiden.at",
+      title: `Vergleich zwischen ${candidates
+        .map((c) => c.name)
+        .join(" und ")}`,
+      description: `Vergleich zwischen ${candidates
+        .map((c) => c.name)
+        .join(" und ")}`,
       images: [
         {
           url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
             ","
           )}`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
+          width: 1200,
+          height: 630,
         },
       ],
     },

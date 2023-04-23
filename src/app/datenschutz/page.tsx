@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "mitentscheiden.at",
+    title: "Datenschutz | SPÖ Vorsitzbefragungs-Kabine",
+    description:
+      "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
     images: [
       {
         url: "https://mitentscheiden.at/opengraph-image",

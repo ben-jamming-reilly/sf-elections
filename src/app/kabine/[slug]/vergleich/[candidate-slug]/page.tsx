@@ -40,10 +40,14 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
     twitter: {
       card: "summary_large_image",
       site: "mitentscheiden.at",
+      title: `Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
+      description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
       images: [
         {
           url: `https://mitentscheiden.at/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
+          width: 1200,
+          height: 630,
         },
       ],
     },
