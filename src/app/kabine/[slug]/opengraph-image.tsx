@@ -56,7 +56,7 @@ export default async function og({ params }: { params: { slug: string } }) {
                 }}
               >
                 <img
-                  tw="rounded-sm block"
+                  tw="rounded-sm flex"
                   src={`${BASE_URL}/og_assets/${candidate.profileImg}`}
                   width={300}
                   height={300}

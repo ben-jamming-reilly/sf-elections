@@ -49,7 +49,7 @@ export default async function og() {
                 }}
               >
                 <img
-                  className="rounded-full block"
+                  tw="rounded-full flex"
                   src={`${BASE_URL}/og_assets/mini/${candidate.profileImg}`}
                   width={100}
                   height={100}
