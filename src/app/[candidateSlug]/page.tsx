@@ -12,8 +12,9 @@ import { BackButton } from "../ui/back-button";
 import { getCandidates } from "../get-candidates";
 import { SecondaryLink } from "../ui/secondary-link";
 import { QuestionInfo } from "../ui/question-info";
+import { constructComparision } from "../vergleich/[...candidateSlugs]/construct-comparision";
 
-export const revalidate = 3600; // 1 hour
+export const revalidate = false;
 
 export type CandidateProfileProps = {
   params: { candidateSlug: string };
@@ -172,4 +173,11 @@ export default async function CandidateProfile({
       )}
     </section>
   );
+}
+
+
+export async function generateStaticParams() {
+  const candidates = await getCandidates();
+
+  return candidates.map((c) => ({  candidateSlug: c.slug }));
 }

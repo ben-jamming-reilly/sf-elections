@@ -12,8 +12,10 @@ import { BackButton } from "~/app/ui/back-button";
 import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import { QuestionInfo } from "~/app/ui/question-info";
 import { BASE_URL } from "~/app/api/og/baseUrl";
+import { getCandidates } from "~/app/get-candidates";
+import { constructComparision } from "./construct-comparision";
 
-export const revalidate = 3600; // 1 hour
+export const revalidate = false;
 
 export type CandidateComparisonProps = {
   params: {
@@ -238,4 +240,16 @@ export default async function CandidateComparison({
       </div>
     </>
   );
+}
+
+export async function generateStaticParams() {
+  const candidates = await getCandidates();
+
+    const comboPairs = constructComparision(candidates.sort(
+
+    (c) => Math.random() - Math.random()
+  ))
+
+
+  return comboPairs.map((c) => ({ params: { candidateSlug: c.slug } }))
 }
