@@ -39,6 +39,7 @@ export default async function Home() {
             </li>
           ))}
         </ul>
+        
 
           <p className="text-xl">
           und vergleichen sie untereinander
