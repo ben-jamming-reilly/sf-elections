@@ -162,6 +162,4 @@ const ogTypes = {
   },
 } as const;
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = 'edge'

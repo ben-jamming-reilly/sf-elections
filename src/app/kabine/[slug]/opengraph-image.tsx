@@ -154,6 +154,4 @@ export default async function og({ params }: { params: { slug: string } }) {
   );
 }
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = 'edge'
