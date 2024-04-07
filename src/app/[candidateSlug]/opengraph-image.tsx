@@ -128,6 +128,4 @@ export default async function og({
   );
 }
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = 'edge'

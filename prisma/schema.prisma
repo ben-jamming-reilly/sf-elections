@@ -1,45 +1,45 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Candidate {
-  id          Int      @id @default(autoincrement())
-  slug        String   @unique
-  hash        String   @unique
-  name        String
-  profileImg String? @unique
-  description String    @db.MediumText
-  hasFinished  Boolean  @default(false)
-  answers   CandidateQuestionAnswer[]
+  id           Int                       @id @default(autoincrement())
+  slug         String                    @unique
+  hash         String                    @unique
+  name         String
+  profileImg   String?                   @unique
+  description  String
+  hasFinished  Boolean                   @default(false)
+  answers      CandidateQuestionAnswer[]
   voterMatches VoterCandidateMatch[]
 }
 
 model Voter {
-  id          Int      @id @default(autoincrement())
-  hash        String   @unique
-  age Int?
-  gender String?
-  state String?
-  isPartyMember Boolean?
-  hasAcceptedTos Boolean?
-  createdAt DateTime @default(now())
-  answers   VoterQuestionAnswer[]
+  id               Int                   @id @default(autoincrement())
+  hash             String                @unique
+  age              Int?
+  gender           String?
+  state            String?
+  isPartyMember    Boolean?
+  hasAcceptedTos   Boolean?
+  createdAt        DateTime              @default(now())
+  answers          VoterQuestionAnswer[]
   candidateMatches VoterCandidateMatch[]
 }
 
 model VoterCandidateMatch {
-  id          Int      @id @default(autoincrement())
-  voter       Voter    @relation(fields: [voterId], references: [id])
-  voterId     Int
-  candidate   Candidate @relation(fields: [candidateId], references: [id])
-  candidateId Int
-  scorePercentageRaw       Float
+  id                 Int       @id @default(autoincrement())
+  voter              Voter     @relation(fields: [voterId], references: [id])
+  voterId            Int
+  candidate          Candidate @relation(fields: [candidateId], references: [id])
+  candidateId        Int
+  scorePercentageRaw Float
 
   @@index([voterId, candidateId])
   @@index([voterId])
@@ -47,15 +47,15 @@ model VoterCandidateMatch {
 }
 
 model CandidateQuestionAnswer {
-  id          Int      @id @default(autoincrement())
-  candidate       Candidate    @relation(fields: [candidateId], references: [id])
-  candidateId     Int
-  question    Question @relation(fields: [questionId], references: [id])
-  questionId  Int
-  option Int?
-  weighting Int?
-  text String @db.MediumText @default("")
-  changedQuestionDisclaimer String? @db.MediumText
+  id                        Int       @id @default(autoincrement())
+  candidate                 Candidate @relation(fields: [candidateId], references: [id])
+  candidateId               Int
+  question                  Question  @relation(fields: [questionId], references: [id])
+  questionId                Int
+  option                    Int?
+  weighting                 Int?
+  text                      String    @default("")
+  changedQuestionDisclaimer String?
 
   @@index([candidateId, questionId])
   @@index([candidateId])
@@ -63,32 +63,27 @@ model CandidateQuestionAnswer {
 }
 
 model VoterQuestionAnswer {
-  id          Int      @id @default(autoincrement())
-  voter       Voter    @relation(fields: [voterId], references: [id])
-  voterId     Int
-  question    Question @relation(fields: [questionId], references: [id])
-  questionId  Int
-  option Int?
-  weighting Int?
-  skipped Boolean @default(false)
+  id         Int      @id @default(autoincrement())
+  voter      Voter    @relation(fields: [voterId], references: [id])
+  voterId    Int
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+  option     Int?
+  weighting  Int?
+  skipped    Boolean  @default(false)
 
   @@index([voterId, questionId])
   @@index([voterId])
   @@index([questionId])
 }
 
-enum QuestionType {
-  YesNo
-  Range
-}
-
 model Question {
-  id         Int      @id @default(autoincrement())
-  title      String @db.MediumText
-  category   String @default("")
-  description String    @db.MediumText @default("")
-  type       QuestionType @default(YesNo)
-  order      Int
-  voters     VoterQuestionAnswer[]
-  candidates CandidateQuestionAnswer[]
+  id          Int                       @id @default(autoincrement())
+  title       String
+  category    String                    @default("")
+  description String                    @default("")
+  type        String                    @default("YesNo")
+  order       Int
+  voters      VoterQuestionAnswer[]
+  candidates  CandidateQuestionAnswer[]
 }
