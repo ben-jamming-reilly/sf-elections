@@ -3,19 +3,19 @@ import { VoterQuestionnaire } from "./voter-questionnaire";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
+  title: "EU-Wahlinfos 2024 – andereseits.org",
   description:
     "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
   twitter: {
     card: "summary_large_image",
-    site: "mitentscheiden.at",
-    title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
+    site: "andererseits.org",
+    title: "EU-Wahlinfos 2024 – andereseits.org",
     description:
       "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
     images: [
       {
-        url: "https://mitentscheiden.at/opengraph-image",
-        alt: "SPÖ Vorsitzbefragungs-Kabine",
+        url: "https://andererseits.org/wahlinfos/opengraph-image",
+        alt: "EU-Wahlinfos 2024 – andereseits.org",
         width: 1200,
         height: 630,
       },

@@ -17,9 +17,9 @@
 @layer base {
   :root {
     --color-font: #ffffff;
-    --color-brand: #e62937;
-    --color-brand-purple: #4a1c6b;
-    --color-brand-yellow: #ffe595;
+    --color-brand: #016956;
+    --color-brand-purple: #DDE8E8;  /* #4a1c6b; */
+    --color-brand-yellow: #FEF9CA;/* #ffe595; */
 
     /** CSS DARK THEME PRIMARY COLORS */
     --color-primary-100: #e62937;

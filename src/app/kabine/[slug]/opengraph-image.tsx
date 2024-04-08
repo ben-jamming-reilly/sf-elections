@@ -1,13 +1,15 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import clsx from "clsx";
-import { ImageResponse, NextResponse } from "next/server";
+import { ImageResponse } from "next/og";
+import { NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { FetchCandidatesWithScoresResponse } from "~/app/api/og/fetch-candidates-with-scores/route";
 import { boldFont, regularFont } from "~/app/api/og/fonts";
 
 export const size = { width: 1200, height: 600 };
-export const alt =
-  "SPÖ Vorsitzbefragungs-Kabine – Finde heraus welche*r Kandidat*in am besten zu dir passt!";
+export const alt = "EU-Wahlinfo 2024 – andererseits.org";
 
 export const contentType = "image/png";
 
@@ -117,7 +119,7 @@ export default async function og({ params }: { params: { slug: string } }) {
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
           >
-            mitentscheiden.at
+            andererseits.org/wahlinfos
           </div>
           <div tw="flex mr-2 mb-2 absolute bottom-0 right-0 text-white text-3xl">
             <img
@@ -154,4 +156,4 @@ export default async function og({ params }: { params: { slug: string } }) {
   );
 }
 
-export const runtime = 'edge'
+export const runtime = "edge";

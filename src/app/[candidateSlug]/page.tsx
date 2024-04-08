@@ -28,15 +28,15 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   }
 
   return {
-    title: `${candidate.name} | SPÖ Vorsitzbefragungs-Kabine`,
-    description: `Vorsitzbefragungs-Kabine Antworten von ${candidate.name}`,
+    title: `${candidate.name} | EU-Wahlinfos 2024`,
+    description: `15 Fragen beantwortet von ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
-      site: "mitentscheiden.at",
+      site: "andererseits.org/",
       images: [
         {
-          url: `https://mitentscheiden.at/${params.candidateSlug}/opengraph-image`,
-          alt: "SPÖ Vorsitzbefragungs-Kabine",
+          url: `https://andererseits.org/wahlinfos/${params.candidateSlug}/opengraph-image`,
+          alt: "EU-Wahlinfos 2024",
         },
       ],
     },
@@ -175,9 +175,8 @@ export default async function CandidateProfile({
   );
 }
 
-
 export async function generateStaticParams() {
   const candidates = await getCandidates();
 
-  return candidates.map((c) => ({  candidateSlug: c.slug }));
+  return candidates.map((c) => ({ candidateSlug: c.slug }));
 }

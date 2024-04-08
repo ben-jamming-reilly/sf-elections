@@ -7,19 +7,17 @@ import Image from "next/image";
 import EasterEgg from "./easter-egg";
 
 export const metadata: Metadata = {
-  title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
-  description:
-    "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
+  title: "EU-Wahlinfos 2024 – andererseits.org",
+  description: "",
   twitter: {
     card: "summary_large_image",
-    title: "SPÖ Vorsitzbefragungs-Kabine | Junge Generation Wien",
-    description:
-      "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
-    site: "mitentscheiden.at",
+    title: "EU-Wahlinfos 2024 – andererseits.org",
+    description: "",
+    site: "andererseits.org",
     images: [
       {
-        url: "https://mitentscheiden.at/opengraph-image",
-        alt: "SPÖ Vorsitzbefragungs-Kabine",
+        url: "andererseits.org/wahlinfos/opengraph-image",
+        alt: "EU-Wahlinfos 2024",
         width: 1200,
         height: 630,
       },
@@ -53,25 +51,21 @@ export default function RootLayout({
       <body className={interFont.variable}>
         <div className={`w-full min-h-full z-10 flex flex-col`}>
           <header className="w-full md:sticky z-50 top-0 bg-brand text-white mb-5">
-            <div className="mx-auto lg:w-[1000px] flex flex-col md:flex-row items-center md:items-end justify-between font-brand gap-y-2 p-3">
+            <div className="mx-auto lg:w-[1000px] flex flex-col md:flex-row items-center justify-between font-brand gap-y-2 px-3 py-4">
               <Link
                 href="/"
                 className="text-2xl [@media(min-width:300px)]:text-3xl w-full md:w-fit py-3 md:py-0 bg-brand fixed top-0 md:static text-center leading-none font-bold focus-visible:outline-brand outline-offset-2 hyphens-manual"
               >
-                SPÖ Vorsitz&shy;befragungs-Kabine
+                EU-Wahlinfos 2024
               </Link>
               <div className="flex md:mt-1 items-end mt-12">
-                <span className="mr-2 md:mx-2 [@media(min-width:300px)]:block hidden">
-                  powered by
-                </span>
                 <a
-                  target="_blank"
                   rel="norefeerer noopener"
-                  className="focus-visible:outline-brand outline-offset-2"
-                  href="https://junge-generation.at/"
+                  className="focus-visible:outline-brand bg-white px-2 py-1 outline-offset-2"
+                  href="https://andererseits.org"
                 >
                   <Image
-                    src="/icon-block-white.png"
+                    src="/andererseits-logo.svg"
                     height={36}
                     priority
                     width={181.83}
@@ -83,34 +77,20 @@ export default function RootLayout({
             </div>
           </header>
           <div className="lg:w-[1000px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
-            <main className="flex-grow px-5">{children}</main>
+            <main className="flex-grow px-5 py-10">{children}</main>
             <footer className="w-full flex flex-col gap-3 justify-center items-center py-5 border-t-2 border-brand">
               <a
-                target="_blank"
                 rel="norefeerer noopener"
                 className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
-                href="https://junge-generation.at/"
+                href="https://andererseits.org/"
               >
-                Made by{" "}
-                <span className="font-brand font-bold">
-                  Junge Generation Wien
-                </span>
+                <span className="font-brand font-bold">andererseits.org</span>
               </a>
               <ul className="flex flex-col gap-3 items-center justify-center sm:flex-row flex-wrap">
                 <li>
-                  <a
-                    target="_blank"
-                    rel="norefeerer noopener"
-                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
-                    href="https://www.spoe.at"
-                  >
-                    SPÖ
-                  </a>
-                </li>
-                <li>
                   <Link
                     className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
-                    href="/impressum"
+                    href="https://andererseits.org/impressum/"
                   >
                     Impressum
                   </Link>
@@ -118,17 +98,9 @@ export default function RootLayout({
                 <li>
                   <Link
                     className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
-                    href="/datenschutz"
+                    href="https://andererseits.org/datenschutz/"
                   >
                     Datenschutz
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
-                    href="/kalkulation"
-                  >
-                    Kalkulation
                   </Link>
                 </li>
               </ul>

@@ -48,7 +48,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: "mitentscheiden.at",
+      site: "andererseits.org",
       title: `Vergleich zwischen ${candidates
         .map((c) => c.name)
         .join(" und ")}`,
@@ -245,11 +245,9 @@ export default async function CandidateComparison({
 export async function generateStaticParams() {
   const candidates = await getCandidates();
 
-    const comboPairs = constructComparision(candidates.sort(
+  const comboPairs = constructComparision(
+    candidates.sort((c) => Math.random() - Math.random())
+  );
 
-    (c) => Math.random() - Math.random()
-  ))
-
-
-  return comboPairs.map((c) => ({ params: { candidateSlug: c.slug } }))
+  return comboPairs.map((c) => ({ params: { candidateSlug: c.slug } }));
 }

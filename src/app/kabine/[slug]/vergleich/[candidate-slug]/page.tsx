@@ -35,16 +35,16 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   );
 
   return {
-    title: `Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
+    title: `Vergleich mit ${candidateWithScore.name} - andererseits.org`,
     description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
     twitter: {
       card: "summary_large_image",
-      site: "mitentscheiden.at",
-      title: `Vergleich mit ${candidateWithScore.name} | SPÖ Vorsitz Wahlkabine`,
+      site: "andererseits.org",
+      title: `Vergleich mit ${candidateWithScore.name} - andererseits.org`,
       description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
       images: [
         {
-          url: `https://mitentscheiden.at/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
+          url: `https://andererseits.org/wahlinfos/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
           width: 1200,
           height: 630,

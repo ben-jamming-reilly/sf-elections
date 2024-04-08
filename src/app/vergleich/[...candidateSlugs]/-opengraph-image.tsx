@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import { ImageResponse } from "next/server";
 import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
 import { CandidateComparisonProps } from "./page";
+import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 600 };
 export const alt = "About Acme";
@@ -29,7 +29,7 @@ export default async function og({ params }: CandidateComparisonProps) {
         }}
       >
         {candidates.map((candidate) => (
-          <div tw="flex flex-col">
+          <div key={candidate.id} tw="flex flex-col">
             <div
               style={{
                 width: 400,

@@ -36,7 +36,7 @@ export const QuestionaireButton = () => {
                 }}
               >
                 <ArrowPathRoundedSquareIcon className="w-5 h-5 inline ml-1 stroke-2" />
-                Reset
+                Neustarten
               </button>
             </div>
           ) : (
@@ -45,7 +45,7 @@ export const QuestionaireButton = () => {
               className="bg-brand text-white inline-flex items-center justify-center gap-1 px-3 py-2 hover:bg-brand/90 active:scale-95 transition-all rounded-md"
             >
               <ArrowRightIcon className="w-5 h-5 inline ml-1 stroke-2" />
-              Kabine starten
+              Zu den Fragen
             </Link>
           )}
         </>

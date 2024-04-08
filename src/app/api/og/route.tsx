@@ -124,7 +124,7 @@ const ogTypes = {
               }}
               tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
             >
-              mitentscheiden.at
+              andererseits.org/wahlinfos
             </div>
             <div tw="flex mr-2 mb-2 absolute bottom-0 right-0 text-white text-3xl">
               <img
@@ -162,4 +162,4 @@ const ogTypes = {
   },
 } as const;
 
-export const runtime = 'edge'
+export const runtime = "edge";

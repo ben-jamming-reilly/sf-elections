@@ -44,14 +44,14 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
       .join(", ")}`,
     twitter: {
       card: "summary_large_image",
-      site: "mitentscheiden.at",
+      site: "andererseits.org",
       title: `Mein Ergebnis bei der Vorsitzbefragungs-Kabine | SPÖ Vorsitz Vorsitzbefragungs-Kabine`,
       description: `Mein Resultat: ${candidatesWithScore
         .map((c) => `${c.name}: ${c.scorePercentage}%`)
         .join(", ")}`,
       images: [
         {
-          url: `https://mitentscheiden.at/kabine/${params.slug}/opengraph-image`,
+          url: `https://andererseits.org/wahlinfos/kabine/${params.slug}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
           width: 1200,
           height: 630,

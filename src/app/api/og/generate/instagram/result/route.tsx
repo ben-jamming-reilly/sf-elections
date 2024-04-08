@@ -1,10 +1,13 @@
-import { ImageResponse, NextResponse } from "next/server";
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+import { NextResponse } from "next/server";
 import { BASE_URL } from "../../../baseUrl";
 import { FetchCandidateBySlugResponse } from "../../../fetch-candidate-by-slug/route";
 import { cacheHeader } from "pretty-cache-header";
 import { FetchCandidatesWithScoresResponse } from "../../../fetch-candidates-with-scores/route";
 import clsx from "clsx";
 import { boldFont, regularFont } from "../../../fonts";
+import { ImageResponse } from "next/og";
 
 export async function GET(request: Request) {
   const [regularFontData, boldFontData] = await Promise.all([
@@ -27,7 +30,7 @@ export async function GET(request: Request) {
       console.error(e);
     });
 
-    console.log(sortedCandidates);
+  console.log(sortedCandidates);
 
   if (!sortedCandidates) {
     return NextResponse.json({ status: 500 });
@@ -52,7 +55,7 @@ export async function GET(request: Request) {
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-6xl"
           >
-            mitentscheiden.at
+            andererseits.org/wahlinfos
           </div>
         </div>
         <div tw="flex items-center absolute bottom-10 left-10 justify-center ml-4 mb-3 flex ">
@@ -178,4 +181,4 @@ export async function GET(request: Request) {
   );
 }
 
-export const runtime = 'edge'
+export const runtime = "edge";
