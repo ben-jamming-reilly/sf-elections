@@ -1,18 +1,12 @@
-import { QuestionType } from "@prisma/client";
 import { YesNoResult } from "./yes-no-result";
-import { RangeResult } from "./range-result";
+import { QuestionType, QuestionTypes } from "../utils.index";
 
 export const OptionResult = ({
   type,
   value,
 }: {
-  type: QuestionType;
+  type: string;
   value: number;
 }) => {
-  return (
-    <>
-      {type === "YesNo" && <YesNoResult value={value} />}
-      {type === "Range" && <RangeResult value={value} />}
-    </>
-  );
+  return <>{type === QuestionTypes.YesNo && <YesNoResult value={value} />}</>;
 };

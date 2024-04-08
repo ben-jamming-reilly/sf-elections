@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: AdriaGrotesk;
-  src: url("/fonts/AdriaGrotesk-Regular.otf");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: AdriaGrotesk;
-  src: url("/fonts/AdriaGrotesk-Black.otf");
-  font-weight: bold;
-}
 
 @layer base {
   :root {

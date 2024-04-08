@@ -1,6 +1,6 @@
-import { QuestionType } from "@prisma/client";
+import { QuestionType, QuestionTypes } from "~/app/utils.index";
 
-export type ScaleOptionValueType = typeof options[number]["value"];
+export type ScaleOptionValueType = (typeof options)[number]["value"];
 
 export const getScaleOptionTendency = (option: ScaleOptionValueType) => {
   return option > 0 ? "positive" : "negative";
@@ -36,14 +36,12 @@ export const yesNoOptions = [
   },
 ] as const;
 
-export const getOptionsBasedOnType = (type: QuestionType) => {
+export const getOptionsBasedOnType = (type: string) => {
   switch (type) {
-    case "YesNo":
+    case QuestionTypes.YesNo:
       return yesNoOptions;
-    case "Range":
-      return options;
     default:
-      return options;
+      return yesNoOptions;
   }
 };
 
@@ -62,7 +60,7 @@ export const getWeightingTendency = (weighting: WeightingValueType) => {
   if (weighting === 2 || weighting === 3) return "positive";
 };
 
-export type WeightingValueType = typeof weightings[number]["value"];
+export type WeightingValueType = (typeof weightings)[number]["value"];
 
 export const weightings = [
   {

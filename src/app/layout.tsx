@@ -1,10 +1,11 @@
 import Link from "next/link";
 import "./globals.css";
 import { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import Script from "next/script";
 import Image from "next/image";
 import EasterEgg from "./easter-egg";
+import clsx from "clsx";
 
 export const metadata: Metadata = {
   title: "EU-Wahlinfos 2024 – andererseits.org",
@@ -32,6 +33,13 @@ const interFont = Inter({
   subsets: ["latin"],
 });
 
+const loraFont = Lora({
+  weight: ["400", "500", "600", "700"],
+  display: "block",
+  variable: "--font-lora",
+  subsets: ["latin"],
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -48,7 +56,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <Script data-domain="mitentscheiden.at" src="/js/script.js"></Script>
       </head>
-      <body className={interFont.variable}>
+      <body className={clsx(interFont.variable, loraFont.variable)}>
         <div className={`w-full min-h-full z-10 flex flex-col`}>
           <header className="w-full md:sticky z-50 top-0 bg-brand text-white mb-5">
             <div className="mx-auto lg:w-[1000px] flex flex-col md:flex-row items-center justify-between font-brand gap-y-2 px-3 py-4">

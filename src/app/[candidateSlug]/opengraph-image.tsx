@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import clsx from "clsx";
-import { ImageResponse, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { cacheHeader } from "pretty-cache-header";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { FetchCandidatesWithScoresResponse } from "~/app/api/og/fetch-candidates-with-scores/route";
 import { FetchCandidateBySlugResponse } from "../api/og/fetch-candidate-by-slug/route";
 import { boldFont, regularFont } from "../api/og/fonts";
+import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 600 };
 export const alt = "EU-Wahlinfo 2024 – andererseits.org";

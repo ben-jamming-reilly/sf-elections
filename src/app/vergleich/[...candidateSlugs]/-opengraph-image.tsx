@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { notFound } from "next/navigation";
 import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
 import { CandidateComparisonProps } from "./page";
@@ -24,7 +26,7 @@ export default async function og({ params }: CandidateComparisonProps) {
         tw="flex flex-row justify-center items-center w-full h-full bg-white"
         style={{
           border: "20px solid #e62937",
-          fontFamily: "AdriaGrotesk, Inter, sans-serif",
+          fontFamily: "Lora, Inter, sans-serif",
           gap: "50px",
         }}
       >

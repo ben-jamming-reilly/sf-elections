@@ -38,7 +38,7 @@ module.exports = {
           "Arial",
           "sans-serif",
         ],
-        brand: ["AdriaGrotesk"],
+        brand: ["var(--font-lora)"],
       },
     },
   },
