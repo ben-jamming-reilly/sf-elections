@@ -4,14 +4,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "EU-Wahlinfos 2024 – andereseits.org",
-  description:
-    "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
+  description: "",
   twitter: {
     card: "summary_large_image",
     site: "andererseits.org",
     title: "EU-Wahlinfos 2024 – andereseits.org",
-    description:
-      "Finde heraus welche*r Kandidat*in für die SPÖ Vorsitzbefragung 2023 am Besten zu dir passt.",
+    description: "",
     images: [
       {
         url: "https://andererseits.org/wahlinfos/opengraph-image",

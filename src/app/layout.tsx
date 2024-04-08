@@ -89,6 +89,7 @@ export default function RootLayout({
               <ul className="flex flex-col gap-3 items-center justify-center sm:flex-row flex-wrap">
                 <li>
                   <Link
+                    prefetch
                     className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                     href="https://andererseits.org/impressum/"
                   >
@@ -97,6 +98,7 @@ export default function RootLayout({
                 </li>
                 <li>
                   <Link
+                    prefetch
                     className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                     href="https://andererseits.org/datenschutz/"
                   >

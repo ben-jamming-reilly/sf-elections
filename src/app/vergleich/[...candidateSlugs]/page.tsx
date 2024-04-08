@@ -60,7 +60,7 @@ export async function generateMetadata({
           url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
             ","
           )}`,
-          alt: "SPÖ Vorsitzbefragungs-Kabine",
+          alt: "EU-Whalinfos 2024 – andereseits.org",
           width: 1200,
           height: 630,
         },
@@ -95,7 +95,7 @@ export default async function CandidateComparison({
             title={`Vergleich zwischen ${randomCandidates
               .map((c) => c.name)
               .join(" und ")}`}
-            text="Schau dir die Antworten der Kandidat*innen an für die SPÖ Vorsitzbefragung Kabine an."
+            text="EU-Wahlinfos 2024 – andereseits.org"
           >
             Seite teilen
           </ShareButton>

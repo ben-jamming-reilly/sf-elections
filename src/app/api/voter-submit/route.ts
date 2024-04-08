@@ -27,7 +27,6 @@ const dataForStatsSchema = z.object({
   age: z.number().min(0).max(120).nullable().optional(),
   gender: z.string().nullable().optional(),
   state: z.string().nullable().optional(),
-  isPartyMember: z.boolean().nullable().optional(),
 });
 
 export async function POST(request: Request) {
@@ -59,7 +58,6 @@ export async function POST(request: Request) {
         age: validatedDataForStats.age ?? null,
         state: validatedDataForStats.state ?? null,
         gender: validatedDataForStats.gender ?? null,
-        isPartyMember: validatedDataForStats.isPartyMember ?? null,
         answers: {
           createMany: {
             data: validatedQuestionsWithAnswers.map((answer) => ({

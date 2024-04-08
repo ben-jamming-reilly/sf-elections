@@ -35,7 +35,6 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
       age: null,
       state: null,
       gender: null,
-      isPartyMember: null,
     },
     setQuestions: (questions: AnsweredQuestion[]) => {
       set((state) => {

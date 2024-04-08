@@ -17,7 +17,6 @@ export interface QuestionnaireState {
     age?: number | null;
     gender?: string | null;
     state?: string | null;
-    isPartyMember?: boolean | null;
   };
   dataForStatsAnswered: () => boolean;
   hasAcceptedTos: boolean;
@@ -75,7 +74,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         age: undefined,
         state: undefined,
         gender: undefined,
-        isPartyMember: undefined,
       },
       dataForStatsAnswered: () => {
         return (
@@ -194,7 +192,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
               age: undefined,
               state: undefined,
               gender: undefined,
-              isPartyMember: undefined,
             },
             hasAcceptedTos: false,
             questions: [],

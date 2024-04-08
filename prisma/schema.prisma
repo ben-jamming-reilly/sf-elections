@@ -26,7 +26,6 @@ model Voter {
   age              Int?
   gender           String?
   state            String?
-  isPartyMember    Boolean?
   hasAcceptedTos   Boolean?
   createdAt        DateTime              @default(now())
   answers          VoterQuestionAnswer[]

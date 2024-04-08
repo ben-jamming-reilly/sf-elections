@@ -38,21 +38,21 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   );
 
   return {
-    title: `Mein Ergebnis bei der Vorsitzbefragungs-Kabine | SPÖ Vorsitz Vorsitzbefragungs-Kabine`,
+    title: `Mein EU-Wahlinfos Ergebnis  – andererseits.org`,
     description: `Mein Resultat: ${candidatesWithScore
       .map((c) => `${c.name}: ${c.scorePercentage}%`)
       .join(", ")}`,
     twitter: {
       card: "summary_large_image",
       site: "andererseits.org",
-      title: `Mein Ergebnis bei der Vorsitzbefragungs-Kabine | SPÖ Vorsitz Vorsitzbefragungs-Kabine`,
+      title: `Mein EU-Wahlinfos Ergebnis  – andererseits.org`,
       description: `Mein Resultat: ${candidatesWithScore
         .map((c) => `${c.name}: ${c.scorePercentage}%`)
         .join(", ")}`,
       images: [
         {
           url: `https://andererseits.org/wahlinfos/kabine/${params.slug}/opengraph-image`,
-          alt: "SPÖ Vorsitzbefragungs-Kabine",
+          alt: "EU-Wahlinfos 2024 – andererseits.org",
           width: 1200,
           height: 630,
         },
@@ -83,11 +83,9 @@ export default async function WahlkabineResult({
     <div>
       <div className="flex pb-5 sm:flex-row flex-col gap-5 items-center justify-center">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="Schau welche*r SPÖ Vorsitz Kandidat*in am Besten zu mir passt!">
-          Teilen
-        </ShareButton>
+        <ShareButton title="EU-Wahlinfos 2024">Teilen</ShareButton>
         <DownloadImageLink
-          title="spoe-vorsitzwahlkabine-resultat.jpg"
+          title="andererseits-eu-wahlinfos-resultat.jpg"
           href={`/api/og/generate/instagram/result?slug=${params.slug}`}
         >
           Bild herunterladen
@@ -258,11 +256,9 @@ export default async function WahlkabineResult({
 
       <div className="flex pt-5 sm:flex-row flex-col gap-5 items-center justify-center">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="Schau welche:r SPÖ Vorsitz Kandidat*in am Besten zu mir passt!">
-          Teilen
-        </ShareButton>
+        <ShareButton title="EU-Wahlinfos 2024">Teilen</ShareButton>
         <DownloadImageLink
-          title="spoe-vorsitzwahlkabine-resultat.jpg"
+          title="andererseits-eu-wahlinfos-resultat.jpg"
           href={`/api/og/generate/instagram/result?slug=${params.slug}`}
         >
           Bild herunterladen

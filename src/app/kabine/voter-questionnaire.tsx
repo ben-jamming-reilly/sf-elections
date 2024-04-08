@@ -152,14 +152,11 @@ export const VoterQuestionnaire = ({
     return (
       <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
         <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
-          Vorsitzbefragungs-Kabine Information
+          EU-Wahlinfos 2024 Information
         </h1>
         <p className="max-w-[50ch] mx-auto text-lg">
           <ul className="list-disc ml-4 mb-3">
-            <li>
-              Diese Vorsitzbefragungs-Kabine dient der demokratischen
-              Meinungsbildung in der SPÖ.
-            </li>
+            <li>Diese Wahlinfos dienen der demokratischen Meinungsbildung.</li>
             <li>
               Wir erfassen <strong>keine</strong> personenbezogenen Daten.
             </li>
@@ -173,7 +170,7 @@ export const VoterQuestionnaire = ({
           Für mehr Informationen kannst du die{" "}
           <Link
             className="text-brand underline-offset-2 hover:underline"
-            href="/datenschutz"
+            href="https://andererseits.org/datenschutz/"
           >
             Datenschutzerklärung hier lesen
           </Link>
@@ -209,10 +206,6 @@ export const VoterQuestionnaire = ({
             gender:
               data.gender === EMPTY_ANSWER ? null : (data.gender as string),
             state: data.state === EMPTY_ANSWER ? null : (data.state as string),
-            isPartyMember:
-              data.partyMember === EMPTY_ANSWER
-                ? null
-                : data.partyMember === "yes",
           });
         }}
       >
@@ -266,19 +259,6 @@ export const VoterQuestionnaire = ({
               <option value="Wien">Wien</option>
             </select>
           </label>
-          <label htmlFor="partyMember" className="flex-1 flex flex-col gap-1">
-            <span className="underline underline-offset-2 text-lg">
-              SPÖ Parteimitglied:
-            </span>
-            <select
-              name="partyMember"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-[10px]"
-            >
-              <option value="no_answer">Bitte auswählen</option>
-              <option value="no">Ich bin kein Parteimitglied</option>
-              <option value="yes">Ich bin Parteimitglied</option>
-            </select>
-          </label>
         </div>
 
         <button
@@ -294,10 +274,7 @@ export const VoterQuestionnaire = ({
   if (hasHydrated && (isSaving || slug)) {
     return (
       <div className="flex flex-col fixed inset-0 h-screen justify-center items-center max-w-[800px] mx-auto">
-        <p className="text-3xl sm:text-4xl md:text-5xl text-center">
-          Du bist <span className="text-brand font-bold">Team SPÖ! ❤️</span>
-        </p>
-        <p className="md:text-xl">Ergebnis wird berechnet...</p>
+        <p className="md:text-xl">Ergebnis wird geladen...</p>
       </div>
     );
   }
