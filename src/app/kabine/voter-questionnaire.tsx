@@ -181,7 +181,7 @@ export const VoterQuestionnaire = ({
             onClick={() => {
               acceptTos();
             }}
-            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
           >
             Ich habe die Information gelesen und verstanden.
           </button>
@@ -263,7 +263,7 @@ export const VoterQuestionnaire = ({
 
         <button
           type="submit"
-          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all text-primary-100 rounded-md gap-2"
+          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
         >
           Weiter
         </button>
