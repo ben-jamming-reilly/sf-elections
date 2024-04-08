@@ -1,4 +1,4 @@
-# SPÖ Vorsitzbefragungs-Kabine 2023
+# andererseits EU Wahlkabine 2024
 
 ## Technologien
 - Next.js 13
