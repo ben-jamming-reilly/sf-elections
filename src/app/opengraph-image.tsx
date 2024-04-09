@@ -37,7 +37,7 @@ export default async function og() {
       <div
         tw="flex flex-col text-center justify-center items-center w-full h-full bg-white"
         style={{
-          border: "12px solid #e62937",
+          border: "12px solid #016956",
         }}
       >
         <div tw="flex flex-col justify-center items-center relative">
@@ -47,7 +47,7 @@ export default async function og() {
                 key={candidate.id}
                 tw="border-4 mr-3 last:mr-0 rounded-full overflow-hidden"
                 style={{
-                  borderColor: "#e62937",
+                  borderColor: "#016956",
                 }}
               >
                 <img
@@ -61,7 +61,7 @@ export default async function og() {
           </ul>
           <h1
             style={{
-              background: "#e62937",
+              background: "#016956",
             }}
             tw="text-7xl py-3 flex flex-col rounded-md  px-6 text-white"
           >
@@ -91,7 +91,7 @@ export default async function og() {
 
           <div
             style={{
-              background: "#e62937",
+              background: "#016956",
               color: "#fff",
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"

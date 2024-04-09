@@ -89,16 +89,16 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ slug: voter.hash });
   } catch (error) {
+    console.log(error);
     if (error instanceof ZodError) {
       return NextResponse.json({ error: error.issues });
     }
 
-    if (error instanceof Prisma.PrismaClientKnownRequestError)
-      return NextResponse.json(
-        {
-          error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
-        },
-        { status: 400 }
-      );
+    return NextResponse.json(
+      {
+        error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
+      },
+      { status: 400 }
+    );
   }
 }

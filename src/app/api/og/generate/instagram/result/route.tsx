@@ -41,16 +41,16 @@ export async function GET(request: Request) {
       <div
         tw="flex flex-col text-center justify-center items-center w-full h-full bg-white"
         style={{
-          borderRight: "40px solid #e62937",
-          borderLeft: "40px solid #e62937",
-          borderTop: "140px solid #e62937",
-          borderBottom: "140px solid #e62937",
+          borderRight: "40px solid #016956",
+          borderLeft: "40px solid #016956",
+          borderTop: "140px solid #016956",
+          borderBottom: "140px solid #016956",
         }}
       >
         <div tw="absolute w-full flex flex-row left-0 top-10 items-end justify-center">
           <div
             style={{
-              background: "#e62937",
+              background: "#016956",
               color: "#fff",
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-6xl"
@@ -81,8 +81,8 @@ export async function GET(request: Request) {
         >
           <h1
             style={{
-              color: "#e62937",
-              borderBottom: "4px solid #e62937",
+              color: "#016956",
+              borderBottom: "4px solid #016956",
             }}
             tw="my-6 font-bold uppercase px-4 text-6xl rounded-md"
           >
@@ -97,7 +97,7 @@ export async function GET(request: Request) {
                   index === 0 ? "mt-0" : "mt-10")
                 }
                 style={{
-                  borderColor: "#e62937",
+                  borderColor: "#016956",
                   transform:
                     index === 1
                       ? "scale(0.98)"
@@ -115,7 +115,7 @@ export async function GET(request: Request) {
                   />
                   <div
                     style={{
-                      background: "#e62937",
+                      background: "#016956",
                     }}
                     tw="absolute bottom-0 items-center justify-center rounded-bl-sm  left-0 flex text-white w-22 h-22 text-5xl"
                   >
@@ -130,7 +130,7 @@ export async function GET(request: Request) {
                 >
                   <h1
                     style={{
-                      background: "#e62937",
+                      background: "#016956",
                     }}
                     tw="text-6xl text-left py-3 flex flex-col rounded-md w-full  px-6 text-white"
                   >
@@ -140,7 +140,7 @@ export async function GET(request: Request) {
                   <p tw="text-5xl flex flex-row items-center justify-start">
                     <span
                       style={{
-                        background: "#e62937",
+                        background: "#016956",
                       }}
                       tw="py-3 px-4 rounded-md text-white font-bold"
                     >

@@ -40,7 +40,7 @@ export default async function og({
       <div
         tw="flex flex-col text-center justify-center items-center w-full h-full bg-white"
         style={{
-          border: "12px solid #e62937",
+          border: "12px solid #016956",
         }}
       >
         <div tw="flex flex-col justify-center items-center relative -top-8">
@@ -49,7 +49,7 @@ export default async function og({
               key={candidate.id}
               tw={"rounded-sm flex relative"}
               style={{
-                borderColor: "#e62937",
+                borderColor: "#016956",
               }}
             >
               <img
@@ -62,7 +62,7 @@ export default async function og({
           </div>
           <h1
             style={{
-              background: "#e62937",
+              background: "#016956",
             }}
             tw="text-5xl py-3 flex flex-col rounded-md  px-6 text-white"
           >
@@ -87,7 +87,7 @@ export default async function og({
 
           <div
             style={{
-              background: "#e62937",
+              background: "#016956",
               color: "#fff",
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"

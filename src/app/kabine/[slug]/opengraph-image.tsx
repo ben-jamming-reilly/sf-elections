@@ -36,7 +36,7 @@ export default async function og({ params }: { params: { slug: string } }) {
       <div
         tw="flex flex-col text-center justify-center items-center w-full h-full bg-white"
         style={{
-          border: "12px solid #e62937",
+          border: "12px solid #016956",
         }}
       >
         <div tw="flex flex-col justify-center items-center relative">
@@ -48,7 +48,7 @@ export default async function og({ params }: { params: { slug: string } }) {
                   (clsx("rounded-sm relative"), index === 0 ? "ml-0" : "ml-10")
                 }
                 style={{
-                  borderColor: "#e62937",
+                  borderColor: "#016956",
                   transform:
                     index === 1
                       ? "scale(0.95)"
@@ -65,7 +65,7 @@ export default async function og({ params }: { params: { slug: string } }) {
                 />
                 <div
                   style={{
-                    background: "#e62937",
+                    background: "#016956",
                   }}
                   tw="absolute top-2 left-2 flex text-white h-14 text-xl w-14 items-center justify-center text-lg rounded-full"
                 >
@@ -73,7 +73,7 @@ export default async function og({ params }: { params: { slug: string } }) {
                 </div>
                 <div
                   style={{
-                    background: "#e62937",
+                    background: "#016956",
                   }}
                   tw="absolute bottom-0 items-center justify-center rounded-bl-sm  left-0 flex text-white w-12 h-12 text-3xl"
                 >
@@ -84,7 +84,7 @@ export default async function og({ params }: { params: { slug: string } }) {
           </ul>
           <h1
             style={{
-              background: "#e62937",
+              background: "#016956",
             }}
             tw="text-5xl py-3 flex flex-col rounded-md  px-6 text-white"
           >
@@ -114,7 +114,7 @@ export default async function og({ params }: { params: { slug: string } }) {
 
           <div
             style={{
-              background: "#e62937",
+              background: "#016956",
               color: "#fff",
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"

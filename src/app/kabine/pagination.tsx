@@ -33,7 +33,7 @@ const Pagination = ({
               "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
               isQuestionAnswered(question) &&
                 !question.skipped &&
-                "bg-brand hover:bg-primary-200 text-white border-brand",
+                "bg-brand hover:bg-brand/80 text-white border-brand",
               isQuestionAnswered(question) &&
                 question.skipped &&
                 "bg-surface-400 border-surface-600 text-white hover:opacity-80 hover:border-surface-600",

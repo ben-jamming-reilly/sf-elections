@@ -36,16 +36,16 @@ export async function GET(request: Request) {
       <div
         tw="flex flex-col text-center justify-center items-center w-full h-full bg-white"
         style={{
-          borderRight: "40px solid #e62937",
-          borderLeft: "40px solid #e62937",
-          borderTop: "140px solid #e62937",
-          borderBottom: "140px solid #e62937",
+          borderRight: "40px solid #016956",
+          borderLeft: "40px solid #016956",
+          borderTop: "140px solid #016956",
+          borderBottom: "140px solid #016956",
         }}
       >
         <div tw="absolute w-full flex flex-row left-0 top-10 items-end justify-center">
           <div
             style={{
-              background: "#e62937",
+              background: "#016956",
               color: "#fff",
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-6xl"
@@ -74,7 +74,7 @@ export async function GET(request: Request) {
               key={candidate.id}
               tw={"rounded-sm flex relative"}
               style={{
-                borderColor: "#e62937",
+                borderColor: "#016956",
               }}
             >
               <img
@@ -87,7 +87,7 @@ export async function GET(request: Request) {
           </div>
           <h1
             style={{
-              background: "#e62937",
+              background: "#016956",
             }}
             tw="text-8xl py-3 flex flex-col rounded-md  px-6 text-white"
           >

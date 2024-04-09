@@ -16,6 +16,11 @@ import { QuestionCategoryLabel } from "../ui/question-category-label";
 import { useHasHydrated } from "~/hooks/useHasHydrated";
 import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import {
+  HandRaisedIcon,
+  HandThumbDownIcon,
+  HandThumbUpIcon,
+} from "@heroicons/react/24/solid";
 
 const variants = {
   enter: (direction: number) => {
@@ -311,7 +316,7 @@ export const VoterQuestionnaire = ({
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
               <QuestionCategoryLabel category={activeQuestion.category} />
-              <div className="text-2xl md:mb-3 md:min-h-[3em]">
+              <div className="text-2xl md:text-3xl xl:text-4xl md:mb-3 md:min-h-[3em]">
                 <span className="text-lg font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
@@ -322,35 +327,15 @@ export const VoterQuestionnaire = ({
             </motion.header>
 
             <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
-              <div className="flex justify-center items-center">
-                <button
-                  disabled={activeQuestion.skipped}
-                  className={clsx(
-                    "px-4 py-2 notouch:hover:active:scale-95 dark:disabled:text-gray-400 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed disabled:hover:no-underline rounded-md dark:bg-surface-200 dark:border-none border-gray-800 text-gray-800 border dark:text-white text-brand transition-all",
-                    activeQuestion.skipped && "border-gray-800 text-gray-800"
-                  )}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    skip(activeQuestion.id);
-                    if (hasNext) {
-                      handleNext();
-                    }
-                  }}
-                >
-                  {activeQuestion.skipped
-                    ? "Wurde übersprungen"
-                    : "Überspringen"}
-                </button>
-              </div>
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-brand underline underline-offset-4">
+                <h2 className="text-xl font-sans underline underline-offset-4">
                   Ich stimme:
                 </h2>
                 <ul
                   className={clsx(
                     "grid w-full",
                     activeQuestion.type === "YesNo" &&
-                      "md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2",
+                      "md:grid-cols-3 md:grid-rows-1 grid-cols-1 grid-rows-2",
                     activeQuestion.type === "Range" &&
                       "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4"
                   )}
@@ -370,11 +355,20 @@ export const VoterQuestionnaire = ({
                           setOption(activeQuestion.id, option.value);
                         }}
                         className={clsx(
-                          "z-10 rounded-md transition-all notouch:hover:active:scale-95 dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full text-center py-4 focus-visible:bg-brand",
+                          "z-10 rounded-md transition-all gap-3 hover:bg-brand hover:text-white flex items-center justify-center notouch:hover:active:scale-95 dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full text-center py-4 focus-visible:bg-brand",
                           option.value === activeQuestion.option &&
                             " text-white !bg-brand !border-brand hover:opacity-90"
                         )}
                       >
+                        {option.label === "Ja" && (
+                          <HandThumbUpIcon className="h-10 w-10 p-1 border-white stroke-[2] border-2 rounded-full" />
+                        )}
+                        {option.label === "Ich weiß es nicht" && (
+                          <HandRaisedIcon className="h-10 w-10 p-1 border-white stroke-[2] border-2 rounded-full" />
+                        )}
+                        {option.label === "Nein" && (
+                          <HandThumbDownIcon className="h-10 w-10 p-1 border-white stroke-[2] border-2 rounded-full transform rotate-180" />
+                        )}
                         {option.label}
                       </button>
                     </li>
@@ -383,7 +377,7 @@ export const VoterQuestionnaire = ({
               </div>
 
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-brand underline underline-offset-4">
+                <h2 className="text-xl font-sans underline underline-offset-4">
                   Das ist mir:
                 </h2>
                 <ul className="grid w-full md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">

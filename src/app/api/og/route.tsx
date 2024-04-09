@@ -62,7 +62,7 @@ const ogTypes = {
         <div
           tw="flex flex-col text-center justify-center items-center w-full h-full bg-white"
           style={{
-            border: "12px solid #e62937",
+            border: "12px solid #016956",
           }}
         >
           <div tw="flex flex-col justify-center items-center relative">
@@ -75,7 +75,7 @@ const ogTypes = {
                     index === 0 ? "ml-0" : "ml-10")
                   }
                   style={{
-                    borderColor: "#e62937",
+                    borderColor: "#016956",
                   }}
                 >
                   <img
@@ -89,7 +89,7 @@ const ogTypes = {
             </ul>
             <h1
               style={{
-                background: "#e62937",
+                background: "#016956",
               }}
               tw="text-4xl py-3 flex flex-col rounded-md text-center items-center justify-center  px-6 text-white"
             >
@@ -122,7 +122,7 @@ const ogTypes = {
 
             <div
               style={{
-                background: "#e62937",
+                background: "#016956",
                 color: "#fff",
               }}
               tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"

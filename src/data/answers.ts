@@ -30,6 +30,7 @@ export const yesNoOptions = [
     label: "Ja",
     value: 3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
+  { label: "Ich weiß es nicht", value: 0 },
   {
     label: "Nein",
     value: -3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
@@ -68,15 +69,15 @@ export const weightings = [
     value: 3,
   },
   {
-    label: "eher wichtig",
+    label: "wichtig",
     value: 2,
   },
   {
-    label: "eher nicht wichtig",
+    label: "nicht so wichtig",
     value: 1,
   },
   {
-    label: "gar nicht wichtig",
+    label: "egal",
     value: 0,
   },
 ] as const;
@@ -88,36 +89,24 @@ export const weightingLabelForValue = (value: number) => {
 
 export const CATEGORIES = [
   {
-    label: "Klima & Umwelt",
+    label: "Umwelt und Klima-Schutz",
     hex: "#38be23",
   },
   {
-    label: "Frauen",
-    hex: "#2766d4",
-  },
-  {
-    label: "Demokratie & Mitbestimmung",
-    hex: "#EB5757",
-  },
-  {
-    label: "Arbeit & Soziales",
+    label: "Arbeit und Inklusion",
     hex: "#b1ae1f",
   },
   {
-    label: "Internes",
-    hex: "#6FCF97",
-  },
-  {
-    label: "Europa & Internationales",
+    label: "Flucht und Asyl",
     hex: "#BB6BD9",
   },
   {
-    label: "Bildung",
-    hex: "#c16926",
+    label: "Krieg und Verteidigung",
+    hex: "#6FCF97",
   },
   {
-    label: "Zusatz",
-    hex: "#485d7c",
+    label: "Die Zukunft der EU",
+    hex: "#c16926",
   },
 ];
 

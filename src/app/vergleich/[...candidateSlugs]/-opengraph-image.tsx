@@ -25,7 +25,7 @@ export default async function og({ params }: CandidateComparisonProps) {
       <div
         tw="flex flex-row justify-center items-center w-full h-full bg-white"
         style={{
-          border: "20px solid #e62937",
+          border: "20px solid #016956",
           fontFamily: "Lora, Inter, sans-serif",
           gap: "50px",
         }}
@@ -52,7 +52,7 @@ export default async function og({ params }: CandidateComparisonProps) {
               <h1
                 tw="text-3xl py-2 px-5 justify-start self-start text-white"
                 style={{
-                  background: "#e62937",
+                  background: "#016956",
                 }}
               >
                 {candidate.name}
