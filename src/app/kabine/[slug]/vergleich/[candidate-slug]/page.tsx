@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
       description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
       images: [
         {
-          url: `https://andererseits.org/wahlinfos/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
+          url: `https://andererseits.org/Wahl-Infos/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
           width: 1200,
           height: 630,
@@ -137,7 +137,7 @@ export default async function WahlkabineResultCandidate({
                 <QuestionCategoryLabel category={answer.question.category} />
               )}
               <div className="text-lg">Frage {index + 1}:</div>
-              <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-brand">
+              <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-sans">
                 {answer.question.title}
               </h2>
 

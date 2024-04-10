@@ -28,15 +28,15 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   }
 
   return {
-    title: `${candidate.name} | EU-Wahlinfos 2024`,
+    title: `${candidate.name} | EU-Wahl-Infos 2024`,
     description: `15 Fragen beantwortet von ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
       site: "andererseits.org/",
       images: [
         {
-          url: `https://andererseits.org/wahlinfos/${params.candidateSlug}/opengraph-image`,
-          alt: "EU-Wahlinfos 2024",
+          url: `https://andererseits.org/Wahl-Infos/${params.candidateSlug}/opengraph-image`,
+          alt: "EU-Wahl-Infos 2024",
         },
       ],
     },

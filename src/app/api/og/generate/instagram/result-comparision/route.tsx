@@ -59,7 +59,7 @@ export async function GET(request: Request) {
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-6xl"
           >
-            andererseits.org/wahlinfos
+            andererseits.org/Wahl-Infos
           </div>
         </div>
         <div tw="flex items-center absolute bottom-10 left-10 justify-center ml-4 mb-3 flex ">
@@ -104,7 +104,7 @@ export async function GET(request: Request) {
             {scorePercentage}%!
           </h1>
           <p tw="text-4xl flex">
-            <span tw="bg-white flex text-gray-800 px-6 py-1">
+            <span tw="bg-white flex text-black px-6 py-1">
               Finde heraus welche*r Kandidat*in am Besten zu dir passt!
             </span>
           </p>

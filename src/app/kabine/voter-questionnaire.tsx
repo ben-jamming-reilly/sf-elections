@@ -21,6 +21,7 @@ import {
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/solid";
+import { ThumbDownIcon, ThumbSideIcon, ThumbUpIcon } from "../ui/yes-no-result";
 
 const variants = {
   enter: (direction: number) => {
@@ -157,11 +158,11 @@ export const VoterQuestionnaire = ({
     return (
       <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
         <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
-          EU-Wahlinfos 2024 Information
+          EU-Wahl-Infos 2024 Information
         </h1>
         <p className="max-w-[50ch] mx-auto text-lg">
           <ul className="list-disc ml-4 mb-3">
-            <li>Diese Wahlinfos dienen der demokratischen Meinungsbildung.</li>
+            <li>Diese Wahl-Infos dienen der demokratischen Meinungsbildung.</li>
             <li>
               Wir erfassen <strong>keine</strong> personenbezogenen Daten.
             </li>
@@ -227,7 +228,7 @@ export const VoterQuestionnaire = ({
               type="number"
               name="age"
               placeholder="Dein Alter"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-2"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-black px-3 py-2"
             />
           </label>
           <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
@@ -236,7 +237,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="gender"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-black px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -250,7 +251,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="state"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-gray-800 px-3 py-[10px]"
+              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-black px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -289,18 +290,9 @@ export const VoterQuestionnaire = ({
       {activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
-            className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
+            className="flex flex-col gap-5 md:gap-10 items-center max-w-full w-[900px] mx-auto"
             key={`question-${activeQuestion.id}`}
           >
-            <div className="">
-              <Pagination
-                activeQuestion={activeQuestion}
-                questionsWithAnswers={questionsWithAnswers}
-                setActiveIndex={setActiveIndex}
-                className="hidden md:flex"
-              />
-            </div>
-
             <motion.header
               layout
               custom={direction}
@@ -315,12 +307,19 @@ export const VoterQuestionnaire = ({
               ref={questionRef}
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
-              <QuestionCategoryLabel category={activeQuestion.category} />
-              <div className="text-2xl md:text-3xl xl:text-4xl md:mb-3 md:min-h-[3em]">
-                <span className="text-lg font-semibold">
+              <div className="flex flex-col gap-5 md:flex-row justify-between mb-3">
+                <QuestionCategoryLabel category={activeQuestion.category} />
+                <Pagination
+                  activeQuestion={activeQuestion}
+                  questionsWithAnswers={questionsWithAnswers}
+                  setActiveIndex={setActiveIndex}
+                />
+              </div>
+              <div className="text-[28px] leading-[34px] md:text-3xl xl:text-4xl md:mb-3 md:min-h-[3em]">
+                <span className="text-[18px] leading-[21px] font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
-                <h1 className="hyphens-auto font-brand">
+                <h1 className="hyphens-auto font-sans">
                   {activeQuestion.title}
                 </h1>
               </div>
@@ -328,9 +327,7 @@ export const VoterQuestionnaire = ({
 
             <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-sans underline underline-offset-4">
-                  Ich stimme:
-                </h2>
+                <h2 className="text-lg font-sans">Ich stimme:</h2>
                 <ul
                   className={clsx(
                     "grid w-full",
@@ -355,21 +352,24 @@ export const VoterQuestionnaire = ({
                           setOption(activeQuestion.id, option.value);
                         }}
                         className={clsx(
-                          "z-10 rounded-md transition-all gap-3 hover:bg-brand hover:text-white flex items-center justify-center notouch:hover:active:scale-95 dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full text-center py-4 focus-visible:bg-brand",
+                          "z-10 rounded-[100px] transition-all gap-3 flex items-center justify-center h-full dark:bg-surface-200 border-black border-2 text-black relative group text-lg w-full text-center py-1 focus-visible:bg-brand",
+                          option.value === 3 && "bg-[#99EB8B]",
+                          option.value === 0 && "bg-[#FBFF95]",
+                          option.value === -3 && "bg-[#FFA06E]",
                           option.value === activeQuestion.option &&
                             " text-white !bg-brand !border-brand hover:opacity-90"
                         )}
                       >
+                        {option.label}
                         {option.label === "Ja" && (
-                          <HandThumbUpIcon className="h-10 w-10 p-1 border-white stroke-[2] border-2 rounded-full" />
+                          <ThumbUpIcon className=" h-auto w-10 p-1" />
                         )}
                         {option.label === "Ich weiß es nicht" && (
-                          <HandRaisedIcon className="h-10 w-10 p-1 border-white stroke-[2] border-2 rounded-full" />
+                          <ThumbSideIcon className=" h-auto w-10 p-1" />
                         )}
                         {option.label === "Nein" && (
-                          <HandThumbDownIcon className="h-10 w-10 p-1 border-white stroke-[2] border-2 rounded-full transform rotate-180" />
+                          <ThumbDownIcon className=" h-auto w-10 p-1" />
                         )}
-                        {option.label}
                       </button>
                     </li>
                   ))}
@@ -377,9 +377,7 @@ export const VoterQuestionnaire = ({
               </div>
 
               <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-sans underline underline-offset-4">
-                  Das ist mir:
-                </h2>
+                <h2 className="text-lg">Das ist mir:</h2>
                 <ul className="grid w-full md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
                   {weightings.map((weighting) => (
                     <li
@@ -391,7 +389,7 @@ export const VoterQuestionnaire = ({
                           setWeighting(activeQuestion.id, weighting.value);
                         }}
                         className={clsx(
-                          "z-20 rounded-md dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-gray-800 relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
+                          "z-20 rounded-[100px] dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-black relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
                           weighting.value === activeQuestion.weighting &&
                             " text-white !bg-brand !border-brand hover:opacity-90"
                         )}
@@ -411,7 +409,7 @@ export const VoterQuestionnaire = ({
                 }}
                 disabled={!hasPrevious}
                 className={clsx(
-                  " notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
+                  " notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black rounded-[100px] hover:bg-white text-white hover:text-black border-black disabled:hover:text-neutral-500 disabled:hover:bg-transparent gap-1 justify-center items-center inline-flex",
                   !hasPrevious && "invisible"
                 )}
               >
@@ -431,7 +429,7 @@ export const VoterQuestionnaire = ({
                   handleNext();
                 }}
                 className={clsx(
-                  "notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border border-gray-800 hover:border-brand dark:border-none hover:bg-brand hover:text-white  disabled:hover:text-neutral-500 disabled:hover:bg-transparent rounded-md gap-1 justify-center items-center inline-flex",
+                  "notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black rounded-[100px] hover:bg-white text-white hover:text-black border-black  disabled:hover:text-neutral-500 disabled:hover:bg-transparent gap-1 justify-center items-center inline-flex",
                   !hasNext && allQuestionsAnswered
                     ? "!bg-brand !border-brand !text-white hover:opacity-90"
                     : ""

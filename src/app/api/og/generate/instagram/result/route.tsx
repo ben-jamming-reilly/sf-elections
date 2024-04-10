@@ -55,7 +55,7 @@ export async function GET(request: Request) {
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-6xl"
           >
-            andererseits.org/wahlinfos
+            andererseits.org/Wahl-Infos
           </div>
         </div>
         <div tw="flex items-center absolute bottom-10 left-10 justify-center ml-4 mb-3 flex ">

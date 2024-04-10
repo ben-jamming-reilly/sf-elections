@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --color-font: #ffffff;
     --color-brand: #016956;
-    --color-brand-purple: #DDE8E8;  /* #4a1c6b; */
-    --color-brand-yellow: #FEF9CA;/* #ffe595; */
+    --color-brand-purple: #dde8e8; /* #4a1c6b; */
+    --color-brand-yellow: #fef9ca; /* #ffe595; */
 
     /** CSS DARK THEME PRIMARY COLORS */
     --color-primary-100: #016956;
@@ -40,7 +39,7 @@
 
   html,
   body {
-    @apply text-gray-800 bg-white dark:bg-surface-100 dark:text-white font-sans;
+    @apply text-black bg-white dark:bg-surface-100 dark:text-white font-sans;
     height: 100%;
   }
 }

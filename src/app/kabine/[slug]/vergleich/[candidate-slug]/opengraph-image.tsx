@@ -69,7 +69,7 @@ export default async function og({
             Ich matche mit {candidate.name} zu {scorePercentage}%!
           </h1>
           <p tw="text-2xl flex">
-            <span tw="bg-white flex text-gray-800 px-6 py-1">
+            <span tw="bg-white flex text-black px-6 py-1">
               Finde heraus welche*r Kandidat*in am Besten zu dir passt!
             </span>
           </p>
@@ -92,7 +92,7 @@ export default async function og({
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
           >
-            andererseits.org/wahlinfos
+            andererseits.org/Wahl-Infos
           </div>
           <div tw="flex mr-2 mb-2 absolute bottom-0 right-0 text-white text-3xl">
             <img

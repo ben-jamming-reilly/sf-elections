@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://andererseits.org/wahlinfos/sitemap.xml",
+    sitemap: "https://andererseits.org/Wahl-Infos/sitemap.xml",
   };
 }

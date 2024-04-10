@@ -38,21 +38,21 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   );
 
   return {
-    title: `Mein EU-Wahlinfos Ergebnis  – andererseits.org`,
+    title: `Mein EU-Wahl-Infos Ergebnis  – andererseits.org`,
     description: `Mein Resultat: ${candidatesWithScore
       .map((c) => `${c.name}: ${c.scorePercentage}%`)
       .join(", ")}`,
     twitter: {
       card: "summary_large_image",
       site: "andererseits.org",
-      title: `Mein EU-Wahlinfos Ergebnis  – andererseits.org`,
+      title: `Mein EU-Wahl-Infos Ergebnis  – andererseits.org`,
       description: `Mein Resultat: ${candidatesWithScore
         .map((c) => `${c.name}: ${c.scorePercentage}%`)
         .join(", ")}`,
       images: [
         {
-          url: `https://andererseits.org/wahlinfos/kabine/${params.slug}/opengraph-image`,
-          alt: "EU-Wahlinfos 2024 – andererseits.org",
+          url: `https://andererseits.org/Wahl-Infos/kabine/${params.slug}/opengraph-image`,
+          alt: "EU-Wahl-Infos 2024 – andererseits.org",
           width: 1200,
           height: 630,
         },
@@ -83,9 +83,9 @@ export default async function WahlkabineResult({
     <div>
       <div className="flex pb-5 sm:flex-row flex-col gap-5 items-center justify-center">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="EU-Wahlinfos 2024">Teilen</ShareButton>
+        <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
         <DownloadImageLink
-          title="andererseits-eu-wahlinfos-resultat.jpg"
+          title="andererseits-eu-Wahl-Infos-resultat.jpg"
           href={`/api/og/generate/instagram/result?slug=${params.slug}`}
         >
           Bild herunterladen
@@ -149,7 +149,7 @@ export default async function WahlkabineResult({
                   <QuestionCategoryLabel category={answer.question.category} />
                 )}
                 <div className="text-lg mt-3">Frage {index + 1}:</div>
-                <h2 className="text-2xl font-brand mb-5 hyphens-auto">
+                <h2 className="text-2xl font-sans mb-5 hyphens-auto">
                   {answer.question.title}
                 </h2>
                 {answer.option !== null && answer.weighting !== null ? (
@@ -256,9 +256,9 @@ export default async function WahlkabineResult({
 
       <div className="flex pt-5 sm:flex-row flex-col gap-5 items-center justify-center">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="EU-Wahlinfos 2024">Teilen</ShareButton>
+        <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
         <DownloadImageLink
-          title="andererseits-eu-wahlinfos-resultat.jpg"
+          title="andererseits-eu-Wahl-Infos-resultat.jpg"
           href={`/api/og/generate/instagram/result?slug=${params.slug}`}
         >
           Bild herunterladen

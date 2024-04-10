@@ -17,12 +17,12 @@ const Pagination = ({
   questionsWithAnswers: VoterAnsweredQuestion[];
   activeQuestion: VoterAnsweredQuestion;
   setActiveIndex: (index: number) => void;
-  className: string;
+  className?: string;
 }) => {
   return (
     <ul
       className={clsx(
-        "flex flex-row flex-wrap gap-3 sm:gap-2 md:gap-1 justify-center",
+        "flex flex-row flex-wrap gap-3 md:gap-1 justify-center md:justify-end",
         className
       )}
     >
@@ -30,20 +30,10 @@ const Pagination = ({
         <li key={`question-shortcut-${question.id}`}>
           <button
             className={clsx(
-              "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 hover:border-brand hover:underline border",
-              isQuestionAnswered(question) &&
-                !question.skipped &&
-                "bg-brand hover:bg-brand/80 text-white border-brand",
-              isQuestionAnswered(question) &&
-                question.skipped &&
-                "bg-surface-400 border-surface-600 text-white hover:opacity-80 hover:border-surface-600",
-              activeQuestion.id === question.id && "underline scale-[0.875]",
-              !isQuestionAnswered(question) &&
-                activeQuestion.id === question.id &&
-                "border-brand text-brand",
-              !isQuestionAnswered(question) &&
-                activeQuestion.id !== question.id &&
-                "border-surface-400"
+              "inline-flex justify-center items-center w-[2em] h-[2em] transition-all underline-offset-2 rounded-full hover:border-black focus-visible:border hover:underline border-2",
+              activeQuestion.id === question.id
+                ? "border-black"
+                : "border-transparent"
             )}
             onClick={() => setActiveIndex(index)}
           >

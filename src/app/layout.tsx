@@ -8,17 +8,17 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "EU-Wahlinfos 2024 – andererseits.org",
+  title: "EU-Wahl-Infos 2024 – andererseits.org",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "EU-Wahlinfos 2024 – andererseits.org",
+    title: "EU-Wahl-Infos 2024 – andererseits.org",
     description: "",
     site: "andererseits.org",
     images: [
       {
-        url: "andererseits.org/wahlinfos/opengraph-image",
-        alt: "EU-Wahlinfos 2024",
+        url: "andererseits.org/Wahl-Infos/opengraph-image",
+        alt: "EU-Wahl-Infos 2024",
         width: 1200,
         height: 630,
       },
@@ -76,15 +76,9 @@ export default function RootLayout({
       </head>
       <body className={clsx(interFont.variable, loraFont.variable)}>
         <div className={`w-full min-h-full z-10 flex flex-col`}>
-          <header className="w-full md:sticky z-50 top-0 bg-brand text-white mb-5">
-            <div className="mx-auto lg:w-[1000px] flex flex-col md:flex-row items-center justify-between font-brand gap-y-2 px-3 py-4">
-              <Link
-                href="/"
-                className="text-2xl [@media(min-width:300px)]:text-3xl w-full md:w-fit py-3 md:py-0 bg-brand fixed top-0 md:static text-center leading-none font-bold focus-visible:outline-brand outline-offset-2 hyphens-manual"
-              >
-                EU-Wahlinfos 2024
-              </Link>
-              <div className="flex md:mt-1 items-end mt-12">
+          <header className="w-full md:sticky z-50 top-0 bg-white border-b border-black mb-5">
+            <div className="mx-auto lg:w-[1320px] max-w-full flex flex-col md:flex-row items-center justify-between font-sans gap-y-2 px-3 py-4">
+              <div className="flex items-end">
                 <a
                   rel="norefeerer noopener"
                   className="focus-visible:outline-brand bg-white px-2 py-1 outline-offset-2"
@@ -100,6 +94,12 @@ export default function RootLayout({
                   />
                 </a>
               </div>
+              <Link
+                href="/"
+                className="text-[28px] leading-[34px] w-full md:w-fit py-3 md:py-0 text-center text-black focus-visible:outline-brand outline-offset-2 hyphens-manual"
+              >
+                Wahl-Infos 2024
+              </Link>
             </div>
           </header>
           <div className="lg:w-[1000px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
@@ -110,7 +110,7 @@ export default function RootLayout({
                 className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
                 href="https://andererseits.org/"
               >
-                <span className="font-brand font-bold">andererseits.org</span>
+                <span className="font-sans font-bold">andererseits.org</span>
               </a>
               <ul className="flex flex-col gap-3 items-center justify-center sm:flex-row flex-wrap">
                 <li>

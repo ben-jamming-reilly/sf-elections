@@ -90,7 +90,7 @@ export const weightingLabelForValue = (value: number) => {
 export const CATEGORIES = [
   {
     label: "Umwelt und Klima-Schutz",
-    hex: "#38be23",
+    hex: "#066700",
   },
   {
     label: "Arbeit und Inklusion",

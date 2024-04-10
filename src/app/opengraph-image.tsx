@@ -65,7 +65,7 @@ export default async function og() {
             }}
             tw="text-7xl py-3 flex flex-col rounded-md  px-6 text-white"
           >
-            EU-Wahlinfos 2024
+            EU-Wahl-Infos 2024
           </h1>
           <p
             tw="text-3xl "
@@ -73,7 +73,7 @@ export default async function og() {
               height: "100px",
             }}
           >
-            <span tw="bg-white text-gray-800 px-6 py-3">
+            <span tw="bg-white text-black px-6 py-3">
               Finde heraus welche*r Kandidat*in am besten zu dir passt!
             </span>
           </p>
@@ -96,7 +96,7 @@ export default async function og() {
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
           >
-            andererseits.org/wahlinfos
+            andererseits.org/Wahl-Infos
           </div>
           <div tw="flex mr-2 mb-2 text-white absolute bottom-0 right-0 text-3xl">
             <img

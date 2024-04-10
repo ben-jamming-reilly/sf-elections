@@ -3,17 +3,17 @@ import { VoterQuestionnaire } from "./voter-questionnaire";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "EU-Wahlinfos 2024 – andereseits.org",
+  title: "EU-Wahl-Infos 2024 – andereseits.org",
   description: "",
   twitter: {
     card: "summary_large_image",
     site: "andererseits.org",
-    title: "EU-Wahlinfos 2024 – andereseits.org",
+    title: "EU-Wahl-Infos 2024 – andereseits.org",
     description: "",
     images: [
       {
-        url: "https://andererseits.org/wahlinfos/opengraph-image",
-        alt: "EU-Wahlinfos 2024 – andereseits.org",
+        url: "https://andererseits.org/Wahl-Infos/opengraph-image",
+        alt: "EU-Wahl-Infos 2024 – andereseits.org",
         width: 1200,
         height: 630,
       },
