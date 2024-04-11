@@ -86,7 +86,7 @@ export default async function WahlkabineResultCandidate({
         </DownloadImageLink>
       </div>
 
-      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black">
         Vergleich mit {candidate.name}
       </h1>
 
@@ -118,7 +118,7 @@ export default async function WahlkabineResultCandidate({
             </h2>
             <div className="p-5 border-2 z-20 relative items-center flex justify-center rounded-br-md rounded-bl-md border-t-0 border-brand">
               <Link
-                className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
+                className="border  active:scale-95 hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
                 href={`/${candidateWithScore.slug}`}
               >
                 {`${candidate.name}s Antworten`}
@@ -142,7 +142,7 @@ export default async function WahlkabineResultCandidate({
               </h2>
 
               <div className="grid grid-cols-1 py-5  gap-5">
-                <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md space-y-4">
+                <div className="flex flex-col gap-1 rounded-md space-y-4">
                   <div className="text-center inline-flex items-center  justify-center font-semibold -translate-x-[15px]">
                     <span className="h-[30px] w-[30px]" /> Deine Antwort:
                   </div>
@@ -161,10 +161,10 @@ export default async function WahlkabineResultCandidate({
                   )}
                 </div>
 
-                <div className="flex flex-col gap-1 dark:bg-surface-200 dark:p-3 rounded-md space-y-4">
+                <div className="flex flex-col gap-1 rounded-md space-y-4">
                   <Link
                     href={`/${candidate.slug}`}
-                    className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                    className="text-center flex flex-row items-center font-semibold gap-3 justify-center hover:underline underline-offset-2"
                   >
                     <Image
                       src={`/${candidateWithScore.profileImg}`}

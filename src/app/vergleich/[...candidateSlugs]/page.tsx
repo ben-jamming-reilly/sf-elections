@@ -101,7 +101,7 @@ export default async function CandidateComparison({
           </ShareButton>
         </div>
 
-        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black">
           Vergleich zwischen <br />
           {`${randomCandidates.map((c) => c.name).join(" & ")}`}
         </h1>
@@ -168,7 +168,7 @@ export default async function CandidateComparison({
                       >
                         <Link
                           href={`/${candidate.slug}`}
-                          className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                          className="text-center flex flex-row items-center font-semibold gap-3 justify-center  hover:underline underline-offset-2"
                         >
                           <Image
                             src={`/${candidate.profileImg}`}

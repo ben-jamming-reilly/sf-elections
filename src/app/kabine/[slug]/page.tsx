@@ -92,8 +92,8 @@ export default async function WahlkabineResult({
         </DownloadImageLink>
       </div>
 
-      <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
-        Die Kandidat*innen
+      <h1 className="text-[28px] leading-[34px] my-5 pb-4 text-center border-b-2 border-black">
+        Vergleiche deine Antworten mit:
       </h1>
 
       <section className="my-10">
@@ -124,7 +124,7 @@ export default async function WahlkabineResult({
                 </h2>
                 <div className="p-5 flex-grow  flex flex-col justify-between items-center rounded-br-md rounded-bl-md border-2 border-brand">
                   <Link
-                    className="border  dark:text-white active:scale-95 dark:hover:opacity-90 dark:bg-brand-purple hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
+                    className="border  active:scale-95 hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
                     href={`/kabine/${params.slug}/vergleich/${candidate.slug}`}
                   >
                     Vergleichen
@@ -137,7 +137,7 @@ export default async function WahlkabineResult({
       </section>
 
       <section>
-        <h2 className="text-3xl pt-10 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+        <h2 className="text-3xl pt-10 pb-4 text-center border-b-2 border-black">
           Fragen und Antworten
         </h2>
         <ul className="flex flex-col gap-16 py-10">
@@ -168,18 +168,18 @@ export default async function WahlkabineResult({
 
                 <div className="mt-5">
                   <details key={`candidate-details-${answer.questionId}`}>
-                    <summary className="cursor-pointer font-semibold py-2 border-gray-800">
+                    <summary className="cursor-pointer font-semibold py-2 border-black">
                       Antworten der Kandidat*innen:
                     </summary>
                     <ul className="grid grid-cols-1 py-5  gap-5">
                       {candidatesWithScore.map((candidate) => (
                         <li
                           key={`candidate-details-${answer.questionId}-${candidate.id}`}
-                          className="dark:bg-surface-200 p-3 rounded-md space-y-4"
+                          className="p-3 rounded-md space-y-4"
                         >
                           <Link
                             href={`/${candidate.slug}`}
-                            className="text-center flex flex-row items-center font-semibold gap-3 justify-center dark:text-white hover:underline underline-offset-2"
+                            className="text-center flex flex-row items-center font-semibold gap-3 justify-center hover:underline underline-offset-2"
                           >
                             <Image
                               src={`/${candidate.profileImg}`}

@@ -71,7 +71,7 @@ export default async function CandidateProfile({
             </ShareButton>
           </div>
 
-          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white">
+          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black">
             Profil von {candidate.name}
           </h1>
 

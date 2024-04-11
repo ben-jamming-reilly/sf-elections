@@ -41,10 +41,10 @@ export const ThumbUpIcon = ({ className }: { className: string }) => {
       <g
         id="Thumb-Up"
         transform="translate(1.5 1.5)"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        fill-rule="evenodd"
+        fill="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fillRule="evenodd"
       >
         <path
           d="M0,22.75H3.33a4.864,4.864,0,0,1,1.433.216L9.188,24.6A22.811,22.811,0,0,0,17.063,26,2.438,2.438,0,0,0,19.5,23.563a2.4,2.4,0,0,0-.158-.839,2.822,2.822,0,0,0,1.825-4.75,2.824,2.824,0,0,0,0-5.073,2.831,2.831,0,0,0,.643-2.787,2.9,2.9,0,0,0-2.8-1.989H13l1.282-2.564a3.244,3.244,0,0,0,.343-1.454V4.063A4.062,4.062,0,0,0,10.584,0,.822.822,0,0,0,9.75.813V2.639a1.624,1.624,0,0,1-.4,1.071l-4.8,5.484a1.625,1.625,0,0,1-1.224.556H0Z"
@@ -72,7 +72,7 @@ export const ThumbSideIcon = ({ className }: { className: string }) => {
       <g
         id="Thumb-Up"
         transform="translate(1.5 24.25) rotate(-90)"
-        fill="none"
+        fill="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         fill-rule="evenodd"
@@ -103,7 +103,7 @@ export const ThumbDownIcon = ({ className }: { className: string }) => {
       <g
         id="Thumb-Up"
         transform="translate(1.5 1.5)"
-        fill="none"
+        fill="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         fill-rule="evenodd"

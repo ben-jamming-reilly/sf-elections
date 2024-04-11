@@ -90,7 +90,7 @@ export default function RootLayout({
                     priority
                     width={181.83}
                     className="object-contain flex-1"
-                    alt="JG Logo"
+                    alt="andererseits Logo"
                   />
                 </a>
               </div>

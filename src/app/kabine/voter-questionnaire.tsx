@@ -1,9 +1,9 @@
 "use client";
 
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
 import { Pagination } from "./pagination";
@@ -16,11 +16,6 @@ import { QuestionCategoryLabel } from "../ui/question-category-label";
 import { useHasHydrated } from "~/hooks/useHasHydrated";
 import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import {
-  HandRaisedIcon,
-  HandThumbDownIcon,
-  HandThumbUpIcon,
-} from "@heroicons/react/24/solid";
 import { ThumbDownIcon, ThumbSideIcon, ThumbUpIcon } from "../ui/yes-no-result";
 
 const variants = {
@@ -58,46 +53,45 @@ export const VoterQuestionnaire = ({
 }) => {
   const router = useRouter();
   const hasHydrated = useHasHydrated();
-  const [
+  const {
     questionsWithAnswers,
     setQuestions,
     setOption,
     setWeighting,
-    skip,
     activeIndex,
     setActiveIndex,
     save,
     slug,
     isSaving,
-    dataForStats,
     setDataForStats,
     hasAcceptedTos,
     acceptTos,
     dataForStatsAnswered,
-  ] = useVoterQuestionnaireStore((s) => [
-    s.questions,
-    s.setQuestions,
-    s.setOption,
-    s.setWeighting,
-    s.skip,
-    s.activeIndex,
-    s.setActiveIndex,
-    s.save,
-    s.slug,
-    s.isSaving,
-    s.dataForStats,
-    s.setDataForStats,
-    s.hasAcceptedTos,
-    s.acceptTos,
-    s.dataForStatsAnswered,
-  ]);
+  } = useVoterQuestionnaireStore((s) => ({
+    questionsWithAnswers: s.questions,
+    setQuestions: s.setQuestions,
+    setOption: s.setOption,
+    setWeighting: s.setWeighting,
+    skip: s.skip,
+    activeIndex: s.activeIndex,
+    setActiveIndex: s.setActiveIndex,
+    save: s.save,
+    slug: s.slug,
+    isSaving: s.isSaving,
+    dataForStats: s.dataForStats,
+    setDataForStats: s.setDataForStats,
+    hasAcceptedTos: s.hasAcceptedTos,
+    acceptTos: s.acceptTos,
+    dataForStatsAnswered: s.dataForStatsAnswered,
+  }));
   const prevIndex = usePrevious(activeIndex);
   const questionRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   // Hydrate store with questions from server
   useEffect(() => {
     setQuestions(questions);
-  }, [questions]);
+  }, [questions, setQuestions]);
 
   // Scroll question into view
   useLayoutEffect(() => {
@@ -117,7 +111,7 @@ export const VoterQuestionnaire = ({
         forceOptimisticNavigation: true,
       });
     }
-  }, [slug]);
+  }, [router, slug]);
 
   // Derived state
   const allQuestionsAnswered = useMemo(() => {
@@ -157,7 +151,7 @@ export const VoterQuestionnaire = ({
   if (hasHydrated && !hasAcceptedTos) {
     return (
       <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
-        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-gray-800 dark:border-white w-full">
+        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black w-full">
           EU-Wahl-Infos 2024 Information
         </h1>
         <p className="max-w-[50ch] mx-auto text-lg">
@@ -187,7 +181,7 @@ export const VoterQuestionnaire = ({
             onClick={() => {
               acceptTos();
             }}
-            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand  hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
           >
             Ich habe die Information gelesen und verstanden.
           </button>
@@ -215,7 +209,7 @@ export const VoterQuestionnaire = ({
           });
         }}
       >
-        <h1 className="text-4xl my-5 text-center border-b-2 border-gray-800 dark:border-white w-full">
+        <h1 className="text-4xl my-5 text-center border-b-2 border-black  w-full">
           Anonyme Informationen für die Statistik
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mx-auto">
@@ -228,7 +222,7 @@ export const VoterQuestionnaire = ({
               type="number"
               name="age"
               placeholder="Dein Alter"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-black px-3 py-2"
+              className="appearance-none text-lg border-brand border-2  outline-brand px-3 py-2"
             />
           </label>
           <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
@@ -237,7 +231,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="gender"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-black px-3 py-[10px]"
+              className="appearance-none text-lg border-brand border-2  outline-brand px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -251,7 +245,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="state"
-              className="appearance-none dark:bg-white text-lg border-brand border-2 dark:border-[2.5px] outline-brand dark:text-black px-3 py-[10px]"
+              className="appearance-none text-lg border-brand border-2 outline-brand px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -269,7 +263,7 @@ export const VoterQuestionnaire = ({
 
         <button
           type="submit"
-          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand dark:hover:opacity-90 outline-brand focus-visible:text-white focus-visible:bg-brand dark:text-white dark:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand outline-brand focus-visible:text-white focus-visible:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
         >
           Weiter
         </button>
@@ -293,37 +287,55 @@ export const VoterQuestionnaire = ({
             className="flex flex-col gap-5 md:gap-10 items-center max-w-full w-[900px] mx-auto"
             key={`question-${activeQuestion.id}`}
           >
-            <motion.header
-              layout
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { duration: 0.2 },
-                opacity: { duration: 0.2 },
-              }}
+            <header
               ref={questionRef}
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
               <div className="flex flex-col gap-5 md:flex-row justify-between mb-3">
-                <QuestionCategoryLabel category={activeQuestion.category} />
-                <Pagination
-                  activeQuestion={activeQuestion}
-                  questionsWithAnswers={questionsWithAnswers}
-                  setActiveIndex={setActiveIndex}
-                />
+                <motion.div
+                  layout
+                  custom={direction}
+                  variants={variants}
+                  initial={shouldReduceMotion ? "center" : "enter"}
+                  animate="center"
+                  exit={shouldReduceMotion ? "center" : "exit"}
+                  transition={{
+                    x: { duration: 0.2 },
+                    opacity: { duration: 0.2 },
+                  }}
+                  className="order-2 md:order-1 w-fit"
+                >
+                  <QuestionCategoryLabel category={activeQuestion.category} />
+                </motion.div>
+                <div className="order-1 md:order-2">
+                  <Pagination
+                    activeQuestion={activeQuestion}
+                    questionsWithAnswers={questionsWithAnswers}
+                    setActiveIndex={setActiveIndex}
+                  />
+                </div>
               </div>
-              <div className="text-[28px] leading-[34px] md:text-3xl xl:text-4xl md:mb-3 md:min-h-[3em]">
+              <motion.div
+                layout
+                custom={direction}
+                variants={variants}
+                initial={shouldReduceMotion ? "center" : "enter"}
+                animate="center"
+                exit={shouldReduceMotion ? "center" : "exit"}
+                transition={{
+                  x: { duration: 0.2 },
+                  opacity: { duration: 0.2 },
+                }}
+                className="text-[28px] leading-[34px] md:text-3xl xl:text-4xl md:mb-3 md:min-h-[4em]"
+              >
                 <span className="text-[18px] leading-[21px] font-semibold">
                   Frage {activeIndex + 1}:
                 </span>
                 <h1 className="hyphens-auto font-sans">
                   {activeQuestion.title}
                 </h1>
-              </div>
-            </motion.header>
+              </motion.div>
+            </header>
 
             <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
               <div className="flex flex-col gap-2">
@@ -351,24 +363,23 @@ export const VoterQuestionnaire = ({
                         onClick={(e) => {
                           setOption(activeQuestion.id, option.value);
                         }}
+                        data-active={option.value === activeQuestion.option}
                         className={clsx(
-                          "z-10 rounded-[100px] transition-all gap-3 flex items-center justify-center h-full dark:bg-surface-200 border-black border-2 text-black relative group text-lg w-full text-center py-1 focus-visible:bg-brand",
+                          "z-10 rounded-[100px] transition-all gap-3 flex items-center justify-center h-full -200 border-black border-2 text-black relative group text-[22px] leading-[26px] w-full text-center py-3 focus-visible:outline-2 outline-black outline-offset-4",
                           option.value === 3 && "bg-[#99EB8B]",
                           option.value === 0 && "bg-[#FBFF95]",
-                          option.value === -3 && "bg-[#FFA06E]",
-                          option.value === activeQuestion.option &&
-                            " text-white !bg-brand !border-brand hover:opacity-90"
+                          option.value === -3 && "bg-[#FFA06E]"
                         )}
                       >
                         {option.label}
                         {option.label === "Ja" && (
-                          <ThumbUpIcon className=" h-auto w-10 p-1" />
+                          <ThumbUpIcon className="group-data-[active=true]:text-black group-hover:text-black transition-all text-transparent h-auto w-10 p-1" />
                         )}
                         {option.label === "Ich weiß es nicht" && (
-                          <ThumbSideIcon className=" h-auto w-10 p-1" />
+                          <ThumbSideIcon className="group-data-[active=true]:text-black group-hover:text-black transition-all text-transparent h-auto w-10 p-1" />
                         )}
                         {option.label === "Nein" && (
-                          <ThumbDownIcon className=" h-auto w-10 p-1" />
+                          <ThumbDownIcon className="group-data-[active=true]:text-black group-hover:text-black transition-all text-transparent h-auto w-10 p-1" />
                         )}
                       </button>
                     </li>
@@ -389,9 +400,9 @@ export const VoterQuestionnaire = ({
                           setWeighting(activeQuestion.id, weighting.value);
                         }}
                         className={clsx(
-                          "z-20 rounded-[100px] dark:bg-surface-200 dark:border-none border-gray-800 border dark:text-white text-black relative text-lg w-full focus-visible:outline-brand outline-offset-2 text-center py-4",
+                          "z-20 rounded-[100px] transition-colors border-black border-2  text-black relative text-lg w-full focus-visible:outline-2 outline-black outline-offset-4 text-center py-4",
                           weighting.value === activeQuestion.weighting &&
-                            " text-white !bg-brand !border-brand hover:opacity-90"
+                            "bg-[#A8F5FF]"
                         )}
                       >
                         {weighting.label}
@@ -403,41 +414,26 @@ export const VoterQuestionnaire = ({
             </section>
 
             <div className="flex flex-col xs:flex-row gap-2 justify-between items-center w-full">
-              <button
-                onClick={(e) => {
-                  handlePrev();
-                }}
+              <NavigationButton
+                label={"Zurück"}
                 disabled={!hasPrevious}
-                className={clsx(
-                  " notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black rounded-[100px] hover:bg-white text-white hover:text-black border-black disabled:hover:text-neutral-500 disabled:hover:bg-transparent gap-1 justify-center items-center inline-flex",
-                  !hasPrevious && "invisible"
-                )}
-              >
-                <ArrowLeftIcon className="inline-block w-5 h-5 mr-1" />
-                Zurück
-              </button>
+                onClick={handlePrev}
+                type="prev"
+                className={clsx(!hasPrevious && "invisible")}
+              />
               <span className="text-lg">
                 {activeIndex + 1} / {questionsWithAnswers.length}
               </span>
-              <button
+              <NavigationButton
+                label={hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
                 disabled={
                   hasNext
                     ? !activeQuestion || !isQuestionAnswered(activeQuestion)
                     : !allQuestionsAnswered
                 }
-                onClick={(e) => {
-                  handleNext();
-                }}
-                className={clsx(
-                  "notouch:hover:active:scale-95 dark:hover:bg-brand dark:disabled:text-gray-400 dark:bg-surface-200 dark:disabled:bg-surface-300 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all disabled:text-neutral-500 disabled:border-neutral-500 w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black rounded-[100px] hover:bg-white text-white hover:text-black border-black  disabled:hover:text-neutral-500 disabled:hover:bg-transparent gap-1 justify-center items-center inline-flex",
-                  !hasNext && allQuestionsAnswered
-                    ? "!bg-brand !border-brand !text-white hover:opacity-90"
-                    : ""
-                )}
-              >
-                {hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
-                <ArrowRightIcon className=" inline-block w-5 h-5 ml-1 stroke-2" />
-              </button>
+                onClick={handleNext}
+                type="next"
+              />
             </div>
 
             <Pagination
@@ -450,5 +446,38 @@ export const VoterQuestionnaire = ({
         </AnimatePresence>
       ) : null}
     </>
+  );
+};
+
+const NavigationButton = ({
+  label,
+  disabled,
+  onClick,
+  className,
+  type,
+}: {
+  disabled?: boolean;
+  onClick: () => void;
+  label: ReactNode;
+  className?: string;
+  type: "prev" | "next";
+}) => {
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={clsx(
+        "notouch:hover:active:scale-95 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all  w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black disabled:bg-black/70 rounded-[100px] hover:bg-white text-white hover:text-black border-black  disabled:hover:text-white disabled:hover:bg-black/70 gap-1 justify-center items-center inline-flex focus-visible:outline-2 outline-black outline-offset-4",
+        className
+      )}
+    >
+      {type === "prev" && (
+        <ArrowLeftIcon className="inline-block w-5 h-5 mr-1 stroke-2" />
+      )}
+      {label}
+      {type === "next" && (
+        <ArrowRightIcon className=" inline-block w-5 h-5 ml-1 stroke-2" />
+      )}
+    </button>
   );
 };

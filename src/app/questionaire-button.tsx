@@ -23,14 +23,14 @@ export const QuestionaireButton = () => {
             <div className="flex flex-row gap-2 items-center justify-center">
               <Link
                 href={`/kabine/${slug}`}
-                className="bg-brand text-white items-center gap-1 inline-flex px-3 py-2 hover:bg-brand/90 active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2 dark:hover:opacity-90"
+                className="bg-brand text-white items-center gap-1 inline-flex px-3 py-2 hover:bg-brand/90 active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2"
               >
                 <ClipboardDocumentCheckIcon className="w-5 h-5 inline ml-1 stroke-2" />
                 Dein Ergebnis
               </Link>
 
               <button
-                className="hover:bg-brand-purple px-3 py-2 hover:text-white border-brand-purple text-brand-purple border active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2 dark:bg-brand-purple dark:text-white dark:hover:opacity-90 items-center gap-1 inline-flex"
+                className="hover:bg-brand-purple px-3 py-2 hover:text-white border-brand-purple text-brand-purple border active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2 items-center gap-1 inline-flex"
                 onClick={(e) => {
                   reset();
                 }}

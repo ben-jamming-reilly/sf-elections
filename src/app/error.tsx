@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Error() {
   return (
     <div className="text-center max-w-[800px] mx-auto">
-      <h1 className="text-4xl pb-4 border-b-2 border-gray-800">
+      <h1 className="text-4xl pb-4 border-b-2 border-black">
         Es ist ein Fehler aufgetreten!
       </h1>
       <p className="my-4">
