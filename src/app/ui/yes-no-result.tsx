@@ -9,22 +9,22 @@ export const YesNoResult = ({ value }: { value: number }) => {
   return (
     <p
       className={clsx(
-        "text-center px-3 py-2 inline-flex text-white items-center justify-center gap-3 rounded-md text-lg font-bold",
+        "z-10 rounded-[100px] w-[260px] transition-all gap-3 flex items-center justify-center h-full -200 border-black border-2 text-black relative group text-[22px] leading-[26px] max-w-full text-center py-3 focus-visible:outline-2 outline-black outline-offset-4",
         value === 3 && "bg-[#99EB8B] selection:bg-[#99EB8B]/80",
         value === 0 && "bg-[#FBFF95] selection:bg-[#FBFF95]/80",
         value === -3 && "bg-[#FFA06E] selection:bg-[#FFA06E]/80"
       )}
     >
+      {optionLabelForYesNoValue(value)}
       {value === 3 && (
-        <ThumbUpIcon className="h-8 w-8 p-1 border-white stroke-[2] border-2 rounded-full" />
+        <ThumbUpIcon className="h-10 w-10 text-transparent p-1 " />
       )}
       {value === 0 && (
-        <ThumbSideIcon className="h-8 w-8 p-1 border-white stroke-[2] border-2 rounded-full" />
+        <ThumbSideIcon className="h-10 w-10 text-transparent p-1 " />
       )}
       {value === -3 && (
-        <ThumbDownIcon className="h-8 w-8 p-1 border-white stroke-[2] border-2 rounded-full" />
+        <ThumbDownIcon className="h-10 w-10 text-transparent p-1 " />
       )}
-      {optionLabelForYesNoValue(value)}
     </p>
   );
 };

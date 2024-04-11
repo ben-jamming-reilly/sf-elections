@@ -7,20 +7,14 @@ import {
 import clsx from "clsx";
 import { weightingLabelForValue } from "~/data/answers";
 
-const IconClasses = "h-8 w-8 p-1 stroke-2 rounded-full flex-shrink-0";
-
 export const WeightingResult = ({ value }: { value: number }) => {
   return (
     <p
       className={clsx(
-        "text-center px-3 py-2 bg-surface-600 text-white inline-flex items-center justify-center text-lg font-medium gap-2 rounded-md"
+        "z-20 rounded-[100px] w-[260px] transition-colors border-black border-2  text-black relative text-[22px] leading-[26px]  max-w-full focus-visible:outline-2 outline-black outline-offset-4 text-center py-4 bg-[#A8F5FF]"
       )}
     >
-      {value === 0 && <ChevronDoubleDownIcon className={IconClasses} />}
-      {value === 1 && <ChevronDownIcon className={IconClasses} />}
-      {value === 2 && <ChevronUpIcon className={IconClasses} />}
-      {value === 3 && <ChevronDoubleUpIcon className={IconClasses} />}
-      Ist mir {weightingLabelForValue(value)}
+      {weightingLabelForValue(value)}
     </p>
   );
 };

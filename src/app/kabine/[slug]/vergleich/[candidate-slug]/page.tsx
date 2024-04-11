@@ -147,7 +147,7 @@ export default async function WahlkabineResultCandidate({
                     <span className="h-[30px] w-[30px]" /> Deine Antwort:
                   </div>
                   {answer.option !== null && answer.weighting !== null ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="flex md:flex-row flex-col gap-3">
                       <OptionResult
                         value={answer.option}
                         type={answer.question.type}
@@ -183,7 +183,7 @@ export default async function WahlkabineResultCandidate({
                   candidateWithScore.answers.sort(
                     (a, b) => a.question.order - b.question.order
                   )[index].weighting !== null ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="flex md:flex-row flex-col gap-3">
                       <OptionResult
                         value={
                           candidateWithScore.answers.sort(

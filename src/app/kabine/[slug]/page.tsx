@@ -92,7 +92,7 @@ export default async function WahlkabineResult({
         </DownloadImageLink>
       </div>
 
-      <h1 className="text-[28px] leading-[34px] my-5 pb-4 text-center border-b-2 border-black">
+      <h1 className="text-[28px] leading-[34px] my-5 pb-4 text-center">
         Vergleiche deine Antworten mit:
       </h1>
 
@@ -136,10 +136,7 @@ export default async function WahlkabineResult({
         </ul>
       </section>
 
-      <section>
-        <h2 className="text-3xl pt-10 pb-4 text-center border-b-2 border-black">
-          Fragen und Antworten
-        </h2>
+      <section aria-label="Fragen & Antworten">
         <ul className="flex flex-col gap-16 py-10">
           {voterWithAnswers.answers
             .sort((a, b) => a.question.order - b.question.order)
@@ -153,7 +150,7 @@ export default async function WahlkabineResult({
                   {answer.question.title}
                 </h2>
                 {answer.option !== null && answer.weighting !== null ? (
-                  <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
+                  <div className="flex md:flex-row flex-col gap-3">
                     <OptionResult
                       value={answer.option}
                       type={answer.question.type}
@@ -168,8 +165,8 @@ export default async function WahlkabineResult({
 
                 <div className="mt-5">
                   <details key={`candidate-details-${answer.questionId}`}>
-                    <summary className="cursor-pointer font-semibold py-2 border-black">
-                      Antworten der Kandidat*innen:
+                    <summary className="cursor-pointer underline underline-offset-2 font-semibold py-2 border-black">
+                      Das haben die Parteien gesagt:
                     </summary>
                     <ul className="grid grid-cols-1 py-5  gap-5">
                       {candidatesWithScore.map((candidate) => (
@@ -196,7 +193,7 @@ export default async function WahlkabineResult({
                           candidate.answers.sort(
                             (a, b) => a.question.order - b.question.order
                           )[index]?.weighting !== null ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="flex md:flex-row flex-col gap-3">
                               <OptionResult
                                 value={
                                   candidate.answers.sort(

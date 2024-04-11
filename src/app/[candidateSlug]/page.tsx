@@ -141,7 +141,7 @@ export default async function CandidateProfile({
                     {answer.question.title}
                   </h2>
                   {answer.option !== null && answer.weighting !== null ? (
-                    <div className="grid grid-cols-1 grid-rows-2 sm:grid-rows-1 sm:grid-cols-2 gap-5">
+                    <div className="flex md:flex-row flex-col gap-3">
                       <OptionResult
                         value={answer.option}
                         type={answer.question.type}
