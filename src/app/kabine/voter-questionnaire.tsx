@@ -3,7 +3,14 @@
 import clsx from "clsx";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { ReactNode, useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import {
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
 import { Pagination } from "./pagination";
@@ -87,6 +94,8 @@ export const VoterQuestionnaire = ({
   const prevIndex = usePrevious(activeIndex);
   const questionRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const firstWeightingRef = useRef<HTMLButtonElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   // Hydrate store with questions from server
   useEffect(() => {
@@ -169,7 +178,7 @@ export const VoterQuestionnaire = ({
           </ul>
           Für mehr Informationen kannst du die{" "}
           <Link
-            className="text-brand underline-offset-2 hover:underline"
+            className="text-brand  underline-offset-2 hover:underline"
             href="https://andererseits.org/datenschutz/"
           >
             Datenschutzerklärung hier lesen
@@ -181,7 +190,7 @@ export const VoterQuestionnaire = ({
             onClick={() => {
               acceptTos();
             }}
-            className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand  hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+            className="border-brand  border active:scale-95 px-3 py-2 hover:bg-brand   hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
           >
             Ich habe die Information gelesen und verstanden.
           </button>
@@ -222,7 +231,7 @@ export const VoterQuestionnaire = ({
               type="number"
               name="age"
               placeholder="Dein Alter"
-              className="appearance-none text-lg border-brand border-2  outline-brand px-3 py-2"
+              className="appearance-none text-lg border-brand  border-2  outline-brand  px-3 py-2"
             />
           </label>
           <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
@@ -231,7 +240,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="gender"
-              className="appearance-none text-lg border-brand border-2  outline-brand px-3 py-[10px]"
+              className="appearance-none text-lg border-brand  border-2  outline-brand  px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -245,7 +254,7 @@ export const VoterQuestionnaire = ({
             </span>
             <select
               name="state"
-              className="appearance-none text-lg border-brand border-2 outline-brand px-3 py-[10px]"
+              className="appearance-none text-lg border-brand  border-2 outline-brand  px-3 py-[10px]"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -263,7 +272,7 @@ export const VoterQuestionnaire = ({
 
         <button
           type="submit"
-          className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand outline-brand focus-visible:text-white focus-visible:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+          className="border-brand  border active:scale-95 px-3 py-2 hover:bg-brand  outline-brand  focus-visible:text-white focus-visible:bg-brand  hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
         >
           Weiter
         </button>
@@ -362,6 +371,10 @@ export const VoterQuestionnaire = ({
                       <button
                         onClick={(e) => {
                           setOption(activeQuestion.id, option.value);
+
+                          if (document.activeElement === e.currentTarget) {
+                            firstWeightingRef.current?.focus();
+                          }
                         }}
                         data-active={option.value === activeQuestion.option}
                         className={clsx(
@@ -390,14 +403,19 @@ export const VoterQuestionnaire = ({
               <div className="flex flex-col gap-2">
                 <h2 className="text-lg">Das ist mir:</h2>
                 <ul className="grid w-full md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
-                  {weightings.map((weighting) => (
+                  {weightings.map((weighting, index) => (
                     <li
                       className="relative mb-2 md:mb-0 md:mr-2 last:mb-0 last:mr-0"
                       key={`${activeQuestion.id}-weighting-${weighting.value}`}
                     >
                       <button
+                        ref={index === 0 ? firstWeightingRef : undefined}
                         onClick={(e) => {
                           setWeighting(activeQuestion.id, weighting.value);
+
+                          if (document.activeElement === e.currentTarget) {
+                            nextButtonRef.current?.focus();
+                          }
                         }}
                         className={clsx(
                           "z-20 rounded-[100px] transition-colors border-black border-2  text-black relative text-lg w-full focus-visible:outline-2 outline-black outline-offset-4 text-center py-4",
@@ -425,6 +443,7 @@ export const VoterQuestionnaire = ({
                 {activeIndex + 1} / {questionsWithAnswers.length}
               </span>
               <NavigationButton
+                buttonRef={nextButtonRef}
                 label={hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
                 disabled={
                   hasNext
@@ -455,15 +474,18 @@ const NavigationButton = ({
   onClick,
   className,
   type,
+  buttonRef,
 }: {
   disabled?: boolean;
   onClick: () => void;
   label: ReactNode;
   className?: string;
   type: "prev" | "next";
+  buttonRef?: React.Ref<HTMLButtonElement>;
 }) => {
   return (
     <button
+      ref={buttonRef}
       disabled={disabled}
       onClick={onClick}
       className={clsx(

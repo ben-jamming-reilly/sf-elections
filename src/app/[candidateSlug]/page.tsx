@@ -71,48 +71,30 @@ export default async function CandidateProfile({
             </ShareButton>
           </div>
 
-          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black">
-            Profil von {candidate.name}
+          <h1 className="text-4xl my-5 pb-4 text-center">
+            Wahl-Infos Antworten: {candidate.name}
           </h1>
 
           <section className="flex justify-center mt-10">
-            <div
-              key={candidate.id}
-              className={clsx(
-                "w-full min-w-[250px] max-w-[350px] snap-start rounded-md relative flex flex-col overflow-clip"
-              )}
-            >
+            <div key={candidate.id} className="relative flex flex-col">
               <Link
+                className="transition-all border-black border rounded-[200px] group  block z-10 relative overflow-clip w-[170px] h-[88px]"
                 href={`/${candidate.slug}`}
-                className={"flex-grow flex flex-col group"}
               >
-                <div className="transition-all block z-10 relative w-full overflow-clip aspect-square">
-                  <Image
-                    src={`/${candidate.profileImg}`}
-                    alt={`Profilebild von ${candidate.name}`}
-                    fill
-                    priority
-                    className={clsx(
-                      "ease-in-out transition-all  bg-brand-yellow w-full",
-                      candidate.id !== candidate.id && "group-hover:scale-110"
-                    )}
-                  />
-                </div>
-                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
-                  {candidate.name}
-                </h2>
-                {/* <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start">
-                  <p className="prose mb-5">{candidate.description}</p>
-                </div> */}
+                <Image
+                  src={`/${candidate.profileImg}`}
+                  alt={`Profilebild von ${candidate.name}`}
+                  fill
+                  priority
+                  className="max-h-full py-3 px-5"
+                />
               </Link>
             </div>
           </section>
 
-          <div className="flex flex-col gap-4 items-center py-5 ">
-            <h2 className="text-xl block font-medium underline underline-offset-2">
-              Vergleichen mit:
-            </h2>
-            <ul className="flex flex-row gap-3">
+          <div className="flex flex-col gap-4 items-center py-8">
+            <h2 className="text-xl block font-medium mb-3">Vergleichen mit:</h2>
+            <ul className="flex flex-row flex-wrap gap-x-3 gap-y-8 justify-around">
               {randomOtherCandidates.map((c) => (
                 <li key={c.id}>
                   <SecondaryLink href={`vergleich/${candidate.slug}/${c.slug}`}>
@@ -120,19 +102,21 @@ export default async function CandidateProfile({
                   </SecondaryLink>
                 </li>
               ))}
+              <li>
+                <SecondaryLink
+                  href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
+                >
+                  Alle
+                </SecondaryLink>
+              </li>
             </ul>
-            <SecondaryLink
-              href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
-            >
-              {randomOtherCandidates.map((c) => c.name).join(" & ")}
-            </SecondaryLink>
           </div>
 
           <ul className="flex flex-col gap-16 py-10">
             {candidate.answers
               .sort((a, b) => a.question.order - b.question.order)
               .map((answer, index) => (
-                <li key={answer.id}>
+                <li key={answer.id} className="flex flex-col gap-3 items-start">
                   <QuestionCategoryLabel category={answer.question.category} />
                   <div className="text-lg font-semibold">
                     Frage {index + 1}:

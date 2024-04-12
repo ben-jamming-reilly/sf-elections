@@ -29,19 +29,14 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
     notFound();
   }
 
-  const candidateWithScore = rateCandidate(
-    voterWithAnswers.answers!,
-    candidate
-  );
-
   return {
-    title: `Vergleich mit ${candidateWithScore.name} - andererseits.org`,
-    description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
+    title: `Vergleich mit ${candidate.name} - andererseits.org`,
+    description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
       site: "andererseits.org",
-      title: `Vergleich mit ${candidateWithScore.name} - andererseits.org`,
-      description: `Ich matche mit ${candidateWithScore.name} zu ${candidateWithScore.scorePercentage}%.`,
+      title: `Vergleich mit ${candidate.name} - andererseits.org`,
+      description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
       images: [
         {
           url: `https://andererseits.org/Wahl-Infos/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
@@ -64,23 +59,16 @@ export default async function WahlkabineResultCandidate({
     notFound();
   }
 
-  const candidateWithScore = rateCandidate(
-    voterWithAnswers.answers!,
-    candidate
-  );
-
   return (
     <div>
       <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
         <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
-        <ShareButton
-          title={`Schau wie gut ${candidateWithScore.name} zu mir passt!`}
-        >
+        <ShareButton title={`Schau wie gut ${candidate.name} zu mir passt!`}>
           Teilen
         </ShareButton>
         <DownloadImageLink
-          title={`spoe-vorsitzwahlkabine-vergleich-${candidateWithScore.name}.jpg`}
-          href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidateWithScore.slug}`}
+          title={`spoe-vorsitzwahlkabine-vergleich-${candidate.name}.jpg`}
+          href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidate.slug}`}
         >
           Bild herunterladen
         </DownloadImageLink>
@@ -91,61 +79,41 @@ export default async function WahlkabineResultCandidate({
       </h1>
 
       <section className="flex justify-center mt-10">
-        <div
-          key={candidateWithScore.id}
-          className={
-            "w-full min-w-[250px] max-w-[350px] rounded-md relative flex flex-col"
-          }
-        >
-          <span className="absolute z-30 rounded-full w-14 h-14 top-3 left-3 bg-brand text-white tabular-nums inline-flex justify-center items-center">
-            {candidateWithScore.scorePercentage}%
-          </span>
-          <div className="">
-            <Link
-              href={`/${candidateWithScore.slug}`}
-              className="transition-all group rounded-tr-md block z-10 relative w-full overflow-clip rounded-tl-md aspect-square"
-            >
-              <Image
-                src={`/${candidateWithScore.profileImg}`}
-                alt={`Profilebild von ${candidateWithScore.name}`}
-                fill
-                priority
-                className=" group-hover:scale-110 ease-in-out transition-all  bg-brand-yellow w-full"
-              />
-            </Link>
-            <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full">
-              {candidateWithScore.name}
-            </h2>
-            <div className="p-5 border-2 z-20 relative items-center flex justify-center rounded-br-md rounded-bl-md border-t-0 border-brand">
-              <Link
-                className="border  active:scale-95 hover:bg-brand-purple text-brand-purple hover:text-white border-brand-purple transition-all  px-4 py-2 rounded-md"
-                href={`/${candidateWithScore.slug}`}
-              >
-                {`${candidate.name}s Antworten`}
-              </Link>
-            </div>
-          </div>
+        <div key={candidate.id} className="relative flex flex-col">
+          <Link
+            className="transition-all border-black border rounded-[200px] group  block z-10 relative overflow-clip w-[170px] h-[88px]"
+            href={`/${candidate.slug}`}
+          >
+            <Image
+              src={`/${candidate.profileImg}`}
+              alt={`Profilebild von ${candidate.name}`}
+              fill
+              priority
+              className="max-h-full py-3 px-5"
+            />
+          </Link>
         </div>
       </section>
 
-      <ul className="flex flex-col gap-16 py-10">
+      <ul className="flex flex-col gap-4 items-center py-8">
         {voterWithAnswers.answers
           .sort((a, b) => a.question.order - b.question.order)
-          .map((answer, index) => (
-            <li key={answer.id} className="">
-              {answer.question.category && (
-                <QuestionCategoryLabel category={answer.question.category} />
-              )}
-              <div className="text-lg">Frage {index + 1}:</div>
-              <h2 className="text-xl md:text-2xl mb-2 md:mb-5 hyphens-auto font-sans">
-                {answer.question.title}
-              </h2>
+          .map((answer, index) => {
+            const candidateAnswer = candidate.answers.sort(
+              (a, b) => a.question.order - b.question.order
+            )[index];
 
-              <div className="grid grid-cols-1 py-5  gap-5">
-                <div className="flex flex-col gap-1 rounded-md space-y-4">
-                  <div className="text-center inline-flex items-center  justify-center font-semibold -translate-x-[15px]">
-                    <span className="h-[30px] w-[30px]" /> Deine Antwort:
-                  </div>
+            return (
+              <li key={answer.id} className="w-full">
+                {answer.question.category && (
+                  <QuestionCategoryLabel category={answer.question.category} />
+                )}
+                <div className="text-lg mt-3">Frage {index + 1}:</div>
+                <h2 className="text-2xl font-sans mb-5 hyphens-auto">
+                  {answer.question.title}
+                </h2>
+                <section className="py-4">
+                  <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
                   {answer.option !== null && answer.weighting !== null ? (
                     <div className="flex md:flex-row flex-col gap-3">
                       <OptionResult
@@ -159,91 +127,58 @@ export default async function WahlkabineResultCandidate({
                       <QuestionUnansweredResult />
                     </div>
                   )}
-                </div>
+                </section>
 
-                <div className="flex flex-col gap-1 rounded-md space-y-4">
+                <div className="pb-16 mt-6 border-t border-black  relative space-y-4">
                   <Link
+                    className="transition-all absolute right-3 md:right-10 -top-5 md:-top-10 no-touch:hover:bg-brand bg-white focus-visible:outline-2 outline-offset-4 outline-black border-black border rounded-[200px] group  block z-10 overflow-clip w-[84px] h-[44px] md:w-[169px] md:h-[88px]"
                     href={`/${candidate.slug}`}
-                    className="text-center flex flex-row items-center font-semibold gap-3 justify-center hover:underline underline-offset-2"
                   >
                     <Image
-                      src={`/${candidateWithScore.profileImg}`}
-                      width={30}
-                      height={30}
-                      alt={`${candidateWithScore.name} Profilbild`}
-                      className="rounded-full"
+                      src={`/${candidate.profileImg}`}
+                      alt={`Profilebild von ${candidate.name}`}
+                      fill
+                      priority
+                      className="max-h-full py-3 px-5"
                     />
-                    <strong className="font-semibold">
-                      {candidateWithScore.name}:
-                    </strong>
                   </Link>
-                  {candidateWithScore.answers.sort(
-                    (a, b) => a.question.order - b.question.order
-                  )[index].option !== null &&
-                  candidateWithScore.answers.sort(
-                    (a, b) => a.question.order - b.question.order
-                  )[index].weighting !== null ? (
+
+                  {candidateAnswer?.option !== null &&
+                  candidateAnswer?.weighting !== null ? (
                     <div className="flex md:flex-row flex-col gap-3">
                       <OptionResult
-                        value={
-                          candidateWithScore.answers.sort(
-                            (a, b) => a.question.order - b.question.order
-                          )[index].option!
-                        }
-                        type={
-                          candidateWithScore.answers.sort(
-                            (a, b) => a.question.order - b.question.order
-                          )[index]?.question.type
-                        }
+                        value={candidateAnswer?.option!}
+                        type={candidateAnswer?.question.type}
                       />
-                      <WeightingResult
-                        value={
-                          candidateWithScore.answers.sort(
-                            (a, b) => a.question.order - b.question.order
-                          )[index].weighting!
-                        }
-                      />
+                      <WeightingResult value={candidateAnswer?.weighting!} />
                     </div>
                   ) : (
                     <div className="w-full">
                       <QuestionUnansweredResult />
                     </div>
                   )}
-                  {candidateWithScore.answers.sort(
-                    (a, b) => a.question.order - b.question.order
-                  )[index].text ||
-                  candidateWithScore.answers.sort(
-                    (a, b) => a.question.order - b.question.order
-                  )[index].changedQuestionDisclaimer ? (
+                  {candidateAnswer?.text ||
+                  candidateAnswer?.changedQuestionDisclaimer ? (
                     <QuestionInfo
-                      text={
-                        candidateWithScore.answers.sort(
-                          (a, b) => a.question.order - b.question.order
-                        )[index].text
-                      }
-                      disclosure={
-                        candidateWithScore.answers.sort(
-                          (a, b) => a.question.order - b.question.order
-                        )[index].changedQuestionDisclaimer
-                      }
+                      open
+                      text={candidateAnswer?.text}
+                      disclosure={candidateAnswer?.changedQuestionDisclaimer}
                     />
                   ) : null}
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
       </ul>
 
       <div className="flex sm:flex-row flex-col gap-5 pt-5 items-center justify-center">
         <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
-        <ShareButton
-          title={`Schau wie gut ${candidateWithScore.name} zu mir passt!`}
-        >
+        <ShareButton title={`Schau wie gut ${candidate.name} zu mir passt!`}>
           Teilen
         </ShareButton>
         <DownloadImageLink
-          title={`spoe-vorsitzwahlkabine-vergleich-${candidateWithScore.name}.jpg`}
-          href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidateWithScore.slug}`}
+          title={`spoe-vorsitzwahlkabine-vergleich-${candidate.name}.jpg`}
+          href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidate.slug}`}
         >
           Bild herunterladen
         </DownloadImageLink>

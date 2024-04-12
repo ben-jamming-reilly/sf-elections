@@ -12,7 +12,7 @@ export const BackButton = ({
   return (
     <Link
       href={href}
-      className="border-brand border active:scale-95 px-3 py-2 hover:bg-brand hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+      className="border-brand  border active:scale-95 px-3 py-2 hover:bg-brand  hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
     >
       <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
       {children}

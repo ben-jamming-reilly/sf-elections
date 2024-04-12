@@ -20,17 +20,17 @@ export const QuestionaireButton = () => {
       {hasHydrated ? (
         <>
           {slug ? (
-            <div className="flex flex-row gap-2 items-center justify-center">
+            <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
               <Link
                 href={`/kabine/${slug}`}
-                className="bg-brand text-white items-center gap-1 inline-flex px-3 py-2 hover:bg-brand/90 active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2"
+                className="bg-brand  text-white items-center gap-1 inline-flex px-3 py-2 hover:bg-brand /90 active:scale-95  transition-all rounded-md focus-visible:outline-brand  outline-offset-2"
               >
                 <ClipboardDocumentCheckIcon className="w-5 h-5 inline ml-1 stroke-2" />
                 Dein Ergebnis
               </Link>
 
               <button
-                className="hover:bg-brand-purple px-3 py-2 hover:text-white border-brand-purple text-brand-purple border active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2 items-center gap-1 inline-flex"
+                className="hover:bg-brand px-3 py-2 hover:text-white border-brand text-brand border active:scale-95  transition-all rounded-md focus-visible:outline-brand  outline-offset-2 items-center gap-1 inline-flex"
                 onClick={(e) => {
                   reset();
                 }}
@@ -42,7 +42,7 @@ export const QuestionaireButton = () => {
           ) : (
             <Link
               href="/kabine"
-              className="bg-brand text-white inline-flex items-center justify-center gap-1 px-3 py-2 hover:bg-brand/90 active:scale-95 transition-all rounded-md"
+              className="bg-brand  text-white inline-flex items-center justify-center gap-1 px-3 py-2 hover:bg-brand /90 active:scale-95 transition-all rounded-md"
             >
               <ArrowRightIcon className="w-5 h-5 inline ml-1 stroke-2" />
               Zu den Fragen

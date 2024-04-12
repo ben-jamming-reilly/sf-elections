@@ -15,7 +15,7 @@ export default function Error() {
       </p>
       <Link
         href="/"
-        className="border-brand border  px-3 py-2 hover:bg-brand hover:text-white active:scale-95 inline-flex items-center text-lg justify-center transition-all rounded-md text-brand gap-2"
+        className="border-brand  border  px-3 py-2 hover:bg-brand  hover:text-white active:scale-95 inline-flex items-center text-lg justify-center transition-all rounded-md text-brand  gap-2"
       >
         <ArrowLeftCircleIcon className="w-5 h-5 stroke-2" />
         Zur Startseite

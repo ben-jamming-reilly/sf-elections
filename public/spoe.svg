@@ -1,0 +1,25 @@
+<svg id="Logo_SPÖ" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="66.043" height="64.977" viewBox="0 0 66.043 64.977">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rechteck_84" data-name="Rechteck 84" width="66.043" height="64.977"/>
+    </clipPath>
+  </defs>
+  <rect id="Rechteck_83" data-name="Rechteck 83" width="66.043" height="64.977" fill="#ed1c24"/>
+  <g id="Gruppe_70" data-name="Gruppe 70" opacity="0.997">
+    <g id="Gruppe_65" data-name="Gruppe 65" clip-path="url(#clip-path)">
+      <path id="Pfad_193" data-name="Pfad 193" d="M15.114,78.326c1.852,0,3.272-.372,3.491-1.639.122-.682-.225-1.115-1.042-1.5a10.614,10.614,0,0,0-1.462-.53c-.561-.171-1.164-.341-1.761-.536C11.933,73.329,9.374,72,10.063,68.1c.9-5.082,6.434-6.386,10.693-6.386a18.261,18.261,0,0,1,5.472.756l.317.1L25.259,67.4l-.39-.177a10.664,10.664,0,0,0-4.411-.877,8.821,8.821,0,0,0-2.388.256c-.762.232-1.28.621-1.4,1.3-.091.524.207.883,1.066,1.243s2.072.609,3.254.987c2.413.768,4.966,2.126,4.283,6-.951,5.435-6.111,6.836-10.858,6.836a22.48,22.48,0,0,1-6.3-.871l-.329-.1,1.481-5.149.4.219a11.386,11.386,0,0,0,5.447,1.261" transform="translate(-3.043 -24.11)" fill="#fff"/>
+    </g>
+    <g id="Gruppe_66" data-name="Gruppe 66" clip-path="url(#clip-path)">
+      <path id="Pfad_194" data-name="Pfad 194" d="M84.1,54.49l-.628,3.656H78.65l.628-3.656Z" transform="translate(-30.728 -21.289)" fill="#fff"/>
+    </g>
+    <g id="Gruppe_67" data-name="Gruppe 67" clip-path="url(#clip-path)">
+      <path id="Pfad_195" data-name="Pfad 195" d="M96.141,54.49l-.615,3.662H90.7l.621-3.662Z" transform="translate(-35.436 -21.289)" fill="#fff"/>
+    </g>
+    <g id="Gruppe_68" data-name="Gruppe 68" clip-path="url(#clip-path)">
+      <path id="Pfad_196" data-name="Pfad 196" d="M48.445,62.27c6.483,0,9.3,2.693,8.463,7.476-.743,4.223-4.5,7.147-9.84,7.147l-1.864.079-1.036,5.88H37.88L41.505,62.27ZM45.953,72.689,47,66.73H48.36c2.108,0,3.327.615,2.888,2.906-.439,2.309-2.1,3.053-4.028,3.053Z" transform="translate(-14.799 -24.328)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+    <g id="Gruppe_69" data-name="Gruppe 69" clip-path="url(#clip-path)">
+      <path id="Pfad_197" data-name="Pfad 197" d="M88.52,72.333C87.387,78.774,83.28,82.9,77.51,82.9c-5.843,0-8.524-4.235-7.385-10.693,1.145-6.5,5.2-10.571,11.01-10.571,5.9,0,8.536,4.174,7.385,10.693m-5.862-.128c.621-3.546.079-5.929-2.212-5.929-2.431,0-3.839,2.583-4.448,6.05-.6,3.382-.079,5.929,2.212,5.929,2.425,0,3.863-2.748,4.448-6.05" transform="translate(-27.297 -24.082)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

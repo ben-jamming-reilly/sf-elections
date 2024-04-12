@@ -1,7 +1,4 @@
-"use client";
-
 import clsx from "clsx";
-import useMediaQuery from "~/hooks/useMediaQuery";
 
 export const QuestionInfo = ({
   text,
@@ -12,18 +9,18 @@ export const QuestionInfo = ({
   open?: boolean;
   disclosure?: string | null;
 }) => {
-  // TODO: change open bbased on breakpoint
-  const isMobile = useMediaQuery("(max-width: 640px)");
   return (
     <>
       <details
-        open={!isMobile}
+        open={open}
         className={clsx(
-          "py-2 px-3 w-full bg-neutral-200 rounded-md text-base appearance-none text-left"
+          "py-2 w-full rounded-md text-base appearance-none text-left"
         )}
       >
-        <summary className="cursor-pointer">Zusätzliche Information</summary>
-        <p className="mt-3 px-3">
+        <summary className="cursor-pointer text-[18px] leading-[21px] underline underline-offset-2">
+          Zusätzliche Information:
+        </summary>
+        <p className="mt-3">
           {disclosure && (
             <>
               <strong>{disclosure}</strong> <br />

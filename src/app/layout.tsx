@@ -81,7 +81,7 @@ export default function RootLayout({
               <div className="flex items-end">
                 <a
                   rel="norefeerer noopener"
-                  className="focus-visible:outline-brand bg-white px-2 py-1 outline-offset-2"
+                  className="focus-visible:outline-brand  bg-white px-2 py-1 outline-offset-2"
                   href="https://andererseits.org"
                 >
                   <Image
@@ -96,7 +96,7 @@ export default function RootLayout({
               </div>
               <Link
                 href="/"
-                className="text-[28px] leading-[34px] w-full md:w-fit py-3 md:py-0 text-center text-black focus-visible:outline-brand outline-offset-2 hyphens-manual"
+                className="text-[28px] leading-[34px] w-full md:w-fit py-3 md:py-0 text-center text-black focus-visible:outline-brand  outline-offset-2 hyphens-manual"
               >
                 Wahl-Infos 2024
               </Link>
@@ -104,10 +104,10 @@ export default function RootLayout({
           </header>
           <div className="lg:w-[1000px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
             <main className="flex-grow px-5 py-10">{children}</main>
-            <footer className="w-full flex flex-col gap-3 justify-center items-center py-5 border-t-2 border-brand">
+            <footer className="w-full flex flex-col gap-3 justify-center items-center py-5 border-t-2 border-brand ">
               <a
                 rel="norefeerer noopener"
-                className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
+                className="focus-visible:outline-brand  outline-offset-2 hover:text-brand  hover:underline underline-offset-2"
                 href="https://andererseits.org/"
               >
                 <span className="font-sans font-bold">andererseits.org</span>
@@ -116,7 +116,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     prefetch
-                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
+                    className="focus-visible:outline-brand  outline-offset-2 hover:text-brand  hover:underline underline-offset-2"
                     href="https://andererseits.org/impressum/"
                   >
                     Impressum
@@ -125,7 +125,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     prefetch
-                    className="focus-visible:outline-brand outline-offset-2 hover:text-brand hover:underline underline-offset-2"
+                    className="focus-visible:outline-brand  outline-offset-2 hover:text-brand  hover:underline underline-offset-2"
                     href="https://andererseits.org/datenschutz/"
                   >
                     Datenschutz

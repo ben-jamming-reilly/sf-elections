@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
@@ -76,15 +75,6 @@ export async function POST(request: Request) {
           },
         },
       },
-    });
-
-    await prisma.voterCandidateMatch.createMany({
-      data: candidates.map((candidate) => ({
-        candidateId: candidate.id,
-        voterId: voter.id,
-        scorePercentageRaw: rateCandidate(voter.answers, candidate)
-          .scorePercentageRaw,
-      })),
     });
 
     return NextResponse.json({ slug: voter.hash });
