@@ -14,7 +14,7 @@ export const QuestionInfo = ({
       <details
         open={open}
         className={clsx(
-          "py-2 w-full rounded-md text-base appearance-none text-left"
+          "w-full appearance-none rounded-md py-2 text-left text-base",
         )}
       >
         <summary className="cursor-pointer text-[18px] leading-[21px] underline underline-offset-2">

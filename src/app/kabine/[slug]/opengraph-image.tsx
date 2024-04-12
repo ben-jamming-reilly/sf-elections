@@ -20,7 +20,7 @@ export default async function og({ params }: { params: { slug: string } }) {
   ]);
 
   const sortedCandidates = await fetch(
-    `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${params.slug}`
+    `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${params.slug}`,
   )
     .then((res) => res.json() as Promise<FetchCandidatesWithScoresResponse>)
     .catch((e) => {
@@ -53,8 +53,8 @@ export default async function og({ params }: { params: { slug: string } }) {
                     index === 1
                       ? "scale(0.95)"
                       : index === 2
-                      ? "scale(0.9)"
-                      : "scale(1)",
+                        ? "scale(0.9)"
+                        : "scale(1)",
                 }}
               >
                 <img
@@ -152,7 +152,7 @@ export default async function og({ params }: { params: { slug: string } }) {
         },
       ],
       debug: process.env.NODE_ENV === "development",
-    }
+    },
   );
 }
 

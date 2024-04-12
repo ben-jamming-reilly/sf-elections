@@ -23,7 +23,7 @@ export async function GET(request: Request) {
   }
 
   const sortedCandidates = await fetch(
-    `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${slug}`
+    `${BASE_URL}/api/og/fetch-candidates-with-scores?slug=${slug}`,
   )
     .then((res) => res.json() as Promise<FetchCandidatesWithScoresResponse>)
     .catch((e) => {
@@ -102,8 +102,8 @@ export async function GET(request: Request) {
                     index === 1
                       ? "scale(0.98)"
                       : index === 2
-                      ? "scale(0.96)"
-                      : "scale(1)",
+                        ? "scale(0.96)"
+                        : "scale(1)",
                 }}
               >
                 <div tw="flex rounded-sm relative mr-10">
@@ -177,7 +177,7 @@ export async function GET(request: Request) {
         }),
       },
       debug: process.env.NODE_ENV === "development",
-    }
+    },
   );
 }
 

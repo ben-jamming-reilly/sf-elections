@@ -22,7 +22,7 @@ export default async function og({
     boldFont,
   ]);
   const data = await fetch(
-    `${BASE_URL}/api/og/fetch-candidate-and-voter?slug=${params.slug}&candidateSlug=${params["candidate-slug"]}`
+    `${BASE_URL}/api/og/fetch-candidate-and-voter?slug=${params.slug}&candidateSlug=${params["candidate-slug"]}`,
   )
     .then((res) => res.json() as FetchCandidateAndVoterViaSlugs)
     .catch((e) => {
@@ -125,7 +125,7 @@ export default async function og({
         },
       ],
       debug: process.env.NODE_ENV === "development",
-    }
+    },
   );
 }
 

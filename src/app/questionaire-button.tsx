@@ -20,31 +20,31 @@ export const QuestionaireButton = () => {
       {hasHydrated ? (
         <>
           {slug ? (
-            <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
               <Link
                 href={`/kabine/${slug}`}
-                className="bg-brand  text-white items-center gap-1 inline-flex px-3 py-2 notouch:hover:bg-brand /90 active:scale-95  transition-all rounded-md focus-visible:outline-brand  outline-offset-2"
+                className="/90  inline-flex items-center gap-1 rounded-md bg-brand px-3 py-2 text-white outline-offset-2  transition-all focus-visible:outline-brand active:scale-95  notouch:hover:bg-brand"
               >
-                <ClipboardDocumentCheckIcon className="w-5 h-5 inline ml-1 stroke-2" />
+                <ClipboardDocumentCheckIcon className="ml-1 inline h-5 w-5 stroke-2" />
                 Dein Ergebnis
               </Link>
 
               <button
-                className="notouch:hover:bg-brand px-3 py-2 notouch:hover:text-white border-brand text-brand border active:scale-95  transition-all rounded-md focus-visible:outline-brand  outline-offset-2 items-center gap-1 inline-flex"
+                className="inline-flex items-center gap-1 rounded-md border border-brand px-3 py-2  text-brand outline-offset-2 transition-all  focus-visible:outline-brand active:scale-95 notouch:hover:bg-brand notouch:hover:text-white"
                 onClick={(e) => {
                   reset();
                 }}
               >
-                <ArrowPathRoundedSquareIcon className="w-5 h-5 inline ml-1 stroke-2" />
+                <ArrowPathRoundedSquareIcon className="ml-1 inline h-5 w-5 stroke-2" />
                 Neustarten
               </button>
             </div>
           ) : (
             <Link
               href="/kabine"
-              className="bg-brand  text-white inline-flex items-center justify-center gap-1 px-3 py-2 notouch:hover:bg-brand /90 active:scale-95 transition-all rounded-md"
+              className="/90  inline-flex items-center justify-center gap-1 rounded-md bg-brand px-3 py-2 text-white transition-all active:scale-95 notouch:hover:bg-brand"
             >
-              <ArrowRightIcon className="w-5 h-5 inline ml-1 stroke-2" />
+              <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
               Zu den Fragen
             </Link>
           )}

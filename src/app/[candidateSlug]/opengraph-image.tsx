@@ -25,7 +25,7 @@ export default async function og({
   ]);
 
   const candidate = await fetch(
-    `${BASE_URL}/api/og/fetch-candidate-by-slug?slug=${params.candidateSlug}`
+    `${BASE_URL}/api/og/fetch-candidate-by-slug?slug=${params.candidateSlug}`,
   )
     .then((res) => res.json() as FetchCandidateBySlugResponse)
     .catch((e) => {
@@ -126,7 +126,7 @@ export default async function og({
         },
       ],
       debug: process.env.NODE_ENV === "development",
-    }
+    },
   );
 }
 

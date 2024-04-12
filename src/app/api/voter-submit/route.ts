@@ -19,7 +19,7 @@ const questionWithAnswersSchema = z.array(
       weighting: z.number().min(0).max(3),
       skipped: z.literal(false),
     }),
-  ])
+  ]),
 );
 
 const dataForStatsSchema = z.object({
@@ -37,13 +37,13 @@ export async function POST(request: Request) {
       {
         error: "Bitte akzeptiere die Nutzungsbedingungen!",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   try {
     const validatedQuestionsWithAnswers = questionWithAnswersSchema.parse(
-      data.questionsWithAnswers
+      data.questionsWithAnswers,
     );
 
     const validatedDataForStats = dataForStatsSchema.parse(data.dataForStats);
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       {
         error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

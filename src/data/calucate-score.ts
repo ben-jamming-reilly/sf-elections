@@ -13,7 +13,7 @@ import {
 
 const calculateWeightingRelevancy = (
   voterWeighting: WeightingValueType,
-  candidateWeighting: WeightingValueType
+  candidateWeighting: WeightingValueType,
 ) => {
   if (voterWeighting === candidateWeighting) return 0.15;
   if (
@@ -28,7 +28,7 @@ const calculateWeightingRelevancy = (
 
 const calculateMatchForScaleOption = (
   voterAnswer: ScaleOptionValueType,
-  candidateAnswer: ScaleOptionValueType
+  candidateAnswer: ScaleOptionValueType,
 ) => {
   if (voterAnswer === candidateAnswer) return 1;
   if (
@@ -47,12 +47,13 @@ export const calculateScore = (
   })[],
   candidateAnswers: (CandidateQuestionAnswer & {
     question: Question;
-  })[]
+  })[],
 ) => {
   let score = 0;
   voterAnswers.forEach((voterAnswer) => {
     const candidateAnswer = candidateAnswers.find(
-      (candidateAnswer) => candidateAnswer.questionId === voterAnswer.questionId
+      (candidateAnswer) =>
+        candidateAnswer.questionId === voterAnswer.questionId,
     );
 
     if (
@@ -71,7 +72,7 @@ export const calculateScore = (
     if (voterAnswer.question.type === "Range") {
       const matchScore = calculateMatchForScaleOption(
         voterAnswer.option! as ScaleOptionValueType,
-        candidateAnswer!.option! as ScaleOptionValueType
+        candidateAnswer!.option! as ScaleOptionValueType,
       );
 
       score += matchScore;
@@ -79,7 +80,7 @@ export const calculateScore = (
 
     const weightingRelevancy = calculateWeightingRelevancy(
       voterAnswer.weighting! as WeightingValueType,
-      candidateAnswer!.weighting! as WeightingValueType
+      candidateAnswer!.weighting! as WeightingValueType,
     );
 
     score += weightingRelevancy;

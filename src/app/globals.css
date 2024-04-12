@@ -39,7 +39,7 @@
 
   html,
   body {
-    @apply text-black bg-white font-sans;
+    @apply bg-white font-sans text-black;
     height: 100%;
   }
 }

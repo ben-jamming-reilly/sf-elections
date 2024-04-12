@@ -1,280 +1,280 @@
 {
-    "state": {
-        "questions": [
-            {
-                "id": 1,
-                "title": "Findest du es legitim, dass sich Jugendliche für ihre Überzeugungen auf die Straße kleben?",
-                "category": "Klima & Umwelt",
-                "description": "",
-                "option": 1,
-                "weighting": 3
-            },
-            {
-                "id": 2,
-                "title": "Tempo 100 km/h auf der Autobahn?",
-                "category": "Klima & Umwelt",
-                "description": "",
-                "option": 1,
-                "weighting": 3
-            },
-            {
-                "id": 3,
-                "title": "Bist du für ein Verbot von Kurzstreckenflügen (unter 1000 km Bsp. Wien - Hamburg)?",
-                "category": "Klima & Umwelt",
-                "description": "",
-                "option": -2,
-                "weighting": 1
-            },
-            {
-                "id": 4,
-                "title": "Die Klimakrise ist das größte Problem dieses Jahrhunderts",
-                "category": "Klima & Umwelt",
-                "description": "",
-                "option": -1,
-                "weighting": 0
-            },
-            {
-                "id": 5,
-                "title": "Um das Klima zu schützen, müssen unpopuläre Entscheidungen getroffen werden.",
-                "category": "Klima & Umwelt",
-                "description": "",
-                "option": 1,
-                "weighting": 1
-            },
-            {
-                "id": 6,
-                "title": "Solltest du Bundeskanzler*in werden, würde deine Regierung zu 50% aus Frauen bestehen?",
-                "category": "Frauen",
-                "description": "",
-                "option": -2,
-                "weighting": 1
-            },
-            {
-                "id": 7,
-                "title": "Frauen haben es in der Politik schwieriger.",
-                "category": "Frauen",
-                "description": "",
-                "option": -1,
-                "weighting": 0
-            },
-            {
-                "id": 8,
-                "title": "Soll das nordische Modell für Sexarbeit in Österreich eingeführt werden?",
-                "category": "Frauen",
-                "description": "",
-                "option": 1,
-                "weighting": 3
-            },
-            {
-                "id": 9,
-                "title": "Frauen werden in der SPÖ noch immer strukturell benachteiligt.",
-                "category": "Frauen",
-                "description": "",
-                "option": 1,
-                "weighting": 1
-            },
-            {
-                "id": 10,
-                "title": "Soll der Schwangerschaftsabbruch in Österreich gratis und aus dem Strafgesetzbuch gestrichen werden?",
-                "category": "Frauen",
-                "description": "",
-                "option": -1,
-                "weighting": 2
-            },
-            {
-                "id": 11,
-                "title": "Soll das Wahlrecht von der Staatsbürgerschaft entkoppelt werden?",
-                "category": "Demokratie & Mitbestimmung",
-                "description": "",
-                "option": 1,
-                "weighting": 1
-            },
-            {
-                "id": 12,
-                "title": "Sollen EU-Bürger*innen ein Wahlrecht auf Bundesebene bekommen?",
-                "category": "Demokratie & Mitbestimmung",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 13,
-                "title": "Soll der Besitz der Doppelstaatsbürgerschaft in Österreich erlaubt werden?",
-                "category": "Demokratie & Mitbestimmung",
-                "description": "",
-                "option": 1,
-                "weighting": 1
-            },
-            {
-                "id": 14,
-                "title": "Bist du für eine verpflichtende Volksabstimmung, wenn ein Volksbegehren von 10% aller Wahlberechtigten unterzeichnet wurde?",
-                "category": "Demokratie & Mitbestimmung",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 15,
-                "title": "Bist du für eine Sanktionierung für Bundesländer, die weniger Geflüchtete aufnehmen als der Verteilungsschlüssel vorgibt?",
-                "category": "Demokratie & Mitbestimmung",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 16,
-                "title": "Soll die 30 Stundenwoche gesetzlich festgelegt werden?",
-                "category": "Arbeit & Soziales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 17,
-                "title": "Soll ein Mindestlohn gesetzlich festgelegt werden?",
-                "category": "Arbeit & Soziales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 18,
-                "title": "Bist du für ein Maximalvermögen (z.B. von 100 Mio. Euro)?",
-                "category": "Arbeit & Soziales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 19,
-                "title": "Bist du für ein Bedingungsloses Grundeinkommen?",
-                "category": "Arbeit & Soziales",
-                "description": "",
-                "option": 1,
-                "weighting": 3
-            },
-            {
-                "id": 20,
-                "title": "Bist du für die Einführung einer Kindergrundsicherung?",
-                "category": "Arbeit & Soziales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 21,
-                "title": "Sollen in Zukunft Bundesparteivorsitzende durch einen bindenden Mitgliederentscheid gewählt werden?",
-                "category": "Internes",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 22,
-                "title": "Würdest du mit der FPÖ auf Bundesebene eine Koalition eingehen?",
-                "category": "Internes",
-                "description": "",
-                "option": 2,
-                "weighting": 3
-            },
-            {
-                "id": 23,
-                "title": "Würdest du mit der ÖVP auf Bundesebene eine Koalition eingehen?",
-                "category": "Internes",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 24,
-                "title": "Würdest du jeder Jugendorganisation einen dauerhaften Platz im Bundesvorstand geben?",
-                "category": "Internes",
-                "description": "",
-                "option": 1,
-                "weighting": 1
-            },
-            {
-                "id": 25,
-                "title": "Bist du  für eine verpflichtende und bindende Mitgliederabstimmung vor einem zukünftigen Koalitionsabkommen?",
-                "category": "Internes",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 26,
-                "title": "Bist du für die Abschaffung der Empfehlungen der Antragsprüfungskommission?",
-                "category": "Internes",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 27,
-                "title": "Soll Österreich auch in Zukunft an der Neutralität festhalten?",
-                "category": "Europa & Internationales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 28,
-                "title": "Bist du dafür, dass die EU neue Freihandelsabkommen mit anderen Ländern/Regionen schließt?",
-                "category": "Europa & Internationales",
-                "description": "",
-                "option": 2,
-                "weighting": 3
-            },
-            {
-                "id": 29,
-                "title": "Soll die Ukraine Mitglied der EU werden?",
-                "category": "Europa & Internationales",
-                "description": "",
-                "option": 1,
-                "weighting": 2
-            },
-            {
-                "id": 30,
-                "title": "Soll der/die Spitzenkandidat:in der europäischen Parteienfamilie, die am meisten Stimmen bei der Europawahl erhält, der/die nächste EU-Kommissionspräsidentin werden?",
-                "category": "Europa & Internationales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 31,
-                "title": "Bist du dafür, dass das Einstimmigkeitsprinzip auf EU-Ebene abgeschafft werden soll?",
-                "category": "Europa & Internationales",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 32,
-                "title": "Bist du für die Legalisierung von Cannabis?",
-                "category": "",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 33,
-                "title": "Soll der 8. Mai als “Tag der Befreiung” ein gesetzlicher Feiertag werden?",
-                "category": "",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            },
-            {
-                "id": 34,
-                "title": "Soll der 12. Februar als “Tag des Widerstands” ein gesetzlicher Feiertag werden?",
-                "category": "",
-                "description": "",
-                "option": 2,
-                "weighting": 2
-            }
-        ],
-        "activeIndex": 33
-    },
-    "version": 0
+  "state": {
+    "questions": [
+      {
+        "id": 1,
+        "title": "Findest du es legitim, dass sich Jugendliche für ihre Überzeugungen auf die Straße kleben?",
+        "category": "Klima & Umwelt",
+        "description": "",
+        "option": 1,
+        "weighting": 3
+      },
+      {
+        "id": 2,
+        "title": "Tempo 100 km/h auf der Autobahn?",
+        "category": "Klima & Umwelt",
+        "description": "",
+        "option": 1,
+        "weighting": 3
+      },
+      {
+        "id": 3,
+        "title": "Bist du für ein Verbot von Kurzstreckenflügen (unter 1000 km Bsp. Wien - Hamburg)?",
+        "category": "Klima & Umwelt",
+        "description": "",
+        "option": -2,
+        "weighting": 1
+      },
+      {
+        "id": 4,
+        "title": "Die Klimakrise ist das größte Problem dieses Jahrhunderts",
+        "category": "Klima & Umwelt",
+        "description": "",
+        "option": -1,
+        "weighting": 0
+      },
+      {
+        "id": 5,
+        "title": "Um das Klima zu schützen, müssen unpopuläre Entscheidungen getroffen werden.",
+        "category": "Klima & Umwelt",
+        "description": "",
+        "option": 1,
+        "weighting": 1
+      },
+      {
+        "id": 6,
+        "title": "Solltest du Bundeskanzler*in werden, würde deine Regierung zu 50% aus Frauen bestehen?",
+        "category": "Frauen",
+        "description": "",
+        "option": -2,
+        "weighting": 1
+      },
+      {
+        "id": 7,
+        "title": "Frauen haben es in der Politik schwieriger.",
+        "category": "Frauen",
+        "description": "",
+        "option": -1,
+        "weighting": 0
+      },
+      {
+        "id": 8,
+        "title": "Soll das nordische Modell für Sexarbeit in Österreich eingeführt werden?",
+        "category": "Frauen",
+        "description": "",
+        "option": 1,
+        "weighting": 3
+      },
+      {
+        "id": 9,
+        "title": "Frauen werden in der SPÖ noch immer strukturell benachteiligt.",
+        "category": "Frauen",
+        "description": "",
+        "option": 1,
+        "weighting": 1
+      },
+      {
+        "id": 10,
+        "title": "Soll der Schwangerschaftsabbruch in Österreich gratis und aus dem Strafgesetzbuch gestrichen werden?",
+        "category": "Frauen",
+        "description": "",
+        "option": -1,
+        "weighting": 2
+      },
+      {
+        "id": 11,
+        "title": "Soll das Wahlrecht von der Staatsbürgerschaft entkoppelt werden?",
+        "category": "Demokratie & Mitbestimmung",
+        "description": "",
+        "option": 1,
+        "weighting": 1
+      },
+      {
+        "id": 12,
+        "title": "Sollen EU-Bürger*innen ein Wahlrecht auf Bundesebene bekommen?",
+        "category": "Demokratie & Mitbestimmung",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 13,
+        "title": "Soll der Besitz der Doppelstaatsbürgerschaft in Österreich erlaubt werden?",
+        "category": "Demokratie & Mitbestimmung",
+        "description": "",
+        "option": 1,
+        "weighting": 1
+      },
+      {
+        "id": 14,
+        "title": "Bist du für eine verpflichtende Volksabstimmung, wenn ein Volksbegehren von 10% aller Wahlberechtigten unterzeichnet wurde?",
+        "category": "Demokratie & Mitbestimmung",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 15,
+        "title": "Bist du für eine Sanktionierung für Bundesländer, die weniger Geflüchtete aufnehmen als der Verteilungsschlüssel vorgibt?",
+        "category": "Demokratie & Mitbestimmung",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 16,
+        "title": "Soll die 30 Stundenwoche gesetzlich festgelegt werden?",
+        "category": "Arbeit & Soziales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 17,
+        "title": "Soll ein Mindestlohn gesetzlich festgelegt werden?",
+        "category": "Arbeit & Soziales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 18,
+        "title": "Bist du für ein Maximalvermögen (z.B. von 100 Mio. Euro)?",
+        "category": "Arbeit & Soziales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 19,
+        "title": "Bist du für ein Bedingungsloses Grundeinkommen?",
+        "category": "Arbeit & Soziales",
+        "description": "",
+        "option": 1,
+        "weighting": 3
+      },
+      {
+        "id": 20,
+        "title": "Bist du für die Einführung einer Kindergrundsicherung?",
+        "category": "Arbeit & Soziales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 21,
+        "title": "Sollen in Zukunft Bundesparteivorsitzende durch einen bindenden Mitgliederentscheid gewählt werden?",
+        "category": "Internes",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 22,
+        "title": "Würdest du mit der FPÖ auf Bundesebene eine Koalition eingehen?",
+        "category": "Internes",
+        "description": "",
+        "option": 2,
+        "weighting": 3
+      },
+      {
+        "id": 23,
+        "title": "Würdest du mit der ÖVP auf Bundesebene eine Koalition eingehen?",
+        "category": "Internes",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 24,
+        "title": "Würdest du jeder Jugendorganisation einen dauerhaften Platz im Bundesvorstand geben?",
+        "category": "Internes",
+        "description": "",
+        "option": 1,
+        "weighting": 1
+      },
+      {
+        "id": 25,
+        "title": "Bist du  für eine verpflichtende und bindende Mitgliederabstimmung vor einem zukünftigen Koalitionsabkommen?",
+        "category": "Internes",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 26,
+        "title": "Bist du für die Abschaffung der Empfehlungen der Antragsprüfungskommission?",
+        "category": "Internes",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 27,
+        "title": "Soll Österreich auch in Zukunft an der Neutralität festhalten?",
+        "category": "Europa & Internationales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 28,
+        "title": "Bist du dafür, dass die EU neue Freihandelsabkommen mit anderen Ländern/Regionen schließt?",
+        "category": "Europa & Internationales",
+        "description": "",
+        "option": 2,
+        "weighting": 3
+      },
+      {
+        "id": 29,
+        "title": "Soll die Ukraine Mitglied der EU werden?",
+        "category": "Europa & Internationales",
+        "description": "",
+        "option": 1,
+        "weighting": 2
+      },
+      {
+        "id": 30,
+        "title": "Soll der/die Spitzenkandidat:in der europäischen Parteienfamilie, die am meisten Stimmen bei der Europawahl erhält, der/die nächste EU-Kommissionspräsidentin werden?",
+        "category": "Europa & Internationales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 31,
+        "title": "Bist du dafür, dass das Einstimmigkeitsprinzip auf EU-Ebene abgeschafft werden soll?",
+        "category": "Europa & Internationales",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 32,
+        "title": "Bist du für die Legalisierung von Cannabis?",
+        "category": "",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 33,
+        "title": "Soll der 8. Mai als “Tag der Befreiung” ein gesetzlicher Feiertag werden?",
+        "category": "",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      },
+      {
+        "id": 34,
+        "title": "Soll der 12. Februar als “Tag des Widerstands” ein gesetzlicher Feiertag werden?",
+        "category": "",
+        "description": "",
+        "option": 2,
+        "weighting": 2
+      }
+    ],
+    "activeIndex": 33
+  },
+  "version": 0
 }

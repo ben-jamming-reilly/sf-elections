@@ -18,11 +18,11 @@ type CandidateWithAnswers = Candidate & {
 
 const getAnsweredQuestionsLength = (
   voterAnswers: VoterAnswer[],
-  candidateAnswers: CandidateWithAnswers["answers"]
+  candidateAnswers: CandidateWithAnswers["answers"],
 ) => {
   return candidateAnswers.filter((answer) => {
     const voterAnswer = voterAnswers.find(
-      (voterAnswer) => voterAnswer.questionId === answer.questionId
+      (voterAnswer) => voterAnswer.questionId === answer.questionId,
     );
 
     return (
@@ -35,7 +35,7 @@ const getAnsweredQuestionsLength = (
 
 export const rateCandidate = (
   voterAnswers: VoterAnswer[],
-  candidate: CandidateWithAnswers
+  candidate: CandidateWithAnswers,
 ) => {
   const maxScore =
     getAnsweredQuestionsLength(voterAnswers, candidate.answers) * 1.15;
@@ -54,7 +54,7 @@ export const rateCandidate = (
 
 export const rateCandidates = (
   voterAnswers: VoterAnswer[],
-  candidates: CandidateWithAnswers[]
+  candidates: CandidateWithAnswers[],
 ) => {
   return candidates
     .map((candidate) => rateCandidate(voterAnswers, candidate))

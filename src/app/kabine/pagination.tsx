@@ -22,18 +22,18 @@ const Pagination = ({
   return (
     <ul
       className={clsx(
-        "flex flex-row flex-wrap gap-x-2 gap-y-1 md:gap-x-1 justify-center md:justify-end",
-        className
+        "flex flex-row flex-wrap justify-center gap-x-2 gap-y-1 md:justify-end md:gap-x-1",
+        className,
       )}
     >
       {questionsWithAnswers.map((question, index) => (
         <li key={`question-shortcut-${question.id}`}>
           <span
             className={clsx(
-              "inline-flex justify-center select-none items-center w-[2em] h-[2em] transition-all rounded-full border-2",
+              "inline-flex h-[2em] w-[2em] select-none items-center justify-center rounded-full border-2 transition-all",
               activeQuestion.id === question.id
                 ? "border-black"
-                : "border-transparent"
+                : "border-transparent",
             )}
             // onClick={() => setActiveIndex(index)}
           >

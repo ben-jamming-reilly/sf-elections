@@ -12,7 +12,7 @@ export const DownloadImageLink = ({
 }) => {
   return (
     <a
-      className="px-3 py-2 active:scale-95 notouch:hover:bg-brand border text-brand notouch:hover:text-white border-brand relative transition-all  rounded-md focus-visible:outline-brand  outline-offset-2 selection:text-white items-center flex justify-center gap-2 selection:bg-brand "
+      className="relative flex items-center justify-center gap-2 rounded-md border border-brand px-3 py-2  text-brand outline-offset-2  transition-all selection:bg-brand selection:text-white focus-visible:outline-brand active:scale-95 notouch:hover:bg-brand notouch:hover:text-white "
       download={title}
       target="_blank"
       href={href}

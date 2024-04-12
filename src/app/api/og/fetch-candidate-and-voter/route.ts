@@ -20,7 +20,7 @@ export async function GET(request: Request) {
       {
         error: "Slug is needed!",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -43,6 +43,6 @@ export async function GET(request: Request) {
         answers: [],
       },
     },
-    { status: 200 }
+    { status: 200 },
   );
 }

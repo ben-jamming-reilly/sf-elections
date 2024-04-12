@@ -15,8 +15,8 @@ export const SecondaryLink = ({
     <Link
       href={href}
       className={clsx(
-        "border active:scale-95 notouch:hover:bg-brand  text-brand  notouch:hover:text-white border-brand  transition-all  px-4 py-2 rounded-md",
-        className
+        "rounded-md border border-brand  px-4  py-2 text-brand  transition-all  active:scale-95 notouch:hover:bg-brand notouch:hover:text-white",
+        className,
       )}
     >
       {children}

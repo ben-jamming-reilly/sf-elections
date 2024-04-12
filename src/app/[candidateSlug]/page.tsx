@@ -61,7 +61,7 @@ export default async function CandidateProfile({
     <section>
       {candidate.hasFinished ? (
         <div className="mb-5">
-          <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
             <BackButton href={`/`}>Zur Startseite</BackButton>
 
             <ShareButton
@@ -71,14 +71,14 @@ export default async function CandidateProfile({
             </ShareButton>
           </div>
 
-          <h1 className="text-4xl my-5 pb-4 text-center">
+          <h1 className="my-5 pb-4 text-center text-4xl">
             Wahl-Infos Antworten: {candidate.name}
           </h1>
 
-          <section className="flex justify-center mt-10">
+          <section className="mt-10 flex justify-center">
             <div key={candidate.id} className="relative flex flex-col">
               <Link
-                className="transition-all border-black border rounded-[200px] group  block z-10 relative overflow-clip w-[170px] h-[88px]"
+                className="group relative z-10 block h-[88px]  w-[170px] overflow-clip rounded-[200px] border border-black transition-all"
                 href={`/${candidate.slug}`}
               >
                 <Image
@@ -86,15 +86,15 @@ export default async function CandidateProfile({
                   alt={`Profilebild von ${candidate.name}`}
                   fill
                   priority
-                  className="max-h-full py-3 px-5"
+                  className="max-h-full px-5 py-3"
                 />
               </Link>
             </div>
           </section>
 
-          <div className="flex flex-col gap-4 items-center py-8">
-            <h2 className="text-xl block font-medium mb-3">Vergleichen mit:</h2>
-            <ul className="flex flex-row flex-wrap gap-x-3 gap-y-8 justify-around">
+          <div className="flex flex-col items-center gap-4 py-8">
+            <h2 className="mb-3 block text-xl font-medium">Vergleichen mit:</h2>
+            <ul className="flex flex-row flex-wrap justify-around gap-x-3 gap-y-8">
               {randomOtherCandidates.map((c) => (
                 <li key={c.id}>
                   <SecondaryLink href={`vergleich/${candidate.slug}/${c.slug}`}>
@@ -116,16 +116,16 @@ export default async function CandidateProfile({
             {candidate.answers
               .sort((a, b) => a.question.order - b.question.order)
               .map((answer, index) => (
-                <li key={answer.id} className="flex flex-col gap-3 items-start">
+                <li key={answer.id} className="flex flex-col items-start gap-3">
                   <QuestionCategoryLabel category={answer.question.category} />
                   <div className="text-lg font-semibold">
                     Frage {index + 1}:
                   </div>
-                  <h2 className="text-2xl mb-5 hyphens-auto">
+                  <h2 className="mb-5 hyphens-auto text-2xl">
                     {answer.question.title}
                   </h2>
                   {answer.option !== null && answer.weighting !== null ? (
-                    <div className="flex md:flex-row flex-col gap-3">
+                    <div className="flex flex-col gap-3 md:flex-row">
                       <OptionResult
                         value={answer.option}
                         type={answer.question.type}

@@ -8,14 +8,14 @@ export default async function Home() {
   const candidates = await getCandidates();
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       <div className="text-center">
-        <h1 className="text-3xl md:text-5xl my-5 pb-4 border-b-2 font-sans border-black ">
+        <h1 className="my-5 border-b-2 border-black pb-4 font-sans text-3xl md:text-5xl ">
           EU-Wahl-Infos 2024 in leichter Sprache
         </h1>
       </div>
 
-      <div className="w-fit mx-auto text-2xl">
+      <div className="mx-auto w-fit text-2xl">
         <QuestionaireButton />
       </div>
     </div>

@@ -18,7 +18,7 @@ export async function GET(request: Request) {
   }
 
   const candidate = await fetch(
-    `${BASE_URL}/api/og/fetch-candidate-by-slug?slug=${candidateSlug}`
+    `${BASE_URL}/api/og/fetch-candidate-by-slug?slug=${candidateSlug}`,
   )
     .then((res) => res.json() as FetchCandidateBySlugResponse)
     .catch((e) => {
@@ -124,7 +124,7 @@ export async function GET(request: Request) {
         },
       ],
       debug: process.env.NODE_ENV === "development",
-    }
+    },
   );
 }
 

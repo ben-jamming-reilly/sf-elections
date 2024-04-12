@@ -75,13 +75,13 @@ export default function RootLayout({
         <Script data-domain="mitentscheiden.at" src="/js/script.js"></Script>
       </head>
       <body className={clsx(interFont.variable, loraFont.variable)}>
-        <div className={`w-full min-h-full z-10 flex flex-col`}>
-          <header className="w-full md:sticky z-50 top-0 bg-white border-b border-black mb-5">
-            <div className="mx-auto lg:w-[1320px] max-w-full flex flex-col md:flex-row items-center justify-between font-sans gap-y-2 px-3 py-4">
+        <div className={`z-10 flex min-h-full w-full flex-col`}>
+          <header className="top-0 z-50 mb-5 w-full border-b border-black bg-white md:sticky">
+            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-3 py-4 font-sans md:flex-row lg:w-[1320px]">
               <div className="flex items-end">
                 <a
                   rel="norefeerer noopener"
-                  className="focus-visible:outline-brand  bg-white px-2 py-1 outline-offset-2"
+                  className="bg-white  px-2 py-1 outline-offset-2 focus-visible:outline-brand"
                   href="https://andererseits.org"
                 >
                   <Image
@@ -89,34 +89,34 @@ export default function RootLayout({
                     height={36}
                     priority
                     width={181.83}
-                    className="object-contain flex-1"
+                    className="flex-1 object-contain"
                     alt="andererseits Logo"
                   />
                 </a>
               </div>
               <Link
                 href="/"
-                className="text-[28px] leading-[34px] w-full md:w-fit py-3 md:py-0 text-center text-black focus-visible:outline-brand  outline-offset-2 hyphens-manual"
+                className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 focus-visible:outline-brand  md:w-fit md:py-0"
               >
                 Wahl-Infos 2024
               </Link>
             </div>
           </header>
-          <div className="lg:w-[1000px] w-full flex flex-col min-h-full flex-grow mx-auto gap-5 md:gap-10">
+          <div className="mx-auto flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 lg:w-[1000px]">
             <main className="flex-grow px-5 py-10">{children}</main>
-            <footer className="w-full flex flex-col gap-3 justify-center items-center py-5 border-t-2 border-brand ">
+            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t-2 border-brand py-5 ">
               <a
                 rel="norefeerer noopener"
-                className="focus-visible:outline-brand  outline-offset-2 notouch:hover:text-brand  notouch:hover:underline underline-offset-2"
+                className="underline-offset-2  outline-offset-2 focus-visible:outline-brand  notouch:hover:text-brand notouch:hover:underline"
                 href="https://andererseits.org/"
               >
                 <span className="font-sans font-bold">andererseits.org</span>
               </a>
-              <ul className="flex flex-col gap-3 items-center justify-center sm:flex-row flex-wrap">
+              <ul className="flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
                 <li>
                   <Link
                     prefetch
-                    className="focus-visible:outline-brand  outline-offset-2 notouch:hover:text-brand  notouch:hover:underline underline-offset-2"
+                    className="underline-offset-2  outline-offset-2 focus-visible:outline-brand  notouch:hover:text-brand notouch:hover:underline"
                     href="https://andererseits.org/impressum/"
                   >
                     Impressum
@@ -125,7 +125,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     prefetch
-                    className="focus-visible:outline-brand  outline-offset-2 notouch:hover:text-brand  notouch:hover:underline underline-offset-2"
+                    className="underline-offset-2  outline-offset-2 focus-visible:outline-brand  notouch:hover:text-brand notouch:hover:underline"
                     href="https://andererseits.org/datenschutz/"
                   >
                     Datenschutz

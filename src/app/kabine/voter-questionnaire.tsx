@@ -151,7 +151,7 @@ export const VoterQuestionnaire = ({
 
   if (!hasHydrated) {
     return (
-      <div className="w-full h-[500px]">
+      <div className="h-[500px] w-full">
         <Loading />
       </div>
     );
@@ -159,12 +159,12 @@ export const VoterQuestionnaire = ({
 
   if (hasHydrated && !hasAcceptedTos) {
     return (
-      <div className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto">
-        <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black w-full">
+      <div className="mx-auto flex max-w-[800px] flex-col items-center gap-5 md:gap-10">
+        <h1 className="my-5 w-full border-b-2 border-black pb-4 text-center text-4xl">
           EU-Wahl-Infos 2024 Information
         </h1>
-        <p className="max-w-[50ch] mx-auto text-lg">
-          <ul className="list-disc ml-4 mb-3">
+        <p className="mx-auto max-w-[50ch] text-lg">
+          <ul className="mb-3 ml-4 list-disc">
             <li>Diese Wahl-Infos dienen der demokratischen Meinungsbildung.</li>
             <li>
               Wir erfassen <strong>keine</strong> personenbezogenen Daten.
@@ -190,7 +190,7 @@ export const VoterQuestionnaire = ({
             onClick={() => {
               acceptTos();
             }}
-            className="border-brand  border active:scale-95 px-3 py-2 notouch:hover:bg-brand   notouch:hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+            className="inline-flex  items-center justify-center gap-2 rounded-md border   border-brand px-3 py-2 transition-all active:scale-95 notouch:hover:bg-brand notouch:hover:text-white"
           >
             Ich habe die Information gelesen und verstanden.
           </button>
@@ -202,7 +202,7 @@ export const VoterQuestionnaire = ({
   if (hasHydrated && !dataForStatsAnswered()) {
     return (
       <form
-        className="flex flex-col gap-5 md:gap-10 items-center max-w-[800px] mx-auto"
+        className="mx-auto flex max-w-[800px] flex-col items-center gap-5 md:gap-10"
         onSubmit={(e) => {
           e.preventDefault();
           const formData = new FormData(e.target as HTMLFormElement);
@@ -218,12 +218,12 @@ export const VoterQuestionnaire = ({
           });
         }}
       >
-        <h1 className="text-4xl my-5 text-center border-b-2 border-black  w-full">
+        <h1 className="my-5 w-full border-b-2 border-black text-center  text-4xl">
           Anonyme Informationen für die Statistik
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mx-auto">
-          <label htmlFor="age" className="flex-1 flex flex-col gap-1">
-            <span className="underline underline-offset-2 text-lg">Alter:</span>
+        <div className="mx-auto grid w-full grid-cols-1 gap-10 md:grid-cols-2">
+          <label htmlFor="age" className="flex flex-1 flex-col gap-1">
+            <span className="text-lg underline underline-offset-2">Alter:</span>
             <input
               min={6}
               max={120}
@@ -231,16 +231,16 @@ export const VoterQuestionnaire = ({
               type="number"
               name="age"
               placeholder="Dein Alter"
-              className="appearance-none text-lg border-brand  border-2  outline-brand  px-3 py-2"
+              className="appearance-none border-2 border-brand  px-3  py-2  text-lg outline-brand"
             />
           </label>
-          <label htmlFor="gender" className="flex-1 flex flex-col gap-1">
-            <span className="underline underline-offset-2 text-lg">
+          <label htmlFor="gender" className="flex flex-1 flex-col gap-1">
+            <span className="text-lg underline underline-offset-2">
               Geschlecht:
             </span>
             <select
               name="gender"
-              className="appearance-none text-lg border-brand  border-2  outline-brand  px-3 py-[10px]"
+              className="appearance-none border-2 border-brand  px-3  py-[10px]  text-lg outline-brand"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="w">Weiblich</option>
@@ -248,13 +248,13 @@ export const VoterQuestionnaire = ({
               <option value="m">Männlich</option>
             </select>
           </label>
-          <label htmlFor="state" className="flex-1 flex flex-col gap-1">
-            <span className="underline underline-offset-2 text-lg">
+          <label htmlFor="state" className="flex flex-1 flex-col gap-1">
+            <span className="text-lg underline underline-offset-2">
               Bundesland:
             </span>
             <select
               name="state"
-              className="appearance-none text-lg border-brand  border-2 outline-brand  px-3 py-[10px]"
+              className="appearance-none border-2 border-brand  px-3 py-[10px]  text-lg outline-brand"
             >
               <option value="no_answer">Bitte auswählen</option>
               <option value="Burgenland">Burgenland</option>
@@ -272,7 +272,7 @@ export const VoterQuestionnaire = ({
 
         <button
           type="submit"
-          className="border-brand  border active:scale-95 px-3 py-2 notouch:hover:bg-brand  outline-brand  focus-visible:text-white focus-visible:bg-brand  notouch:hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+          className="inline-flex  items-center justify-center gap-2 rounded-md border  border-brand  px-3 py-2  outline-brand transition-all focus-visible:bg-brand focus-visible:text-white active:scale-95 notouch:hover:bg-brand notouch:hover:text-white"
         >
           Weiter
         </button>
@@ -282,7 +282,7 @@ export const VoterQuestionnaire = ({
 
   if (hasHydrated && (isSaving || slug)) {
     return (
-      <div className="flex flex-col fixed inset-0 h-screen justify-center items-center max-w-[800px] mx-auto">
+      <div className="fixed inset-0 mx-auto flex h-screen max-w-[800px] flex-col items-center justify-center">
         <p className="md:text-xl">Ergebnis wird geladen...</p>
       </div>
     );
@@ -293,14 +293,14 @@ export const VoterQuestionnaire = ({
       {activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
-            className="flex flex-col gap-5 md:gap-10 items-center max-w-full w-[900px] mx-auto"
+            className="mx-auto flex w-[900px] max-w-full flex-col items-center gap-5 md:gap-10"
             key={`question-${activeQuestion.id}`}
           >
             <header
               ref={questionRef}
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
-              <div className="flex flex-col gap-5 md:flex-row justify-between mb-3">
+              <div className="mb-3 flex flex-col justify-between gap-5 md:flex-row">
                 <motion.div
                   layout
                   custom={direction}
@@ -312,7 +312,7 @@ export const VoterQuestionnaire = ({
                     x: { duration: 0.2 },
                     opacity: { duration: 0.2 },
                   }}
-                  className="order-2 md:order-1 w-fit"
+                  className="order-2 w-fit md:order-1"
                 >
                   <QuestionCategoryLabel category={activeQuestion.category} />
                 </motion.div>
@@ -335,9 +335,9 @@ export const VoterQuestionnaire = ({
                   x: { duration: 0.2 },
                   opacity: { duration: 0.2 },
                 }}
-                className="text-[28px] leading-[34px] md:text-3xl xl:text-4xl md:mb-3 md:min-h-[4em]"
+                className="text-[28px] leading-[34px] md:mb-3 md:min-h-[4em] md:text-3xl xl:text-4xl"
               >
-                <span className="text-[18px] leading-[21px] font-semibold">
+                <span className="text-[18px] font-semibold leading-[21px]">
                   Frage {activeIndex + 1}:
                 </span>
                 <h1 className="hyphens-auto font-sans">
@@ -346,16 +346,16 @@ export const VoterQuestionnaire = ({
               </motion.div>
             </header>
 
-            <section className="flex flex-col gap-5 md:gap-10 max-md:my-3 my-6 w-full">
+            <section className="max-md:my-3 my-6 flex w-full flex-col gap-5 md:gap-10">
               <div className="flex flex-col gap-2">
-                <h2 className="text-lg font-sans">Ich stimme:</h2>
+                <h2 className="font-sans text-lg">Ich stimme:</h2>
                 <ul
                   className={clsx(
                     "grid w-full",
                     activeQuestion.type === "YesNo" &&
-                      "md:grid-cols-3 md:grid-rows-1 grid-cols-1 grid-rows-2",
+                      "grid-cols-1 grid-rows-2 md:grid-cols-3 md:grid-rows-1",
                     activeQuestion.type === "Range" &&
-                      "md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4"
+                      "grid-cols-1 grid-rows-4 md:grid-cols-4 md:grid-rows-1",
                   )}
                 >
                   {getOptionsBasedOnType(activeQuestion.type).map((option) => (
@@ -364,7 +364,7 @@ export const VoterQuestionnaire = ({
                         "relative",
                         (activeQuestion.type === "Range" ||
                           activeQuestion.type === "YesNo") &&
-                          "mb-2 md:mb-0 md:mr-2 last:mr-0"
+                          "mb-2 last:mr-0 md:mb-0 md:mr-2",
                       )}
                       key={`${activeQuestion.id}-option-${option.value}`}
                     >
@@ -378,21 +378,21 @@ export const VoterQuestionnaire = ({
                         }}
                         data-active={option.value === activeQuestion.option}
                         className={clsx(
-                          "z-10 rounded-[100px] transition-all gap-3 flex items-center justify-center h-full -200 border-black border-2 text-black relative group text-[22px] leading-[26px] w-full text-center py-3 focus-visible:outline-2 outline-black outline-offset-4",
+                          "-200 group relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
                           option.value === 3 && "bg-[#99EB8B]",
                           option.value === 0 && "bg-[#FBFF95]",
-                          option.value === -3 && "bg-[#FFA06E]"
+                          option.value === -3 && "bg-[#FFA06E]",
                         )}
                       >
                         {option.label}
                         {option.label === "Ja" && (
-                          <ThumbUpIcon className="group-data-[active=true]:text-black group-hover:text-black transition-all text-transparent h-auto w-10 p-1" />
+                          <ThumbUpIcon className="h-auto w-10 p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
                         )}
                         {option.label === "Ich weiß es nicht" && (
-                          <ThumbSideIcon className="group-data-[active=true]:text-black group-hover:text-black transition-all text-transparent h-auto w-10 p-1" />
+                          <ThumbSideIcon className="h-auto w-10 p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
                         )}
                         {option.label === "Nein" && (
-                          <ThumbDownIcon className="group-data-[active=true]:text-black group-hover:text-black transition-all text-transparent h-auto w-10 p-1" />
+                          <ThumbDownIcon className="h-auto w-10 p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
                         )}
                       </button>
                     </li>
@@ -402,10 +402,10 @@ export const VoterQuestionnaire = ({
 
               <div className="flex flex-col gap-2">
                 <h2 className="text-lg">Das ist mir:</h2>
-                <ul className="grid w-full md:grid-cols-4 md:grid-rows-1 grid-cols-1 grid-rows-4">
+                <ul className="grid w-full grid-cols-1 grid-rows-4 md:grid-cols-4 md:grid-rows-1">
                   {weightings.map((weighting, index) => (
                     <li
-                      className="relative mb-2 md:mb-0 md:mr-2 last:mb-0 last:mr-0"
+                      className="relative mb-2 last:mb-0 last:mr-0 md:mb-0 md:mr-2"
                       key={`${activeQuestion.id}-weighting-${weighting.value}`}
                     >
                       <button
@@ -418,9 +418,9 @@ export const VoterQuestionnaire = ({
                           }
                         }}
                         className={clsx(
-                          "z-20 rounded-[100px] transition-colors border-black border-2  text-black relative text-lg w-full focus-visible:outline-2 outline-black outline-offset-4 text-center py-4",
+                          "relative z-20 w-full rounded-[100px] border-2  border-black py-4 text-center text-lg text-black outline-offset-4 outline-black transition-colors focus-visible:outline-2",
                           weighting.value === activeQuestion.weighting &&
-                            "bg-[#A8F5FF]"
+                            "bg-[#A8F5FF]",
                         )}
                       >
                         {weighting.label}
@@ -431,7 +431,7 @@ export const VoterQuestionnaire = ({
               </div>
             </section>
 
-            <div className="flex flex-col xs:flex-row gap-2 justify-between items-center w-full">
+            <div className="flex w-full flex-col items-center justify-between gap-2 xs:flex-row">
               <NavigationButton
                 label={"Zurück"}
                 disabled={!hasPrevious}
@@ -459,7 +459,7 @@ export const VoterQuestionnaire = ({
               activeQuestion={activeQuestion}
               questionsWithAnswers={questionsWithAnswers}
               setActiveIndex={setActiveIndex}
-              className="visible md:hidden mt-5"
+              className="visible mt-5 md:hidden"
             />
           </motion.article>
         </AnimatePresence>
@@ -489,16 +489,16 @@ const NavigationButton = ({
       disabled={disabled}
       onClick={onClick}
       className={clsx(
-        "notouch:hover:active:scale-95 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all  w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black disabled:bg-black/70 rounded-[100px] notouch:hover:bg-white text-white notouch:hover:text-black border-black  notouch:disabled:hover:text-white notouch:disabled:hover:bg-black/70 gap-1 justify-center items-center inline-flex focus-visible:outline-2 outline-black outline-offset-4",
-        className
+        "inline-flex w-[115px] items-center justify-center gap-1 rounded-[100px]  border border-black bg-black py-2 text-center text-lg text-white underline-offset-2 outline-offset-4 outline-black transition-all focus-visible:outline-2 active:scale-95  disabled:cursor-not-allowed disabled:bg-black/70 disabled:active:!scale-100 xs:w-[130px] notouch:hover:bg-white notouch:hover:text-black notouch:hover:active:scale-95 notouch:disabled:hover:bg-black/70 notouch:disabled:hover:text-white",
+        className,
       )}
     >
       {type === "prev" && (
-        <ArrowLeftIcon className="inline-block w-5 h-5 mr-1 stroke-2" />
+        <ArrowLeftIcon className="mr-1 inline-block h-5 w-5 stroke-2" />
       )}
       {label}
       {type === "next" && (
-        <ArrowRightIcon className=" inline-block w-5 h-5 ml-1 stroke-2" />
+        <ArrowRightIcon className=" ml-1 inline-block h-5 w-5 stroke-2" />
       )}
     </button>
   );

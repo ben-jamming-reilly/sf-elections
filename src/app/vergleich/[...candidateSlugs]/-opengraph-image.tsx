@@ -61,7 +61,7 @@ export default async function og({ params }: CandidateComparisonProps) {
           </div>
         ))}
       </div>
-    )
+    ),
   );
   // ...
 }

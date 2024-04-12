@@ -58,12 +58,12 @@ export default async function WahlkabineResult({
   }
 
   const candidates = (await getCandidatesWithQuestions()).sort(
-    (a, b) => Math.random() - 0.5
+    (a, b) => Math.random() - 0.5,
   );
 
   return (
     <div>
-      <div className="flex pb-5 sm:flex-row flex-col gap-5 items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
         <BackButton href={`/`}>Zur Startseite</BackButton>
         <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
         <DownloadImageLink
@@ -74,16 +74,16 @@ export default async function WahlkabineResult({
         </DownloadImageLink>
       </div>
 
-      <h1 className="text-[28px] leading-[34px] my-5 pb-4 text-center">
+      <h1 className="my-5 pb-4 text-center text-[28px] leading-[34px]">
         Vergleiche deine Antworten mit:
       </h1>
 
       <section className="my-10">
-        <ul className="flex flex-row flex-wrap items-center justify-around lg:gap-x-3 gap-y-6 my-10 max-w-full w-[724px] mx-auto">
+        <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-around gap-y-6 lg:gap-x-3">
           {candidates.map((candidate, index) => (
             <li key={candidate.id} className="relative flex flex-col">
               <Link
-                className="transition-all no-touch:hover:bg-brand bg-white focus-visible:outline-2 outline-offset-4 outline-black border-black border rounded-[200px] group  block z-10 relative overflow-clip w-[170px] h-[88px]"
+                className="no-touch:hover:bg-brand group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px] border  border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2"
                 href={`/kabine/${params.slug}/vergleich/${candidate.slug}`}
               >
                 <Image
@@ -91,7 +91,7 @@ export default async function WahlkabineResult({
                   alt={`Profilebild von ${candidate.name}`}
                   fill
                   priority
-                  className="max-h-full py-3 px-5"
+                  className="max-h-full px-5 py-3"
                 />
               </Link>
             </li>
@@ -108,14 +108,14 @@ export default async function WahlkabineResult({
                 {answer.question.category && (
                   <QuestionCategoryLabel category={answer.question.category} />
                 )}
-                <div className="text-lg mt-3">Frage {index + 1}:</div>
-                <h2 className="text-2xl font-sans mb-5 hyphens-auto">
+                <div className="mt-3 text-lg">Frage {index + 1}:</div>
+                <h2 className="mb-5 hyphens-auto font-sans text-2xl">
                   {answer.question.title}
                 </h2>
                 <section className="py-4">
                   <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
                   {answer.option !== null && answer.weighting !== null ? (
-                    <div className="flex md:flex-row flex-col gap-3">
+                    <div className="flex flex-col gap-3 md:flex-row">
                       <OptionResult
                         value={answer.option}
                         type={answer.question.type}
@@ -131,13 +131,13 @@ export default async function WahlkabineResult({
 
                 <div className="mt-5">
                   <details open key={`candidate-details-${answer.questionId}`}>
-                    <summary className="cursor-pointer underline underline-offset-2 font-semibold pb-3 border-black">
+                    <summary className="cursor-pointer border-black pb-3 font-semibold underline underline-offset-2">
                       Das haben die Parteien gesagt:
                     </summary>
                     <ul className="grid grid-cols-1">
                       {candidates.map((candidate) => {
                         const candidateAnswer = candidate.answers.sort(
-                          (a, b) => a.question.order - b.question.order
+                          (a, b) => a.question.order - b.question.order,
                         )[index];
 
                         if (!candidateAnswer) {
@@ -147,10 +147,10 @@ export default async function WahlkabineResult({
                         return (
                           <li
                             key={`candidate-details-${candidateAnswer.questionId}-${candidate.id}`}
-                            className="pb-16 border-t border-black  relative space-y-4 pt-4"
+                            className="relative space-y-4 border-t  border-black pb-16 pt-4"
                           >
                             <Link
-                              className="transition-all absolute right-3 md:right-10 -top-5 md:-top-10 no-touch:hover:bg-brand bg-white focus-visible:outline-2 outline-offset-4 outline-black border-black border rounded-[200px] group  block z-10 overflow-clip w-[84px] h-[44px] md:w-[169px] md:h-[88px]"
+                              className="no-touch:hover:bg-brand group absolute -top-5 right-3 z-10 block h-[44px] w-[84px] overflow-clip rounded-[200px] border border-black bg-white outline-offset-4  outline-black transition-all focus-visible:outline-2 md:-top-10 md:right-10 md:h-[88px] md:w-[169px]"
                               href={`/${candidate.slug}`}
                             >
                               <Image
@@ -158,12 +158,12 @@ export default async function WahlkabineResult({
                                 alt={`Profilebild von ${candidate.name}`}
                                 fill
                                 priority
-                                className="max-h-full py-3 px-5"
+                                className="max-h-full px-5 py-3"
                               />
                             </Link>
                             {candidateAnswer.option !== null &&
                             candidateAnswer.weighting !== null ? (
-                              <div className="flex md:flex-row flex-col gap-3">
+                              <div className="flex flex-col gap-3 md:flex-row">
                                 <OptionResult
                                   value={candidateAnswer.option}
                                   type={candidateAnswer.question.type}
@@ -173,7 +173,7 @@ export default async function WahlkabineResult({
                                 />
                               </div>
                             ) : (
-                              <div className="w-full flex items-center justify-center">
+                              <div className="flex w-full items-center justify-center">
                                 <QuestionUnansweredResult />
                               </div>
                             )}
@@ -197,7 +197,7 @@ export default async function WahlkabineResult({
         </ul>
       </section>
 
-      <div className="flex pt-5 sm:flex-row flex-col gap-5 items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-5 pt-5 sm:flex-row">
         <BackButton href={`/`}>Zur Startseite</BackButton>
         <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
         <DownloadImageLink

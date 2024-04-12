@@ -79,33 +79,47 @@ const matchOption = (option: string) => {
           "Antwort Grüne": z.string(),
           "Wertung Grüne": z.string(),
           "Erklärung Grüne": z.string(),
-        })
+        }),
       )
       .parse(partiesData);
 
-    const parties = partiesDataParsed.reduce((acc, partyData) => {
-      for (const party of PARTIES) {
-        if (acc[party] === undefined) {
-          acc[party] = {
-            name: party,
-            answers: [],
-          };
+    const parties = partiesDataParsed.reduce(
+      (acc, partyData) => {
+        for (const party of PARTIES) {
+          if (acc[party] === undefined) {
+            acc[party] = {
+              name: party,
+              answers: [],
+            };
+          }
+
+          if (partyData[`Antwort ${party}`] === "") {
+            continue;
+          }
+
+          acc[party].answers.push({
+            question: partyData[`Frage`].trim(),
+            answer: partyData[`Antwort ${party}`].trim(),
+            weighting: partyData[`Wertung ${party}`].trim(),
+            explanation: partyData[`Erklärung ${party}`].trim(),
+          });
         }
 
-        if (partyData[`Antwort ${party}`] === "") {
-          continue;
+        return acc;
+      },
+      {} as Record<
+        Parties,
+        {
+          name: string;
+          answers: {
+            question: string;
+            answer: string;
+            weighting: string;
+            explanation: string;
+          }[];
         }
-
-        acc[party].answers.push({
-          question: partyData[`Frage`].trim(),
-          answer: partyData[`Antwort ${party}`].trim(),
-          weighting: partyData[`Wertung ${party}`].trim(),
-          explanation: partyData[`Erklärung ${party}`].trim(),
-        });
-      }
-
-      return acc;
-    }, {} as Record<Parties, { name: string; answers: { question: string; answer: string; weighting: string; explanation: string }[] }>);
+      >,
+    );
 
     const questions = await prisma.question.findMany();
     const matchedQuestions = questions.filter((question) => {
@@ -122,16 +136,16 @@ const matchOption = (option: string) => {
 
     const notMatchedQuestions = questions.filter((question) => {
       return !matchedQuestions.some(
-        (matchedQuestion) => matchedQuestion.id === question.id
+        (matchedQuestion) => matchedQuestion.id === question.id,
       );
     });
 
     console.log(
-      `Matched questions: ${matchedQuestions.length}/${questions.length}`
+      `Matched questions: ${matchedQuestions.length}/${questions.length}`,
     );
 
     console.log(
-      `Not matched questions: ${notMatchedQuestions.length}/${questions.length}`
+      `Not matched questions: ${notMatchedQuestions.length}/${questions.length}`,
     );
 
     console.log(notMatchedQuestions.map((question) => question.title));
@@ -150,7 +164,7 @@ const matchOption = (option: string) => {
             createMany: {
               data: party.answers.map((answer) => ({
                 questionId: matchedQuestions.find(
-                  (question) => question.title === answer.question
+                  (question) => question.title === answer.question,
                 )!.id,
                 option: matchOption(answer.answer),
                 weighting: matchWeighing(answer.weighting),

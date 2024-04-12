@@ -27,7 +27,7 @@ export interface QuestionnaireState {
     data:
       | { option: number | null }
       | { weighting: number | null }
-      | { skipped: boolean }
+      | { skipped: boolean },
   ) => void;
   setActiveIndex: (index: number) => void;
   setSlug: (slug: string) => void;
@@ -78,7 +78,7 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       dataForStatsAnswered: () => {
         return (
           Object.values(get().dataForStats).every(
-            (v) => typeof v !== "undefined"
+            (v) => typeof v !== "undefined",
           ) && Object.keys(get().dataForStats).length > 0
         );
       },
@@ -203,6 +203,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
     }),
     {
       name: "voter-questionnaire-storage-20-04-2023-v3",
-    }
-  )
+    },
+  ),
 );

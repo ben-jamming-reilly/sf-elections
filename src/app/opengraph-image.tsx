@@ -129,7 +129,7 @@ export default async function og() {
         },
       ],
       debug: process.env.NODE_ENV === "development",
-    }
+    },
   );
 }
 
