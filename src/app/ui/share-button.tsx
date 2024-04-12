@@ -27,7 +27,7 @@ export const ShareButton = ({
 
   return (
     <button
-      className="px-3 py-2 active:scale-95 hover:bg-brand border text-brand hover:text-white border-brand relative transition-all items-center justify-center rounded-md focus-visible:outline-brand  outline-offset-2 selection:text-white selection:bg-brand "
+      className="px-3 py-2 active:scale-95 notouch:hover:bg-brand border text-brand notouch:hover:text-white border-brand relative transition-all items-center justify-center rounded-md focus-visible:outline-brand  outline-offset-2 selection:text-white selection:bg-brand "
       onClick={async (e) => {
         try {
           if (navigator.share) {

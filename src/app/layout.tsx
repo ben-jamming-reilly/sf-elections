@@ -107,7 +107,7 @@ export default function RootLayout({
             <footer className="w-full flex flex-col gap-3 justify-center items-center py-5 border-t-2 border-brand ">
               <a
                 rel="norefeerer noopener"
-                className="focus-visible:outline-brand  outline-offset-2 hover:text-brand  hover:underline underline-offset-2"
+                className="focus-visible:outline-brand  outline-offset-2 notouch:hover:text-brand  notouch:hover:underline underline-offset-2"
                 href="https://andererseits.org/"
               >
                 <span className="font-sans font-bold">andererseits.org</span>
@@ -116,7 +116,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     prefetch
-                    className="focus-visible:outline-brand  outline-offset-2 hover:text-brand  hover:underline underline-offset-2"
+                    className="focus-visible:outline-brand  outline-offset-2 notouch:hover:text-brand  notouch:hover:underline underline-offset-2"
                     href="https://andererseits.org/impressum/"
                   >
                     Impressum
@@ -125,7 +125,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     prefetch
-                    className="focus-visible:outline-brand  outline-offset-2 hover:text-brand  hover:underline underline-offset-2"
+                    className="focus-visible:outline-brand  outline-offset-2 notouch:hover:text-brand  notouch:hover:underline underline-offset-2"
                     href="https://andererseits.org/datenschutz/"
                   >
                     Datenschutz

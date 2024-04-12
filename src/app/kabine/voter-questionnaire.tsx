@@ -178,7 +178,7 @@ export const VoterQuestionnaire = ({
           </ul>
           Für mehr Informationen kannst du die{" "}
           <Link
-            className="text-brand  underline-offset-2 hover:underline"
+            className="text-brand  underline-offset-2 notouch:hover:underline"
             href="https://andererseits.org/datenschutz/"
           >
             Datenschutzerklärung hier lesen
@@ -190,7 +190,7 @@ export const VoterQuestionnaire = ({
             onClick={() => {
               acceptTos();
             }}
-            className="border-brand  border active:scale-95 px-3 py-2 hover:bg-brand   hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+            className="border-brand  border active:scale-95 px-3 py-2 notouch:hover:bg-brand   notouch:hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
           >
             Ich habe die Information gelesen und verstanden.
           </button>
@@ -272,7 +272,7 @@ export const VoterQuestionnaire = ({
 
         <button
           type="submit"
-          className="border-brand  border active:scale-95 px-3 py-2 hover:bg-brand  outline-brand  focus-visible:text-white focus-visible:bg-brand  hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
+          className="border-brand  border active:scale-95 px-3 py-2 notouch:hover:bg-brand  outline-brand  focus-visible:text-white focus-visible:bg-brand  notouch:hover:text-white inline-flex items-center justify-center transition-all rounded-md gap-2"
         >
           Weiter
         </button>
@@ -489,7 +489,7 @@ const NavigationButton = ({
       disabled={disabled}
       onClick={onClick}
       className={clsx(
-        "notouch:hover:active:scale-95 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all  w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black disabled:bg-black/70 rounded-[100px] hover:bg-white text-white hover:text-black border-black  disabled:hover:text-white disabled:hover:bg-black/70 gap-1 justify-center items-center inline-flex focus-visible:outline-2 outline-black outline-offset-4",
+        "notouch:hover:active:scale-95 disabled:active:!scale-100 disabled:cursor-not-allowed underline-offset-2 text-center transition-all  w-[115px] xs:w-[130px] py-2 active:scale-95 text-lg border bg-black disabled:bg-black/70 rounded-[100px] notouch:hover:bg-white text-white notouch:hover:text-black border-black  notouch:disabled:hover:text-white notouch:disabled:hover:bg-black/70 gap-1 justify-center items-center inline-flex focus-visible:outline-2 outline-black outline-offset-4",
         className
       )}
     >
