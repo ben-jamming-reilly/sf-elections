@@ -10,6 +10,7 @@ import {
   useLayoutEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../ui/loading";
@@ -97,6 +98,19 @@ export const VoterQuestionnaire = ({
   const firstWeightingRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
 
+  // Derived state
+  const allQuestionsAnswered = useMemo(() => {
+    return questionsWithAnswers.every(isQuestionAnswered);
+  }, [questionsWithAnswers]);
+
+  const activeQuestion =
+    questionsWithAnswers.length > 0 && questionsWithAnswers[activeIndex];
+
+  const direction = prevIndex < activeIndex ? 1 : -1;
+
+  const hasPrevious = activeIndex > 0;
+  const hasNext = activeIndex !== questionsWithAnswers.length - 1;
+
   // Hydrate store with questions from server
   useEffect(() => {
     setQuestions(questions);
@@ -112,6 +126,8 @@ export const VoterQuestionnaire = ({
     }
   }, [activeIndex]);
 
+  useLayoutEffect(() => {}, [activeIndex]);
+
   // Redirect once hash is set
   // Re-add when candidates are done
   useEffect(() => {
@@ -121,19 +137,6 @@ export const VoterQuestionnaire = ({
       });
     }
   }, [router, slug]);
-
-  // Derived state
-  const allQuestionsAnswered = useMemo(() => {
-    return questionsWithAnswers.every(isQuestionAnswered);
-  }, [questionsWithAnswers]);
-
-  const activeQuestion =
-    questionsWithAnswers.length > 0 && questionsWithAnswers[activeIndex];
-
-  const direction = prevIndex < activeIndex ? 1 : -1;
-
-  const hasPrevious = activeIndex > 0;
-  const hasNext = activeIndex !== questionsWithAnswers.length - 1;
 
   // Handlers
   const handlePrev = () => {
@@ -414,7 +417,10 @@ export const VoterQuestionnaire = ({
                           setWeighting(activeQuestion.id, weighting.value);
 
                           if (document.activeElement === e.currentTarget) {
-                            nextButtonRef.current?.focus();
+                            window.setTimeout(() => {
+                              console.log(nextButtonRef.current?.disabled);
+                              nextButtonRef.current?.focus();
+                            }, 0);
                           }
                         }}
                         className={clsx(
