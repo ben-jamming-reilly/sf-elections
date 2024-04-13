@@ -17,22 +17,22 @@ const slugify = (str: string) =>
     .replace(/ß/g, "ss")
     .replace(/[^a-z0-9\-]/g, "");
 
-const matchWeighing = (option: string) => {
-  switch (option) {
-    case "sehr wichtig":
+const matchWeighing = (weighing: WeighingsType) => {
+  switch (weighing) {
+    case "Sehr wichtig":
       return 3;
-    case "wichtig":
+    case "Wichtig":
       return 2;
-    case "nicht wichtig":
+    case "Nicht so wichtig":
       return 1;
-    case "neutral":
+    case "Egal":
       return 0;
     default:
-      return 0;
+      throw new Error(`Unknwon Weighing: ${weighing}`);
   }
 };
 
-const matchOption = (option: string) => {
+const matchOption = (option: OptionsType) => {
   switch (option) {
     case "Ja":
       return 3;
@@ -41,15 +41,32 @@ const matchOption = (option: string) => {
     case "Weiß ich nicht":
       return 0;
     default:
-      return 0;
+      throw new Error(`Unknwon Option: ${option}`);
   }
 };
 
+const optionsValidator = z.enum(["Ja", "Nein", "Weiß ich nicht", ""]);
+type OptionsType = z.infer<typeof optionsValidator>;
+const weighingsValidator = z.enum([
+  "Sehr wichtig",
+  "Wichtig",
+  "Nicht so wichtig",
+  "Egal",
+  "",
+]);
+type WeighingsType = z.infer<typeof weighingsValidator>;
+
 (async () => {
   try {
-    const csvFile = "./src/scripts/data/wahlkabine-parties.csv";
+    const partiesCsvFile = "./src/scripts/data/wahlkabine-parties.csv";
+    const glossarCsvFile = "./src/scripts/data/wahlkabine-glossar.csv";
 
-    const partiesData = parse(fs.readFileSync(csvFile, "utf8"), {
+    const partiesData = parse(fs.readFileSync(partiesCsvFile, "utf8"), {
+      columns: true,
+      skip_empty_lines: true,
+    });
+
+    const glossarData = parse(fs.readFileSync(glossarCsvFile, "utf8"), {
       columns: true,
       skip_empty_lines: true,
     });
@@ -58,30 +75,51 @@ const matchOption = (option: string) => {
       .array(
         z.object({
           Frage: z.string(),
-          "Antwort FPÖ": z.string(),
-          "Wertung FPÖ": z.string(),
+          "Antwort FPÖ": optionsValidator,
+          "Wertung FPÖ": weighingsValidator,
           "Erklärung FPÖ": z.string(),
-          "Antwort NEOS": z.string(),
-          "Wertung NEOS": z.string(),
+          "Antwort NEOS": optionsValidator,
+          "Wertung NEOS": weighingsValidator,
           "Erklärung NEOS": z.string(),
-          "Antwort KPÖ": z.string(),
-          "Wertung KPÖ": z.string(),
+          "Antwort KPÖ": optionsValidator,
+          "Wertung KPÖ": weighingsValidator,
           "Erklärung KPÖ": z.string(),
-          "Antwort Volt": z.string(),
-          "Wertung Volt": z.string(),
+          "Antwort Volt": optionsValidator,
+          "Wertung Volt": weighingsValidator,
           "Erklärung Volt": z.string(),
-          "Antwort SPÖ": z.string(),
-          "Wertung SPÖ": z.string(),
+          "Antwort SPÖ": optionsValidator,
+          "Wertung SPÖ": weighingsValidator,
           "Erklärung SPÖ": z.string(),
-          "Antwort ÖVP": z.string(),
-          "Wertung ÖVP": z.string(),
+          "Antwort ÖVP": optionsValidator,
+          "Wertung ÖVP": weighingsValidator,
           "Erklärung ÖVP": z.string(),
-          "Antwort Grüne": z.string(),
-          "Wertung Grüne": z.string(),
+          "Antwort Grüne": optionsValidator,
+          "Wertung Grüne": weighingsValidator,
           "Erklärung Grüne": z.string(),
         }),
       )
       .parse(partiesData);
+
+    const glossarDataParsed = z
+      .array(
+        z.object({
+          Begriff: z.string(),
+          Synonyme: z.string().optional(),
+          Erklärung: z.string(),
+        }),
+      )
+      .parse(glossarData);
+
+    console.log("Deleting glossar");
+    await prisma.glossarEntry.deleteMany();
+    await prisma.glossarEntry.createMany({
+      data: glossarDataParsed.map((entry) => ({
+        definition: entry.Erklärung,
+        term: entry.Begriff,
+        synonyms: entry.Synonyme ?? "",
+      })),
+    });
+    console.log(`Glossar created with ${glossarDataParsed.length} entries`);
 
     const parties = partiesDataParsed.reduce(
       (acc, partyData) => {
@@ -99,8 +137,8 @@ const matchOption = (option: string) => {
 
           acc[party].answers.push({
             question: partyData[`Frage`].trim(),
-            answer: partyData[`Antwort ${party}`].trim(),
-            weighting: partyData[`Wertung ${party}`].trim(),
+            answer: partyData[`Antwort ${party}`],
+            weighting: partyData[`Wertung ${party}`],
             explanation: partyData[`Erklärung ${party}`].trim(),
           });
         }
@@ -113,8 +151,8 @@ const matchOption = (option: string) => {
           name: string;
           answers: {
             question: string;
-            answer: string;
-            weighting: string;
+            answer: OptionsType;
+            weighting: WeighingsType;
             explanation: string;
           }[];
         }
@@ -148,8 +186,10 @@ const matchOption = (option: string) => {
       `Not matched questions: ${notMatchedQuestions.length}/${questions.length}`,
     );
 
-    console.log(notMatchedQuestions.map((question) => question.title));
+    notMatchedQuestions.length > 0 &&
+      console.log(notMatchedQuestions.map((question) => question.title));
 
+    console.log("Deleting parties");
     await prisma.candidateQuestionAnswer.deleteMany();
     await prisma.candidate.deleteMany();
     for (const party of Object.values(parties)) {
@@ -175,7 +215,7 @@ const matchOption = (option: string) => {
         },
       });
 
-      console.log(candidate);
+      console.log(`Created party: ${candidate.name}`);
     }
   } catch (error) {
     console.error(error);

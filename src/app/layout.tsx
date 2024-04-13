@@ -76,7 +76,7 @@ export default function RootLayout({
       </head>
       <body className={clsx(interFont.variable, loraFont.variable)}>
         <div className={`z-10 flex min-h-full w-full flex-col`}>
-          <header className="top-0 z-50 mb-5 w-full border-b border-black bg-white md:sticky">
+          <header className="top-0 z-50 w-full border-b border-black bg-white md:sticky md:h-[90px]">
             <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-3 py-4 font-sans md:flex-row lg:w-[1320px]">
               <div className="flex items-end">
                 <a
@@ -88,7 +88,7 @@ export default function RootLayout({
                     src="/andererseits-logo.svg"
                     height={36}
                     priority
-                    width={181.83}
+                    width={182}
                     className="flex-1 object-contain"
                     alt="andererseits Logo"
                   />

@@ -24,9 +24,12 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function Wahlkabine() {
-  const questions = await prisma.question.findMany({
-    orderBy: { order: "asc" },
-  });
+  const [questions, glossarEntries] = await Promise.all([
+    prisma.question.findMany({
+      orderBy: { order: "asc" },
+    }),
+    prisma.glossarEntry.findMany(),
+  ]);
 
   return (
     <VoterQuestionnaire
@@ -36,6 +39,7 @@ export default async function Wahlkabine() {
         weighting: null,
         skipped: false,
       }))}
+      glossarEntries={glossarEntries}
     />
   );
 }

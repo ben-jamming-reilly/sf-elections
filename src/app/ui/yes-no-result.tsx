@@ -1,18 +1,13 @@
-import {
-  HandThumbDownIcon,
-  HandThumbUpIcon,
-} from "@heroicons/react/24/outline";
 import { optionLabelForYesNoValue } from "../../data/answers";
 import clsx from "clsx";
-import { HandRaisedIcon } from "@heroicons/react/24/solid";
 export const YesNoResult = ({ value }: { value: number }) => {
   return (
     <p
       className={clsx(
         "-200 group relative z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
-        value === 3 && "bg-[#99EB8B] selection:bg-[#99EB8B]/80",
-        value === 0 && "bg-[#FBFF95] selection:bg-[#FBFF95]/80",
-        value === -3 && "bg-[#FFA06E] selection:bg-[#FFA06E]/80",
+        value === 3 && "bg-[#99EB8B]",
+        value === 0 && "bg-[#FBFF95]",
+        value === -3 && "bg-[#FFA06E]",
       )}
     >
       {optionLabelForYesNoValue(value)}

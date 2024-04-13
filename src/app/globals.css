@@ -37,11 +37,15 @@
     color: #fff;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+  
   html,
   body {
     @apply bg-white font-sans text-black;
-    height: 100%;
   }
+
 }
 
 @layer components {

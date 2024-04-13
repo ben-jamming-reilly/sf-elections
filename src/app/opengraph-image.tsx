@@ -52,7 +52,7 @@ export default async function og() {
               >
                 <img
                   tw="rounded-full flex"
-                  src={`${BASE_URL}/og_assets/mini/${candidate.profileImg}`}
+                  src={`${BASE_URL}/${candidate.profileImg}`}
                   width={100}
                   height={100}
                 />
@@ -82,9 +82,9 @@ export default async function og() {
         <div tw="absolute w-full flex flex-row left-0 bottom-0 items-end justify-center">
           <div tw="flex items-center absolute bottom-0 left-0 justify-center ml-4 mb-3 flex ">
             <img
-              src={`${BASE_URL}/og_assets/logo-red.png`}
-              width={200}
-              height={40}
+              src={`${BASE_URL}/andererseits-logo.svg`}
+              width={182}
+              height={36}
               tw="relative"
             />
           </div>
@@ -96,14 +96,7 @@ export default async function og() {
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
           >
-            andererseits.org/Wahl-Infos
-          </div>
-          <div tw="flex mr-2 mb-2 text-white absolute bottom-0 right-0 text-3xl">
-            <img
-              src={`${BASE_URL}/og_assets/artwork.png`}
-              width={150}
-              height={150}
-            />
+            andererseits.org/wahl-infos
           </div>
         </div>
       </div>

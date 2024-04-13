@@ -60,17 +60,10 @@ export async function GET(request: Request) {
         </div>
         <div tw="flex items-center absolute bottom-10 left-10 justify-center ml-4 mb-3 flex ">
           <img
-            src={`${BASE_URL}/og_assets/logo-red.png`}
+            src={`${BASE_URL}/andererseits-logo.svg`}
             width={300}
             height={60}
             tw="relative"
-          />
-        </div>
-        <div tw="flex mr-2 mb-2 absolute bottom-10 right-10 text-white text-3xl">
-          <img
-            src={`${BASE_URL}/og_assets/artwork.png`}
-            width={250}
-            height={250}
           />
         </div>
         <div

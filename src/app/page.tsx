@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getCandidates } from "./get-candidates";
 import { QuestionaireButton } from "./questionaire-button";
+import { SecondaryLink } from "./ui/secondary-link";
 
 export const revalidate = false;
 
@@ -15,8 +16,11 @@ export default async function Home() {
         </h1>
       </div>
 
-      <div className="mx-auto w-fit text-2xl">
+      <div className="ju mx-auto flex w-fit flex-col items-center gap-5 text-2xl md:flex-row">
         <QuestionaireButton />
+        <div>
+          <SecondaryLink href="/glossar">Glossar</SecondaryLink>
+        </div>
       </div>
     </div>
   );

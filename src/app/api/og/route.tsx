@@ -113,7 +113,7 @@ const ogTypes = {
           <div tw="absolute w-full flex flex-row left-0 bottom-0 items-end justify-center">
             <div tw="flex items-center absolute bottom-0 left-0 justify-center ml-4 mb-3 flex ">
               <img
-                src={`${BASE_URL}/og_assets/logo-red.png`}
+                src={`${BASE_URL}/andererseits-logo.svg`}
                 width={200}
                 height={40}
                 tw="relative"
@@ -128,13 +128,6 @@ const ogTypes = {
               tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
             >
               andererseits.org/Wahl-Infos
-            </div>
-            <div tw="flex mr-2 mb-2 absolute bottom-0 right-0 text-white text-3xl">
-              <img
-                src={`${BASE_URL}/og_assets/artwork.png`}
-                width={150}
-                height={150}
-              />
             </div>
           </div>
         </div>

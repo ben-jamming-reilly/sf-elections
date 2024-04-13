@@ -85,3 +85,12 @@ model Question {
   voters      VoterQuestionAnswer[]
   candidates  CandidateQuestionAnswer[]
 }
+
+model GlossarEntry {
+  id         Int      @id @default(autoincrement())
+  term       String   @unique
+  definition String
+  synonyms   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

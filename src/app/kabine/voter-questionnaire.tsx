@@ -25,6 +25,8 @@ import { useHasHydrated } from "~/hooks/useHasHydrated";
 import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { ThumbDownIcon, ThumbSideIcon, ThumbUpIcon } from "../ui/yes-no-result";
+import { GlossarEntry } from "@prisma/client";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const variants = {
   enter: (direction: number) => {
@@ -54,10 +56,65 @@ const isQuestionAnswered = (question: VoterAnsweredQuestion) => {
   );
 };
 
+const GlossaredText = ({
+  text,
+  glossarEntries,
+}: {
+  text: string;
+  glossarEntries: GlossarEntry[];
+}) => {
+  const [activeEntry, setActiveEntry] = useState<GlossarEntry | null>(null);
+
+  return (
+    <>
+      {text.split(" ").map((word, index) => {
+        const glossarEntry = glossarEntries.find(
+          (entry) =>
+            entry.term === word || entry.synonyms.split(",").includes(word),
+        );
+        if (glossarEntry) {
+          return (
+            <>
+              {" "}
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveEntry(glossarEntry);
+                }}
+                key={index}
+                href="#"
+                className="font-bold"
+              >
+                {word}
+              </a>
+            </>
+          );
+        }
+        return " " + word;
+      })}
+
+      {activeEntry && (
+        <div className="md: fixed left-1/2 top-1/2 z-50 w-[calc(100%-20px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] border border-black bg-white p-10 md:w-[440px]">
+          <button
+            onClick={() => setActiveEntry(null)}
+            className="absolute right-2 top-2 p-2 transition-all focus-visible:outline-2 focus-visible:outline-brand notouch:hover:bg-brand notouch:hover:text-white notouch:hover:active:scale-95"
+          >
+            <XMarkIcon className="h-8 w-8" />
+          </button>
+          <h3 className="mb-2 font-semibold">{activeEntry.term}:</h3>
+          <p>{activeEntry.definition}</p>
+        </div>
+      )}
+    </>
+  );
+};
+
 export const VoterQuestionnaire = ({
   questions,
+  glossarEntries,
 }: {
   questions: VoterAnsweredQuestion[];
+  glossarEntries: GlossarEntry[];
 }) => {
   const router = useRouter();
   const hasHydrated = useHasHydrated();
@@ -344,7 +401,10 @@ export const VoterQuestionnaire = ({
                   Frage {activeIndex + 1}:
                 </span>
                 <h1 className="hyphens-auto font-sans">
-                  {activeQuestion.title}
+                  <GlossaredText
+                    text={activeQuestion.title}
+                    glossarEntries={glossarEntries}
+                  />
                 </h1>
               </motion.div>
             </header>
