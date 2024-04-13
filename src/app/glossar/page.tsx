@@ -19,7 +19,9 @@ export default async function Glossar() {
   const glossarEntries = await prisma.glossarEntry.findMany();
 
   const aToZFiltered = aToZ.filter((letter) =>
-    glossarEntries.some((entry) => entry.term.startsWith(letter)),
+    glossarEntries.some((entry) =>
+      entry.term.toLowerCase().startsWith(letter.toLowerCase()),
+    ),
   );
 
   return (
@@ -47,7 +49,9 @@ export default async function Glossar() {
             <h2 className="text-[28px] font-light leading-[34px]">{letter}</h2>
             <div>
               {glossarEntries
-                .filter((entry) => entry.term.startsWith(letter))
+                .filter((entry) =>
+                  entry.term.toLowerCase().startsWith(letter.toLowerCase()),
+                )
                 .map((entry) => (
                   <article key={entry.id} className="mt-5">
                     <h3 className="text-[18px] font-medium leading-[24px]">
