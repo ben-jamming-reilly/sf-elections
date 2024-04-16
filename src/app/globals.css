@@ -93,3 +93,11 @@
     }
   }
 }
+
+@layer utilities {
+  details summary::-webkit-details-marker,
+    details summary::marker {
+      display: none;
+      content: "";
+    }
+}

@@ -1,5 +1,4 @@
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { BackButton } from "./ui/back-button";
 
 export default function NotFound() {
   return (
@@ -11,13 +10,7 @@ export default function NotFound() {
         Die Seite, die du aufgerufen hast, konnte nicht gefunden werden. Bitte
         überprüfe die URL und versuchen es erneut.
       </p>
-      <Link
-        href="/"
-        className="inline-flex items-center justify-center gap-2 rounded-md border border-brand px-3 py-2 text-lg text-brand transition-all active:scale-95 notouch:hover:bg-brand  notouch:hover:text-white"
-      >
-        <ArrowLeftCircleIcon className="h-5 w-5 stroke-2" />
-        Zur Startseite
-      </Link>
+      <BackButton href={`/`}>Zur Startseite</BackButton>
     </div>
   );
 }

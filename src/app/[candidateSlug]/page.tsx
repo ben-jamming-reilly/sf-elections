@@ -13,6 +13,7 @@ import { getCandidates } from "../get-candidates";
 import { SecondaryLink } from "../ui/secondary-link";
 import { QuestionInfo } from "../ui/question-info";
 import { constructComparision } from "../vergleich/[...candidateSlugs]/construct-comparision";
+import { GlossaredTextServer } from "../ui/glossared-text.server";
 
 export const revalidate = false;
 
@@ -75,10 +76,10 @@ export default async function CandidateProfile({
             Wahl-Infos Antworten: {candidate.name}
           </h1>
 
-          <section className="mt-10 flex justify-center">
+          <section className="my-8 flex justify-center">
             <div key={candidate.id} className="relative flex flex-col">
               <Link
-                className="group relative z-10 block h-[88px]  w-[170px] overflow-clip rounded-[200px] border border-black transition-all"
+                className="group relative z-10 block h-[88px]  w-[170px] overflow-clip rounded-[200px] border border-black outline-offset-4 outline-black transition-all focus-visible:outline-2"
                 href={`/${candidate.slug}`}
               >
                 <Image
@@ -92,22 +93,28 @@ export default async function CandidateProfile({
             </div>
           </section>
 
-          <div className="flex flex-col items-center gap-4 py-8">
-            <h2 className="mb-3 block text-xl font-medium">Vergleichen mit:</h2>
-            <ul className="flex flex-row flex-wrap justify-around gap-x-3 gap-y-8">
+          <div className="flex flex-col items-center gap-1 py-6 text-[18px] leading-[21px]">
+            <h2 className="mb-3 block font-medium uppercase ">
+              Vergleichen mit:
+            </h2>
+            <ul className="flex flex-row flex-wrap justify-around gap-y-8 divide-x divide-black">
               {randomOtherCandidates.map((c) => (
                 <li key={c.id}>
-                  <SecondaryLink href={`vergleich/${candidate.slug}/${c.slug}`}>
+                  <Link
+                    className="mx-3 px-3 outline-offset-4 outline-black"
+                    href={`vergleich/${candidate.slug}/${c.slug}`}
+                  >
                     {c.name}
-                  </SecondaryLink>
+                  </Link>
                 </li>
               ))}
               <li>
-                <SecondaryLink
+                <Link
+                  className="mx-3 px-3 outline-offset-4 outline-black"
                   href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
                 >
-                  Alle
-                </SecondaryLink>
+                  ALLE
+                </Link>
               </li>
             </ul>
           </div>
@@ -122,7 +129,8 @@ export default async function CandidateProfile({
                     Frage {index + 1}:
                   </div>
                   <h2 className="mb-5 hyphens-auto text-2xl">
-                    {answer.question.title}
+                    {/* @ts-expect-error */}
+                    <GlossaredTextServer text={answer.question.title} />
                   </h2>
                   {answer.option !== null && answer.weighting !== null ? (
                     <div className="flex flex-col gap-3 md:flex-row">
@@ -155,6 +163,16 @@ export default async function CandidateProfile({
           {candidate.name} hat die Wahlkabine noch nicht beantwortet.
         </p>
       )}
+
+      <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
+        <BackButton href={`/`}>Zur Startseite</BackButton>
+
+        <ShareButton
+          title={`Vorsitzbefragungs-Kabinen Antworten von ${candidate.name}`}
+        >
+          Teilen
+        </ShareButton>
+      </div>
     </section>
   );
 }

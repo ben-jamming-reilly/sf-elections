@@ -32,31 +32,24 @@ export async function POST(request: Request) {
   const data = await request.json();
   const hash = uuidv4().slice(0, 8);
 
-  if (!data.hasAcceptedTos) {
-    return NextResponse.json(
-      {
-        error: "Bitte akzeptiere die Nutzungsbedingungen!",
-      },
-      { status: 400 },
-    );
-  }
+  // if (!data.hasAcceptedTos) {
+  //   return NextResponse.json(
+  //     {
+  //       error: "Bitte akzeptiere die Nutzungsbedingungen!",
+  //     },
+  //     { status: 400 },
+  //   );
+  // }
 
   try {
     const validatedQuestionsWithAnswers = questionWithAnswersSchema.parse(
       data.questionsWithAnswers,
     );
 
-    const validatedDataForStats = dataForStatsSchema.parse(data.dataForStats);
-
-    const candidates = await getCandidatesWithQuestions();
-
     const voter = await prisma.voter.create({
       data: {
         hash: hash,
         hasAcceptedTos: true,
-        age: validatedDataForStats.age ?? null,
-        state: validatedDataForStats.state ?? null,
-        gender: validatedDataForStats.gender ?? null,
         answers: {
           createMany: {
             data: validatedQuestionsWithAnswers.map((answer) => ({

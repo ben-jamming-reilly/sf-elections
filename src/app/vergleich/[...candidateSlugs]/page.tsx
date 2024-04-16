@@ -14,6 +14,8 @@ import { QuestionInfo } from "~/app/ui/question-info";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
+import { GlossaredTextServer } from "~/app/ui/glossared-text.server";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 export const revalidate = false;
 
@@ -140,7 +142,8 @@ export default async function CandidateComparison({
                   )}
                   <div className="mt-3 text-lg">Frage {index + 1}:</div>
                   <h2 className="mb-5 hyphens-auto font-sans text-2xl">
-                    {answer.question.title}
+                    {/* @ts-expect-error */}
+                    <GlossaredTextServer text={answer.question.title} />
                   </h2>
 
                   <div className="mt-5">
@@ -148,8 +151,9 @@ export default async function CandidateComparison({
                       open
                       key={`candidate-details-${answer.questionId}`}
                     >
-                      <summary className="cursor-pointer border-black pb-3 font-semibold underline underline-offset-2">
-                        Das haben die Parteien gesagt:
+                      <summary className="flex cursor-pointer items-center gap-2 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
+                        Zusätzliche Information:{" "}
+                        <ChevronRightIcon className="w-6 transition-all group-open:rotate-90" />
                       </summary>
                       <ul className="grid grid-cols-1 py-4">
                         {randomCandidates.map((candidate) => {
@@ -213,6 +217,18 @@ export default async function CandidateComparison({
               ))}
           </ul>
         </section>
+
+        <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
+          <BackButton href={`/`}>Zur Startseite</BackButton>
+          <ShareButton
+            title={`Vergleich zwischen ${randomCandidates
+              .map((c) => c.name)
+              .join(" und ")}`}
+            text="EU-Wahl-Infos 2024 – andereseits.org"
+          >
+            Seite teilen
+          </ShareButton>
+        </div>
       </div>
     </>
   );

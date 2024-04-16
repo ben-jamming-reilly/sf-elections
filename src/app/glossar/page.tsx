@@ -1,4 +1,5 @@
 import { prisma } from "~/lib/prisma";
+import { BackButton } from "../ui/back-button";
 
 export async function generateMetadata() {
   return {
@@ -26,18 +27,25 @@ export default async function Glossar() {
 
   return (
     <div className="w-[820px] max-w-full">
-      <h1 className="my-5 pb-4 text-center text-[28px] leading-[34px]">
-        Glossar
-      </h1>
+      <div className="mb-14 flex justify-center">
+        <BackButton href={`/`}>Zur Startseite</BackButton>
+      </div>
+
+      <h1 className="my-5 text-center text-[36px] leading-[44px]">Glossar</h1>
 
       <header className="sticky top-0 z-20 bg-white py-3 md:top-[90px]">
         <ul className="flex w-full snap-x snap-proximity scroll-mx-4 justify-center overflow-x-auto rounded-[30px] border border-black">
           {aToZFiltered.map((letter) => (
             <li
               key={letter}
-              className="snap-center px-[8.5px] text-[18px] leading-[40px] notouch:hover:text-brand"
+              className="snap-center px-[8.5px] text-[18px] leading-[40px]  notouch:hover:text-black"
             >
-              <a href={`#${letter}`}>{letter}</a>
+              <a
+                className="outline-offset-4 outline-black focus-visible:outline-2"
+                href={`#${letter}`}
+              >
+                {letter}
+              </a>
             </li>
           ))}
         </ul>

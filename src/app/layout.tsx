@@ -75,13 +75,19 @@ export default function RootLayout({
         <Script data-domain="mitentscheiden.at" src="/js/script.js"></Script>
       </head>
       <body className={clsx(interFont.variable, loraFont.variable)}>
+        <a
+          className="sr-only left-0 top-0 z-50 text-black outline-offset-4 outline-black focus-visible:not-sr-only focus-visible:fixed focus-visible:outline-2"
+          href="#content"
+        >
+          Zum Inhalt springen
+        </a>
         <div className={`z-10 flex min-h-full w-full flex-col`}>
-          <header className="top-0 z-50 w-full border-b border-black bg-white md:sticky md:h-[90px]">
-            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-3 py-4 font-sans md:flex-row lg:w-[1320px]">
+          <header className="top-0 z-40 w-full border-b border-black bg-white md:sticky md:h-[90px]">
+            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-10 py-4 font-sans md:flex-row lg:w-[1320px]">
               <div className="flex items-end">
                 <a
                   rel="norefeerer noopener"
-                  className="bg-white  px-2 py-1 outline-offset-2 focus-visible:outline-brand"
+                  className="bg-white  px-2 py-1 outline-offset-4 outline-black focus-visible:outline-2"
                   href="https://andererseits.org"
                 >
                   <Image
@@ -96,27 +102,34 @@ export default function RootLayout({
               </div>
               <Link
                 href="/"
-                className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 focus-visible:outline-brand  md:w-fit md:py-0"
+                className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0"
               >
                 Wahl-Infos 2024
               </Link>
             </div>
           </header>
           <div className="mx-auto flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 lg:w-[1000px]">
-            <main className="flex-grow px-5 py-10">{children}</main>
-            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t-2 border-brand py-5 ">
+            <main className="relative flex-grow px-5 py-10">
+              <span
+                id="content"
+                className="absolute -top-20 left-0"
+                aria-hidden
+              ></span>
+              {children}
+            </main>
+            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t-2 border-black py-5 ">
               <a
                 rel="norefeerer noopener"
-                className="underline-offset-2  outline-offset-2 focus-visible:outline-brand  notouch:hover:text-brand notouch:hover:underline"
+                className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
                 href="https://andererseits.org/"
               >
-                <span className="font-sans font-bold">andererseits.org</span>
+                <span className="font-sans font-medium">andererseits.org</span>
               </a>
-              <ul className="flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
+              <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
                 <li>
                   <Link
                     prefetch
-                    className="underline-offset-2  outline-offset-2 focus-visible:outline-brand  notouch:hover:text-brand notouch:hover:underline"
+                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
                     href="https://andererseits.org/impressum/"
                   >
                     Impressum
@@ -125,7 +138,7 @@ export default function RootLayout({
                 <li>
                   <Link
                     prefetch
-                    className="underline-offset-2  outline-offset-2 focus-visible:outline-brand  notouch:hover:text-brand notouch:hover:underline"
+                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
                     href="https://andererseits.org/datenschutz/"
                   >
                     Datenschutz

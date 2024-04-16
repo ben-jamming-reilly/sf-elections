@@ -104,7 +104,7 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
       .array(
         z.object({
           Begriff: z.string(),
-          Synonyme: z.string().optional(),
+          Synonym: z.string().optional(),
           Erklärung: z.string(),
         }),
       )
@@ -116,7 +116,7 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
       data: glossarDataParsed.map((entry) => ({
         definition: entry.Erklärung,
         term: entry.Begriff,
-        synonyms: entry.Synonyme ?? "",
+        synonyms: entry.Synonym ?? "",
       })),
     });
     console.log(`Glossar created with ${glossarDataParsed.length} entries`);

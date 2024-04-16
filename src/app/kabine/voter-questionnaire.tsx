@@ -27,6 +27,9 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { ThumbDownIcon, ThumbSideIcon, ThumbUpIcon } from "../ui/yes-no-result";
 import { GlossarEntry } from "@prisma/client";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { GlossaredText } from "../ui/glossared-text";
+import { Button } from "../ui/button";
+import Image from "next/image";
 
 const variants = {
   enter: (direction: number) => {
@@ -56,59 +59,6 @@ const isQuestionAnswered = (question: VoterAnsweredQuestion) => {
   );
 };
 
-const GlossaredText = ({
-  text,
-  glossarEntries,
-}: {
-  text: string;
-  glossarEntries: GlossarEntry[];
-}) => {
-  const [activeEntry, setActiveEntry] = useState<GlossarEntry | null>(null);
-
-  return (
-    <>
-      {text.split(" ").map((word, index) => {
-        const glossarEntry = glossarEntries.find(
-          (entry) =>
-            entry.term === word || entry.synonyms.split(",").includes(word),
-        );
-        if (glossarEntry) {
-          return (
-            <>
-              {" "}
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveEntry(glossarEntry);
-                }}
-                key={index}
-                href="#"
-                className="font-bold"
-              >
-                {word}
-              </a>
-            </>
-          );
-        }
-        return " " + word;
-      })}
-
-      {activeEntry && (
-        <div className="md: fixed left-1/2 top-1/2 z-50 w-[calc(100%-20px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] border border-black bg-white p-10 md:w-[440px]">
-          <button
-            onClick={() => setActiveEntry(null)}
-            className="absolute right-2 top-2 p-2 transition-all focus-visible:outline-2 focus-visible:outline-brand notouch:hover:bg-brand notouch:hover:text-white notouch:hover:active:scale-95"
-          >
-            <XMarkIcon className="h-8 w-8" />
-          </button>
-          <h3 className="mb-2 font-semibold">{activeEntry.term}:</h3>
-          <p>{activeEntry.definition}</p>
-        </div>
-      )}
-    </>
-  );
-};
-
 export const VoterQuestionnaire = ({
   questions,
   glossarEntries,
@@ -128,10 +78,6 @@ export const VoterQuestionnaire = ({
     save,
     slug,
     isSaving,
-    setDataForStats,
-    hasAcceptedTos,
-    acceptTos,
-    dataForStatsAnswered,
   } = useVoterQuestionnaireStore((s) => ({
     questionsWithAnswers: s.questions,
     setQuestions: s.setQuestions,
@@ -143,11 +89,6 @@ export const VoterQuestionnaire = ({
     save: s.save,
     slug: s.slug,
     isSaving: s.isSaving,
-    dataForStats: s.dataForStats,
-    setDataForStats: s.setDataForStats,
-    hasAcceptedTos: s.hasAcceptedTos,
-    acceptTos: s.acceptTos,
-    dataForStatsAnswered: s.dataForStatsAnswered,
   }));
   const prevIndex = usePrevious(activeIndex);
   const questionRef = useRef<HTMLDivElement>(null);
@@ -185,16 +126,6 @@ export const VoterQuestionnaire = ({
 
   useLayoutEffect(() => {}, [activeIndex]);
 
-  // Redirect once hash is set
-  // Re-add when candidates are done
-  useEffect(() => {
-    if (slug) {
-      router.push(`/kabine/${slug}`, {
-        forceOptimisticNavigation: true,
-      });
-    }
-  }, [router, slug]);
-
   // Handlers
   const handlePrev = () => {
     if (!hasPrevious) return;
@@ -217,134 +148,84 @@ export const VoterQuestionnaire = ({
     );
   }
 
-  if (hasHydrated && !hasAcceptedTos) {
+  if (hasHydrated && isSaving) {
     return (
-      <div className="mx-auto flex max-w-[800px] flex-col items-center gap-5 md:gap-10">
-        <h1 className="my-5 w-full border-b-2 border-black pb-4 text-center text-4xl">
-          EU-Wahl-Infos 2024 Information
-        </h1>
-        <p className="mx-auto max-w-[50ch] text-lg">
-          <ul className="mb-3 ml-4 list-disc">
-            <li>Diese Wahl-Infos dienen der demokratischen Meinungsbildung.</li>
-            <li>
-              Wir erfassen <strong>keine</strong> personenbezogenen Daten.
-            </li>
-            <li>
-              Niemand wird deine politischen Ansichten bzw. dein Ergebnis zu
-              sehen bekommen.
-            </li>
-            <li>Niemand wird deine Eingabe mit dir verknüpfen können.</li>
-            <li>Du bist anonym.</li>
-          </ul>
-          Für mehr Informationen kannst du die{" "}
-          <Link
-            className="text-brand  underline-offset-2 notouch:hover:underline"
-            href="https://andererseits.org/datenschutz/"
-          >
-            Datenschutzerklärung hier lesen
-          </Link>
-          .
-          <br />
-          <br />
-          <button
-            onClick={() => {
-              acceptTos();
-            }}
-            className="inline-flex  items-center justify-center gap-2 rounded-md border   border-brand px-3 py-2 transition-all active:scale-95 notouch:hover:bg-brand notouch:hover:text-white"
-          >
-            Ich habe die Information gelesen und verstanden.
-          </button>
-        </p>
-      </div>
-    );
-  }
-
-  if (hasHydrated && !dataForStatsAnswered()) {
-    return (
-      <form
-        className="mx-auto flex max-w-[800px] flex-col items-center gap-5 md:gap-10"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const formData = new FormData(e.target as HTMLFormElement);
-          const data = Object.fromEntries(formData);
-
-          const EMPTY_ANSWER = "no_answer";
-
-          setDataForStats({
-            age: data.age === "" ? null : parseInt(data.age as string),
-            gender:
-              data.gender === EMPTY_ANSWER ? null : (data.gender as string),
-            state: data.state === EMPTY_ANSWER ? null : (data.state as string),
-          });
-        }}
-      >
-        <h1 className="my-5 w-full border-b-2 border-black text-center  text-4xl">
-          Anonyme Informationen für die Statistik
-        </h1>
-        <div className="mx-auto grid w-full grid-cols-1 gap-10 md:grid-cols-2">
-          <label htmlFor="age" className="flex flex-1 flex-col gap-1">
-            <span className="text-lg underline underline-offset-2">Alter:</span>
-            <input
-              min={6}
-              max={120}
-              step={1}
-              type="number"
-              name="age"
-              placeholder="Dein Alter"
-              className="appearance-none border-2 border-brand  px-3  py-2  text-lg outline-brand"
-            />
-          </label>
-          <label htmlFor="gender" className="flex flex-1 flex-col gap-1">
-            <span className="text-lg underline underline-offset-2">
-              Geschlecht:
-            </span>
-            <select
-              name="gender"
-              className="appearance-none border-2 border-brand  px-3  py-[10px]  text-lg outline-brand"
-            >
-              <option value="no_answer">Bitte auswählen</option>
-              <option value="w">Weiblich</option>
-              <option value="x">Diverse</option>
-              <option value="m">Männlich</option>
-            </select>
-          </label>
-          <label htmlFor="state" className="flex flex-1 flex-col gap-1">
-            <span className="text-lg underline underline-offset-2">
-              Bundesland:
-            </span>
-            <select
-              name="state"
-              className="appearance-none border-2 border-brand  px-3 py-[10px]  text-lg outline-brand"
-            >
-              <option value="no_answer">Bitte auswählen</option>
-              <option value="Burgenland">Burgenland</option>
-              <option value="Kärnten">Kärnten</option>
-              <option value="Niederösterreich">Niederösterreich</option>
-              <option value="Oberösterreich">Oberösterreich</option>
-              <option value="Salzburg">Salzburg</option>
-              <option value="Steiermark">Steiermark</option>
-              <option value="Tirol">Tirol</option>
-              <option value="Vorarlberg">Vorarlberg</option>
-              <option value="Wien">Wien</option>
-            </select>
-          </label>
-        </div>
-
-        <button
-          type="submit"
-          className="inline-flex  items-center justify-center gap-2 rounded-md border  border-brand  px-3 py-2  outline-brand transition-all focus-visible:bg-brand focus-visible:text-white active:scale-95 notouch:hover:bg-brand notouch:hover:text-white"
-        >
-          Weiter
-        </button>
-      </form>
-    );
-  }
-
-  if (hasHydrated && (isSaving || slug)) {
-    return (
-      <div className="fixed inset-0 mx-auto flex h-screen max-w-[800px] flex-col items-center justify-center">
+      <div className="mx-auto flex max-w-[800px] flex-col items-center justify-center py-10">
         <p className="md:text-xl">Ergebnis wird geladen...</p>
       </div>
+    );
+  }
+
+  if (hasHydrated && slug) {
+    return (
+      <section className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[24px]">
+        <h1 className="text-[36px] leading-[44px]">Was ist andererseits</h1>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id
+          nibh ultricies vehicula ut id elit. Donec ullamcorper nulla non metus
+          auctor fringilla. Nullam id dolor id nibh ultricies vehicula ut id
+          elit. Donec ullamcorper nulla non metus auctor fringilla. Donec
+          ullamcorper nulla non metus auctor fringilla.
+        </p>
+        <p>
+          Nullam id dolor id nibh ultricies vehicula ut id elit. Donec
+          ullamcorper nulla non metus auctor fringilla.
+        </p>
+
+        <Image
+          width={672}
+          height={350}
+          src="/was-ist-andererseits.png"
+          alt="andererseits Team Sitzkreis"
+          className="rounded-[80px]"
+        />
+
+        <p>
+          Nullam id dolor id nibh ultricies vehicula ut id elit. Donec
+          ullamcorper nulla non metus auctor fringilla.
+        </p>
+
+        <form
+          className="py-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log("submitting form");
+            alert("Newsletter anmeldung muss noch implementiert werden");
+          }}
+        >
+          <div className="relative">
+            <input
+              type="email"
+              placeholder="Deine E-Mail Adresse"
+              className="w-full rounded-[100px] border-2 border-black px-6 py-3 text-black caret-black outline-offset-4  outline-black focus-visible:outline-2"
+            />
+            <button
+              type="submit"
+              className="absolute right-0 top-0 rounded-[100px] border-2 border-black  bg-[#FBFF95] px-6 py-3 text-black outline-offset-4  outline-black transition-all focus-visible:outline-2 notouch:hover:bg-black notouch:hover:text-[#FBFF95]"
+            >
+              Ich bin dabei!
+            </button>
+          </div>
+        </form>
+
+        <p>
+          Nullam id dolor id nibh ultricies vehicula ut id elit. Donec
+          ullamcorper nulla non metus auctor fringilla.
+        </p>
+
+        <div className="flex items-center justify-center py-5">
+          <Button
+            prefetch
+            as="Link"
+            href={`/kabine/${slug}`}
+            variant="primary"
+            roundness="large"
+          >
+            Zum Ergebnis
+            <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
+          </Button>
+        </div>
+      </section>
     );
   }
 
@@ -550,14 +431,14 @@ const NavigationButton = ({
   buttonRef?: React.Ref<HTMLButtonElement>;
 }) => {
   return (
-    <button
-      ref={buttonRef}
+    <Button
+      variant="primary"
+      as="button"
+      roundness="large"
+      buttonRef={buttonRef}
       disabled={disabled}
       onClick={onClick}
-      className={clsx(
-        "inline-flex w-[115px] items-center justify-center gap-1 rounded-[100px]  border border-black bg-black py-2 text-center text-lg text-white underline-offset-2 outline-offset-4 outline-black transition-all focus-visible:outline-2 active:scale-95  disabled:cursor-not-allowed disabled:bg-black/70 disabled:active:!scale-100 xs:w-[130px] notouch:hover:bg-white notouch:hover:text-black notouch:hover:active:scale-95 notouch:disabled:hover:bg-black/70 notouch:disabled:hover:text-white",
-        className,
-      )}
+      className={clsx("w-[115px] text-lg text-white xs:w-[130px]", className)}
     >
       {type === "prev" && (
         <ArrowLeftIcon className="mr-1 inline-block h-5 w-5 stroke-2" />
@@ -566,6 +447,6 @@ const NavigationButton = ({
       {type === "next" && (
         <ArrowRightIcon className=" ml-1 inline-block h-5 w-5 stroke-2" />
       )}
-    </button>
+    </Button>
   );
 };

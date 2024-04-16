@@ -13,6 +13,7 @@ import { getCandidateWithQuestions } from "./get-candidate-with-question";
 import { BackButton } from "~/app/ui/back-button";
 import { QuestionInfo } from "~/app/ui/question-info";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
+import { GlossaredTextServer } from "~/app/ui/glossared-text.server";
 
 export type WahlkabineResultCandidate = {
   params: {
@@ -63,7 +64,9 @@ export default async function WahlkabineResultCandidate({
     <div>
       <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
         <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
-        <ShareButton title={`Schau wie gut ${candidate.name} zu mir passt!`}>
+        <ShareButton
+          title={`Mein Vergleich zu ${candidate.name} für die EU-Wahl 2024!`}
+        >
           Teilen
         </ShareButton>
         <DownloadImageLink
@@ -81,7 +84,7 @@ export default async function WahlkabineResultCandidate({
       <section className="mt-10 flex justify-center">
         <div key={candidate.id} className="relative flex flex-col">
           <Link
-            className="group relative z-10 block h-[88px]  w-[170px] overflow-clip rounded-[200px] border border-black transition-all"
+            className="group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px]  border border-black outline-offset-4 outline-black transition-all focus-visible:outline-2"
             href={`/${candidate.slug}`}
           >
             <Image
@@ -110,7 +113,8 @@ export default async function WahlkabineResultCandidate({
                 )}
                 <div className="mt-3 text-lg">Frage {index + 1}:</div>
                 <h2 className="mb-5 hyphens-auto font-sans text-2xl">
-                  {answer.question.title}
+                  {/* @ts-expect-error */}
+                  <GlossaredTextServer text={answer.question.title} />
                 </h2>
                 <section className="py-4">
                   <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
@@ -173,7 +177,9 @@ export default async function WahlkabineResultCandidate({
 
       <div className="flex flex-col items-center justify-center gap-5 pt-5 sm:flex-row">
         <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
-        <ShareButton title={`Schau wie gut ${candidate.name} zu mir passt!`}>
+        <ShareButton
+          title={`Mein Vergleich zu ${candidate.name} für die EU-Wahl 2024!`}
+        >
           Teilen
         </ShareButton>
         <DownloadImageLink

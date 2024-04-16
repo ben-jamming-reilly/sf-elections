@@ -14,6 +14,8 @@ import { BackButton } from "~/app/ui/back-button";
 import { QuestionInfo } from "~/app/ui/question-info";
 import { SecondaryLink } from "~/app/ui/secondary-link";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
+import { GlossaredTextServer } from "~/app/ui/glossared-text.server";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 export type WahlkabineResultProps = {
   params: {
@@ -63,7 +65,7 @@ export default async function WahlkabineResult({
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
+      <div className="flex flex-col justify-center gap-5 pb-5 sm:flex-row">
         <BackButton href={`/`}>Zur Startseite</BackButton>
         <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
         <DownloadImageLink
@@ -110,7 +112,8 @@ export default async function WahlkabineResult({
                 )}
                 <div className="mt-3 text-lg">Frage {index + 1}:</div>
                 <h2 className="mb-5 hyphens-auto font-sans text-2xl">
-                  {answer.question.title}
+                  {/* @ts-expect-error */}
+                  <GlossaredTextServer text={answer.question.title} />
                 </h2>
                 <section className="py-4">
                   <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
@@ -131,8 +134,9 @@ export default async function WahlkabineResult({
 
                 <div className="mt-5">
                   <details open key={`candidate-details-${answer.questionId}`}>
-                    <summary className="cursor-pointer border-black pb-3 font-semibold underline underline-offset-2">
+                    <summary className="flex cursor-pointer items-center gap-2 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
                       Das haben die Parteien gesagt:
+                      <ChevronRightIcon className="w-6 transition-all group-open:rotate-90" />
                     </summary>
                     <ul className="grid grid-cols-1">
                       {candidates.map((candidate) => {
