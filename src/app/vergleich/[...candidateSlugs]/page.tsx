@@ -149,11 +149,12 @@ export default async function CandidateComparison({
                   <div className="mt-5">
                     <details
                       open
+                      className="group/candidates"
                       key={`candidate-details-${answer.questionId}`}
                     >
                       <summary className="flex cursor-pointer items-center gap-2 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
-                        Zusätzliche Information:{" "}
-                        <ChevronRightIcon className="w-6 transition-all group-open:rotate-90" />
+                        Das haben die Parteien gesagt:
+                        <ChevronRightIcon className="w-6 transition-all group-open/candidates:rotate-90" />
                       </summary>
                       <ul className="grid grid-cols-1 py-4">
                         {randomCandidates.map((candidate) => {

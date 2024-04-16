@@ -133,12 +133,16 @@ export default async function WahlkabineResult({
                 </section>
 
                 <div className="mt-5">
-                  <details open key={`candidate-details-${answer.questionId}`}>
+                  <details
+                    className="group/candidates"
+                    open
+                    key={`candidate-details-${answer.questionId}`}
+                  >
                     <summary className="flex cursor-pointer items-center gap-2 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
                       Das haben die Parteien gesagt:
-                      <ChevronRightIcon className="w-6 transition-all group-open:rotate-90" />
+                      <ChevronRightIcon className="w-6 transition-all group-open/candidates:rotate-90" />
                     </summary>
-                    <ul className="grid grid-cols-1">
+                    <ul className="grid grid-cols-1 py-4">
                       {candidates.map((candidate) => {
                         const candidateAnswer = candidate.answers.sort(
                           (a, b) => a.question.order - b.question.order,
