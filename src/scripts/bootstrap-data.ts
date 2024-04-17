@@ -28,7 +28,8 @@ const matchWeighing = (weighing: WeighingsType) => {
     case "Egal":
       return 0;
     default:
-      throw new Error(`Unknwon Weighing: ${weighing}`);
+      console.log(`Unknwon Weighing: ${weighing}`);
+      return 0;
   }
 };
 

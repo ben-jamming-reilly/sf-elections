@@ -10,5 +10,4 @@ const libsql = createClient({
 const adapter = new PrismaLibSQL(libsql);
 export const prisma = new PrismaClient({
   adapter,
-  log: ["query"],
 });
