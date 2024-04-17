@@ -76,12 +76,12 @@ export default async function WahlkabineResult({
         </DownloadImageLink>
       </div>
 
-      <h1 className="my-5 pb-4 text-center text-[28px] leading-[34px]">
+      <h1 className="my-5 pb-4 text-center text-4xl">
         Vergleiche deine Antworten mit:
       </h1>
 
       <section className="my-10">
-        <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-around gap-y-6 lg:gap-x-3">
+        <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-evenly gap-y-6 lg:gap-x-3">
           {candidates.map((candidate, index) => (
             <li key={candidate.id} className="relative flex flex-col">
               <Link
@@ -133,15 +133,7 @@ export default async function WahlkabineResult({
                 </section>
 
                 <div className="mt-5">
-                  <details
-                    className="group/candidates"
-                    open
-                    key={`candidate-details-${answer.questionId}`}
-                  >
-                    <summary className="flex cursor-pointer items-center gap-2 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
-                      Das haben die Parteien gesagt:
-                      <ChevronRightIcon className="w-6 transition-all group-open/candidates:rotate-90" />
-                    </summary>
+                  <div>
                     <ul className="grid grid-cols-1 py-4">
                       {candidates.map((candidate) => {
                         const candidateAnswer = candidate.answers.sort(
@@ -198,7 +190,7 @@ export default async function WahlkabineResult({
                         );
                       })}
                     </ul>
-                  </details>
+                  </div>
                 </div>
               </li>
             ))}

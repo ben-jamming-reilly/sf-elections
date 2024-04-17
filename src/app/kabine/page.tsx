@@ -32,14 +32,16 @@ export default async function Wahlkabine() {
   ]);
 
   return (
-    <VoterQuestionnaire
-      questions={questions.map((q) => ({
-        ...q,
-        option: null,
-        weighting: null,
-        skipped: false,
-      }))}
-      glossarEntries={glossarEntries}
-    />
+    <div className="pt-14">
+      <VoterQuestionnaire
+        questions={questions.map((q) => ({
+          ...q,
+          option: null,
+          weighting: null,
+          skipped: false,
+        }))}
+        glossarEntries={glossarEntries}
+      />
+    </div>
   );
 }

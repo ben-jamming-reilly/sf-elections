@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 const interFont = Inter({
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "block",
   variable: "--font-inter",
   subsets: ["latin"],
@@ -108,16 +108,18 @@ export default function RootLayout({
               </Link>
             </div>
           </header>
-          <div className="mx-auto flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 lg:w-[1000px]">
-            <main className="relative flex-grow px-5 py-10">
-              <span
-                id="content"
-                className="absolute -top-20 left-0"
-                aria-hidden
-              ></span>
-              {children}
-            </main>
-            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t-2 border-black py-5 ">
+          <div className="flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 ">
+            <div className="mx-auto max-w-full lg:w-[1000px]">
+              <main className="relative flex-grow px-5 py-10">
+                <span
+                  id="content"
+                  className="absolute -top-20 left-0"
+                  aria-hidden
+                ></span>
+                {children}
+              </main>
+            </div>
+            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t border-black py-5 ">
               <a
                 rel="norefeerer noopener"
                 className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"

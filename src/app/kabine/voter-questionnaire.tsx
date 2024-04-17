@@ -241,7 +241,7 @@ export const VoterQuestionnaire = ({
               ref={questionRef}
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
-              <div className="mb-3 flex flex-col justify-between gap-5 md:flex-row">
+              <div className="flex flex-col justify-between gap-5 pb-5 md:flex-row">
                 <motion.div
                   layout
                   custom={direction}
@@ -276,12 +276,12 @@ export const VoterQuestionnaire = ({
                   x: { duration: 0.2 },
                   opacity: { duration: 0.2 },
                 }}
-                className="text-[28px] leading-[34px] md:mb-3 md:min-h-[4em] md:text-3xl xl:text-4xl"
+                className="flex flex-col gap-2 text-[28px] leading-[34px] md:mb-3 md:min-h-[4em] md:text-2xl"
               >
-                <span className="text-[18px] font-semibold leading-[21px]">
+                <span className="block text-[18px] font-medium leading-[21px]">
                   Frage {activeIndex + 1}:
                 </span>
-                <h1 className="hyphens-auto font-sans">
+                <h1 className="hyphens-auto font-sans font-light">
                   <GlossaredText
                     text={activeQuestion.title}
                     glossarEntries={glossarEntries}
@@ -330,13 +330,13 @@ export const VoterQuestionnaire = ({
                       >
                         {option.label}
                         {option.label === "Ja" && (
-                          <ThumbUpIcon className="h-auto w-10 p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
+                          <ThumbUpIcon className="h-10 w-auto p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
                         )}
                         {option.label === "Ich weiß es nicht" && (
-                          <ThumbSideIcon className="h-auto w-10 p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
+                          <ThumbSideIcon className="h-10 w-auto p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
                         )}
                         {option.label === "Nein" && (
-                          <ThumbDownIcon className="h-auto w-10 p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
+                          <ThumbDownIcon className="h-10 w-auto p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
                         )}
                       </button>
                     </li>

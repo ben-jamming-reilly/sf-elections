@@ -147,15 +147,7 @@ export default async function CandidateComparison({
                   </h2>
 
                   <div className="mt-5">
-                    <details
-                      open
-                      className="group/candidates"
-                      key={`candidate-details-${answer.questionId}`}
-                    >
-                      <summary className="flex cursor-pointer items-center gap-2 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
-                        Das haben die Parteien gesagt:
-                        <ChevronRightIcon className="w-6 transition-all group-open/candidates:rotate-90" />
-                      </summary>
+                    <div className="pt-10">
                       <ul className="grid grid-cols-1 py-4">
                         {randomCandidates.map((candidate) => {
                           const candidateAnswer = candidate.answers.sort(
@@ -212,7 +204,7 @@ export default async function CandidateComparison({
                           );
                         })}
                       </ul>
-                    </details>
+                    </div>
                   </div>
                 </li>
               ))}
