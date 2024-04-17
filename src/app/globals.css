@@ -37,11 +37,15 @@
     color: #fff;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+  
   html,
   body {
-    @apply text-black bg-white font-sans;
-    height: 100%;
+    @apply bg-white font-sans text-black;
   }
+
 }
 
 @layer components {
@@ -88,4 +92,12 @@
       transform: translateY(0);
     }
   }
+}
+
+@layer utilities {
+  details summary::-webkit-details-marker,
+    details summary::marker {
+      display: none;
+      content: "";
+    }
 }

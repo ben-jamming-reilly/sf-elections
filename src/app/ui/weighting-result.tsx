@@ -11,7 +11,7 @@ export const WeightingResult = ({ value }: { value: number }) => {
   return (
     <p
       className={clsx(
-        "z-20 rounded-[100px] w-[260px] transition-colors border-black border-2  text-black relative text-[22px] leading-[26px]  max-w-full focus-visible:outline-2 outline-black outline-offset-4 text-center py-4 bg-[#A8F5FF]"
+        "relative z-20 w-[260px] max-w-full rounded-[100px] border-2  border-black bg-[#A8F5FF] py-4 text-center  text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-colors focus-visible:outline-2",
       )}
     >
       {weightingLabelForValue(value)}

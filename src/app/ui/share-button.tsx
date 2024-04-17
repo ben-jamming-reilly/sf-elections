@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import { ReactNode, useEffect, useState } from "react";
 import { ShareIcon } from "@heroicons/react/24/outline";
+import { Button } from "./button";
 
 export const ShareButton = ({
   children,
@@ -26,8 +27,10 @@ export const ShareButton = ({
   }, [copied]);
 
   return (
-    <button
-      className="px-3 py-2 active:scale-95 hover:bg-brand-purple border text-brand-purple hover:text-white border-brand-purple relative transition-all items-center justify-center rounded-md focus-visible:outline-brand outline-offset-2 selection:text-white selection:bg-brand-purple"
+    <Button
+      as="button"
+      variant="secondary"
+      roundness="small"
       onClick={async (e) => {
         try {
           if (navigator.share) {
@@ -48,22 +51,12 @@ export const ShareButton = ({
     >
       <div
         className={clsx(
-          "transition-opacity items-center flex justify-center gap-2",
-          copied ? "invisible opacity-0" : "visible opacity-100"
+          "flex items-center justify-center gap-2 transition-opacity",
         )}
       >
         <ShareIcon className="h-4 w-4 stroke-2" />
         {children}
       </div>
-
-      <span
-        className={clsx(
-          "absolute z-10 top-1/2 left-1/2 -translate-x-1/2  -translate-y-1/2 transition-opacity",
-          copied ? "opacity-100" : "opacity-0"
-        )}
-      >
-        ✊
-      </span>
-    </button>
+    </Button>
   );
 };

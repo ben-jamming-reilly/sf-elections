@@ -13,6 +13,7 @@ import { getCandidates } from "../get-candidates";
 import { SecondaryLink } from "../ui/secondary-link";
 import { QuestionInfo } from "../ui/question-info";
 import { constructComparision } from "../vergleich/[...candidateSlugs]/construct-comparision";
+import { GlossaredTextServer } from "../ui/glossared-text.server";
 
 export const revalidate = false;
 
@@ -61,7 +62,7 @@ export default async function CandidateProfile({
     <section>
       {candidate.hasFinished ? (
         <div className="mb-5">
-          <div className="flex sm:flex-row flex-col gap-5 pb-5 items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
             <BackButton href={`/`}>Zur Startseite</BackButton>
 
             <ShareButton
@@ -71,77 +72,68 @@ export default async function CandidateProfile({
             </ShareButton>
           </div>
 
-          <h1 className="text-4xl my-5 pb-4 text-center border-b-2 border-black">
-            Profil von {candidate.name}
+          <h1 className="my-5 pb-4 text-center text-4xl">
+            Wahl-Infos Antworten: {candidate.name}
           </h1>
 
-          <section className="flex justify-center mt-10">
-            <div
-              key={candidate.id}
-              className={clsx(
-                "w-full min-w-[250px] max-w-[350px] snap-start rounded-md relative flex flex-col overflow-clip"
-              )}
-            >
+          <section className="my-8 flex justify-center">
+            <div key={candidate.id} className="relative flex flex-col">
               <Link
+                className="group relative z-10 block h-[88px]  w-[170px] overflow-clip rounded-[200px] border border-black outline-offset-4 outline-black transition-all focus-visible:outline-2"
                 href={`/${candidate.slug}`}
-                className={"flex-grow flex flex-col group"}
               >
-                <div className="transition-all block z-10 relative w-full overflow-clip aspect-square">
-                  <Image
-                    src={`/${candidate.profileImg}`}
-                    alt={`Profilebild von ${candidate.name}`}
-                    fill
-                    priority
-                    className={clsx(
-                      "ease-in-out transition-all  bg-brand-yellow w-full",
-                      candidate.id !== candidate.id && "group-hover:scale-110"
-                    )}
-                  />
-                </div>
-                <h2 className="text-2xl bg-brand text-white font-medium hyphens-auto px-3 py-2 selection:text-brand selection:bg-white text-center w-full shadow-md">
-                  {candidate.name}
-                </h2>
-                {/* <div className="p-5 flex-grow border-2 border-brand flex flex-col justify-between items-start">
-                  <p className="prose mb-5">{candidate.description}</p>
-                </div> */}
+                <Image
+                  src={`/${candidate.profileImg}`}
+                  alt={`Profilebild von ${candidate.name}`}
+                  fill
+                  priority
+                  className="max-h-full px-5 py-3"
+                />
               </Link>
             </div>
           </section>
 
-          <div className="flex flex-col gap-4 items-center py-5 ">
-            <h2 className="text-xl block font-medium underline underline-offset-2">
+          <div className="flex flex-col items-center gap-1 py-6 text-[18px] leading-[21px]">
+            <h2 className="mb-3 block font-medium uppercase ">
               Vergleichen mit:
             </h2>
-            <ul className="flex flex-row gap-3">
+            <ul className="flex flex-row flex-wrap justify-around gap-y-8 divide-x divide-black">
               {randomOtherCandidates.map((c) => (
                 <li key={c.id}>
-                  <SecondaryLink href={`vergleich/${candidate.slug}/${c.slug}`}>
+                  <Link
+                    className="mx-3 px-3 outline-offset-4 outline-black"
+                    href={`vergleich/${candidate.slug}/${c.slug}`}
+                  >
                     {c.name}
-                  </SecondaryLink>
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  className="mx-3 px-3 outline-offset-4 outline-black"
+                  href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
+                >
+                  ALLE
+                </Link>
+              </li>
             </ul>
-            <SecondaryLink
-              href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
-            >
-              {randomOtherCandidates.map((c) => c.name).join(" & ")}
-            </SecondaryLink>
           </div>
 
           <ul className="flex flex-col gap-16 py-10">
             {candidate.answers
               .sort((a, b) => a.question.order - b.question.order)
               .map((answer, index) => (
-                <li key={answer.id}>
+                <li key={answer.id} className="flex flex-col items-start gap-3">
                   <QuestionCategoryLabel category={answer.question.category} />
                   <div className="text-lg font-semibold">
                     Frage {index + 1}:
                   </div>
-                  <h2 className="text-2xl mb-5 hyphens-auto">
-                    {answer.question.title}
+                  <h2 className="mb-5 hyphens-auto text-2xl">
+                    {/* @ts-expect-error */}
+                    <GlossaredTextServer text={answer.question.title} />
                   </h2>
                   {answer.option !== null && answer.weighting !== null ? (
-                    <div className="flex md:flex-row flex-col gap-3">
+                    <div className="flex flex-col gap-3 md:flex-row">
                       <OptionResult
                         value={answer.option}
                         type={answer.question.type}
@@ -171,6 +163,16 @@ export default async function CandidateProfile({
           {candidate.name} hat die Wahlkabine noch nicht beantwortet.
         </p>
       )}
+
+      <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
+        <BackButton href={`/`}>Zur Startseite</BackButton>
+
+        <ShareButton
+          title={`Vorsitzbefragungs-Kabinen Antworten von ${candidate.name}`}
+        >
+          Teilen
+        </ShareButton>
+      </div>
     </section>
   );
 }

@@ -8,6 +8,6 @@ export async function GET(request: Request) {
 
   return NextResponse.json(
     candidates.sort((a, b) => Math.random() - 0.5).slice(0, 3),
-    { status: 200 }
+    { status: 200 },
   );
 }

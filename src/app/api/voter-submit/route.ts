@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
@@ -20,7 +19,7 @@ const questionWithAnswersSchema = z.array(
       weighting: z.number().min(0).max(3),
       skipped: z.literal(false),
     }),
-  ])
+  ]),
 );
 
 const dataForStatsSchema = z.object({
@@ -33,31 +32,24 @@ export async function POST(request: Request) {
   const data = await request.json();
   const hash = uuidv4().slice(0, 8);
 
-  if (!data.hasAcceptedTos) {
-    return NextResponse.json(
-      {
-        error: "Bitte akzeptiere die Nutzungsbedingungen!",
-      },
-      { status: 400 }
-    );
-  }
+  // if (!data.hasAcceptedTos) {
+  //   return NextResponse.json(
+  //     {
+  //       error: "Bitte akzeptiere die Nutzungsbedingungen!",
+  //     },
+  //     { status: 400 },
+  //   );
+  // }
 
   try {
     const validatedQuestionsWithAnswers = questionWithAnswersSchema.parse(
-      data.questionsWithAnswers
+      data.questionsWithAnswers,
     );
-
-    const validatedDataForStats = dataForStatsSchema.parse(data.dataForStats);
-
-    const candidates = await getCandidatesWithQuestions();
 
     const voter = await prisma.voter.create({
       data: {
         hash: hash,
         hasAcceptedTos: true,
-        age: validatedDataForStats.age ?? null,
-        state: validatedDataForStats.state ?? null,
-        gender: validatedDataForStats.gender ?? null,
         answers: {
           createMany: {
             data: validatedQuestionsWithAnswers.map((answer) => ({
@@ -78,15 +70,6 @@ export async function POST(request: Request) {
       },
     });
 
-    await prisma.voterCandidateMatch.createMany({
-      data: candidates.map((candidate) => ({
-        candidateId: candidate.id,
-        voterId: voter.id,
-        scorePercentageRaw: rateCandidate(voter.answers, candidate)
-          .scorePercentageRaw,
-      })),
-    });
-
     return NextResponse.json({ slug: voter.hash });
   } catch (error) {
     console.log(error);
@@ -98,7 +81,7 @@ export async function POST(request: Request) {
       {
         error: "Es ist ein Fehler passiert. Bitte probiere es nochmal!",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 }

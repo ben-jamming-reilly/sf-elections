@@ -1,29 +1,24 @@
-import {
-  HandThumbDownIcon,
-  HandThumbUpIcon,
-} from "@heroicons/react/24/outline";
 import { optionLabelForYesNoValue } from "../../data/answers";
 import clsx from "clsx";
-import { HandRaisedIcon } from "@heroicons/react/24/solid";
 export const YesNoResult = ({ value }: { value: number }) => {
   return (
     <p
       className={clsx(
-        "z-10 rounded-[100px] w-[260px] transition-all gap-3 flex items-center justify-center h-full -200 border-black border-2 text-black relative group text-[22px] leading-[26px] max-w-full text-center py-3 focus-visible:outline-2 outline-black outline-offset-4",
-        value === 3 && "bg-[#99EB8B] selection:bg-[#99EB8B]/80",
-        value === 0 && "bg-[#FBFF95] selection:bg-[#FBFF95]/80",
-        value === -3 && "bg-[#FFA06E] selection:bg-[#FFA06E]/80"
+        "-200 group relative z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
+        value === 3 && "bg-[#99EB8B]",
+        value === 0 && "bg-[#FBFF95]",
+        value === -3 && "bg-[#FFA06E]",
       )}
     >
       {optionLabelForYesNoValue(value)}
       {value === 3 && (
-        <ThumbUpIcon className="h-10 w-10 text-transparent p-1 " />
+        <ThumbUpIcon className="h-10 w-10 p-1 text-transparent " />
       )}
       {value === 0 && (
-        <ThumbSideIcon className="h-10 w-10 text-transparent p-1 " />
+        <ThumbSideIcon className="h-10 w-10 p-1 text-transparent " />
       )}
       {value === -3 && (
-        <ThumbDownIcon className="h-10 w-10 text-transparent p-1 " />
+        <ThumbDownIcon className="h-10 w-10 p-1 text-transparent " />
       )}
     </p>
   );
@@ -73,9 +68,9 @@ export const ThumbSideIcon = ({ className }: { className: string }) => {
         id="Thumb-Up"
         transform="translate(1.5 24.25) rotate(-90)"
         fill="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        fill-rule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fillRule="evenodd"
       >
         <path
           d="M0,3.25H3.33a4.864,4.864,0,0,0,1.433-.216L9.188,1.4A22.811,22.811,0,0,1,17.063,0,2.438,2.438,0,0,1,19.5,2.437a2.4,2.4,0,0,1-.158.839,2.822,2.822,0,0,1,1.825,4.75,2.824,2.824,0,0,1,0,5.073,2.831,2.831,0,0,1,.643,2.787,2.9,2.9,0,0,1-2.8,1.989H13l1.282,2.564a3.244,3.244,0,0,1,.343,1.454v.044A4.062,4.062,0,0,1,10.584,26a.822.822,0,0,1-.834-.812V23.361a1.624,1.624,0,0,0-.4-1.071l-4.8-5.484a1.625,1.625,0,0,0-1.224-.556H0Z"
@@ -104,9 +99,9 @@ export const ThumbDownIcon = ({ className }: { className: string }) => {
         id="Thumb-Up"
         transform="translate(1.5 1.5)"
         fill="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        fill-rule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fillRule="evenodd"
       >
         <path
           d="M0,3.25H3.33a4.864,4.864,0,0,0,1.433-.216L9.188,1.4A22.811,22.811,0,0,1,17.063,0,2.438,2.438,0,0,1,19.5,2.437a2.4,2.4,0,0,1-.158.839,2.822,2.822,0,0,1,1.825,4.75,2.824,2.824,0,0,1,0,5.073,2.831,2.831,0,0,1,.643,2.787,2.9,2.9,0,0,1-2.8,1.989H13l1.282,2.564a3.244,3.244,0,0,1,.343,1.454v.044A4.062,4.062,0,0,1,10.584,26a.822.822,0,0,1-.834-.812V23.361a1.624,1.624,0,0,0-.4-1.071l-4.8-5.484a1.625,1.625,0,0,0-1.224-.556H0Z"

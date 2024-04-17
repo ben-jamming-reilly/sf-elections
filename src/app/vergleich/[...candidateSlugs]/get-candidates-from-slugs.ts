@@ -18,5 +18,5 @@ export const getCandidatesFromSlugs = cache(
         },
       },
     });
-  }
+  },
 );

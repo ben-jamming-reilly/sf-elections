@@ -125,7 +125,7 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
             option: q.option,
             weighting: q.weighting,
             text: q?.text,
-          }))
+          })),
         ),
       })
         .then((res) => res.json())
@@ -159,7 +159,7 @@ export const useQuestionnaireStore = create<QuestionnaireState>()(
         };
       });
     },
-  })
+  }),
   //   {
   //     name: "questionnaire-storage",
   //   }

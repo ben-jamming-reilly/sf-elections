@@ -16,7 +16,7 @@ export async function GET(request: Request) {
       {
         error: "Slug is needed!",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
   const candidates = await getCandidatesWithQuestions();
   const candidatesWithScore = rateCandidates(
     voterWithAnswers.answers,
-    candidates
+    candidates,
   );
   return NextResponse.json(
     candidatesWithScore
@@ -36,6 +36,6 @@ export async function GET(request: Request) {
         answers: [],
       }))
       .sort((a, b) => b.scorePercentageRaw - a.scorePercentageRaw),
-    { status: 200 }
+    { status: 200 },
   );
 }

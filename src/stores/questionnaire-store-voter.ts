@@ -13,12 +13,6 @@ export interface QuestionnaireState {
   isSaving: boolean;
   activeIndex: number;
   slug?: string;
-  dataForStats: {
-    age?: number | null;
-    gender?: string | null;
-    state?: string | null;
-  };
-  dataForStatsAnswered: () => boolean;
   hasAcceptedTos: boolean;
   acceptTos: () => void;
   setQuestions: (questions: VoterAnsweredQuestion[]) => void;
@@ -27,7 +21,7 @@ export interface QuestionnaireState {
     data:
       | { option: number | null }
       | { weighting: number | null }
-      | { skipped: boolean }
+      | { skipped: boolean },
   ) => void;
   setActiveIndex: (index: number) => void;
   setSlug: (slug: string) => void;
@@ -36,7 +30,6 @@ export interface QuestionnaireState {
   skip: (questionId: number) => void;
   save: () => void;
   reset: () => void;
-  setDataForStats: (data: Partial<QuestionnaireState["dataForStats"]>) => void;
 }
 
 export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
@@ -67,28 +60,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
         set((state) => {
           return {
             hasAcceptedTos: true,
-          };
-        });
-      },
-      dataForStats: {
-        age: undefined,
-        state: undefined,
-        gender: undefined,
-      },
-      dataForStatsAnswered: () => {
-        return (
-          Object.values(get().dataForStats).every(
-            (v) => typeof v !== "undefined"
-          ) && Object.keys(get().dataForStats).length > 0
-        );
-      },
-      setDataForStats: (data: Partial<QuestionnaireState["dataForStats"]>) => {
-        set((state) => {
-          return {
-            dataForStats: {
-              ...state.dataForStats,
-              ...data,
-            },
           };
         });
       },
@@ -161,8 +132,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
               weighting: q.weighting,
               skipped: q.skipped,
             })),
-            dataForStats: get().dataForStats,
-            hasAcceptedTos: get().hasAcceptedTos,
           }),
         })
           .then((res) => res.json())
@@ -188,12 +157,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
       reset: () => {
         set((state) => {
           return {
-            dataForStats: {
-              age: undefined,
-              state: undefined,
-              gender: undefined,
-            },
-            hasAcceptedTos: false,
             questions: [],
             activeIndex: 0,
             slug: undefined,

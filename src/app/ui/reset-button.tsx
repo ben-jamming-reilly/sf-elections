@@ -18,7 +18,7 @@ export const ResetButton = () => {
         <>
           {slug && path?.includes(slug) ? (
             <button
-              className="hover:bg-brand-purple px-3 py-2 hover:text-white border-brand-purple text-brand-purple border active:scale-95 inline-block transition-all rounded-md focus-visible:outline-brand outline-offset-2"
+              className="inline-block rounded-md border border-brand px-3 py-2 text-brand outline-offset-2 transition-all focus-visible:outline-brand active:scale-95 notouch:hover:bg-brand  notouch:hover:text-white"
               onClick={(e) => {
                 reset();
               }}

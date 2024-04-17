@@ -11,7 +11,6 @@ datasource db {
 model Candidate {
   id           Int                       @id @default(autoincrement())
   slug         String                    @unique
-  hash         String                    @unique
   name         String
   profileImg   String?                   @unique
   description  String
@@ -85,4 +84,13 @@ model Question {
   order       Int
   voters      VoterQuestionAnswer[]
   candidates  CandidateQuestionAnswer[]
+}
+
+model GlossarEntry {
+  id         Int      @id @default(autoincrement())
+  term       String   @unique
+  definition String
+  synonyms   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

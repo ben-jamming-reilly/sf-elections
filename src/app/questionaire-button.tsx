@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid";
+import { Button } from "./ui/button";
 
 export const QuestionaireButton = () => {
   const hasHydrated = useHasHydrated();
@@ -20,33 +21,34 @@ export const QuestionaireButton = () => {
       {hasHydrated ? (
         <>
           {slug ? (
-            <div className="flex flex-row gap-2 items-center justify-center">
-              <Link
+            <div className="flex flex-col justify-center gap-3 md:flex-row">
+              <Button
+                variant="primary"
+                roundness="large"
+                as="a"
                 href={`/kabine/${slug}`}
-                className="bg-brand text-white items-center gap-1 inline-flex px-3 py-2 hover:bg-brand/90 active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2"
               >
-                <ClipboardDocumentCheckIcon className="w-5 h-5 inline ml-1 stroke-2" />
+                <ClipboardDocumentCheckIcon className="ml-1 inline h-5 w-5 stroke-2" />
                 Dein Ergebnis
-              </Link>
+              </Button>
 
-              <button
-                className="hover:bg-brand-purple px-3 py-2 hover:text-white border-brand-purple text-brand-purple border active:scale-95  transition-all rounded-md focus-visible:outline-brand outline-offset-2 items-center gap-1 inline-flex"
+              <Button
+                as="button"
+                variant="secondary"
+                roundness="large"
                 onClick={(e) => {
                   reset();
                 }}
               >
-                <ArrowPathRoundedSquareIcon className="w-5 h-5 inline ml-1 stroke-2" />
+                <ArrowPathRoundedSquareIcon className="ml-1 inline h-5 w-5 stroke-2" />
                 Neustarten
-              </button>
+              </Button>
             </div>
           ) : (
-            <Link
-              href="/kabine"
-              className="bg-brand text-white inline-flex items-center justify-center gap-1 px-3 py-2 hover:bg-brand/90 active:scale-95 transition-all rounded-md"
-            >
-              <ArrowRightIcon className="w-5 h-5 inline ml-1 stroke-2" />
+            <Button variant="primary" roundness="large" as="a" href="/kabine">
+              <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
               Zu den Fragen
-            </Link>
+            </Button>
           )}
         </>
       ) : (
