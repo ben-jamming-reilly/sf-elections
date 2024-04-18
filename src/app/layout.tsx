@@ -72,7 +72,10 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#016956" />
         <meta name="msapplication-TileColor" content="#016956" />
         <meta name="theme-color" content="#016956" />
-        <Script data-domain="mitentscheiden.at" src="/js/script.js"></Script>
+        <Script
+          data-domain="andererseits-wahlkabine.vercel.app"
+          src="/js/script.js"
+        ></Script>
       </head>
       <body className={clsx(interFont.variable, loraFont.variable)}>
         <a
