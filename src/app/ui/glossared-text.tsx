@@ -6,6 +6,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useId, useRef, useState } from "react";
 import { mergeHyphenatedWords } from "~/utils";
 
+function simpleSegmenter(text: string) {
+  // - Capture sequences of word characters and apostrophes as words.
+  // - Capture punctuation marks.
+  // - Capture sequences of whitespace characters.
+  const regex = /([\w']+|[^\w\s]+|\s+)/g;
+
+  // The 'match' method returns an array containing all matches, including whitespace.
+  return text.match(regex);
+}
+
 const matchTermAndSynonyms = (entry: GlossarEntry, word: string) => {
   return (
     entry.term.toLowerCase() === word.toLowerCase() ||
@@ -23,10 +33,7 @@ export const GlossaredText = ({
   const id = useId();
   const [activeEntry, setActiveEntry] = useState<GlossarEntry | null>(null);
 
-  const segmenter = new Intl.Segmenter("de", {
-    granularity: "word",
-  });
-  const parts = Array.from(segmenter.segment(text)).map((part) => part.segment);
+  const parts = simpleSegmenter(text) ?? [];
   const partsClean = mergeHyphenatedWords(parts);
 
   return (
