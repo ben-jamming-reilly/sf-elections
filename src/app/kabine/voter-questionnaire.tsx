@@ -116,12 +116,13 @@ export const VoterQuestionnaire = ({
 
   // Scroll question into view
   useLayoutEffect(() => {
-    if (!navigator.userAgent.match(/Android/i)) {
-      questionRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
+    // TODO: Test if this still breaks on Chrome Android
+    // if (!navigator.userAgent.match(/Android/i)) {
+    questionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+    // }
   }, [activeIndex]);
 
   useLayoutEffect(() => {}, [activeIndex]);
@@ -378,7 +379,7 @@ export const VoterQuestionnaire = ({
               </div>
             </section>
 
-            <div className="flex w-full flex-col items-center justify-between gap-2 xs:flex-row">
+            <div className="flex w-full flex-col items-center justify-between gap-4 xs:flex-row">
               <NavigationButton
                 label={"Zurück"}
                 disabled={!hasPrevious}
@@ -438,14 +439,14 @@ const NavigationButton = ({
       buttonRef={buttonRef}
       disabled={disabled}
       onClick={onClick}
-      className={clsx("w-[115px] text-lg text-white xs:w-[130px]", className)}
+      className={clsx("w-[130px] text-lg text-white", className)}
     >
       {type === "prev" && (
-        <ArrowLeftIcon className="mr-1 inline-block h-5 w-5 stroke-2" />
+        <ArrowLeftIcon className="mr-1 inline-block h-5 w-5 flex-shrink-0 stroke-2" />
       )}
       {label}
       {type === "next" && (
-        <ArrowRightIcon className=" ml-1 inline-block h-5 w-5 stroke-2" />
+        <ArrowRightIcon className=" ml-1 inline-block h-5 w-5 flex-shrink-0 stroke-2" />
       )}
     </Button>
   );

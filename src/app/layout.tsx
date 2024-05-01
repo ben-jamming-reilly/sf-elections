@@ -88,10 +88,10 @@ export default function RootLayout({
           <header className="top-0 z-40 w-full border-b border-black bg-white md:sticky md:h-[90px]">
             <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-10 py-4 font-sans md:flex-row lg:w-[1320px]">
               <div className="flex items-end">
-                <a
-                  rel="norefeerer noopener"
+                <Link
                   className="bg-white  px-2 py-1 outline-offset-4 outline-black focus-visible:outline-2"
-                  href="https://andererseits.org"
+                  href="/"
+                  title="Zur Startseite"
                 >
                   <Image
                     src="/andererseits-logo.svg"
@@ -100,14 +100,15 @@ export default function RootLayout({
                     width={182}
                     className="flex-1 object-contain"
                     alt="andererseits Logo"
+                    title="Zur Startseite"
                   />
-                </a>
+                </Link>
               </div>
               <Link
                 href="/"
                 className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0"
               >
-                Wahl-Infos 2024
+                Wahlchecker EU 2024
               </Link>
             </div>
           </header>
