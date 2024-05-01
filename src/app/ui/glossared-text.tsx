@@ -136,7 +136,7 @@ const GlossarModal = ({
       transition={{
         duration: 0.1,
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 shadow-xl"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2 shadow-xl"
     >
       <motion.div
         transition={{
@@ -151,7 +151,7 @@ const GlossarModal = ({
         exit={{
           opacity: 0,
         }}
-        className="relative w-[440px] rounded-[30px] bg-white p-10"
+        className="relative w-[440px] rounded-[30px] bg-white p-6 py-10 md:p-10"
       >
         <button
           aria-label="Schließen"

@@ -110,7 +110,7 @@ export default function RootLayout({
           </header>
           <div className="flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 ">
             <div className="mx-auto max-w-full lg:w-[1000px]">
-              <main className="relative flex-grow px-5 py-10">
+              <main className="xxs:px-4 relative flex-grow px-3 py-10 xs:px-5">
                 <span
                   id="content"
                   className="absolute -top-20 left-0"

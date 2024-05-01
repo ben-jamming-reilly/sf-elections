@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xs: "400px",
+        xxs: "350px",
+        xs: "420px",
         notouch: { raw: "(hover: hover)" },
       },
       colors: {

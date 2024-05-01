@@ -2,18 +2,10 @@ import { getVoterViaHash } from "../../../get-voter-via-hash";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ShareButton } from "~/app/ui/share-button";
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
-import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
-import { OptionResult } from "~/app/ui/option-result";
-import { WeightingResult } from "~/app/ui/weighting-result";
-import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
 import Image from "next/image";
-import { rateCandidate } from "../../rate-candidates";
 import { getCandidateWithQuestions } from "./get-candidate-with-question";
 import { BackButton } from "~/app/ui/back-button";
-import { QuestionInfo } from "~/app/ui/question-info";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
-import { GlossaredTextServer } from "~/app/ui/glossared-text.server";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 
 export type WahlkabineResultCandidate = {
@@ -22,34 +14,6 @@ export type WahlkabineResultCandidate = {
     "candidate-slug": string;
   };
 };
-
-export async function generateMetadata({ params }: WahlkabineResultCandidate) {
-  const voterWithAnswers = await getVoterViaHash(params.slug);
-  const candidate = await getCandidateWithQuestions(params["candidate-slug"]);
-
-  if (!candidate || !candidate.hasFinished || !voterWithAnswers) {
-    notFound();
-  }
-
-  return {
-    title: `Vergleich mit ${candidate.name} - andererseits.org`,
-    description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
-    twitter: {
-      card: "summary_large_image",
-      site: "andererseits.org",
-      title: `Vergleich mit ${candidate.name} - andererseits.org`,
-      description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
-      images: [
-        {
-          url: `https://andererseits.org/Wahl-Infos/fragen/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
-          alt: "SPÖ Vorsitzbefragungs-Kabine",
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-  };
-}
 
 export default async function WahlkabineResultCandidate({
   params,
@@ -126,4 +90,32 @@ export default async function WahlkabineResultCandidate({
       {toolbar}
     </div>
   );
+}
+
+export async function generateMetadata({ params }: WahlkabineResultCandidate) {
+  const voterWithAnswers = await getVoterViaHash(params.slug);
+  const candidate = await getCandidateWithQuestions(params["candidate-slug"]);
+
+  if (!candidate || !candidate.hasFinished || !voterWithAnswers) {
+    notFound();
+  }
+
+  return {
+    title: `Vergleich mit ${candidate.name} - andererseits.org`,
+    description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
+    twitter: {
+      card: "summary_large_image",
+      site: "andererseits.org",
+      title: `Vergleich mit ${candidate.name} - andererseits.org`,
+      description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
+      images: [
+        {
+          url: `https://andererseits.org/Wahl-Infos/fragen/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
+          alt: "SPÖ Vorsitzbefragungs-Kabine",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 }

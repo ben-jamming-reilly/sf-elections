@@ -1,16 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { OptionResult } from "~/app/ui/option-result";
-import { QuestionCategoryLabel } from "~/app/ui/question-category-label";
 import { ShareButton } from "~/app/ui/share-button";
-import { WeightingResult } from "~/app/ui/weighting-result";
 import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
 import { Metadata } from "next";
-import { SecondaryLink } from "~/app/ui/secondary-link";
 import { BackButton } from "~/app/ui/back-button";
-import { QuestionUnansweredResult } from "~/app/ui/question-unanswered-result";
-import { QuestionInfo } from "~/app/ui/question-info";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
@@ -26,52 +20,6 @@ export type CandidateComparisonProps = {
   };
 };
 
-export async function generateMetadata({
-  params,
-}: CandidateComparisonProps): Promise<Metadata> {
-  const candidates = await getCandidatesFromSlugs(params.candidateSlugs);
-
-  if (candidates.length !== params.candidateSlugs.length) {
-    notFound();
-  }
-
-  return {
-    title: `Vergleich zwischen ${candidates.map((c) => c.name).join(" und ")}`,
-    description: `Vergleich zwischen ${candidates
-      .map((c) => c.name)
-      .join(" und ")}`,
-    openGraph: {
-      images: [
-        {
-          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
-            ",",
-          )}`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "andererseits.org",
-      title: `Vergleich zwischen ${candidates
-        .map((c) => c.name)
-        .join(" und ")}`,
-      description: `Vergleich zwischen ${candidates
-        .map((c) => c.name)
-        .join(" und ")}`,
-      images: [
-        {
-          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
-            ",",
-          )}`,
-          alt: "EU-Whalinfos 2024 – andereseits.org",
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-  };
-}
-
 export default async function CandidateComparison({
   params,
 }: CandidateComparisonProps) {
@@ -80,10 +28,6 @@ export default async function CandidateComparison({
   }
 
   const candidates = await getCandidatesFromSlugs(params.candidateSlugs);
-
-  if (candidates.length !== params.candidateSlugs.length) {
-    notFound();
-  }
 
   const randomCandidates = candidates.sort(
     (c) => Math.random() - Math.random(),
@@ -163,4 +107,46 @@ export async function generateStaticParams() {
   );
 
   return comboPairs.map((c) => ({ params: { candidateSlug: c.slug } }));
+}
+
+export async function generateMetadata({
+  params,
+}: CandidateComparisonProps): Promise<Metadata> {
+  const candidates = await getCandidatesFromSlugs(params.candidateSlugs);
+
+  return {
+    title: `Vergleich zwischen ${candidates.map((c) => c.name).join(" und ")}`,
+    description: `Vergleich zwischen ${candidates
+      .map((c) => c.name)
+      .join(" und ")}`,
+    openGraph: {
+      images: [
+        {
+          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
+            ",",
+          )}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "andererseits.org",
+      title: `Vergleich zwischen ${candidates
+        .map((c) => c.name)
+        .join(" und ")}`,
+      description: `Vergleich zwischen ${candidates
+        .map((c) => c.name)
+        .join(" und ")}`,
+      images: [
+        {
+          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
+            ",",
+          )}`,
+          alt: "EU-Whalinfos 2024 – andereseits.org",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 }
