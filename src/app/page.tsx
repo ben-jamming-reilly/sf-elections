@@ -14,7 +14,7 @@ export default async function Home() {
     <div className="flex h-full flex-col gap-10">
       <div className="mx-auto w-[675px] max-w-full px-3">
         <h1 className="my-5 font-sans text-[36px] leading-[44px]">
-          EU-Wahl-Infos 2024 <br /> in leichter Sprache
+          Wahlchecker EU 2024 <br /> in leichter Sprache
         </h1>
 
         <div className="space-y-4 text-[18px] leading-[24px]">

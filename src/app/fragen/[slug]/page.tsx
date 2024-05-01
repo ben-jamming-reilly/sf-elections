@@ -31,17 +31,17 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   }
 
   return {
-    title: `Mein EU-Wahl-Infos Ergebnis  – andererseits.org`,
+    title: `Mein Wahlchecker EU Ergebnis  – andererseits.org`,
     description: ``,
     twitter: {
       card: "summary_large_image",
       site: "andererseits.org",
-      title: `Mein EU-Wahl-Infos Ergebnis  – andererseits.org`,
+      title: `Mein Wahlchecker EU Ergebnis  – andererseits.org`,
       description: ``,
       images: [
         {
-          url: `https://andererseits.org/Wahl-Infos/kabine/${params.slug}/opengraph-image`,
-          alt: "EU-Wahl-Infos 2024 – andererseits.org",
+          url: `https://andererseits.org/Wahl-Infos/fragen/${params.slug}/opengraph-image`,
+          alt: "Wahlchecker EU 2024 – andererseits.org",
           width: 1200,
           height: 630,
         },
@@ -67,9 +67,9 @@ export default async function WahlkabineResult({
     <div>
       <div className="flex flex-col justify-center gap-5 pb-5 sm:flex-row">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
+        <ShareButton title="Wahlchecker EU 2024">Teilen</ShareButton>
         <DownloadImageLink
-          title="andererseits-eu-Wahl-Infos-resultat.jpg"
+          title="andererseits-Wahlchecker EU-resultat.jpg"
           href={`/api/og/generate/instagram/result?slug=${params.slug}`}
         >
           Bild herunterladen
@@ -80,38 +80,45 @@ export default async function WahlkabineResult({
         Vergleiche deine Antworten mit:
       </h1>
 
-      <section className="my-10">
-        <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-evenly gap-y-6 lg:gap-x-3">
+      <section aria-label="Die Parteien" className="my-10">
+        <nav className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-evenly gap-y-6 lg:gap-x-3">
           {candidates.map((candidate, index) => (
-            <li key={candidate.id} className="relative flex flex-col">
-              <Link
-                className="no-touch:hover:bg-brand group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px] border  border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2"
-                href={`/kabine/${params.slug}/vergleich/${candidate.slug}`}
-              >
-                <Image
-                  src={`/${candidate.profileImg}`}
-                  alt={`Profilebild von ${candidate.name}`}
-                  fill
-                  priority
-                  className="max-h-full px-5 py-3"
-                />
-              </Link>
-            </li>
+            <Link
+              key={candidate.id}
+              className="no-touch:hover:bg-brand group relative z-10 flex h-[88px] w-[170px] overflow-clip rounded-[200px] border  border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2"
+              href={`/${candidate.slug}`}
+              title={`Zur ${candidate.name} Seite`}
+            >
+              <Image
+                alt=""
+                src={`/${candidate.profileImg}`}
+                fill
+                priority
+                className="max-h-full px-5 py-3"
+              />
+            </Link>
           ))}
-        </ul>
+        </nav>
       </section>
 
-      <section aria-label="Fragen & Antworten">
-        <ul className="flex flex-col gap-10 py-10">
+      <section aria-label="Die Fragen mit den Antworten der Parteien">
+        <div className="flex flex-col gap-10 py-10">
           {voterWithAnswers.answers
             .sort((a, b) => a.question.order - b.question.order)
             .map((answer, index) => (
-              <li key={answer.id} className="w-full">
+              <article
+                aria-labelledby={`aria-label-question-${index + 1}`}
+                key={answer.id}
+                className="w-full"
+              >
                 {answer.question.category && (
                   <QuestionCategoryLabel category={answer.question.category} />
                 )}
                 <div className="mt-3 text-lg">Frage {index + 1}:</div>
-                <h2 className="mb-5 hyphens-auto font-sans text-2xl">
+                <h2
+                  id={`aria-label-question-${index + 1}`}
+                  className="mb-5 hyphens-auto font-sans text-2xl"
+                >
                   {/* @ts-expect-error */}
                   <GlossaredTextServer text={answer.question.title} />
                 </h2>
@@ -151,7 +158,7 @@ export default async function WahlkabineResult({
                           >
                             <Link
                               className="no-touch:hover:bg-brand group absolute -top-5 right-3 z-10 block h-[44px] w-[84px] overflow-clip rounded-[200px] border border-black bg-white outline-offset-4  outline-black transition-all focus-visible:outline-2 md:-top-10 md:right-10 md:h-[88px] md:w-[169px]"
-                              href={`/${candidate.slug}`}
+                              href={`/fragen/${params.slug}/vergleich/${candidate.slug}`}
                             >
                               <Image
                                 src={`/${candidate.profileImg}`}
@@ -192,16 +199,16 @@ export default async function WahlkabineResult({
                     </ul>
                   </div>
                 </div>
-              </li>
+              </article>
             ))}
-        </ul>
+        </div>
       </section>
 
       <div className="flex flex-col items-center justify-center gap-5 pt-5 sm:flex-row">
         <BackButton href={`/`}>Zur Startseite</BackButton>
-        <ShareButton title="EU-Wahl-Infos 2024">Teilen</ShareButton>
+        <ShareButton title="Wahlchecker EU 2024">Teilen</ShareButton>
         <DownloadImageLink
-          title="andererseits-eu-Wahl-Infos-resultat.jpg"
+          title="andererseits-Wahlchecker EU-resultat.jpg"
           href={`/api/og/generate/instagram/result?slug=${params.slug}`}
         >
           Bild herunterladen

@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
       description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
       images: [
         {
-          url: `https://andererseits.org/Wahl-Infos/kabine/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
+          url: `https://andererseits.org/Wahl-Infos/fragen/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
           width: 1200,
           height: 630,
@@ -63,7 +63,7 @@ export default async function WahlkabineResultCandidate({
   return (
     <div>
       <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
-        <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
+        <BackButton href={`/fragen/${params.slug}`}>Zur Übersicht</BackButton>
         <ShareButton
           title={`Mein Vergleich zu ${candidate.name} für die EU-Wahl 2024!`}
         >
@@ -176,14 +176,14 @@ export default async function WahlkabineResultCandidate({
       </ul>
 
       <div className="flex flex-col items-center justify-center gap-5 pt-5 sm:flex-row">
-        <BackButton href={`/kabine/${params.slug}`}>Zur Übersicht</BackButton>
+        <BackButton href={`/fragen/${params.slug}`}>Zur Übersicht</BackButton>
         <ShareButton
           title={`Mein Vergleich zu ${candidate.name} für die EU-Wahl 2024!`}
         >
           Teilen
         </ShareButton>
         <DownloadImageLink
-          title={`spoe-vorsitzwahlkabine-vergleich-${candidate.name}.jpg`}
+          title={`andererseits-wahlchecker-vergleich-${candidate.name}.jpg`}
           href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidate.slug}`}
         >
           Bild herunterladen

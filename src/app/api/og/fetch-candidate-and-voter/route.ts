@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { getCandidateFromSlug } from "~/app/[candidateSlug]/get-candidate-from-slug";
 import { getCandidates } from "~/app/get-candidates";
-import { rateCandidate } from "~/app/kabine/[slug]/rate-candidates";
-import { getCandidateWithQuestions } from "~/app/kabine/[slug]/vergleich/[candidate-slug]/get-candidate-with-question";
-import { getVoterViaHash } from "~/app/kabine/get-voter-via-hash";
+import { rateCandidate } from "~/app/fragen/[slug]/rate-candidates";
+import { getCandidateWithQuestions } from "~/app/fragen/[slug]/vergleich/[candidate-slug]/get-candidate-with-question";
+import { getVoterViaHash } from "~/app/fragen/get-voter-via-hash";
 
 export type FetchCandidateAndVoterViaSlugs = Promise<{
   scorePercentage: number;

@@ -7,19 +7,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
     },
     {
-      url: "https://andererseits.org/Wahl-Infos/kabine",
+      url: "https://andererseits.org/Wahl-Infos/fragen",
       lastModified: new Date(),
     },
     {
-      url: "https://andererseits.org/Wahl-Infos/impressum",
+      url: "https://andererseits.org/Wahl-Infos/glossar",
       lastModified: new Date(),
     },
     {
-      url: "https://andererseits.org/Wahl-Infos/datenschutz",
+      url: "https://andererseits.org/Wahl-Infos/glossar",
       lastModified: new Date(),
     },
     {
-      url: "https://andererseits.org/Wahl-Infos/kalkulation",
+      url: "https://andererseits.org/Wahl-Infos/glossar",
+      lastModified: new Date(),
+    },
+    {
+      url: "https://andererseits.org/Wahl-Infos/glossar",
       lastModified: new Date(),
     },
   ];

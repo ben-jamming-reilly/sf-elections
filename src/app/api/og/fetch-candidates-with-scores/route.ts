@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { getCandidatesWithQuestions } from "~/app/kabine/[slug]/get-candidates-with-questions";
-import { rateCandidates } from "~/app/kabine/[slug]/rate-candidates";
-import { getVoterViaHash } from "~/app/kabine/get-voter-via-hash";
+import { getCandidatesWithQuestions } from "~/app/fragen/[slug]/get-candidates-with-questions";
+import { rateCandidates } from "~/app/fragen/[slug]/rate-candidates";
+import { getVoterViaHash } from "~/app/fragen/get-voter-via-hash";
 
 export type FetchCandidatesWithScoresResponse = ReturnType<
   typeof rateCandidates

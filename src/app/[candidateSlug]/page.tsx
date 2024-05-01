@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   }
 
   return {
-    title: `${candidate.name} | EU-Wahl-Infos 2024`,
+    title: `${candidate.name} | Wahlchecker EU 2024`,
     description: `15 Fragen beantwortet von ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
       images: [
         {
           url: `https://andererseits.org/Wahl-Infos/${params.candidateSlug}/opengraph-image`,
-          alt: "EU-Wahl-Infos 2024",
+          alt: "Wahlchecker EU 2024",
         },
       ],
     },

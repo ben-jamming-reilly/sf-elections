@@ -8,17 +8,17 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "EU-Wahl-Infos 2024 – andererseits.org",
+  title: "Wahlchecker EU 2024 – andererseits.org",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "EU-Wahl-Infos 2024 – andererseits.org",
+    title: "Wahlchecker EU 2024 – andererseits.org",
     description: "",
     site: "andererseits.org",
     images: [
       {
         url: "andererseits.org/Wahl-Infos/opengraph-image",
-        alt: "EU-Wahl-Infos 2024",
+        alt: "Wahlchecker EU 2024",
         width: 1200,
         height: 630,
       },
@@ -100,16 +100,12 @@ export default function RootLayout({
                     width={182}
                     className="flex-1 object-contain"
                     alt="andererseits Logo"
-                    title="Zur Startseite"
                   />
                 </Link>
               </div>
-              <Link
-                href="/"
-                className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0"
-              >
+              <div className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0">
                 Wahlchecker EU 2024
-              </Link>
+              </div>
             </div>
           </header>
           <div className="flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 ">
@@ -123,16 +119,21 @@ export default function RootLayout({
                 {children}
               </main>
             </div>
-            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t border-black py-5 ">
-              <a
-                rel="norefeerer noopener"
-                className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                href="https://andererseits.org/"
+            <footer className=" border-t border-black py-5 ">
+              <nav
+                aria-label="Links zu andererseits.org, Impressum und Datenschutz"
+                className="flex w-full flex-col items-center justify-center gap-3"
               >
-                <span className="font-sans font-medium">andererseits.org</span>
-              </a>
-              <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
-                <li>
+                <a
+                  rel="norefeerer noopener"
+                  className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                  href="https://andererseits.org/"
+                >
+                  <span className="font-sans font-medium">
+                    andererseits.org
+                  </span>
+                </a>
+                <div className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
                   <Link
                     prefetch
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
@@ -140,8 +141,6 @@ export default function RootLayout({
                   >
                     Impressum
                   </Link>
-                </li>
-                <li>
                   <Link
                     prefetch
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
@@ -149,8 +148,8 @@ export default function RootLayout({
                   >
                     Datenschutz
                   </Link>
-                </li>
-              </ul>
+                </div>
+              </nav>
             </footer>
           </div>
         </div>

@@ -38,37 +38,42 @@ export const GlossaredText = ({
 
   return (
     <>
-      {partsClean.map((word, index) => {
-        const glossarEntry = glossarEntries.find((entry) =>
-          matchTermAndSynonyms(entry, word),
-        );
-
-        if (glossarEntry) {
-          return (
-            <a
-              key={`glossar-${id}-${index}`}
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveEntry(glossarEntry);
-              }}
-              href="#"
-              className="underline-offset-4 outline-offset-2 outline-black hover:underline focus-visible:outline-4"
-            >
-              {word}*
-            </a>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">
+        {partsClean.map((word, index) => {
+          const glossarEntry = glossarEntries.find((entry) =>
+            matchTermAndSynonyms(entry, word),
           );
-        }
-        return word;
-      })}
 
-      <AnimatePresence>
-        {activeEntry && (
-          <GlossarModal
-            entry={activeEntry}
-            onClose={() => setActiveEntry(null)}
-          />
-        )}
-      </AnimatePresence>
+          if (glossarEntry) {
+            return (
+              <a
+                key={`glossar-${id}-${index}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveEntry(glossarEntry);
+                }}
+                href="#"
+                aria-hidden="false"
+                title={`Glossareintrag für ${word}`}
+                className="font-semibold underline-offset-4 outline-offset-2 outline-black hover:underline focus-visible:outline-4"
+              >
+                {word}
+              </a>
+            );
+          }
+          return word;
+        })}
+
+        <AnimatePresence>
+          {activeEntry && (
+            <GlossarModal
+              entry={activeEntry}
+              onClose={() => setActiveEntry(null)}
+            />
+          )}
+        </AnimatePresence>
+      </span>
     </>
   );
 };
@@ -113,7 +118,7 @@ const GlossarModal = ({
     <motion.div
       role="dialog"
       aria-modal="true"
-      aria-label={`Glossar: ${entry.term}`}
+      aria-label={`Glossareintrag für ${entry.term}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
@@ -149,13 +154,14 @@ const GlossarModal = ({
         className="relative w-[440px] rounded-[30px] bg-white p-10"
       >
         <button
+          aria-label="Schließen"
           onClick={onClose}
           ref={closeButtonRef}
           className="p- absolute right-5 top-5 transition-all focus-visible:outline-2 focus-visible:outline-brand notouch:hover:bg-brand notouch:hover:text-white notouch:hover:active:scale-95"
         >
           <XMarkIcon className="h-8 w-8" />
         </button>
-        <h3 className="mb-2 font-semibold">{entry.term}:</h3>
+        <h3 className="mb-2 font-semibold">{`${entry.term}:`}</h3>
         <p>{entry.definition}</p>
       </motion.div>
     </motion.div>
