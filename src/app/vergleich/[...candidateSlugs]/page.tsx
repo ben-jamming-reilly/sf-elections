@@ -16,6 +16,7 @@ import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
 import { GlossaredTextServer } from "~/app/ui/glossared-text.server";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 
 export const revalidate = false;
 
@@ -88,142 +89,69 @@ export default async function CandidateComparison({
     (c) => Math.random() - Math.random(),
   );
 
+  const toolbar = (
+    <aside
+      aria-label="Zur Startseite und Teilen"
+      className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
+    >
+      <BackButton href={`/`}>Zur Startseite</BackButton>
+      <ShareButton
+        title={`Vergleich zwischen ${randomCandidates
+          .map((c) => c.name)
+          .join(" und ")}`}
+        text="Wahlchecker EU 2024 – andereseits.org"
+      >
+        Seite teilen
+      </ShareButton>
+    </aside>
+  );
+
   return (
-    <>
-      <div>
-        <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
-          <BackButton href={`/`}>Zur Startseite</BackButton>
-          <ShareButton
-            title={`Vergleich zwischen ${randomCandidates
-              .map((c) => c.name)
-              .join(" und ")}`}
-            text="Wahlchecker EU 2024 – andereseits.org"
-          >
-            Seite teilen
-          </ShareButton>
-        </div>
+    <div>
+      {toolbar}
+      <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
+        Vergleich zwischen <br />
+        {`${randomCandidates.map((c) => c.name).join(" & ")}`}
+      </h1>
 
-        <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
-          Vergleich zwischen <br />
-          {`${randomCandidates.map((c) => c.name).join(" & ")}`}
-        </h1>
+      <section className="my-10">
+        <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-around gap-y-6 lg:gap-x-3">
+          {randomCandidates.map((candidate) => (
+            <li key={candidate.id} className="relative flex flex-col">
+              <Link
+                className="no-touch:hover:bg-brand group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px] border  border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2"
+                href={`/${candidate.slug}`}
+              >
+                <Image
+                  src={`/${candidate.profileImg}`}
+                  alt={`Profilebild von ${candidate.name}`}
+                  fill
+                  priority
+                  className="max-h-full px-5 py-3"
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <section className="my-10">
-          <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-around gap-y-6 lg:gap-x-3">
-            {randomCandidates.map((candidate) => (
-              <li key={candidate.id} className="relative flex flex-col">
-                <Link
-                  className="no-touch:hover:bg-brand group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px] border  border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2"
-                  href={`/${candidate.slug}`}
-                >
-                  <Image
-                    src={`/${candidate.profileImg}`}
-                    alt={`Profilebild von ${candidate.name}`}
-                    fill
-                    priority
-                    className="max-h-full px-5 py-3"
-                  />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
+      <section
+        aria-label="Die Antworten der Parteien im Vergleich"
+        className="flex flex-col gap-10 py-10"
+      >
+        {candidates[0]?.answers
+          .sort((a, b) => a.question.order - b.question.order)
+          .map((answer, index) => (
+            <QuestionWithAnswers
+              key={answer.id}
+              question={answer.question}
+              candidatesAnswers={candidates}
+            />
+          ))}
+      </section>
 
-        <section>
-          <ul className="flex flex-col gap-10 py-10">
-            {candidates[0]?.answers
-              .sort((a, b) => a.question.order - b.question.order)
-              .map((answer, index) => (
-                <li key={answer.id} className="w-full py-5">
-                  {answer.question.category && (
-                    <QuestionCategoryLabel
-                      category={answer.question.category}
-                    />
-                  )}
-                  <div className="mt-3 text-lg">Frage {index + 1}:</div>
-                  <h2 className="mb-5 hyphens-auto font-sans text-2xl">
-                    {/* @ts-expect-error */}
-                    <GlossaredTextServer text={answer.question.title} />
-                  </h2>
-
-                  <div className="mt-5">
-                    <div className="pt-10">
-                      <ul className="grid grid-cols-1 py-4">
-                        {randomCandidates.map((candidate) => {
-                          const candidateAnswer = candidate.answers.sort(
-                            (a, b) => a.question.order - b.question.order,
-                          )[index];
-
-                          if (!candidateAnswer) {
-                            return null;
-                          }
-
-                          return (
-                            <li
-                              key={`candidate-details-${candidateAnswer.questionId}-${candidate.id}`}
-                              className="relative space-y-4 border-t border-black  pb-8 pt-4 md:pb-16"
-                            >
-                              <Link
-                                className="no-touch:hover:bg-brand group absolute -top-5 right-3 z-10 block h-[44px] w-[84px] overflow-clip rounded-[200px] border border-black bg-white outline-offset-4  outline-black transition-all focus-visible:outline-2 md:-top-10 md:right-10 md:h-[88px] md:w-[169px]"
-                                href={`/${candidate.slug}`}
-                              >
-                                <Image
-                                  src={`/${candidate.profileImg}`}
-                                  alt={`Profilebild von ${candidate.name}`}
-                                  fill
-                                  priority
-                                  className="max-h-full px-5 py-3"
-                                />
-                              </Link>
-                              {candidateAnswer.option !== null &&
-                              candidateAnswer.weighting !== null ? (
-                                <div className="flex flex-col gap-3 md:flex-row">
-                                  <OptionResult
-                                    value={candidateAnswer.option}
-                                    type={candidateAnswer.question.type}
-                                  />
-                                  <WeightingResult
-                                    value={candidateAnswer.weighting}
-                                  />
-                                </div>
-                              ) : (
-                                <div className="flex w-full items-center justify-center">
-                                  <QuestionUnansweredResult />
-                                </div>
-                              )}
-                              {candidateAnswer.text ||
-                              candidateAnswer.changedQuestionDisclaimer ? (
-                                <QuestionInfo
-                                  text={candidateAnswer.text}
-                                  disclosure={
-                                    candidateAnswer.changedQuestionDisclaimer
-                                  }
-                                />
-                              ) : null}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </section>
-
-        <div className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row">
-          <BackButton href={`/`}>Zur Startseite</BackButton>
-          <ShareButton
-            title={`Vergleich zwischen ${randomCandidates
-              .map((c) => c.name)
-              .join(" und ")}`}
-            text="Wahlchecker EU 2024 – andereseits.org"
-          >
-            Seite teilen
-          </ShareButton>
-        </div>
-      </div>
-    </>
+      {toolbar}
+    </div>
   );
 }
 
