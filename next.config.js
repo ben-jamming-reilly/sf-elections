@@ -16,6 +16,22 @@ const nextConfig = {
         source: "/api/event", // Or '/api/event/' if you have `trailingSlash: true` in this config
         destination: "https://plausible.io/api/event",
       },
+      {
+        "source": "/wahlchecker",
+        "destination": "/"
+      },
+      {
+        "source": "/wahlchecker/:path*",
+        "destination": "/:path*"
+      },
+      {
+        "source": "/wahlkabine",
+        "destination": "/"
+      },
+      {
+        "source": "/wahlkabine/:path*",
+        "destination": "/:path*"
+      },
     ];
   },
   eslint: {
