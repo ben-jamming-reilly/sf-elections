@@ -116,12 +116,13 @@ export const VoterQuestionnaire = ({
 
   // Scroll question into view
   useLayoutEffect(() => {
-    if (!navigator.userAgent.match(/Android/i)) {
-      questionRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
+    // TODO: Test if this still breaks on Chrome Android
+    // if (!navigator.userAgent.match(/Android/i)) {
+    questionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+    // }
   }, [activeIndex]);
 
   useLayoutEffect(() => {}, [activeIndex]);
@@ -158,34 +159,31 @@ export const VoterQuestionnaire = ({
 
   if (hasHydrated && slug) {
     return (
-      <section className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[24px]">
-        <h1 className="text-[36px] leading-[44px]">Was ist andererseits</h1>
+      <section
+        aria-describedby="newsletter-cta-title"
+        className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[24px]"
+      >
+        <h1 id="newsletter-cta-title" className="text-[36px] leading-[44px]">
+          Lerne Behinderung besser verstehen! Mit dem kostenlosen Newsletter von
+          <span className="italic"> andererseits</span>
+        </h1>
         <p>
-          Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id
-          nibh ultricies vehicula ut id elit. Donec ullamcorper nulla non metus
-          auctor fringilla. Nullam id dolor id nibh ultricies vehicula ut id
-          elit. Donec ullamcorper nulla non metus auctor fringilla. Donec
-          ullamcorper nulla non metus auctor fringilla.
+          Bei andererseits arbeiten Journalist*innen mit und ohne Behinderung
+          gemeinsam. Gleichberechtigt, kritisch und fair bezahlt.
         </p>
         <p>
-          Nullam id dolor id nibh ultricies vehicula ut id elit. Donec
-          ullamcorper nulla non metus auctor fringilla.
+          Wenn Du mehr wissen möchtest, kannst du kostenlos unseren Newsletter
+          abonnieren. Jeden Freitag bekommst du eine kleine Geschichte, einen
+          Fakt über Behinderung und ein Update aus der Redaktion.
         </p>
 
-        <Image
-          width={672}
-          height={350}
-          src="/was-ist-andererseits.png"
-          alt="andererseits Team Sitzkreis"
-          className="rounded-[80px]"
-        />
-
         <p>
-          Nullam id dolor id nibh ultricies vehicula ut id elit. Donec
-          ullamcorper nulla non metus auctor fringilla.
+          Damit gibst Du uns auch die Erlaubnis, Dir Neuigkeiten und Werbung von
+          andererseits zu schicken. Du kannst Dich jederzeit abmelden.
         </p>
 
         <form
+          aria-label="Newsletter Anmeldungsformular"
           className="py-5"
           onSubmit={(e) => {
             e.preventDefault();
@@ -194,7 +192,11 @@ export const VoterQuestionnaire = ({
           }}
         >
           <div className="relative">
+            <label className="sr-only" htmlFor="newsletter_email">
+              Deine E-Mail Adresse
+            </label>
             <input
+              name="newsletter_email"
               type="email"
               placeholder="Deine E-Mail Adresse"
               className="w-full rounded-[100px] border-2 border-black px-6 py-3 text-black caret-black outline-offset-4  outline-black focus-visible:outline-2"
@@ -208,16 +210,16 @@ export const VoterQuestionnaire = ({
           </div>
         </form>
 
-        <p>
-          Nullam id dolor id nibh ultricies vehicula ut id elit. Donec
-          ullamcorper nulla non metus auctor fringilla.
+        <p className="">
+          Du möchtest keinen Newsletter bekommen? <br />
+          Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Quiz:
         </p>
 
         <div className="flex items-center justify-center py-5">
           <Button
             prefetch
             as="Link"
-            href={`/kabine/${slug}`}
+            href={`/fragen/${slug}`}
             variant="primary"
             roundness="large"
           >
@@ -378,7 +380,7 @@ export const VoterQuestionnaire = ({
               </div>
             </section>
 
-            <div className="flex w-full flex-col items-center justify-between gap-2 xs:flex-row">
+            <div className="flex w-full flex-col items-center justify-between gap-4 xs:flex-row">
               <NavigationButton
                 label={"Zurück"}
                 disabled={!hasPrevious}
@@ -438,14 +440,14 @@ const NavigationButton = ({
       buttonRef={buttonRef}
       disabled={disabled}
       onClick={onClick}
-      className={clsx("w-[115px] text-lg text-white xs:w-[130px]", className)}
+      className={clsx("w-[130px] text-lg text-white", className)}
     >
       {type === "prev" && (
-        <ArrowLeftIcon className="mr-1 inline-block h-5 w-5 stroke-2" />
+        <ArrowLeftIcon className="mr-1 inline-block h-5 w-5 flex-shrink-0 stroke-2" />
       )}
       {label}
       {type === "next" && (
-        <ArrowRightIcon className=" ml-1 inline-block h-5 w-5 stroke-2" />
+        <ArrowRightIcon className=" ml-1 inline-block h-5 w-5 flex-shrink-0 stroke-2" />
       )}
     </Button>
   );

@@ -6,8 +6,10 @@ import { ComponentProps } from "react";
 
 type ButtonProps = {
   variant: "primary" | "secondary";
+  children: React.ReactNode;
   roundness?: "none" | "small" | "large" | "full";
   buttonRef?: React.Ref<HTMLButtonElement> | React.Ref<HTMLAnchorElement>;
+  className?: string;
 } & (
   | (ComponentProps<"button"> & {
       as: "button";
@@ -18,6 +20,7 @@ type ButtonProps = {
   | (LinkProps & {
       as: "Link";
     })
+  | (ComponentProps<"summary"> & { as: "summary" })
 );
 
 export const Button = ({
@@ -35,7 +38,7 @@ export const Button = ({
     <Element
       ref={buttonRef}
       className={clsx(
-        "inline-flex items-center justify-center gap-3 border border-black px-4 py-1 text-center font-medium text-black outline-offset-4  transition-all focus-visible:outline-black active:scale-95 disabled:cursor-not-allowed disabled:active:!scale-100",
+        "inline-flex cursor-pointer items-center justify-center gap-3 border border-black px-4 py-1 text-center font-medium text-black outline-offset-4  transition-all focus-visible:outline-black active:scale-95 disabled:cursor-not-allowed disabled:active:!scale-100",
         variant === "primary" &&
           "bg-black text-white disabled:bg-black/70 notouch:hover:bg-white notouch:hover:text-black notouch:disabled:hover:bg-black/70 notouch:disabled:hover:text-white",
         variant === "secondary" &&

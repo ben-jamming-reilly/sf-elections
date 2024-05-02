@@ -8,17 +8,17 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "EU-Wahl-Infos 2024 – andererseits.org",
+  title: "Wahlchecker EU 2024 – andererseits.org",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "EU-Wahl-Infos 2024 – andererseits.org",
+    title: "Wahlchecker EU 2024 – andererseits.org",
     description: "",
     site: "andererseits.org",
     images: [
       {
         url: "andererseits.org/Wahl-Infos/opengraph-image",
-        alt: "EU-Wahl-Infos 2024",
+        alt: "Wahlchecker EU 2024",
         width: 1200,
         height: 630,
       },
@@ -88,10 +88,10 @@ export default function RootLayout({
           <header className="top-0 z-40 w-full border-b border-black bg-white md:sticky md:h-[90px]">
             <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-10 py-4 font-sans md:flex-row lg:w-[1320px]">
               <div className="flex items-end">
-                <a
-                  rel="norefeerer noopener"
+                <Link
                   className="bg-white  px-2 py-1 outline-offset-4 outline-black focus-visible:outline-2"
-                  href="https://andererseits.org"
+                  href="/"
+                  title="Zur Startseite"
                 >
                   <Image
                     src="/andererseits-logo.svg"
@@ -101,19 +101,16 @@ export default function RootLayout({
                     className="flex-1 object-contain"
                     alt="andererseits Logo"
                   />
-                </a>
+                </Link>
               </div>
-              <Link
-                href="/"
-                className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0"
-              >
-                Wahl-Infos 2024
-              </Link>
+              <div className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0">
+                Wahlchecker EU 2024
+              </div>
             </div>
           </header>
           <div className="flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 ">
             <div className="mx-auto max-w-full lg:w-[1000px]">
-              <main className="relative flex-grow px-5 py-10">
+              <main className="xxs:px-4 relative flex-grow px-3 py-10 xs:px-5">
                 <span
                   id="content"
                   className="absolute -top-20 left-0"
@@ -122,16 +119,21 @@ export default function RootLayout({
                 {children}
               </main>
             </div>
-            <footer className="flex w-full flex-col items-center justify-center gap-3 border-t border-black py-5 ">
-              <a
-                rel="norefeerer noopener"
-                className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                href="https://andererseits.org/"
+            <footer className=" border-t border-black py-5 ">
+              <nav
+                aria-label="Links zu andererseits.org, Impressum und Datenschutz"
+                className="flex w-full flex-col items-center justify-center gap-3"
               >
-                <span className="font-sans font-medium">andererseits.org</span>
-              </a>
-              <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
-                <li>
+                <a
+                  rel="norefeerer noopener"
+                  className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                  href="https://andererseits.org/"
+                >
+                  <span className="font-sans font-medium">
+                    andererseits.org
+                  </span>
+                </a>
+                <div className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
                   <Link
                     prefetch
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
@@ -139,8 +141,6 @@ export default function RootLayout({
                   >
                     Impressum
                   </Link>
-                </li>
-                <li>
                   <Link
                     prefetch
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
@@ -148,8 +148,8 @@ export default function RootLayout({
                   >
                     Datenschutz
                   </Link>
-                </li>
-              </ul>
+                </div>
+              </nav>
             </footer>
           </div>
         </div>

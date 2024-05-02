@@ -1,24 +1,38 @@
 import { optionLabelForYesNoValue } from "../../data/answers";
 import clsx from "clsx";
-export const YesNoResult = ({ value }: { value: number }) => {
+
+export const YesNoResult = ({
+  hideIcon,
+  value,
+  className,
+}: {
+  hideIcon?: boolean;
+  value: number;
+  className?: string;
+}) => {
   return (
     <p
       className={clsx(
-        "-200 group relative z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
+        "group z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[18px] leading-[22px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2 md:text-[22px] md:leading-[26px]",
         value === 3 && "bg-[#99EB8B]",
         value === 0 && "bg-[#FBFF95]",
         value === -3 && "bg-[#FFA06E]",
+        className,
       )}
     >
       {optionLabelForYesNoValue(value)}
-      {value === 3 && (
-        <ThumbUpIcon className="h-10 w-10 p-1 text-transparent " />
-      )}
-      {value === 0 && (
-        <ThumbSideIcon className="h-10 w-10 p-1 text-transparent " />
-      )}
-      {value === -3 && (
-        <ThumbDownIcon className="h-10 w-10 p-1 text-transparent " />
+      {!hideIcon && (
+        <>
+          {value === 3 && (
+            <ThumbUpIcon className="h-10 w-10 p-1 text-transparent " />
+          )}
+          {value === 0 && (
+            <ThumbSideIcon className="h-10 w-10 p-1 text-transparent " />
+          )}
+          {value === -3 && (
+            <ThumbDownIcon className="h-10 w-10 p-1 text-transparent " />
+          )}
+        </>
       )}
     </p>
   );

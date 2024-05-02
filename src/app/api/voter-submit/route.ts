@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
-import { getCandidatesWithQuestions } from "~/app/kabine/[slug]/get-candidates-with-questions";
-import { rateCandidate } from "~/app/kabine/[slug]/rate-candidates";
+import { getCandidatesWithQuestions } from "~/app/fragen/[slug]/get-candidates-with-questions";
+import { rateCandidate } from "~/app/fragen/[slug]/rate-candidates";
 import { prisma } from "~/lib/prisma";
 
 const questionWithAnswersSchema = z.array(
