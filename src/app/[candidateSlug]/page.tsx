@@ -1,22 +1,14 @@
 import { notFound } from "next/navigation";
 import { getCandidateFromSlug } from "./get-candidate-from-slug";
 import { ShareButton } from "../ui/share-button";
-import { OptionResult } from "../ui/option-result";
-import { WeightingResult } from "../ui/weighting-result";
-import { QuestionUnansweredResult } from "../ui/question-unanswered-result";
-import { QuestionCategoryLabel } from "../ui/question-category-label";
 import Link from "next/link";
 import Image from "next/image";
-import clsx from "clsx";
 import { BackButton } from "../ui/back-button";
 import { getCandidates } from "../get-candidates";
-import { SecondaryLink } from "../ui/secondary-link";
-import { QuestionInfo } from "../ui/question-info";
-import { constructComparision } from "../vergleich/[...candidateSlugs]/construct-comparision";
-import { GlossaredTextServer } from "../ui/glossared-text.server";
 import { QuestionWithAnswers } from "../ui/question-with-answers";
+import { PartyLogo } from "../ui/party-logo";
 
-export const revalidate = false;
+export const revalidate = 18000; // 5 hours
 
 export type CandidateProfileProps = {
   params: { candidateSlug: string };
@@ -48,13 +40,15 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
 export default async function CandidateProfile({
   params,
 }: CandidateProfileProps) {
-  const candidate = await getCandidateFromSlug(params.candidateSlug);
+  const [candidate, candidates] = await Promise.all([
+    getCandidateFromSlug(params.candidateSlug),
+    getCandidates(),
+  ]);
 
   if (!candidate) {
     notFound();
   }
 
-  const candidates = await getCandidates();
   const randomOtherCandidates = candidates
     .filter((c) => c.id !== candidate.id)
     .sort((c) => Math.random() - Math.random());
@@ -83,21 +77,14 @@ export default async function CandidateProfile({
             Wahl-Infos Antworten: {candidate.name}
           </h1>
 
-          <section className="my-8 flex justify-center">
-            <div key={candidate.id} className="relative flex flex-col">
-              <Link
-                className="group relative z-10 block h-[88px]  w-[170px] overflow-clip rounded-[200px] border border-black outline-offset-4 outline-black transition-all focus-visible:outline-2"
+          <section className="my-8 flex w-full justify-center">
+            <div className="relative">
+              <PartyLogo
                 href={`/${candidate.slug}`}
+                priority
                 title={`Zur ${candidate.name} Seite`}
-              >
-                <Image
-                  src={`/${candidate.profileImg}`}
-                  alt=""
-                  fill
-                  priority
-                  className="max-h-full px-5 py-3"
-                />
-              </Link>
+                src={`/${candidate.profileImg}`}
+              />
             </div>
           </section>
 
@@ -108,19 +95,20 @@ export default async function CandidateProfile({
             <h2 className="mb-3 block font-medium uppercase ">
               Vergleichen mit:
             </h2>
-            <div className="flex flex-row flex-wrap justify-around gap-y-8 divide-x divide-black">
+            <div className="flex flex-row flex-wrap justify-center gap-y-3 divide-x divide-black">
               {randomOtherCandidates.map((c) => (
                 <Link
                   key={c.id}
-                  className="mx-3 px-3 outline-offset-4 outline-black"
+                  className="mx-0 px-3 outline-offset-4 outline-black"
                   href={`vergleich/${candidate.slug}/${c.slug}`}
                   title={`Vergleiche ${candidate.name} mit ${c.name}`}
+                  prefetch={false}
                 >
                   {c.name}
                 </Link>
               ))}
               <Link
-                className="mx-3 px-3 outline-offset-4 outline-black"
+                className="px-3 outline-offset-4 outline-black"
                 href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
                 title="Vergleiche alle Parteien"
               >

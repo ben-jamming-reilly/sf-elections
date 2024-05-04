@@ -1,12 +1,11 @@
 import { getVoterViaHash } from "../../../get-voter-via-hash";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { ShareButton } from "~/app/ui/share-button";
-import Image from "next/image";
 import { getCandidateWithQuestions } from "./get-candidate-with-question";
 import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
+import { PartyLogo } from "~/app/ui/party-logo";
 
 export type WahlkabineResultCandidate = {
   params: {
@@ -14,6 +13,8 @@ export type WahlkabineResultCandidate = {
     "candidate-slug": string;
   };
 };
+
+export const revalidate = 18000; // 5 hours
 
 export default async function WahlkabineResultCandidate({
   params,
@@ -54,19 +55,16 @@ export default async function WahlkabineResultCandidate({
       </h1>
 
       <section className="mt-10 flex justify-center">
-        <div key={candidate.id} className="relative flex flex-col">
-          <Link
-            className="group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px]  border border-black outline-offset-4 outline-black transition-all focus-visible:outline-2"
+        <div className="relative flex flex-col">
+          <PartyLogo
+            key={candidate.id}
             href={`/${candidate.slug}`}
-          >
-            <Image
-              src={`/${candidate.profileImg}`}
-              alt={`Profilebild von ${candidate.name}`}
-              fill
-              priority
-              className="max-h-full px-5 py-3"
-            />
-          </Link>
+            priority
+            className=""
+            title={`Zur ${candidate.name} Seite`}
+            src={`/${candidate.profileImg}`}
+            alt=""
+          />
         </div>
       </section>
 
@@ -83,6 +81,7 @@ export default async function WahlkabineResultCandidate({
               voterAnswer={answer}
               question={answer.question}
               candidatesAnswers={[candidate]}
+              textOpenByDefault
             />
           ))}
       </section>

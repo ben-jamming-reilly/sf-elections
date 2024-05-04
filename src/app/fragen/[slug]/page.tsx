@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
 import { getVoterViaHash } from "../get-voter-via-hash";
 import { ShareButton } from "~/app/ui/share-button";
 import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
 import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
+import { PartyLogo } from "~/app/ui/party-logo";
 
 export type WahlkabineResultProps = {
   params: {
@@ -14,23 +13,26 @@ export type WahlkabineResultProps = {
   };
 };
 
+export const revalidate = 18000; // 5 hours
+
 export default async function WahlkabineResult({
   params,
 }: WahlkabineResultProps) {
-  const voterWithAnswers = await getVoterViaHash(params.slug);
+  const [voterWithAnswers, candidates] = await Promise.all([
+    getVoterViaHash(params.slug),
+    getCandidatesWithQuestions(),
+  ]);
 
   if (!voterWithAnswers) {
     notFound();
   }
 
-  const candidates = (await getCandidatesWithQuestions()).sort(
-    (a, b) => Math.random() - 0.5,
-  );
+  const randomCandidates = candidates.sort(() => Math.random() - 0.5);
 
   const toolbar = (
     <aside
       aria-label="Zurück & Teilen"
-      className="flex flex-col justify-center gap-5 pb-5 sm:flex-row"
+      className="flex flex-row flex-wrap justify-center gap-5 pb-5"
     >
       <BackButton href={`/`}>Zur Startseite</BackButton>
       <ShareButton title="Wahlchecker EU 2024">Teilen</ShareButton>
@@ -55,21 +57,16 @@ export default async function WahlkabineResult({
         aria-label="Links zu den Antworten der einzelnen Parteien"
         className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-evenly gap-x-3 gap-y-6"
       >
-        {candidates.map((candidate, index) => (
-          <Link
+        {randomCandidates.map((candidate, index) => (
+          <PartyLogo
             key={candidate.id}
-            className="no-touch:hover:bg-brand group relative z-10 flex h-[78px] w-[110px] overflow-clip rounded-[200px] border border-black bg-white outline-offset-4 outline-black  transition-all focus-visible:outline-2 sm:w-[150px] md:h-[88px] md:w-[170px]"
             href={`/${candidate.slug}`}
+            priority
+            className=""
             title={`Zur ${candidate.name} Seite`}
-          >
-            <Image
-              alt=""
-              src={`/${candidate.profileImg}`}
-              fill
-              priority
-              className="max-h-full px-3 py-3"
-            />
-          </Link>
+            src={`/${candidate.profileImg}`}
+            alt=""
+          />
         ))}
       </nav>
 
@@ -85,7 +82,7 @@ export default async function WahlkabineResult({
               candidateLinkBase={`/fragen/${params.slug}/vergleich`}
               voterAnswer={answer}
               question={answer.question}
-              candidatesAnswers={candidates}
+              candidatesAnswers={randomCandidates}
             />
           ))}
       </section>

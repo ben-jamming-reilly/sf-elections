@@ -53,6 +53,7 @@ model CandidateQuestionAnswer {
   option                    Int?
   weighting                 Int?
   text                      String    @default("")
+  textSimpleLanguage        String?    @default("")
   changedQuestionDisclaimer String?
 
   @@index([candidateId, questionId])

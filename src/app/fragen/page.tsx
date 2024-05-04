@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600;
+export const revalidate = 18000; // 5 hours
 
 export default async function Wahlkabine() {
   const [questions, glossarEntries] = await Promise.all([

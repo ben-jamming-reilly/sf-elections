@@ -3,7 +3,16 @@ import { parse } from "csv-parse/sync";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 
-const PARTIES = ["FPÖ", "NEOS", "KPÖ", "Volt", "SPÖ", "ÖVP", "Grüne"] as const;
+const PARTIES = [
+  "FPÖ",
+  "NEOS",
+  "KPÖ",
+  "Volt",
+  "SPÖ",
+  "ÖVP",
+  "Grüne",
+  "DNA",
+] as const;
 
 type Parties = (typeof PARTIES)[number];
 
@@ -28,7 +37,7 @@ const matchWeighing = (weighing: WeighingsType) => {
     case "Egal":
       return 0;
     default:
-      console.log(`Unknwon Weighing: ${weighing}`);
+      console.log(`Unknwon Weighing: "${weighing}`);
       return 0;
   }
 };
@@ -79,24 +88,35 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
           "Antwort FPÖ": optionsValidator,
           "Wertung FPÖ": weighingsValidator,
           "Erklärung FPÖ": z.string(),
+          "Erklärung FPÖ (einfach)": z.string().optional().nullable(),
           "Antwort NEOS": optionsValidator,
           "Wertung NEOS": weighingsValidator,
           "Erklärung NEOS": z.string(),
+          "Erklärung NEOS (einfach)": z.string().optional().nullable(),
           "Antwort KPÖ": optionsValidator,
           "Wertung KPÖ": weighingsValidator,
           "Erklärung KPÖ": z.string(),
+          "Erklärung KPÖ (einfach)": z.string().optional().nullable(),
           "Antwort Volt": optionsValidator,
           "Wertung Volt": weighingsValidator,
           "Erklärung Volt": z.string(),
+          "Erklärung Volt (einfach)": z.string().optional().nullable(),
           "Antwort SPÖ": optionsValidator,
           "Wertung SPÖ": weighingsValidator,
           "Erklärung SPÖ": z.string(),
+          "Erklärung SPÖ (einfach)": z.string().optional().nullable(),
           "Antwort ÖVP": optionsValidator,
           "Wertung ÖVP": weighingsValidator,
           "Erklärung ÖVP": z.string(),
+          "Erklärung ÖVP (einfach)": z.string().optional().nullable(),
           "Antwort Grüne": optionsValidator,
           "Wertung Grüne": weighingsValidator,
           "Erklärung Grüne": z.string(),
+          "Erklärung Grüne (einfach)": z.string().optional().nullable(),
+          "Antwort DNA": optionsValidator,
+          "Wertung DNA": weighingsValidator,
+          "Erklärung DNA": z.string(),
+          "Erklärung DNA (einfach)": z.string().optional().nullable(),
         }),
       )
       .parse(partiesData);
@@ -141,6 +161,8 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
             answer: partyData[`Antwort ${party}`],
             weighting: partyData[`Wertung ${party}`],
             explanation: partyData[`Erklärung ${party}`].trim(),
+            explanationSimple:
+              partyData[`Erklärung ${party} (einfach)`]?.trim(),
           });
         }
 
@@ -155,6 +177,7 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
             answer: OptionsType;
             weighting: WeighingsType;
             explanation: string;
+            explanationSimple?: string;
           }[];
         }
       >,
@@ -187,6 +210,14 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
       `Not matched questions: ${notMatchedQuestions.length}/${questions.length}`,
     );
 
+    if (notMatchedQuestions.length > 0) {
+      console.log("Not matched questions:");
+      console.log(notMatchedQuestions.map((question) => question.title));
+
+      console.error("Not all questions are matched, exiting...");
+      return;
+    }
+
     notMatchedQuestions.length > 0 &&
       console.log(notMatchedQuestions.map((question) => question.title));
 
@@ -199,7 +230,8 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
           name: party.name,
           description: "",
           hasFinished: true,
-          profileImg: slugify(party.name) + ".svg",
+          profileImg:
+            slugify(party.name) + (party.name === "DNA" ? ".png" : ".svg"),
           slug: slugify(party.name),
           answers: {
             createMany: {
@@ -210,6 +242,7 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
                 option: matchOption(answer.answer),
                 weighting: matchWeighing(answer.weighting),
                 text: answer.explanation,
+                textSimpleLanguage: answer.explanationSimple,
               })),
             },
           },

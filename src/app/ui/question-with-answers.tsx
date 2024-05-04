@@ -1,14 +1,13 @@
-import Image from "next/image";
 import { CandidatesWithQuestions } from "../fragen/[slug]/get-candidates-with-questions";
 import { GlossaredTextServer } from "./glossared-text.server";
 import { OptionResult } from "./option-result";
 import { QuestionCategoryLabel } from "./question-category-label";
 import { QuestionUnansweredResult } from "./question-unanswered-result";
 import { WeightingResult } from "./weighting-result";
-import Link from "next/link";
 import { QuestionInfo } from "./question-info";
 import { Button } from "./button";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { PartyLogo } from "./party-logo";
 
 // TODO: remove direct database type
 // TODO: refactor naming to use main answer vs comparision answers
@@ -18,6 +17,7 @@ export const QuestionWithAnswers = ({
   voterAnswer,
   candidatesAnswers,
   candidateLinkBase, // For linking to the candidate comparison page with the voter hash
+  textOpenByDefault = false,
 }: {
   question: {
     id: number;
@@ -30,10 +30,12 @@ export const QuestionWithAnswers = ({
     option: number | null;
     weighting: number | null;
     text?: string | null; // only used for when the "voter" is a candidate
+    textSimpleLanguage?: string | null; // only used for when the "voter" is a candidate
     changedQuestionDisclaimer?: string | null; // only used for when the "voter" is a candidate
   };
   candidatesAnswers?: CandidatesWithQuestions;
   candidateLinkBase?: string;
+  textOpenByDefault?: boolean;
 }) => {
   return (
     <article
@@ -54,7 +56,7 @@ export const QuestionWithAnswers = ({
       </h2>
 
       {voterAnswer && (
-        <section aria-label="Dein Antwort" className="">
+        <section aria-label="Dein Antwort" className="mb-6">
           <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
           {voterAnswer.option !== null && voterAnswer.weighting !== null ? (
             <div className="flex flex-row gap-3">
@@ -75,6 +77,7 @@ export const QuestionWithAnswers = ({
             open
             text={voterAnswer.text ?? ""}
             disclosure={voterAnswer.changedQuestionDisclaimer}
+            textSimpleLanguage={voterAnswer.textSimpleLanguage}
           />
         </div>
       ) : null}
@@ -99,18 +102,12 @@ export const QuestionWithAnswers = ({
                   key={`candidate-${candidateAnswer.questionId}-${candidate.id}`}
                   className="relative h-[70px] w-full sm:h-[60px] md:w-[260px]"
                 >
-                  <Link
-                    className="no-touch:hover:bg-brand xxs:w-[100px] xxs:rounded-[200px] group absolute left-0 top-0 z-20 block h-full w-[80px] overflow-clip rounded-[100px] border-2 border-black bg-white outline-offset-4 outline-black transition-all  focus-visible:outline-2 sm:w-2/3 xs:w-2/3"
+                  <PartyLogo
+                    className="absolute left-0 top-0 z-20 h-full w-[75px] rounded-[100px]  border-2 sm:w-2/3 xxs:w-[100px] xxs:rounded-[200px] xs:w-2/3"
                     href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
-                  >
-                    <Image
-                      src={`/${candidate.profileImg}`}
-                      alt=""
-                      fill
-                      priority
-                      className="mx-auto max-h-full max-w-[90px] px-3 py-3 md:max-w-[130px] md:px-5 md:py-3"
-                    />
-                  </Link>
+                    src={`/${candidate.profileImg}`}
+                    priority
+                  />
 
                   {candidateAnswer.option !== null ? (
                     <OptionResult
@@ -133,7 +130,10 @@ export const QuestionWithAnswers = ({
 
       {candidatesAnswers && (
         <section aria-label="Antworten der Parteien im Detail" className="mt-5">
-          <details className="group flex items-center justify-center py-10">
+          <details
+            open={textOpenByDefault}
+            className="group flex items-center justify-center py-10"
+          >
             <Button
               as="summary"
               roundness="large"
@@ -158,18 +158,12 @@ export const QuestionWithAnswers = ({
                     key={`candidate-details-${candidateAnswer.questionId}-${candidate.id}`}
                     className="relative space-y-4 border-t border-black pb-16 pt-12 md:pt-4"
                   >
-                    <Link
-                      className="no-touch:hover:bg-brand group absolute -top-[30px] left-1/2 z-10 block h-[60px] w-[170px] -translate-x-1/2 overflow-clip rounded-[200px] border border-black  bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2 sm:w-[150px] md:-top-[44px] md:left-auto md:right-10 md:h-[88px] md:translate-x-0 xl:-top-[30px] xl:h-[60px]"
+                    <PartyLogo
+                      className="group absolute -top-[30px] left-1/2 h-[60px] w-[170px] -translate-x-1/2 sm:w-[150px] md:-top-[44px] md:left-auto md:right-10 md:h-[88px] md:translate-x-0 xl:-top-[30px] xl:h-[60px]"
                       href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
-                    >
-                      <Image
-                        src={`/${candidate.profileImg}`}
-                        alt=""
-                        fill
-                        priority
-                        className="max-h-full px-5 py-3"
-                      />
-                    </Link>
+                      src={`/${candidate.profileImg}`}
+                      priority
+                    />
 
                     {candidateAnswer.option !== null &&
                     candidateAnswer.weighting !== null ? (
@@ -189,7 +183,9 @@ export const QuestionWithAnswers = ({
                     {candidateAnswer.text ||
                     candidateAnswer.changedQuestionDisclaimer ? (
                       <QuestionInfo
+                        open={textOpenByDefault}
                         text={candidateAnswer.text}
+                        textSimpleLanguage={candidateAnswer.textSimpleLanguage}
                         disclosure={candidateAnswer.changedQuestionDisclaimer}
                       />
                     ) : null}

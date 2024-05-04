@@ -8,9 +8,8 @@ import { BackButton } from "~/app/ui/back-button";
 import { BASE_URL } from "~/app/api/og/baseUrl";
 import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
-import { GlossaredTextServer } from "~/app/ui/glossared-text.server";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
+import { PartyLogo } from "~/app/ui/party-logo";
 
 export const revalidate = false;
 
@@ -59,21 +58,20 @@ export default async function CandidateComparison({
       </h1>
 
       <section className="my-10">
-        <ul className="mx-auto my-10 flex w-[724px] max-w-full flex-row flex-wrap items-center justify-around gap-y-6 lg:gap-x-3">
+        <ul className="mx-auto my-10 grid w-[724px] max-w-full grid-cols-2 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-6 sm:flex ">
           {randomCandidates.map((candidate) => (
-            <li key={candidate.id} className="relative flex flex-col">
-              <Link
-                className="no-touch:hover:bg-brand group relative z-10 block h-[88px] w-[170px] overflow-clip rounded-[200px] border  border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2"
+            <li
+              key={candidate.id}
+              className="relative flex flex-col items-center justify-center"
+            >
+              <PartyLogo
                 href={`/${candidate.slug}`}
-              >
-                <Image
-                  src={`/${candidate.profileImg}`}
-                  alt={`Profilebild von ${candidate.name}`}
-                  fill
-                  priority
-                  className="max-h-full px-5 py-3"
-                />
-              </Link>
+                priority
+                className=""
+                title={`Zur ${candidate.name} Seite`}
+                src={`/${candidate.profileImg}`}
+                alt=""
+              />
             </li>
           ))}
         </ul>

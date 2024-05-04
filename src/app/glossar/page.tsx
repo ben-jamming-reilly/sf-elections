@@ -14,6 +14,8 @@ export async function generateMetadata() {
   };
 }
 
+export const revalidate = 18000; // 5 hours
+
 const aToZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default async function Glossar() {

@@ -2,7 +2,7 @@
 
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { GlossarEntry } from "@prisma/client";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useId, useRef, useState } from "react";
 import { mergeHyphenatedWords } from "~/utils";
 
@@ -87,6 +87,7 @@ const GlossarModal = ({
   entry: GlossarEntry;
   onClose: () => void;
 }) => {
+  const prefersReducedMotion = useReducedMotion();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -144,12 +145,15 @@ const GlossarModal = ({
         }}
         initial={{
           opacity: 0,
+          scale: prefersReducedMotion ? 1 : 0.9,
         }}
         animate={{
           opacity: 1,
+          scale: 1,
         }}
         exit={{
           opacity: 0,
+          scale: prefersReducedMotion ? 1 : 0.9,
         }}
         className="relative w-[440px] rounded-[30px] bg-white p-6 py-10 md:p-10"
       >
