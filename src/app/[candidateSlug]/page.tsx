@@ -14,29 +14,6 @@ export type CandidateProfileProps = {
   params: { candidateSlug: string };
 };
 
-export async function generateMetadata({ params }: CandidateProfileProps) {
-  const candidate = await getCandidateFromSlug(params.candidateSlug);
-
-  if (!candidate) {
-    notFound();
-  }
-
-  return {
-    title: `${candidate.name} | Wahlchecker EU 2024`,
-    description: `15 Fragen beantwortet von ${candidate.name}.`,
-    twitter: {
-      card: "summary_large_image",
-      site: "andererseits.org/",
-      images: [
-        {
-          url: `https://andererseits.org/Wahl-Infos/${params.candidateSlug}/opengraph-image`,
-          alt: "Wahlchecker EU 2024",
-        },
-      ],
-    },
-  };
-}
-
 export default async function CandidateProfile({
   params,
 }: CandidateProfileProps) {
@@ -148,4 +125,27 @@ export async function generateStaticParams() {
   const candidates = await getCandidates();
 
   return candidates.map((c) => ({ candidateSlug: c.slug }));
+}
+
+export async function generateMetadata({ params }: CandidateProfileProps) {
+  const candidate = await getCandidateFromSlug(params.candidateSlug);
+
+  if (!candidate) {
+    notFound();
+  }
+
+  return {
+    title: `${candidate.name} | Wahlchecker EU 2024`,
+    description: `15 Fragen beantwortet von ${candidate.name}.`,
+    twitter: {
+      card: "summary_large_image",
+      site: "andererseits.org/",
+      images: [
+        {
+          url: `https://andererseits.org/Wahl-Infos/${params.candidateSlug}/opengraph-image`,
+          alt: "Wahlchecker EU 2024",
+        },
+      ],
+    },
+  };
 }
