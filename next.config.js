@@ -17,20 +17,20 @@ const nextConfig = {
         destination: "https://plausible.io/api/event",
       },
       {
-        "source": "/wahlchecker",
-        "destination": "/"
+        source: "/wahlchecker",
+        destination: "/",
       },
       {
-        "source": "/wahlchecker/:path*",
-        "destination": "/:path*"
+        source: "/wahlchecker/:path*",
+        destination: "/:path*",
       },
       {
-        "source": "/wahlkabine",
-        "destination": "/"
+        source: "/wahlkabine",
+        destination: "/",
       },
       {
-        "source": "/wahlkabine/:path*",
-        "destination": "/:path*"
+        source: "/wahlkabine/:path*",
+        destination: "/:path*",
       },
     ];
   },

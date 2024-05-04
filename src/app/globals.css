@@ -40,12 +40,11 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   html,
   body {
     @apply bg-white font-sans text-black;
   }
-
 }
 
 @layer components {
@@ -96,8 +95,8 @@
 
 @layer utilities {
   details summary::-webkit-details-marker,
-    details summary::marker {
-      display: none;
-      content: "";
-    }
+  details summary::marker {
+    display: none;
+    content: "";
+  }
 }

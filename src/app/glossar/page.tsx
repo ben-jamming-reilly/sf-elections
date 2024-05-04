@@ -44,7 +44,7 @@ export default async function Glossar() {
             >
               <a
                 className="outline-offset-4 outline-black focus-visible:outline-2"
-                href={`#${letter}`}
+                href={`#sektion-${letter}`}
               >
                 {letter}
               </a>
@@ -55,7 +55,10 @@ export default async function Glossar() {
       <section className="mx-auto flex w-[720px] max-w-full flex-col gap-16 px-3 py-10">
         {aToZFiltered.map((letter) => (
           <div key={letter} className="relative z-10 ">
-            <span id={letter} className="absolute -top-[120px] z-10"></span>
+            <span
+              id={`sektion-${letter}`}
+              className="absolute -top-[120px] z-10"
+            ></span>
             <h2 className="text-[28px] font-light leading-[34px]">{letter}</h2>
             <div>
               {glossarEntries

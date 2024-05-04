@@ -166,6 +166,6 @@ export const useVoterQuestionnaireStore = create<QuestionnaireState>()(
     }),
     {
       name: "voter-questionnaire-storage-17-04-2024-v1",
-    }
-  )
+    },
+  ),
 );
