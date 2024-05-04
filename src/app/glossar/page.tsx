@@ -1,5 +1,6 @@
 import { prisma } from "~/lib/prisma";
 import { BackButton } from "../ui/back-button";
+import Link from "next/link";
 
 export async function generateMetadata() {
   return {
@@ -42,12 +43,12 @@ export default async function Glossar() {
               key={letter}
               className="snap-center px-[8.5px] text-[18px] leading-[40px]  notouch:hover:text-black"
             >
-              <a
+              <Link
                 className="outline-offset-4 outline-black focus-visible:outline-2"
-                href={`#sektion-${letter}`}
+                href={`#${letter}`}
               >
                 {letter}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -56,7 +57,7 @@ export default async function Glossar() {
         {aToZFiltered.map((letter) => (
           <div key={letter} className="relative z-10 ">
             <span
-              id={`sektion-${letter}`}
+              id={`${letter}`}
               className="absolute -top-[120px] z-10"
             ></span>
             <h2 className="text-[28px] font-light leading-[34px]">{letter}</h2>
