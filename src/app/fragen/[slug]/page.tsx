@@ -15,6 +15,12 @@ export type WahlkabineResultProps = {
 
 export const revalidate = 18000; // 5 hours
 
+export function generateStaticParams() {
+  return [];
+}
+
+export const dynamicParams = true;
+
 export default async function WahlkabineResult({
   params,
 }: WahlkabineResultProps) {
