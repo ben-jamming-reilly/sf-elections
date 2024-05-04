@@ -332,13 +332,13 @@ export const VoterQuestionnaire = ({
                       >
                         {option.label}
                         {option.label === "Ja" && (
-                          <ThumbUpIcon className="h-10 w-auto p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
+                          <ThumbUpIcon className="h-10 w-auto p-1 text-transparent transition-all group-data-[active=true]:text-black notouch:group-hover:text-black" />
                         )}
                         {option.label === "Ich weiß es nicht" && (
-                          <ThumbSideIcon className="h-10 w-auto p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
+                          <ThumbSideIcon className="h-10 w-auto p-1 text-transparent transition-all group-data-[active=true]:text-black notouch:group-hover:text-black" />
                         )}
                         {option.label === "Nein" && (
-                          <ThumbDownIcon className="h-10 w-auto p-1 text-transparent transition-all group-hover:text-black group-data-[active=true]:text-black" />
+                          <ThumbDownIcon className="h-10 w-auto p-1 text-transparent transition-all group-data-[active=true]:text-black notouch:group-hover:text-black" />
                         )}
                       </button>
                     </li>
