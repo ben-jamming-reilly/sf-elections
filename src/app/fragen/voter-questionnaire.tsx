@@ -30,6 +30,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { GlossaredText } from "../ui/glossared-text";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { NewsletterSignupResponse } from "../api/newsletter-signup/route";
 
 const variants = {
   enter: (direction: number) => {
@@ -158,77 +159,7 @@ export const VoterQuestionnaire = ({
   }
 
   if (hasHydrated && slug) {
-    return (
-      <section
-        aria-describedby="newsletter-cta-title"
-        className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[24px]"
-      >
-        <h1 id="newsletter-cta-title" className="text-[36px] leading-[44px]">
-          Lerne Behinderung besser verstehen! Mit dem kostenlosen Newsletter von
-          <span className="italic"> andererseits</span>
-        </h1>
-        <p>
-          Bei andererseits arbeiten Journalist*innen mit und ohne Behinderung
-          gemeinsam. Gleichberechtigt, kritisch und fair bezahlt.
-        </p>
-        <p>
-          Wenn Du mehr wissen möchtest, kannst du kostenlos unseren Newsletter
-          abonnieren. Jeden Freitag bekommst du eine kleine Geschichte, einen
-          Fakt über Behinderung und ein Update aus der Redaktion.
-        </p>
-
-        <p>
-          Damit gibst Du uns auch die Erlaubnis, Dir Neuigkeiten und Werbung von
-          andererseits zu schicken. Du kannst Dich jederzeit abmelden.
-        </p>
-
-        <form
-          aria-label="Newsletter Anmeldungsformular"
-          className="py-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log("submitting form");
-            alert("Newsletter anmeldung muss noch implementiert werden");
-          }}
-        >
-          <div className="relative">
-            <label className="sr-only" htmlFor="newsletter_email">
-              Deine E-Mail Adresse
-            </label>
-            <input
-              name="newsletter_email"
-              type="email"
-              placeholder="Deine E-Mail Adresse"
-              className="w-full rounded-[100px] border-2 border-black px-6 py-3 text-black caret-black outline-offset-4  outline-black focus-visible:outline-2"
-            />
-            <button
-              type="submit"
-              className="absolute right-0 top-0 rounded-[100px] border-2 border-black  bg-[#FBFF95] px-6 py-3 text-black outline-offset-4  outline-black transition-all focus-visible:outline-2 notouch:hover:bg-black notouch:hover:text-[#FBFF95]"
-            >
-              Ich bin dabei!
-            </button>
-          </div>
-        </form>
-
-        <p className="">
-          Du möchtest keinen Newsletter bekommen? <br />
-          Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Quiz:
-        </p>
-
-        <div className="flex items-center justify-center py-5">
-          <Button
-            prefetch
-            as="Link"
-            href={`/fragen/${slug}`}
-            variant="primary"
-            roundness="large"
-          >
-            Zum Ergebnis
-            <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
-          </Button>
-        </div>
-      </section>
-    );
+    return <AfterSubmitPage linkToNextPage={`/fragen/${slug}`} />;
   }
 
   return (
@@ -414,6 +345,140 @@ export const VoterQuestionnaire = ({
         </AnimatePresence>
       ) : null}
     </>
+  );
+};
+
+const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
+  const [state, setState] = useState<"idle" | "loading" | "error" | "success">(
+    "idle",
+  );
+  const [message, setMessage] = useState<string | null>(null);
+
+  return (
+    <section
+      aria-describedby="newsletter-cta-title"
+      className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[24px]"
+    >
+      <h1 id="newsletter-cta-title" className="text-[36px] leading-[44px]">
+        Lerne Behinderung besser verstehen! Mit dem kostenlosen Newsletter von
+        <span className="italic"> andererseits</span>
+      </h1>
+      <p>
+        Bei andererseits arbeiten Journalist*innen mit und ohne Behinderung
+        gemeinsam. Gleichberechtigt, kritisch und fair bezahlt.
+      </p>
+      <p>
+        Wenn Du mehr wissen möchtest, kannst du kostenlos unseren Newsletter
+        abonnieren. Jeden Freitag bekommst du eine kleine Geschichte, einen Fakt
+        über Behinderung und ein Update aus der Redaktion.
+      </p>
+
+      <p>
+        Damit gibst Du uns auch die Erlaubnis, Dir Neuigkeiten und Werbung von
+        andererseits zu schicken. Du kannst Dich jederzeit abmelden.
+      </p>
+
+      <form
+        aria-label="Newsletter Anmeldungsformular"
+        className="py-5"
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          const formData = new FormData(e.target as HTMLFormElement);
+
+          setState("loading");
+
+          fetch("/api/newsletter-signup", {
+            method: "POST",
+            body: JSON.stringify({
+              email: formData.get("newsletter_email"),
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then(async (response) => {
+              const data = (await response.json()) as NewsletterSignupResponse;
+
+              if (response.ok) {
+                setState("success");
+                setMessage("Du bist erfolgreich angemeldet!");
+              } else {
+                throw new Error(data.message);
+              }
+            })
+            .catch((error) => {
+              setState("error");
+              console.log(error.message);
+              setMessage("Ein Fehler ist passiert. Bitte probiere es nochmal.");
+            });
+        }}
+      >
+        <div className="relative">
+          <label className="sr-only" htmlFor="newsletter_email">
+            Deine E-Mail Adresse
+          </label>
+          <input
+            name="newsletter_email"
+            type="email"
+            placeholder="Deine E-Mail Adresse"
+            className="w-full rounded-[100px] border-2 border-black px-6 py-3 text-black caret-black outline-offset-4  outline-black focus-visible:outline-2"
+          />
+          <button
+            type="submit"
+            className="absolute right-0 top-0 flex items-center justify-center  rounded-[100px] border-2 border-black bg-[#FBFF95] px-6 py-3 text-black outline-offset-4  outline-black transition-all focus-visible:outline-2 notouch:hover:bg-black notouch:hover:text-[#FBFF95]"
+          >
+            <span className={clsx(state === "loading" && "invisible")}>
+              Ich bin dabei!
+            </span>
+            <span className="absolute left-1/2 top-1/2 h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2">
+              {state === "loading" && <Loading size={30} />}
+            </span>
+          </button>
+        </div>
+
+        {state === "error" && (
+          <p
+            aria-label="Fehlermeldung"
+            className="mt-5 flex items-center gap-2 font-semibold text-red-500"
+          >
+            <XMarkIcon aria-hidden className="inline-block h-5 w-5 stroke-2" />
+            {message}
+          </p>
+        )}
+
+        {state === "success" && (
+          <p
+            aria-label="Erfolgsmeldung"
+            className="mt-5 flex items-center gap-2 font-semibold text-green-500"
+          >
+            <ThumbUpIcon
+              aria-hidden
+              className="inline-block h-5 w-5 stroke-2"
+            />
+            {message}
+          </p>
+        )}
+      </form>
+
+      <p className="">
+        Du möchtest keinen Newsletter bekommen? <br />
+        Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Quiz:
+      </p>
+
+      <div className="flex items-center justify-center py-5">
+        <Button
+          prefetch
+          as="Link"
+          href={linkToNextPage}
+          variant="primary"
+          roundness="large"
+        >
+          Zum Ergebnis
+          <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
+        </Button>
+      </div>
+    </section>
   );
 };
 
