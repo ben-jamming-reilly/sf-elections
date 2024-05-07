@@ -9,8 +9,6 @@ import { GlossaredTextServer } from "./ui/glossared-text.server";
 export const revalidate = false;
 
 export default async function Home() {
-  const candidates = await getCandidates();
-
   return (
     <div className="flex h-full flex-col gap-10">
       <div className="mx-auto w-[675px] max-w-full px-3">

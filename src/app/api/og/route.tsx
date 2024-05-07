@@ -127,7 +127,7 @@ const ogTypes = {
               }}
               tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
             >
-              andererseits.org/Wahl-Infos
+              wahlchecker.at
             </div>
           </div>
         </div>

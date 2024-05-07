@@ -139,10 +139,10 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
     description: `15 Fragen beantwortet von ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
-      site: "andererseits.org/",
+      site: "wahlchecker.at/",
       images: [
         {
-          url: `https://andererseits.org/Wahl-Infos/${params.candidateSlug}/opengraph-image`,
+          url: `https;//wahlchecker.at/${params.candidateSlug}/opengraph-image`,
           alt: "Wahlchecker EU 2024",
         },
       ],

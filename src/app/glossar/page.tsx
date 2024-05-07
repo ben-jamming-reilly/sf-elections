@@ -4,12 +4,12 @@ import Link from "next/link";
 
 export async function generateMetadata() {
   return {
-    title: `Wahl-Info Glossar – andererseits.org`,
+    title: `Wahl-Info Glossar`,
     description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
     twitter: {
       card: "summary_large_image",
-      site: "andererseits.org",
-      title: `Wahl-Info Glossar – andererseits.org`,
+      site: "wahlchecker.at",
+      title: `Wahl-Info Glossar`,
       description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
     },
   };

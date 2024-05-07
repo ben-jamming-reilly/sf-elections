@@ -8,7 +8,7 @@ import { FetchCandidateAndVoterViaSlugs } from "~/app/api/og/fetch-candidate-and
 import { boldFont, regularFont } from "~/app/api/og/fonts";
 
 export const size = { width: 1200, height: 600 };
-export const alt = "EU-Wahlinfo 2024 – andererseits.org";
+export const alt = "EU-Wahlinfo 2024";
 
 export const contentType = "image/png";
 
@@ -92,7 +92,7 @@ export default async function og({
             }}
             tw="px-4 py-2 border-4 font-semibold flex rounded-md mb-3 text-3xl"
           >
-            andererseits.org/Wahl-Infos
+            wahlchecker.at
           </div>
         </div>
       </div>

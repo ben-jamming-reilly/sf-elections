@@ -106,17 +106,17 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
   }
 
   return {
-    title: `Mein Wahlchecker EU Ergebnis  – andererseits.org`,
+    title: `Mein Wahlchecker EU Ergebnis `,
     description: ``,
     twitter: {
       card: "summary_large_image",
-      site: "andererseits.org",
-      title: `Mein Wahlchecker EU Ergebnis  – andererseits.org`,
+      site: "wahlchecker.at",
+      title: `Mein Wahlchecker EU Ergebnis `,
       description: ``,
       images: [
         {
-          url: `https://andererseits.org/Wahl-Infos/fragen/${params.slug}/opengraph-image`,
-          alt: "Wahlchecker EU 2024 – andererseits.org",
+          url: `https;//wahlchecker.at/fragen/${params.slug}/opengraph-image`,
+          alt: "Wahlchecker EU 2024",
           width: 1200,
           height: 630,
         },

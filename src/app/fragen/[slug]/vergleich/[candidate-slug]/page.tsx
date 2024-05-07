@@ -106,16 +106,16 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   }
 
   return {
-    title: `Vergleich mit ${candidate.name} - andererseits.org`,
+    title: `Vergleich mit ${candidate.name} - wahlchecker.at`,
     description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
-      site: "andererseits.org",
-      title: `Vergleich mit ${candidate.name} - andererseits.org`,
+      site: "wahlchecker.at",
+      title: `Vergleich mit ${candidate.name} - wahlchecker.at`,
       description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
       images: [
         {
-          url: `https://andererseits.org/Wahl-Infos/fragen/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
+          url: `https;//wahlchecker.at/fragen/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
           alt: "SPÖ Vorsitzbefragungs-Kabine",
           width: 1200,
           height: 630,

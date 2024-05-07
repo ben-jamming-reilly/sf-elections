@@ -8,16 +8,16 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "Wahlchecker EU 2024 – andererseits.org",
+  title: "Wahlchecker EU 2024",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "Wahlchecker EU 2024 – andererseits.org",
+    title: "Wahlchecker EU 2024",
     description: "",
-    site: "andererseits.org",
+    site: "wahlchecker.at",
     images: [
       {
-        url: "andererseits.org/Wahl-Infos/opengraph-image",
+        url: "wahlchecker.at/opengraph-image",
         alt: "Wahlchecker EU 2024",
         width: 1200,
         height: 630,
@@ -72,10 +72,7 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#016956" />
         <meta name="msapplication-TileColor" content="#016956" />
         <meta name="theme-color" content="#016956" />
-        <Script
-          data-domain="andererseits-wahlkabine.vercel.app"
-          src="/js/script.js"
-        ></Script>
+        <Script data-domain="wahlchecker.at" src="/js/script.js"></Script>
       </head>
       <body className={clsx(interFont.variable, loraFont.variable)}>
         <a
@@ -121,30 +118,27 @@ export default function RootLayout({
             </div>
             <footer className=" border-t border-black py-5 ">
               <nav
-                aria-label="Links zu andererseits.org, Impressum und Datenschutz"
+                aria-label="Links zu wahlchecker.at, Impressum und Datenschutz"
                 className="flex w-full flex-col items-center justify-center gap-3"
               >
                 <a
                   rel="norefeerer noopener"
                   className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                  href="https://andererseits.org/"
+                  href="https://wahlchecker.at/"
                 >
-                  <span className="font-sans font-medium">
-                    andererseits.org
-                  </span>
+                  <span className="font-sans font-medium">wahlchecker.at</span>
                 </a>
                 <div className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
-                  <Link
-                    prefetch
+                  <a
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
                     href="https://andererseits.org/impressum/"
                   >
                     Impressum
-                  </Link>
+                  </a>
                   <Link
                     prefetch
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                    href="https://andererseits.org/datenschutz/"
+                    href="/datenschutz"
                   >
                     Datenschutz
                   </Link>

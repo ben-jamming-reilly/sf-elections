@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   description: "",
   twitter: {
     card: "summary_large_image",
-    site: "andererseits.org",
+    site: "wahlchecker.at",
     title: "Wahlchecker Fragen EU 2024 – andereseits.org",
     description: "15 Fragen zur EU-Wahl 2024.",
     images: [
       {
-        url: "https://andererseits.org/Wahl-Infos/opengraph-image",
+        url: "https;//wahlchecker.at/opengraph-image",
         alt: "Wahlchecker Fragen EU 2024 – andereseits.org",
         width: 1200,
         height: 630,

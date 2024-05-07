@@ -128,7 +128,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: "andererseits.org",
+      site: "wahlchecker.at",
       title: `Vergleich zwischen ${candidates
         .map((c) => c.name)
         .join(" und ")}`,
