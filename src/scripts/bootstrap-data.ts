@@ -3,16 +3,7 @@ import { parse } from "csv-parse/sync";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 
-const PARTIES = [
-  "FPÖ",
-  "NEOS",
-  "KPÖ",
-  "Volt",
-  "SPÖ",
-  "ÖVP",
-  "Grüne",
-  "DNA",
-] as const;
+const PARTIES = ["FPÖ", "NEOS", "KPÖ", "SPÖ", "ÖVP", "Grüne", "DNA"] as const;
 
 type Parties = (typeof PARTIES)[number];
 
@@ -97,10 +88,6 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
           "Wertung KPÖ": weighingsValidator,
           "Erklärung KPÖ": z.string(),
           "Erklärung KPÖ (einfach)": z.string().optional().nullable(),
-          "Antwort Volt": optionsValidator,
-          "Wertung Volt": weighingsValidator,
-          "Erklärung Volt": z.string(),
-          "Erklärung Volt (einfach)": z.string().optional().nullable(),
           "Antwort SPÖ": optionsValidator,
           "Wertung SPÖ": weighingsValidator,
           "Erklärung SPÖ": z.string(),
@@ -221,7 +208,10 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
     notMatchedQuestions.length > 0 &&
       console.log(notMatchedQuestions.map((question) => question.title));
 
-    console.log("Deleting parties");
+    console.log("Deleting parties and voters");
+    await prisma.voterCandidateMatch.deleteMany();
+    await prisma.voterQuestionAnswer.deleteMany();
+    await prisma.voter.deleteMany();
     await prisma.candidateQuestionAnswer.deleteMany();
     await prisma.candidate.deleteMany();
     for (const party of Object.values(parties)) {
