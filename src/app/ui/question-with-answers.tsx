@@ -183,7 +183,7 @@ export const QuestionWithAnswers = ({
                     {candidateAnswer.text ||
                     candidateAnswer.changedQuestionDisclaimer ? (
                       <QuestionInfo
-                        open={true}
+                        open
                         text={candidateAnswer.text}
                         textSimpleLanguage={candidateAnswer.textSimpleLanguage}
                         disclosure={candidateAnswer.changedQuestionDisclaimer}
