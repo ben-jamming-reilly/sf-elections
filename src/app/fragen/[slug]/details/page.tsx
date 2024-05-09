@@ -80,12 +80,14 @@ export default async function WahlkabineResultDetails({
         </nav>
       </section>
 
+      <hr />
+
       <section
         aria-labelledby="details-page-questions-overview-title"
-        className="flex flex-col gap-10 py-10"
+        className="flex flex-col gap-10 py-16"
       >
-        <div className="mx-auto w-[60ch] max-w-full space-y-3 text-center">
-          <h2 id="details-page-questions-overview-title" className="text-4xl">
+        <div className="max-w-[80ch] space-y-3">
+          <h2 id="details-page-questions-overview-title" className="text-3xl">
             Hier kannst Du Deine Antworten mit allen Parteien vergleichen
           </h2>
           <p>

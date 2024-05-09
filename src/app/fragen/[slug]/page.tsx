@@ -62,8 +62,8 @@ export default async function WahlkabineResult({
         aria-label="Ergebnis Übersicht"
         className="my-10 flex w-[900px] max-w-full flex-col items-center gap-10"
       >
-        <div className="mx-auto w-full max-w-[60ch] text-center">
-          <h1 className="mb-3 text-4xl">Resultat</h1>
+        <div className="mx-auto w-full max-w-[60ch]">
+          <h1 className="mb-3 text-4xl">Dein Ergebnis</h1>
           <div className="space-y-3">
             <p>
               Du hast 15 Fragen über die EU-Politik beantwortet. Hier kannst Du
@@ -131,7 +131,7 @@ export default async function WahlkabineResult({
             ))}
         </div>
 
-        <div className="mx-auto w-full max-w-[60ch] space-y-3 text-center">
+        <div className="mx-auto w-full max-w-[60ch] space-y-3">
           <p>
             <strong className="font-semibold">Wichtig:</strong>
             <br /> Das Ergebnis ist keine Wahl-Empfehlung. Es bedeutet nicht,
@@ -143,19 +143,18 @@ export default async function WahlkabineResult({
             Auf der nächsten Seite kannst Du Dir die Antworten von allen
             Parteien anschauen und mit Deinen Antworten vergleichen.
           </p>
-          <Button
-            as="Link"
-            href={`/fragen/${params.slug}/details`}
-            variant="primary"
-            roundness="large"
-          >
-            <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
-            Zu den Antworten
-          </Button>
         </div>
-      </section>
 
-      {toolbar}
+        <Button
+          as="Link"
+          href={`/fragen/${params.slug}/details`}
+          variant="primary"
+          roundness="large"
+        >
+          <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
+          Zu den Antworten
+        </Button>
+      </section>
     </div>
   );
 }

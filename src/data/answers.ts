@@ -85,7 +85,7 @@ export const CATEGORIES = [
   },
   {
     label: "Arbeit und Inklusion",
-    hex: "#b1ae1f",
+    hex: "#D51414",
   },
   {
     label: "Flucht und Asyl",
@@ -93,11 +93,11 @@ export const CATEGORIES = [
   },
   {
     label: "Krieg und Verteidigung",
-    hex: "#6FCF97",
+    hex: "#005CB9",
   },
   {
-    label: "Die Zukunft der EU",
-    hex: "#c16926",
+    label: "Zukunft der EU",
+    hex: "#CC00CC",
   },
 ];
 

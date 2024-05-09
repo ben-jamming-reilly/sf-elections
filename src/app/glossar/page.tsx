@@ -64,7 +64,7 @@ export default async function Glossar() {
       </header>
       <section
         aria-label=""
-        className="mx-auto flex w-[720px] max-w-full flex-col gap-16 px-3 py-10"
+        className="mx-auto flex w-[720px] max-w-full flex-col gap-20 px-3 py-10"
       >
         {aToZFiltered.map((letter) => (
           <div
@@ -77,7 +77,7 @@ export default async function Glossar() {
               className="absolute -top-[120px] z-10"
             ></span>
             <h2 className="text-[28px] font-light leading-[34px]">{letter}</h2>
-            <div>
+            <div className="flex flex-col gap-6">
               {glossarEntries
                 .filter((entry) =>
                   entry.term.toLowerCase().startsWith(letter.toLowerCase()),

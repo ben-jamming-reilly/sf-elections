@@ -55,10 +55,11 @@ export const GlossaredText = ({
                 }}
                 href="#"
                 aria-hidden="false"
-                title={`Glossareintrag für ${word}`}
-                className="font-semibold underline underline-offset-2 outline-offset-2  outline-black focus-visible:outline-4"
+                title={`Wort-Erklärung für ${word}`}
+                className="relative font-semibold outline-offset-2  outline-black focus-visible:outline-4"
               >
-                {word}
+                <span className="absolute -inset-[2px] z-10 rounded-[2px] bg-[#FFFF00] px-[4px] py-[1px]"></span>
+                <span className="relative z-20">{word}</span>
               </a>
             );
           }
@@ -161,11 +162,11 @@ const GlossarModal = ({
           aria-label="Schließen"
           onClick={onClose}
           ref={closeButtonRef}
-          className="p- absolute right-5 top-5 transition-all focus-visible:outline-2 focus-visible:outline-brand notouch:hover:bg-brand notouch:hover:text-white notouch:hover:active:scale-95"
+          className="p- absolute right-5 top-5 transition-all focus-visible:outline-2 focus-visible:outline-black notouch:hover:bg-black notouch:hover:text-white notouch:hover:active:scale-95"
         >
           <XMarkIcon className="h-8 w-8" />
         </button>
-        <h3 className="mb-2 font-semibold">{`${entry.term}:`}</h3>
+        <h3 className="mb-2 text-xl font-semibold">{`${entry.term}:`}</h3>
         <p>{entry.definition}</p>
       </motion.div>
     </motion.div>

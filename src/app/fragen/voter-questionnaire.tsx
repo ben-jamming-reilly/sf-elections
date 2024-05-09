@@ -211,7 +211,7 @@ export const VoterQuestionnaire = ({
                   x: { duration: 0.2 },
                   opacity: { duration: 0.2 },
                 }}
-                className="flex flex-col gap-2 text-[28px] leading-[34px] md:mb-3 md:min-h-[4em] md:text-2xl"
+                className="flex flex-col gap-2 text-[28px] leading-[34px] md:mb-3 md:min-h-[3.5em] md:text-2xl lg:min-h-[3em] xl:min-h-[2.5em]"
               >
                 <span className="block text-[18px] font-medium leading-[21px]">
                   Frage {activeIndex + 1}:
@@ -322,7 +322,7 @@ export const VoterQuestionnaire = ({
                 disabled={!hasPrevious}
                 onClick={handlePrev}
                 type="prev"
-                className={clsx(!hasPrevious && "invisible")}
+                className={clsx(!hasPrevious && "hidden sm:invisible sm:block")}
               />
               <span className="text-lg">
                 {activeIndex + 1} / {questionsWithAnswers.length}

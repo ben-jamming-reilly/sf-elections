@@ -32,7 +32,7 @@ export default async function Wahlkabine() {
   ]);
 
   return (
-    <div className="pt-14">
+    <div className="pt-5">
       <VoterQuestionnaire
         questions={questions.map((q) => ({
           ...q,
