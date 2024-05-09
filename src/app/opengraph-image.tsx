@@ -65,7 +65,7 @@ export default async function og() {
             }}
             tw="text-7xl py-3 flex flex-col rounded-md  px-6 text-white"
           >
-            Wahlchecker EU 2024
+            Wahl-Checker EU 2024
           </h1>
           <p
             tw="text-3xl "

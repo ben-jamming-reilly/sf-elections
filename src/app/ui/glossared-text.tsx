@@ -56,7 +56,7 @@ export const GlossaredText = ({
                 href="#"
                 aria-hidden="false"
                 title={`Glossareintrag für ${word}`}
-                className="font-semibold underline-offset-4 outline-offset-2 outline-black hover:underline focus-visible:outline-4"
+                className="font-semibold underline underline-offset-4 outline-offset-2  outline-black focus-visible:outline-4"
               >
                 {word}
               </a>

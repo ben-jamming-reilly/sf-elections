@@ -3,17 +3,17 @@ import { VoterQuestionnaire } from "./voter-questionnaire";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wahlchecker Fragen EU 2024 – andereseits.org",
+  title: "Wahl-Checker Fragen EU 2024 – andereseits.org",
   description: "",
   twitter: {
     card: "summary_large_image",
     site: "wahlchecker.at",
-    title: "Wahlchecker Fragen EU 2024 – andereseits.org",
+    title: "Wahl-Checker Fragen EU 2024 – andereseits.org",
     description: "15 Fragen zur EU-Wahl 2024.",
     images: [
       {
         url: "https;//wahlchecker.at/opengraph-image",
-        alt: "Wahlchecker Fragen EU 2024 – andereseits.org",
+        alt: "Wahl-Checker Fragen EU 2024 – andereseits.org",
         width: 1200,
         height: 630,
       },

@@ -69,7 +69,7 @@ export default async function og({ params }: { params: { slug: string } }) {
                   }}
                   tw="absolute top-2 left-2 flex text-white h-14 text-xl w-14 items-center justify-center text-lg rounded-full"
                 >
-                  {candidate.scorePercentage}%
+                  {candidate.score}
                 </div>
                 <div
                   style={{

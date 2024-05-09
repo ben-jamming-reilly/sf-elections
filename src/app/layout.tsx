@@ -8,17 +8,17 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "Wahlchecker EU 2024",
+  title: "Wahl-Checker EU 2024",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "Wahlchecker EU 2024",
+    title: "Wahl-Checker EU 2024",
     description: "",
     site: "wahlchecker.at",
     images: [
       {
         url: "wahlchecker.at/opengraph-image",
-        alt: "Wahlchecker EU 2024",
+        alt: "Wahl-Checker EU 2024",
         width: 1200,
         height: 630,
       },
@@ -83,7 +83,7 @@ export default function RootLayout({
         </a>
         <div className={`z-10 flex min-h-full w-full flex-col`}>
           <header className="top-0 z-40 w-full border-b border-black bg-white md:sticky md:h-[90px]">
-            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-10 py-4 font-sans md:flex-row lg:w-[1320px]">
+            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-3 py-4 font-sans md:flex-row md:px-10 lg:w-[1320px]">
               <div className="flex items-end">
                 <Link
                   className="bg-white  px-2 py-1 outline-offset-4 outline-black focus-visible:outline-2"
@@ -100,8 +100,8 @@ export default function RootLayout({
                   />
                 </Link>
               </div>
-              <div className="w-full hyphens-manual py-3 text-center text-[28px] leading-[34px] text-black outline-offset-2 outline-black focus-visible:outline-2  md:w-fit md:py-0">
-                Wahlchecker EU 2024
+              <div className="w-full hyphens-manual py-3 text-center text-[24px] leading-[28px] text-black outline-offset-2 outline-black focus-visible:outline-2 md:w-fit md:py-0  xs:text-[28px] xs:leading-[34px]">
+                Wahl-Checker EU 2024
               </div>
             </div>
           </header>
@@ -122,11 +122,13 @@ export default function RootLayout({
                 className="flex w-full flex-col items-center justify-center gap-3"
               >
                 <a
-                  rel="norefeerer noopener"
+                  rel="noopener"
                   className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                  href="https://wahlchecker.at/"
+                  href="https://andererseits.org/"
                 >
-                  <span className="font-sans font-medium">wahlchecker.at</span>
+                  <span className="font-sans font-medium">
+                    andererseits.org
+                  </span>
                 </a>
                 <div className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
                   <a

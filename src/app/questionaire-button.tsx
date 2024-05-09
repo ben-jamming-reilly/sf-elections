@@ -45,7 +45,12 @@ export const QuestionaireButton = () => {
               </Button>
             </div>
           ) : (
-            <Button variant="primary" roundness="large" as="a" href="/fragen">
+            <Button
+              variant="primary"
+              roundness="large"
+              as="Link"
+              href="/fragen"
+            >
               <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
               Zu den Fragen
             </Button>

@@ -57,7 +57,7 @@ export default async function WahlkabineResultCandidate({
       {toolbar}
 
       <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
-        Vergleich mit {candidate.name}
+        Vergleich Deine Antworten mit {candidate.name}
       </h1>
 
       <section className="mt-10 flex justify-center">

@@ -1,10 +1,6 @@
-import { QuestionType, QuestionTypes } from "~/app/utils.index";
+import { QuestionTypes } from "~/app/utils.index";
 
 export type ScaleOptionValueType = (typeof options)[number]["value"];
-
-export const getScaleOptionTendency = (option: ScaleOptionValueType) => {
-  return option > 0 ? "positive" : "negative";
-};
 
 export const options = [
   {
@@ -28,12 +24,12 @@ export const options = [
 export const yesNoOptions = [
   {
     label: "Ja",
-    value: 3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
+    value: 1, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
   { label: "Ich weiß es nicht", value: 0 },
   {
     label: "Nein",
-    value: -3, // Settings a different value to be able to differnentiate. Can normalise afterwards.
+    value: -1, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
 ] as const;
 
@@ -54,11 +50,6 @@ export const optionLabelForValue = (value: number) => {
 export const optionLabelForYesNoValue = (value: number) => {
   const option = yesNoOptions.find((option) => option.value === value);
   return option ? option.label : "";
-};
-
-export const getWeightingTendency = (weighting: WeightingValueType) => {
-  if (weighting === 0 || weighting === 1) return "negative";
-  if (weighting === 2 || weighting === 3) return "positive";
 };
 
 export type WeightingValueType = (typeof weightings)[number]["value"];

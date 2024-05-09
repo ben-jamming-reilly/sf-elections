@@ -38,16 +38,16 @@ const matchWeighing = (weighing: WeighingsType) => {
       return 0;
     default:
       console.log(`Unknwon Weighing: "${weighing}`);
-      return 0;
+      return 1;
   }
 };
 
 const matchOption = (option: OptionsType) => {
   switch (option) {
     case "Ja":
-      return 3;
+      return 1;
     case "Nein":
-      return -3;
+      return -1;
     case "Weiß ich nicht":
       return 0;
     default:

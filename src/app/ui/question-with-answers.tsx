@@ -140,7 +140,7 @@ export const QuestionWithAnswers = ({
               variant="secondary"
               className="mx-auto inline-flex w-fit items-center px-6 py-3 text-[18px] font-semibold leading-[22px]"
             >
-              Antworten im Detail:
+              Alle Antworten:
               <ChevronRightIcon className="ml-1 h-6 w-6 stroke-[1.5px] transition-all group-open:rotate-90" />
             </Button>
             <ul className="grid w-full grid-cols-1 gap-y-10 pt-20 md:gap-7">
@@ -156,7 +156,7 @@ export const QuestionWithAnswers = ({
                 return (
                   <li
                     key={`candidate-details-${candidateAnswer.questionId}-${candidate.id}`}
-                    className="relative space-y-4 border-t border-black pb-16 pt-12 md:pt-4"
+                    className="relative space-y-4 border-t border-black pb-10 pt-12 md:pt-4"
                   >
                     <PartyLogo
                       className="group absolute -top-[30px] left-1/2 h-[60px] w-[170px] -translate-x-1/2 sm:w-[150px] md:-top-[44px] md:left-auto md:right-10 md:h-[88px] md:translate-x-0 xl:-top-[30px] xl:h-[60px]"

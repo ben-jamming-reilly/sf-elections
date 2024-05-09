@@ -37,7 +37,7 @@ model VoterCandidateMatch {
   voterId            Int
   candidate          Candidate @relation(fields: [candidateId], references: [id])
   candidateId        Int
-  scorePercentageRaw Float
+  score Int
 
   @@index([voterId, candidateId])
   @@index([voterId])

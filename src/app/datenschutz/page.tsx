@@ -2,17 +2,17 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Datenschutz – Wahlchecker EU 2024",
+  title: "Datenschutz – Wahl-Checker EU 2024",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "Datenschutz – Wahlchecker EU 2024",
+    title: "Datenschutz – Wahl-Checker EU 2024",
     description: "",
     site: "wahlchecker.at",
     images: [
       {
         url: "wahlchecker.at/opengraph-image",
-        alt: "Datenschutz – Wahlchecker EU 2024",
+        alt: "Datenschutz – Wahl-Checker EU 2024",
         width: 1200,
         height: 630,
       },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function Datenschutz({}: {}) {
   return (
-    <article className="prose mx-auto">
+    <article className="prose mx-auto font-sans">
       <h1 className="text-3xl">Datenschutz</h1>
 
       <p>

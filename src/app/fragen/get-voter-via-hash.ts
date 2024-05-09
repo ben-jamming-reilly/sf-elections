@@ -12,6 +12,11 @@ export const getVoterViaHash = cache(async (hash: string) => {
           question: true,
         },
       },
+      candidateMatches: {
+        include: {
+          candidate: true,
+        },
+      },
     },
   });
 });

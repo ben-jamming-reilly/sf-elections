@@ -28,34 +28,50 @@ export default async function Glossar() {
     ),
   );
 
+  const toolbar = (
+    <aside
+      aria-label="Zurück zur Startseite"
+      className="mb-14 flex justify-center"
+    >
+      <BackButton href={`/`}>Zur Startseite</BackButton>
+    </aside>
+  );
+
   return (
     <div className="w-[820px] max-w-full">
-      <div className="mb-14 flex justify-center">
-        <BackButton href={`/`}>Zur Startseite</BackButton>
-      </div>
+      {toolbar}
 
-      <h1 className="my-5 text-center text-[36px] leading-[44px]">Glossar</h1>
+      <h1 className="my-5 text-center text-[36px] leading-[44px]">
+        Wort-Erklärungen
+      </h1>
 
       <header className="sticky top-0 z-20 bg-white py-3 md:top-[90px]">
-        <ul className="flex w-full snap-x snap-proximity scroll-mx-4 justify-center overflow-x-auto rounded-[30px] border border-black">
+        <nav
+          aria-label="Navigation zu den Anfangsbuchstaben"
+          className="flex w-full snap-x snap-proximity scroll-mx-4 justify-center overflow-x-auto rounded-[30px] border border-black"
+        >
           {aToZFiltered.map((letter) => (
-            <li
-              key={letter}
-              className="snap-center px-[8.5px] text-[18px] leading-[40px]  notouch:hover:text-black"
+            <Link
+              key={`glossar-nav-${letter}`}
+              className="snap-center px-[8.5px] text-[18px] leading-[40px] outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black"
+              href={`#${letter}`}
+              title={`Zum Anfangsbuchstaben ${letter}`}
             >
-              <Link
-                className="outline-offset-4 outline-black focus-visible:outline-2"
-                href={`#${letter}`}
-              >
-                {letter}
-              </Link>
-            </li>
+              {letter}
+            </Link>
           ))}
-        </ul>
+        </nav>
       </header>
-      <section className="mx-auto flex w-[720px] max-w-full flex-col gap-16 px-3 py-10">
+      <section
+        aria-label=""
+        className="mx-auto flex w-[720px] max-w-full flex-col gap-16 px-3 py-10"
+      >
         {aToZFiltered.map((letter) => (
-          <div key={letter} className="relative z-10 ">
+          <div
+            aria-label={`Begriffe mit ${letter}`}
+            key={`glossar-section-${letter}`}
+            className="relative z-10 "
+          >
             <span
               id={`${letter}`}
               className="absolute -top-[120px] z-10"
@@ -67,8 +83,15 @@ export default async function Glossar() {
                   entry.term.toLowerCase().startsWith(letter.toLowerCase()),
                 )
                 .map((entry) => (
-                  <article key={entry.id} className="mt-5">
-                    <h3 className="text-[18px] font-medium leading-[24px]">
+                  <article
+                    aria-labelledby={`glossar-entry-${entry.id}-title`}
+                    key={`glossar-entry-${entry.id}`}
+                    className="mt-5"
+                  >
+                    <h3
+                      id={`glossar-entry-${entry.id}-title`}
+                      className="text-[18px] font-medium leading-[24px]"
+                    >
                       {entry.term}
                     </h3>
                     <p className="mt-2 text-[18px] leading-[24px]">
@@ -80,6 +103,8 @@ export default async function Glossar() {
           </div>
         ))}
       </section>
+
+      {toolbar}
     </div>
   );
 }

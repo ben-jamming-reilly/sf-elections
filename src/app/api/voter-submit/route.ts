@@ -46,28 +46,40 @@ export async function POST(request: Request) {
       data.questionsWithAnswers,
     );
 
-    const voter = await prisma.voter.create({
-      data: {
-        hash: hash,
-        hasAcceptedTos: true,
-        answers: {
-          createMany: {
-            data: validatedQuestionsWithAnswers.map((answer) => ({
-              questionId: answer.id,
-              option: answer.option,
-              weighting: answer.weighting,
-              skipped: answer.skipped,
-            })),
+    const [voter, candidates] = await Promise.all([
+      prisma.voter.create({
+        data: {
+          hash: hash,
+          hasAcceptedTos: true,
+          answers: {
+            createMany: {
+              data: validatedQuestionsWithAnswers.map((answer) => ({
+                questionId: answer.id,
+                option: answer.option,
+                weighting: answer.weighting,
+                skipped: answer.skipped,
+              })),
+            },
           },
         },
-      },
-      include: {
-        answers: {
-          include: {
-            question: true,
+        include: {
+          answers: {
+            include: {
+              question: true,
+            },
           },
         },
-      },
+      }),
+      getCandidatesWithQuestions(),
+    ]);
+
+    // calculate the rating for each candidate
+    await prisma.voterCandidateMatch.createMany({
+      data: candidates.map((candidate) => ({
+        candidateId: candidate.id,
+        voterId: voter.id,
+        score: rateCandidate(voter.answers, candidate).score,
+      })),
     });
 
     return NextResponse.json({ slug: voter.hash });

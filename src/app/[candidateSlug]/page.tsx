@@ -51,7 +51,7 @@ export default async function CandidateProfile({
       {candidate.hasFinished ? (
         <div className="mb-5">
           <h1 className="my-5 pb-4 text-center text-4xl">
-            Wahl-Infos Antworten: {candidate.name}
+            Die Antworten von {candidate.name}
           </h1>
 
           <section className="my-8 flex w-full justify-center">
@@ -135,7 +135,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   }
 
   return {
-    title: `${candidate.name} | Wahlchecker EU 2024`,
+    title: `${candidate.name} | Wahl-Checker EU 2024`,
     description: `15 Fragen beantwortet von ${candidate.name}.`,
     twitter: {
       card: "summary_large_image",
@@ -143,7 +143,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
       images: [
         {
           url: `https;//wahlchecker.at/${params.candidateSlug}/opengraph-image`,
-          alt: "Wahlchecker EU 2024",
+          alt: "Wahl-Checker EU 2024",
         },
       ],
     },

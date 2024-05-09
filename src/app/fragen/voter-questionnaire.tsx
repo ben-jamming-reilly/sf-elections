@@ -167,10 +167,12 @@ export const VoterQuestionnaire = ({
       {activeQuestion ? (
         <AnimatePresence mode="wait" custom={direction}>
           <motion.article
+            aria-label="Frage und Antwortmöglichkeiten"
             className="mx-auto flex w-[900px] max-w-full flex-col items-center gap-5 md:gap-10"
             key={`question-${activeQuestion.id}`}
           >
             <header
+              aria-label="Frage"
               ref={questionRef}
               className="w-full scroll-mt-28 md:scroll-mt-10"
             >
@@ -223,7 +225,10 @@ export const VoterQuestionnaire = ({
               </motion.div>
             </header>
 
-            <section className="max-md:my-3 my-6 flex w-full flex-col gap-5 md:gap-10">
+            <section
+              aria-label="Antwortmöglichkeiten"
+              className="max-md:my-3 my-6 flex w-full flex-col gap-5 md:gap-10"
+            >
               <div className="flex flex-col gap-2">
                 <h2 className="font-sans text-lg">Ich stimme:</h2>
                 <ul
@@ -256,9 +261,9 @@ export const VoterQuestionnaire = ({
                         data-active={option.value === activeQuestion.option}
                         className={clsx(
                           "-200 group relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
-                          option.value === 3 && "bg-[#99EB8B]",
+                          option.value === 1 && "bg-[#99EB8B]",
                           option.value === 0 && "bg-[#FBFF95]",
-                          option.value === -3 && "bg-[#FFA06E]",
+                          option.value === -1 && "bg-[#FFA06E]",
                         )}
                       >
                         {option.label}
