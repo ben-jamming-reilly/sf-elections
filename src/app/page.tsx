@@ -11,7 +11,7 @@ export default async function Home() {
     <div className="flex h-full flex-col gap-10">
       <article
         aria-label="Erklärtext zum Wahl-Checker"
-        className="mx-auto w-[675px] max-w-full text-[18px] leading-[24px]"
+        className="mx-auto w-[900px] max-w-full text-[18px] leading-[24px]"
       >
         <h1 className="my-5 font-sans text-[36px] leading-[44px]">
           Wahl-Checker EU-Wahl 2024:
@@ -69,7 +69,7 @@ export default async function Home() {
 
           <p>
             {/* @ts-expect-error */}
-            <GlossaredTextServer text="Danach kannst Du Deine Meinung vergleichen mit den Meinungen von den 8 Parteien, die man bei der Europa-Wahl in Österreich wählen kann." />
+            <GlossaredTextServer text="Danach kannst Du Deine Meinung vergleichen mit den Meinungen von den 7 Parteien, die man bei der Europa-Wahl in Österreich wählen kann." />
             <br />
             {/* @ts-expect-error */}
             <GlossaredTextServer text="Die Parteien haben außerdem die Gründe für ihre Antworten geschickt. Wir haben die Gründe auch in einfacher Sprache erklärt." />

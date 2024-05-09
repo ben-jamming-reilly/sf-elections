@@ -41,7 +41,9 @@ export default async function WahlkabineResultDetails({
       className="flex flex-row flex-wrap justify-center gap-5 pb-5"
     >
       <BackButton href={`/fragen/${params.slug}/`}>Zur Übersicht</BackButton>
-      <ShareButton title="Wahl-Checker EU 2024">Teilen</ShareButton>
+      <ShareButton title="Wahl-Checker EU 2024 von andereseits">
+        Teilen
+      </ShareButton>
       <DownloadImageLink
         title="andererseits-Wahl-Checker EU-resultat.jpg"
         href={`/api/og/generate/instagram/result?slug=${params.slug}`}
@@ -134,7 +136,7 @@ export async function generateMetadata({
       images: [
         {
           url: `https;//wahlchecker.at/fragen/${params.slug}/opengraph-image`,
-          alt: "Wahl-Checker EU 2024",
+          alt: "Wahl-Checker EU 2024 von andereseits",
           width: 1200,
           height: 630,
         },

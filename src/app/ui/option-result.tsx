@@ -5,17 +5,24 @@ export const OptionResult = ({
   className,
   type,
   hideIcon,
+  hideLabel,
   value,
 }: {
   className?: string;
   hideIcon?: boolean;
+  hideLabel?: boolean;
   type: string;
   value: number;
 }) => {
   return (
     <>
       {type === QuestionTypes.YesNo && (
-        <YesNoResult className={className} hideIcon={hideIcon} value={value} />
+        <YesNoResult
+          className={className}
+          hideLabel={hideLabel}
+          hideIcon={hideIcon}
+          value={value}
+        />
       )}
     </>
   );

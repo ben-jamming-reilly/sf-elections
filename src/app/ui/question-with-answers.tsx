@@ -112,7 +112,7 @@ export const QuestionWithAnswers = ({
                   {candidateAnswer.option !== null ? (
                     <OptionResult
                       className="absolute right-0 top-0 z-10 !h-full w-full !justify-end  !pr-4 !text-right sm:!pr-7"
-                      hideIcon={true}
+                      hideLabel={true}
                       value={candidateAnswer.option}
                       type={candidateAnswer.question.type}
                     />
@@ -183,7 +183,7 @@ export const QuestionWithAnswers = ({
                     {candidateAnswer.text ||
                     candidateAnswer.changedQuestionDisclaimer ? (
                       <QuestionInfo
-                        open={textOpenByDefault}
+                        open={true}
                         text={candidateAnswer.text}
                         textSimpleLanguage={candidateAnswer.textSimpleLanguage}
                         disclosure={candidateAnswer.changedQuestionDisclaimer}

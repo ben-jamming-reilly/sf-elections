@@ -15,16 +15,16 @@ export const QuestionInfo = ({
 }) => {
   return (
     <>
-      <details
-        open={open}
+      <div
+        // open={open}
         className={clsx(
           "group w-full appearance-none rounded-md py-2 text-left text-base",
         )}
       >
-        <summary className="flex cursor-pointer items-center gap-3 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
+        <header className="flex items-center gap-3 text-[18px] leading-[21px] underline underline-offset-4 outline-2 outline-offset-4 outline-black">
           Mehr Infos:{" "}
-          <ChevronRightIcon className="w-6 transition-all group-open:rotate-90" />
-        </summary>
+          {/* <ChevronRightIcon className="w-6 transition-all group-open:rotate-90" /> */}
+        </header>
         <div className="flex flex-col gap-5">
           <p className="mt-3">
             {disclosure && (
@@ -46,7 +46,7 @@ export const QuestionInfo = ({
             </>
           )}
         </div>
-      </details>
+      </div>
     </>
   );
 };

@@ -8,17 +8,17 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 
 export const metadata: Metadata = {
-  title: "Wahl-Checker EU 2024",
+  title: "Wahl-Checker EU 2024 von andereseits",
   description: "",
   twitter: {
     card: "summary_large_image",
-    title: "Wahl-Checker EU 2024",
+    title: "Wahl-Checker EU 2024 von andereseits",
     description: "",
     site: "wahlchecker.at",
     images: [
       {
         url: "wahlchecker.at/opengraph-image",
-        alt: "Wahl-Checker EU 2024",
+        alt: "Wahl-Checker EU 2024 von andereseits",
         width: 1200,
         height: 630,
       },

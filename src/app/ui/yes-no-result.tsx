@@ -3,15 +3,18 @@ import clsx from "clsx";
 
 export const YesNoResult = ({
   hideIcon,
+  hideLabel,
   value,
   className,
 }: {
   hideIcon?: boolean;
+  hideLabel?: boolean;
   value: number;
   className?: string;
 }) => {
   return (
     <p
+      aria-label={optionLabelForYesNoValue(value)}
       className={clsx(
         "group z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black px-1 py-3 text-center text-[18px] leading-[22px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2 md:text-[22px] md:leading-[26px]",
         value === 1 && "bg-[#99EB8B]",
@@ -20,7 +23,7 @@ export const YesNoResult = ({
         className,
       )}
     >
-      {optionLabelForYesNoValue(value)}
+      {!hideLabel && <span aria-hidden>{optionLabelForYesNoValue(value)}</span>}
       {!hideIcon && (
         <>
           {value === 1 && (

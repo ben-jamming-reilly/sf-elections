@@ -89,11 +89,8 @@ export default async function WahlkabineResult({
               <article
                 aria-label={`Kandidat: ${match.candidate.name} - Übereinstimmung: ${match.score}`}
                 key={`candidate-match-overview-${match.candidate.id}`}
-                className="relative -mt-[2px] flex h-[60px] w-full flex-row items-center justify-between overflow-clip  rounded-[200px] border-2 border-black px-3 [--radius-offset:60px] sm:px-7 md:[--radius-offset:90px] xs:[--radius-offset:75px]"
+                className="relative -mt-[2px] flex h-[60px] w-full flex-row items-center justify-center overflow-clip  rounded-[200px] border-2 border-black px-3 [--radius-offset:60px] sm:px-7 md:[--radius-offset:90px] xs:[--radius-offset:75px]"
               >
-                <div className="relative z-20 w-[50px] text-[28px] leading-[34px] sm:w-[100px]">
-                  {match.score < 0 ? match.score : null}
-                </div>
                 <PartyLogo
                   src={`/${match.candidate.profileImg}`}
                   alt=""
@@ -101,9 +98,6 @@ export default async function WahlkabineResult({
                   href={`/fragen/${params.slug}/vergleich/${match.candidate.slug}`}
                   className="z-20 -mt-[2px] h-[calc(100%+4px)] w-[120px] border-2 sm:w-[180px] xs:w-[150px]"
                 />
-                <div className="relative z-20 w-[50px] text-right text-[28px] leading-[34px] sm:w-[100px]">
-                  {match.score > 0 ? match.score : null}
-                </div>
 
                 <div
                   aria-hidden="true"
