@@ -11,7 +11,7 @@ export default async function Home() {
     <div className="flex h-full flex-col gap-10">
       <article
         aria-label="Erklärtext zum Wahl-Checker"
-        className="mx-auto w-[900px] max-w-full text-[18px] leading-[24px]"
+        className="mx-auto w-[900px] max-w-full text-[18px] leading-[27px]"
       >
         <h1 className="my-5 font-sans text-[36px] leading-[44px]">
           Wahl-Checker EU-Wahl 2024:
@@ -54,7 +54,7 @@ export default async function Home() {
             >
               Wahlkabine
             </a>
-            " ,{/* @ts-expect-error */}
+            ", {/* @ts-expect-error */}
             <GlossaredTextServer text="die es für die EU-Wahl 2024 aber nicht gibt." />
             <br />
             {/* @ts-expect-error */}

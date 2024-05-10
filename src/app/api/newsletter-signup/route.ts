@@ -1,27 +1,41 @@
+import { userAgent } from "next/server";
 import { z } from "zod";
 import { MAILER_GROUP_IDS, createOrUpdateSubscriber } from "~/lib/mailerlite";
+import { trackPlausibleEvent } from "~/lib/plausible";
 
 export type NewsletterSignupResponse = { success: boolean; message: string };
 
 export const POST = async (request: Request) => {
   try {
+    const { ua } = userAgent(request);
+    const ip = (request.headers.get("x-forwarded-for") ?? "127.0.0.1").split(
+      ",",
+    )[0];
     const data = await request.json();
 
     const parsedData = z.object({
       email: z.string().email(),
     });
 
-    const mailerliteSignupResponse = await createOrUpdateSubscriber({
-      groups: [
-        MAILER_GROUP_IDS.WAHLKABINE,
-        MAILER_GROUP_IDS.SENSIBLE_SPRECHEN,
-        MAILER_GROUP_IDS.MARKETING,
-        MAILER_GROUP_IDS.FREITAG_MORGEN,
-      ],
-      email: parsedData.parse(data).email,
-      subscribed_at: dateInYyyyMmDdHhMmSs(new Date()),
-      fields: {},
-    });
+    const mailerliteSignupResponse = await Promise.allSettled([
+      createOrUpdateSubscriber({
+        groups: [
+          MAILER_GROUP_IDS.WAHLKABINE,
+          MAILER_GROUP_IDS.SENSIBLE_SPRECHEN,
+          MAILER_GROUP_IDS.MARKETING,
+          MAILER_GROUP_IDS.FREITAG_MORGEN,
+        ],
+        email: parsedData.parse(data).email,
+        subscribed_at: dateInYyyyMmDdHhMmSs(new Date()),
+        fields: {},
+      }),
+      trackPlausibleEvent({
+        event: "Newsletter Anmeldung",
+        url: request.url,
+        ip: ip,
+        userAgent: ua,
+      }),
+    ]);
 
     return new Response(
       JSON.stringify({

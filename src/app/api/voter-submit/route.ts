@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
+import { headers } from "next/headers";
+import { NextResponse, userAgent } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
 import { getCandidatesWithQuestions } from "~/app/fragen/[slug]/get-candidates-with-questions";
 import { rateCandidate } from "~/app/fragen/[slug]/rate-candidates";
+import { trackPlausibleEvent } from "~/lib/plausible";
 import { prisma } from "~/lib/prisma";
 
 const questionWithAnswersSchema = z.array(
@@ -22,24 +24,13 @@ const questionWithAnswersSchema = z.array(
   ]),
 );
 
-const dataForStatsSchema = z.object({
-  age: z.number().min(0).max(120).nullable().optional(),
-  gender: z.string().nullable().optional(),
-  state: z.string().nullable().optional(),
-});
-
 export async function POST(request: Request) {
   const data = await request.json();
+  const { ua } = userAgent(request);
+  const ip = (request.headers.get("x-forwarded-for") ?? "127.0.0.1").split(
+    ",",
+  )[0];
   const hash = uuidv4().slice(0, 8);
-
-  // if (!data.hasAcceptedTos) {
-  //   return NextResponse.json(
-  //     {
-  //       error: "Bitte akzeptiere die Nutzungsbedingungen!",
-  //     },
-  //     { status: 400 },
-  //   );
-  // }
 
   try {
     const validatedQuestionsWithAnswers = questionWithAnswersSchema.parse(
@@ -71,6 +62,12 @@ export async function POST(request: Request) {
         },
       }),
       getCandidatesWithQuestions(),
+      trackPlausibleEvent({
+        event: "Fragebogen abgeschickt",
+        url: request.url,
+        ip: ip,
+        userAgent: ua,
+      }),
     ]);
 
     // calculate the rating for each candidate

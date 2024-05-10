@@ -362,26 +362,65 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
   return (
     <section
       aria-describedby="newsletter-cta-title"
-      className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[24px]"
+      className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[27px]"
     >
       <h1 id="newsletter-cta-title" className="text-[36px] leading-[44px]">
-        Lerne Behinderung besser verstehen! Mit dem kostenlosen Newsletter von
-        <span className="italic"> andererseits</span>
+        Richtige Worte?
       </h1>
       <p>
-        Bei andererseits arbeiten Journalist*innen mit und ohne Behinderung
-        gemeinsam. Gleichberechtigt, kritisch und fair bezahlt.
+        Behinderung, Beeinträchtigung, besondere Bedürfnisse? Weißt Du manchmal
+        auch nicht so ganz, wie Du über Behinderung sprechen sollst?
       </p>
       <p>
-        Wenn Du mehr wissen möchtest, kannst du kostenlos unseren Newsletter
-        abonnieren. Jeden Freitag bekommst du eine kleine Geschichte, einen Fakt
-        über Behinderung und ein Update aus der Redaktion.
+        Bei <span className="italic">andererseits</span> arbeiten
+        Journalist*innen mit und ohne Behinderung gemeinsam. Gleichberechtigt,
+        kritisch und fair bezahlt.
+        <br />
+        Wenn Du uns Deine E-Mail Adresse gibst, dann schicken wir Dir unseren
+        Leitfaden. <br />
+        Darin erzählen Dir Redakteur*innen von{" "}
+        <span className="italic">andererseits</span>, wie Du sensibel über
+        Behinderung sprechen kannst.
       </p>
 
       <p>
-        Damit gibst Du uns auch die Erlaubnis, Dir Neuigkeiten und Werbung von
-        andererseits zu schicken. Du kannst Dich jederzeit abmelden.
+        Damit gibst Du uns auch die Erlaubnis, Dir unseren wöchentlichen
+        Newsletter, Neuigkeiten und Werbung von{" "}
+        <span className="italic">andererseits</span> zu schicken. Du kannst Dich
+        jederzeit abmelden.
       </p>
+
+      <p>
+        Mehr Infos zum Datenschutz bei{" "}
+        <span className="italic">andererseits</span> und unserem
+        Newsletterprogramm findest Du hier:
+        <br />
+        <ul className="my-3 ml-4 list-disc space-y-1">
+          {[
+            {
+              text: "Privacy Policy – MailerLite",
+              href: "https://www.mailerlite.com/legal/privacy-policy",
+            },
+            {
+              text: "Datenschutz – andererseits",
+              href: "https://andererseits.org/datenschutz",
+            },
+          ].map((link) => (
+            <li key={link.href}>
+              <a
+                className="font-semibold text-black underline"
+                target="blank"
+                rel="noreferrer noopener"
+                href={link.href}
+              >
+                {link.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </p>
+
+      <p>Bist Du dabei? Dann melde Dich jetzt kostenlos an.</p>
 
       <form
         aria-label="Newsletter Anmeldungsformular"
@@ -468,7 +507,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
 
       <p className="">
         Du möchtest keinen Newsletter bekommen? <br />
-        Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Quiz:
+        Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Checker:
       </p>
 
       <div className="flex items-center justify-center py-5">
