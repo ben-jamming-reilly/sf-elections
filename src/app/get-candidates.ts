@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { prisma } from "~/lib/prisma";
 
 export const getCandidatesRaw = async () => {
@@ -9,4 +9,6 @@ export const getCandidatesRaw = async () => {
   });
 };
 
-export const getCandidates = cache(getCandidatesRaw);
+export const getCandidates = unstable_cache(getCandidatesRaw, ['candidates'], {
+  revalidate: 18000,
+});

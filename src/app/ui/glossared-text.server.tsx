@@ -1,8 +1,5 @@
-import { prisma } from "~/lib/prisma";
 import { GlossaredText } from "./glossared-text";
-import { cache } from "react";
-
-const getGlossarEntries = cache(async () => prisma.glossarEntry.findMany());
+import { getGlossarEntries } from "../glossar/page";
 
 export const GlossaredTextServer = async ({ text }: { text: string }) => {
   const glossarEntries = await getGlossarEntries();

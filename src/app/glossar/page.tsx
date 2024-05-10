@@ -2,22 +2,25 @@ import { prisma } from "~/lib/prisma";
 import { BackButton } from "../ui/back-button";
 import Link from "next/link";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
 export async function generateMetadata() {
   return {
-    title: `Wahl-Info Glossar`,
+    title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andereseits`,
     description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
     twitter: {
       card: "summary_large_image",
       site: "wahlchecker.at",
-      title: `Wahl-Info Glossar`,
+      title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andereseits`,
       description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
     },
   };
 }
 
-export const getGlossarEntries = cache(async () => {
+export const getGlossarEntries = unstable_cache(async () => {
   return prisma.glossarEntry.findMany();
+}, ["glossarEntries"], {
+  revalidate: 18000,
 });
 
 export const revalidate = 18000; // 5 hours

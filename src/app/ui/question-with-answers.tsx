@@ -115,6 +115,7 @@ export const QuestionWithAnswers = ({
                     className="absolute left-0 top-0 z-20 h-full w-[75px] rounded-[100px]  border-2 sm:w-2/3 xxs:w-[100px] xxs:rounded-[200px] xs:w-2/3"
                     href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
                     src={`/${candidate.profileImg}`}
+                    alt={`${candidate.name}`}
                     priority
                   />
 

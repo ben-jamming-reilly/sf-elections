@@ -4,12 +4,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Fragen | Wahl-Checker EU 2024 von andereseits",
-  description: "",
+  description: "15 Fragen zur EU-Wahl 2024 beantwortet von 7 Parteien.",
   twitter: {
     card: "summary_large_image",
     site: "wahlchecker.at",
     title: "Fragen | Wahl-Checker EU 2024 von andereseits",
-    description: "15 Fragen zur EU-Wahl 2024.",
+    description: "15 Fragen zur EU-Wahl 2024 beantwortet von 7 Parteien",
     images: [
       {
         url: "https;//wahlchecker.at/opengraph-image",
