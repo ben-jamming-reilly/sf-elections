@@ -1,6 +1,7 @@
 import { prisma } from "~/lib/prisma";
 import { BackButton } from "../ui/back-button";
 import Link from "next/link";
+import { cache } from "react";
 
 export async function generateMetadata() {
   return {
@@ -15,12 +16,16 @@ export async function generateMetadata() {
   };
 }
 
+export const getGlossarEntries = cache(async () => {
+  return prisma.glossarEntry.findMany();
+});
+
 export const revalidate = 18000; // 5 hours
 
 const aToZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default async function Glossar() {
-  const glossarEntries = await prisma.glossarEntry.findMany();
+  const glossarEntries = await getGlossarEntries();
 
   const aToZFiltered = aToZ.filter((letter) =>
     glossarEntries.some((entry) =>

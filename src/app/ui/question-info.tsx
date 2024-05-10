@@ -1,17 +1,20 @@
 import clsx from "clsx";
-import { GlossaredTextServer } from "./glossared-text.server";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import { GlossaredText } from "./glossared-text";
+import { GlossarEntry } from "@prisma/client";
 
 export const QuestionInfo = ({
   text,
   textSimpleLanguage,
   open,
   disclosure,
+  glossarEntries,
 }: {
   text: string;
   textSimpleLanguage?: string | null;
   open?: boolean;
   disclosure?: string | null;
+  glossarEntries: GlossarEntry[];
 }) => {
   return (
     <>
@@ -32,16 +35,14 @@ export const QuestionInfo = ({
                 <strong>{disclosure}</strong> <br />
               </>
             )}
-            {/* @ts-expect-error */}
-            <GlossaredTextServer text={text} />
+            <GlossaredText glossarEntries={glossarEntries} text={text} />
           </p>
           {textSimpleLanguage && (
             <>
               <hr />
               <p>
                 <strong>Erklärung in einfacher Sprache:</strong> <br />
-                {/* @ts-expect-error */}
-                <GlossaredTextServer text={textSimpleLanguage} />
+                <GlossaredText glossarEntries={glossarEntries} text={textSimpleLanguage} />
               </p>
             </>
           )}

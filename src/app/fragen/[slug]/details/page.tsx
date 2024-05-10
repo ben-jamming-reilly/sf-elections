@@ -6,6 +6,7 @@ import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
+import { getGlossarEntries } from "~/app/glossar/page";
 
 export type WahlkabineResultDetailsProps = {
   params: {
@@ -24,9 +25,10 @@ export const dynamicParams = true;
 export default async function WahlkabineResultDetails({
   params,
 }: WahlkabineResultDetailsProps) {
-  const [voterWithAnswers, candidates] = await Promise.all([
+  const [voterWithAnswers, candidates, glossarEntries] = await Promise.all([
     getVoterViaHash(params.slug),
     getCandidatesWithQuestions(),
+    getGlossarEntries(),
   ]);
 
   if (!voterWithAnswers) {
@@ -108,6 +110,7 @@ export default async function WahlkabineResultDetails({
                 voterAnswer={answer}
                 question={answer.question}
                 candidatesAnswers={randomCandidates}
+                glossarEntries={glossarEntries}
               />
             ))}
         </div>

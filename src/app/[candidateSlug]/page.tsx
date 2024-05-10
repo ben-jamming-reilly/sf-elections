@@ -7,6 +7,7 @@ import { BackButton } from "../ui/back-button";
 import { getCandidates } from "../get-candidates";
 import { QuestionWithAnswers } from "../ui/question-with-answers";
 import { PartyLogo } from "../ui/party-logo";
+import { getGlossarEntries } from "../glossar/page";
 
 export const revalidate = 18000; // 5 hours
 
@@ -17,9 +18,10 @@ export type CandidateProfileProps = {
 export default async function CandidateProfile({
   params,
 }: CandidateProfileProps) {
-  const [candidate, candidates] = await Promise.all([
+  const [candidate, candidates, glossarEntries] = await Promise.all([
     getCandidateFromSlug(params.candidateSlug),
     getCandidates(),
+    getGlossarEntries(),
   ]);
 
   if (!candidate) {
@@ -103,6 +105,7 @@ export default async function CandidateProfile({
               .map((answer, index) => (
                 <QuestionWithAnswers
                   key={answer.id}
+                  glossarEntries={glossarEntries}
                   candidateLinkBase={`/${params.candidateSlug}`}
                   voterAnswer={answer}
                   question={answer.question}
