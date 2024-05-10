@@ -10,6 +10,7 @@ import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
+import { getGlossarEntries } from "~/app/glossar/page";
 
 export const revalidate = false;
 
@@ -26,7 +27,11 @@ export default async function CandidateComparison({
     notFound();
   }
 
-  const candidates = await getCandidatesFromSlugs(params.candidateSlugs);
+
+  const [candidates, glossarEntries] = await Promise.all([
+    getCandidatesFromSlugs(params.candidateSlugs),
+    getGlossarEntries(),
+  ])
 
   const randomCandidates = candidates.sort(
     (c) => Math.random() - Math.random(),
@@ -88,6 +93,7 @@ export default async function CandidateComparison({
               key={answer.id}
               question={answer.question}
               candidatesAnswers={candidates}
+              glossarEntries={glossarEntries}
             />
           ))}
       </section>
