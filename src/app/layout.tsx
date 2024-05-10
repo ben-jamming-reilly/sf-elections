@@ -96,7 +96,7 @@ export default function RootLayout({
                     priority
                     width={182}
                     className="flex-1 object-contain"
-                    alt="andererseits Logo"
+                    alt="andererseits"
                   />
                 </Link>
               </div>
@@ -117,35 +117,42 @@ export default function RootLayout({
               </main>
             </div>
             <footer className=" border-t border-black py-5 ">
-              <nav
-                aria-label="Links zu wahlchecker.at, Impressum und Datenschutz"
+              <ul
+                aria-label="Links zu andererseits.org, Impressum und Datenschutz"
                 className="flex w-full flex-col items-center justify-center gap-3"
               >
                 <a
-                  rel="noopener"
+                  target="blank"
                   className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
                   href="https://andererseits.org/"
+                  title="Zu andererseits.org, öffnet in neuem Fenster"
                 >
                   <span className="font-sans font-medium">
                     andererseits.org
                   </span>
                 </a>
-                <div className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
-                  <a
-                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                    href="https://andererseits.org/impressum/"
-                  >
-                    Impressum
-                  </a>
-                  <Link
-                    prefetch
-                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                    href="/datenschutz"
-                  >
-                    Datenschutz
-                  </Link>
-                </div>
-              </nav>
+                <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
+                  <li>
+                    <a
+                      target="blank"
+                      className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                      href="https://andererseits.org/impressum/"
+                      title="Zum Impressum, öffnet in neuem Fenster"
+                    >
+                      Impressum
+                    </a>
+                  </li>
+                  <li>
+                    <Link
+                      prefetch
+                      className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                      href="/datenschutz"
+                    >
+                      Datenschutz
+                    </Link>
+                  </li>
+                </ul>
+              </ul>
             </footer>
           </div>
         </div>

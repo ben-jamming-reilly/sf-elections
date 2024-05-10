@@ -27,10 +27,10 @@ export default async function WahlkabineResultCandidate({
   params,
 }: WahlkabineResultCandidate) {
   const [voterWithAnswers, candidate, glossarEntries] = await Promise.all([
-    getVoterViaHash(params.slug), 
+    getVoterViaHash(params.slug),
     getCandidateWithQuestions(params["candidate-slug"]),
     getGlossarEntries(),
-  ])
+  ]);
 
   if (!candidate || !candidate.hasFinished || !voterWithAnswers) {
     notFound();
@@ -61,7 +61,7 @@ export default async function WahlkabineResultCandidate({
       {toolbar}
 
       <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
-        Vergleich Deine Antworten mit {candidate.name}
+        Vergleiche Deine Antworten mit {candidate.name}
       </h1>
 
       <section className="mt-10 flex justify-center">

@@ -166,7 +166,7 @@ const GlossarModal = ({
         >
           <XMarkIcon className="h-8 w-8" />
         </button>
-        <h3 className="mb-2 text-xl font-semibold">{`${entry.term}:`}</h3>
+        <h2 className="mb-2 text-xl font-semibold">{`${entry.term}:`}</h2>
         <p>{entry.definition}</p>
       </motion.div>
     </motion.div>

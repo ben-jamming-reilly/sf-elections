@@ -9,7 +9,7 @@ export const revalidate = false;
 export default async function Home() {
   return (
     <div className="flex h-full flex-col gap-10">
-      <article
+      <section
         aria-label="Erklärtext zum Wahl-Checker"
         className="mx-auto w-[900px] max-w-full text-[18px] leading-[27px]"
       >
@@ -50,6 +50,7 @@ export default async function Home() {
             <a
               href="https://wahlkabine.at"
               target="_blank"
+              title="Zu wahlkabine.at, öffnet in neuem Fenster"
               className="font-semibold underline"
             >
               Wahlkabine
@@ -113,7 +114,7 @@ export default async function Home() {
             </Link>
           </p>
         </div>
-      </article>
+      </section>
 
       <nav
         aria-label="Zu den Fragen oder Wort-Erklärungen"

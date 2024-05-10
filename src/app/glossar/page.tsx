@@ -17,11 +17,15 @@ export async function generateMetadata() {
   };
 }
 
-export const getGlossarEntries = unstable_cache(async () => {
-  return prisma.glossarEntry.findMany();
-}, ["glossarEntries"], {
-  revalidate: 18000,
-});
+export const getGlossarEntries = unstable_cache(
+  async () => {
+    return prisma.glossarEntry.findMany();
+  },
+  ["glossarEntries"],
+  {
+    revalidate: 18000,
+  },
+);
 
 export const revalidate = 18000; // 5 hours
 
@@ -37,12 +41,12 @@ export default async function Glossar() {
   );
 
   const toolbar = (
-    <aside
+    <section
       aria-label="Zurück zur Startseite"
       className="mb-14 flex justify-center"
     >
       <BackButton href={`/`}>Zur Startseite</BackButton>
-    </aside>
+    </section>
   );
 
   return (
@@ -91,21 +95,21 @@ export default async function Glossar() {
                   entry.term.toLowerCase().startsWith(letter.toLowerCase()),
                 )
                 .map((entry) => (
-                  <article
+                  <dl
                     aria-labelledby={`glossar-entry-${entry.id}-title`}
                     key={`glossar-entry-${entry.id}`}
                     className="mt-5"
                   >
-                    <h3
+                    <dt
                       id={`glossar-entry-${entry.id}-title`}
                       className="text-[18px] font-medium leading-[24px]"
                     >
                       {entry.term}
-                    </h3>
-                    <p className="mt-2 text-[18px] leading-[24px]">
+                    </dt>
+                    <dd className="mt-2 text-[18px] leading-[24px]">
                       {entry.definition}
-                    </p>
-                  </article>
+                    </dd>
+                  </dl>
                 ))}
             </div>
           </div>

@@ -13,6 +13,7 @@ import { GlossarEntry } from "@prisma/client";
 import { GlossaredText } from "./glossared-text";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import clsx from "clsx";
 
 // TODO: remove direct database type
 // TODO: refactor naming to use main answer vs comparision answers
@@ -44,7 +45,10 @@ export const QuestionWithAnswers = ({
   textOpenByDefault?: boolean;
   glossarEntries: GlossarEntry[];
 }) => {
-  const [detailsOpen, setDetailsOpen] = useState(textOpenByDefault);
+  const isSingleComparison = candidatesAnswers?.length === 1;
+  const [detailsOpen, setDetailsOpen] = useState(
+    isSingleComparison ? true : textOpenByDefault,
+  );
 
   return (
     <article
@@ -91,7 +95,7 @@ export const QuestionWithAnswers = ({
         </div>
       ) : null}
 
-      {candidatesAnswers && (
+      {candidatesAnswers && !isSingleComparison ? (
         <section aria-label="Antworten der Parteien auf einen Blick">
           <h3 className="mb-3 mt-5 font-semibold">
             Das haben die Parteien gesagt:
@@ -136,20 +140,30 @@ export const QuestionWithAnswers = ({
             })}
           </ul>
         </section>
-      )}
+      ) : null}
 
       {candidatesAnswers && (
-        <section aria-label="Antworten der Parteien im Detail" className="mt-5">
+        <section
+          aria-label={
+            isSingleComparison
+              ? "Antwort der Partei"
+              : "Antworten der Parteien im Detail"
+          }
+          className="mt-5"
+        >
           <details
             open={detailsOpen}
             onToggle={(e) => setDetailsOpen(e.currentTarget.open)}
-            className="group flex items-center justify-center py-10"
+            className={"group flex items-center justify-center py-10"}
           >
             <Button
               as="summary"
               roundness="large"
               variant="secondary"
-              className="mx-auto inline-flex w-fit items-center px-6 py-3 text-[18px] font-semibold leading-[22px]"
+              className={clsx(
+                "mx-auto inline-flex w-fit items-center px-6 py-3 text-[18px] font-semibold leading-[22px]",
+                isSingleComparison && "hidden",
+              )}
             >
               Alle Antworten:
               <ChevronRightIcon className="ml-1 h-6 w-6 stroke-[1.5px] transition-all group-open:rotate-90" />
@@ -173,7 +187,10 @@ export const QuestionWithAnswers = ({
                     opacity: 0,
                     y: -50,
                   }}
-                  className="grid w-full grid-cols-1 gap-y-10 pt-20 md:gap-7"
+                  className={clsx(
+                    "grid w-full grid-cols-1 gap-y-10 pt-20 md:gap-7",
+                    isSingleComparison ? "pt-5" : "pt-20",
+                  )}
                 >
                   {candidatesAnswers.map((candidate) => {
                     const candidateAnswer = candidate.answers.find(

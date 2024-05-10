@@ -86,7 +86,7 @@ export default async function WahlkabineResult({
             .sort((a, b) => b.score - a.score)
             .map((match) => (
               <article
-                aria-label={`Kandidat: ${match.candidate.name} - Übereinstimmung: ${match.score}`}
+                aria-label={`Kandidat: ${match.candidate.name} - Übereinstimmung: ${match.score}/${MAX_POINTS} Punkten`}
                 key={`candidate-match-overview-${match.candidate.id}`}
                 className="relative -mt-[2px] flex h-[60px] w-full flex-row items-center justify-center overflow-clip  rounded-[200px] border-2 border-black px-3 [--radius-offset:60px] sm:px-7 md:[--radius-offset:90px] xs:[--radius-offset:75px]"
               >
