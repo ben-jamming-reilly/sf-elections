@@ -3,24 +3,63 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { GlossarEntry } from "@prisma/client";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useId, useRef, useState } from "react";
-import { mergeHyphenatedWords } from "~/utils";
+import { ReactNode, useEffect, useId, useRef, useState } from "react";
+import reactStringReplace from "react-string-replace";
 
-function simpleSegmenter(text: string) {
-  // - Capture sequences of word characters and apostrophes as words.
-  // - Capture punctuation marks.
-  // - Capture sequences of whitespace characters.
-  const regex = /([\w']+|[^\w\s]+|\s+)/g;
+const ReplacedText = ({
+  text,
+  glossarEntries,
+  onClick,
+}: {
+  text: string;
+  glossarEntries: GlossarEntry[];
+  onClick: (entry: GlossarEntry) => void;
+}) => {
+  const id = useId();
 
-  // The 'match' method returns an array containing all matches, including whitespace.
-  return text.match(regex);
-}
+  let parts: Array<ReactNode> | string = text;
+  const hasMatched: Record<string, boolean> = {};
+  for (const entry of glossarEntries) {
+    const synonyms =
+      entry.synonyms !== ""
+        ? entry.synonyms.split(",").concat(entry.term)
+        : [entry.term];
 
-const matchTermAndSynonyms = (entry: GlossarEntry, word: string) => {
-  return (
-    entry.term.toLowerCase() === word.toLowerCase() ||
-    entry.synonyms.toLowerCase().split(",").includes(word.toLowerCase())
-  );
+    for (const synonym of synonyms) {
+      // Function to escape special characters in the search string for use in a regular expression
+      const escapeRegExp = (string: string) => {
+        return string.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+      };
+
+      // Create a new regular expression using the escaped dynamic search string
+      const regex = new RegExp(`(\\b${escapeRegExp(synonym.trim())}\\b)`, "gi");
+      parts = reactStringReplace(parts, regex, (match, index) => {
+        if (hasMatched[match]) {
+          return match;
+        }
+
+        hasMatched[match] = true;
+
+        return (
+          <a
+            key={`glossar-${id}-${index}`}
+            onClick={(e) => {
+              e.preventDefault();
+              onClick(entry);
+            }}
+            href="#"
+            aria-hidden="false"
+            title={`Wort-Erklärung für ${match}`}
+            className="relative bg-[#FFFF00] px-[2px] py-[1px] font-semibold outline-offset-2  outline-black focus-visible:outline-4"
+          >
+            {match}
+          </a>
+        );
+      });
+    }
+  }
+
+  return <>{parts}</>;
 };
 
 export const GlossaredText = ({
@@ -30,17 +69,18 @@ export const GlossaredText = ({
   text: string;
   glossarEntries: GlossarEntry[];
 }) => {
-  const id = useId();
   const [activeEntry, setActiveEntry] = useState<GlossarEntry | null>(null);
-
-  const parts = simpleSegmenter(text) ?? [];
-  const partsClean = mergeHyphenatedWords(parts);
 
   return (
     <>
       <span className="sr-only">{text}</span>
       <span aria-hidden="true">
-        {partsClean.map((word, index) => {
+        <ReplacedText
+          text={text}
+          glossarEntries={glossarEntries}
+          onClick={(entry) => setActiveEntry(entry)}
+        />
+        {/* {partsClean.map((word, index) => {
           const glossarEntry = glossarEntries.find((entry) =>
             matchTermAndSynonyms(entry, word),
           );
@@ -56,15 +96,14 @@ export const GlossaredText = ({
                 href="#"
                 aria-hidden="false"
                 title={`Wort-Erklärung für ${word}`}
-                className="relative font-semibold outline-offset-2  outline-black focus-visible:outline-4"
+                className="relative bg-[#FFFF00] px-[2px] py-[1px] font-semibold outline-offset-2  outline-black focus-visible:outline-4"
               >
-                <span className="absolute -inset-[2px] z-10 rounded-[2px] bg-[#FFFF00] px-[4px] py-[1px]"></span>
-                <span className="relative z-20">{word}</span>
+                {word}
               </a>
             );
           }
           return word;
-        })}
+        })} */}
 
         <AnimatePresence>
           {activeEntry && (
