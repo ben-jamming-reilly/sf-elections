@@ -37,17 +37,19 @@ export default function Datenschutz({}: {}) {
       <h2 className="text-2xl">TLDR – Welche Daten wir verarbeiten</h2>
 
       <p>
-        Die Privatsphäre unserer Website-Besucher ist uns sehr wichtig. Daher
-        sollen Sie zu jeder Zeit wissen, wann welche personenbezogenen Daten auf
-        welche Weise uns verwendet werden. Wir unterliegen den Bestimmungen der
-        europäischen Datenschutzgrundverordnung (DSGVO) sowie den ergänzenden
-        Bestimmungen des österreichischen Datenschutzgesetzes (DSG).
+        Die Privatsphäre unserer Website-Besucher*innen ist uns sehr wichtig.
+        Daher sollen Sie zu jeder Zeit wissen, wann welche personenbezogenen
+        Daten auf welche Weise von uns verwendet werden. Wir unterliegen den
+        Bestimmungen der europäischen Datenschutzgrundverordnung (DSGVO) sowie
+        den ergänzenden Bestimmungen des österreichischen Datenschutzgesetzes
+        (DSG).
       </p>
-      <p>Als Besucher dieser Seite:</p>
+      <p>Als Besucher*in dieser Seite:</p>
       <ul>
         <li>werden keine persönlichen Informationen gespeichert</li>
         <li>
-          werden keine Informationen, wie z.B. Cookies, im Browser gespeichert
+          werden keine Tracking Informationen, wie z.B. Cookies, im Browser
+          gespeichert
         </li>
         <li>
           werden keine Informationen mit Dritten (z.B. Werbefirmen) geteilt, an
@@ -62,7 +64,7 @@ export default function Datenschutz({}: {}) {
 
       <h2 className="text-2xl">Vollständige Datenschutzerklärung</h2>
       <p>
-        Diese Datenschutzerklärung klärt Sie als Besucher dieser Website über
+        Diese Datenschutzerklärung klärt Sie als Besucher*in dieser Website über
         die Art, den Umfang und die Zwecke der Erhebung und Verwendung
         personenbezogener Daten auf.
       </p>
@@ -122,11 +124,12 @@ export default function Datenschutz({}: {}) {
         grundsätzliche Statistiken zur Nutzung unserer Website auswerten zu
         können. Ihre IP-Adresse wird im Laufe dieser Auswertung gelöscht.
         Dadurch werden die weiter verwendeten Daten anonymisiert (eine Zuordnung
-        dieser Daten zu Ihnen als Website-Besucher ist also nicht mehr möglich).
+        dieser Daten zu Ihnen als Website-Besucher*in ist also nicht mehr
+        möglich).
       </p>
       <p>
         Das Ziel ist es, allgemeine Trends in unserem Website-Verkehr zu
-        verfolgen, nicht jedoch, Daten, die auf den einzelnen Besucher
+        verfolgen, nicht jedoch, Daten, die auf den einzelnen Besucher*in
         rückführbar sind, zu speichern oder zu verwerten.
       </p>
       <p>
@@ -182,8 +185,8 @@ export default function Datenschutz({}: {}) {
       </p>
       <p>
         Durch diese differenzierten Abwägungen soll das Interesse unserer
-        Website-Besucher auf Schutz ihrer personenbezogenen Daten im Sinne des
-        Art 6 Abs 1 lit f DSGVO gewahrt werden.
+        Website-Besucher*in auf Schutz ihrer personenbezogenen Daten im Sinne
+        des Art 6 Abs 1 lit f DSGVO gewahrt werden.
       </p>
       <h3 className="text-xl">Speicherdauer und Löschung von Daten</h3>
       <p>

@@ -391,7 +391,9 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
       </p>
 
       <p>
-        Mehr Infos zum Datenschutz bei{" "}
+        Auch wenn Du uns deine E-Mail Adresse gibst, wissen wir nicht, wie Du
+        gestimmt hast.
+        <br /> Mehr Infos zum Datenschutz bei{" "}
         <span className="italic">andererseits</span> und unserem
         Newsletterprogramm findest Du hier:
         <br />

@@ -35,11 +35,6 @@ export default async function Home() {
             <GlossaredTextServer text="Das EU-Parlament arbeitet an den Regeln mit, die die EU für alle Mitglieds-Länder macht." />
           </p>
 
-          <p>
-            {/* @ts-expect-error */}
-            <GlossaredTextServer text="Die Europa-Wahl ist also sehr wichtig. In Österreich dürfen am 9. Juni die Menschen ab 16 Jahren wählen. Im EU-Parlament werden 720 Abgeordnete sitzen. 20 von den Abgeordneten kommen aus Österreich." />
-          </p>
-
           <h2 className="pt-5 text-[28px] leading-[34px]">
             Was ist der Wahl-Checker?
           </h2>
@@ -56,8 +51,7 @@ export default async function Home() {
               Wahlkabine
             </a>
             ", {/* @ts-expect-error */}
-            <GlossaredTextServer text="die es für die EU-Wahl 2024 aber nicht gibt." />
-            <br />
+            <GlossaredTextServer text="die es für die EU-Wahl 2024 aber nicht gibt." />{" "}
             {/* @ts-expect-error */}
             <GlossaredTextServer
               text="Im Wahl-Checker stehen 15 Fragen zu wichtigen Themen, um die sich
@@ -71,15 +65,11 @@ export default async function Home() {
           <p>
             {/* @ts-expect-error */}
             <GlossaredTextServer text="Danach kannst Du Deine Meinung vergleichen mit den Meinungen von den 7 Parteien, die man bei der Europa-Wahl in Österreich wählen kann." />
-            <br />
-            {/* @ts-expect-error */}
-            <GlossaredTextServer text="Die Parteien haben außerdem die Gründe für ihre Antworten geschickt. Wir haben die Gründe auch in einfacher Sprache erklärt." />
           </p>
 
           <p>
             {/* @ts-expect-error */}
-            <GlossaredTextServer text="Wir haben außerdem Erklärungen zu wichtigen Wörtern geschrieben. Die Wörter sind fett geschrieben und gelb markiert. Wenn Du ein gelb markiertes Wort anklickst, kannst Du die Erklärung lesen. Du findest alle Erklärungen auch auf der Seite „Wort-Erklärungen“." />
-
+            <GlossaredTextServer text="Wir haben außerdem Erklärungen zu wichtigen Wörtern geschrieben. Die Wörter sind gelb markiert. Wenn Du ein gelb markiertes Wort anklickst, kannst Du die Erklärung lesen. Du findest alle Erklärungen auch auf der Seite „Wort-Erklärungen“." />{" "}
             {/* @ts-expect-error */}
             <GlossaredTextServer text="Du kannst den Wahl-Checker auch mit einem Screen-Reader benutzen." />
           </p>
@@ -107,8 +97,8 @@ export default async function Home() {
           <h2 className="pt-5 text-[28px] leading-[34px]">Daten-Schutz</h2>
           <p>
             Der Wahl-Checker ist anonym. Das heißt: Wir wissen nicht, wer Du
-            bist und wie Du abgestimmt hast. Mehr Infos zum Datenschutz bei{" "}
-            <span className="italic">andererseits</span> findest Du hier:{" "}
+            bist und wie Du abgestimmt hast. Mehr Infos zum Datenschutz findest
+            Du hier:{" "}
             <Link href="/datenschutz" className="font-semibold underline">
               wahlchecker.at/datenschutz
             </Link>
