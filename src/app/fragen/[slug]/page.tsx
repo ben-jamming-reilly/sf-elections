@@ -61,7 +61,7 @@ export default async function WahlkabineResult({
         aria-label="Ergebnis Übersicht"
         className="my-10 flex w-[900px] max-w-full flex-col items-center gap-10"
       >
-        <div className="mx-auto w-full max-w-[60ch]">
+        <div className="w-full">
           <h1 className="mb-3 text-4xl">Dein Ergebnis</h1>
           <div className="space-y-3">
             <p>
@@ -130,7 +130,7 @@ export default async function WahlkabineResult({
             ))}
         </div>
 
-        <div className="mx-auto w-full max-w-[60ch] space-y-3">
+        <div className="w-full space-y-3">
           <p>
             <strong className="font-semibold">Wichtig:</strong>
             <br /> Das Ergebnis ist keine Wahl-Empfehlung. Es bedeutet nicht,

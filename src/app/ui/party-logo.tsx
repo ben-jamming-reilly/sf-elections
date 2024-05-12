@@ -27,7 +27,7 @@ export const PartyLogo = ({
       title={title}
       className={twMerge(
         clsx(
-          "no-touch:hover:bg-brand group relative z-10 block h-[88px] w-[170px] max-w-full overflow-clip rounded-[200px] border border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2",
+          " group relative z-10 block h-[88px] w-[170px] max-w-full overflow-clip rounded-[200px] border border-black bg-white outline-offset-4 outline-black transition-all focus-visible:outline-2",
           className,
         ),
       )}
@@ -37,7 +37,7 @@ export const PartyLogo = ({
         alt={alt}
         fill
         priority={priority}
-        className="object-contain px-4 py-2"
+        className="object-contain px-4 py-2 transition-all group-focus-visible:scale-105 notouch:group-hover:scale-105"
       />
     </Link>
   );

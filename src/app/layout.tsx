@@ -1,11 +1,11 @@
 import Link from "next/link";
-import "./globals.css";
 import { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
 import Script from "next/script";
 import Image from "next/image";
 import EasterEgg from "./easter-egg";
 import clsx from "clsx";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Wahl-Checker EU 2024 von andereseits",
@@ -105,7 +105,7 @@ export default function RootLayout({
               </div>
             </div>
           </header>
-          <div className="flex min-h-full w-full flex-grow flex-col gap-5 md:gap-10 ">
+          <div className="flex w-full flex-grow flex-grow flex-col gap-5 md:gap-10 ">
             <div className="mx-auto max-w-full lg:w-[1000px]">
               <main className="relative flex-grow px-3 py-10 xxs:px-4 xs:px-5">
                 <span
@@ -116,45 +116,43 @@ export default function RootLayout({
                 {children}
               </main>
             </div>
-            <footer className=" border-t border-black py-5 ">
-              <ul
-                aria-label="Links zu andererseits.org, Impressum und Datenschutz"
-                className="flex w-full flex-col items-center justify-center gap-3"
-              >
-                <a
-                  target="blank"
-                  className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                  href="https://andererseits.org/"
-                  title="Zu andererseits.org, öffnet in neuem Fenster"
-                >
-                  <span className="font-sans font-medium">
-                    andererseits.org
-                  </span>
-                </a>
-                <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
-                  <li>
-                    <a
-                      target="blank"
-                      className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                      href="https://andererseits.org/impressum/"
-                      title="Zum Impressum, öffnet in neuem Fenster"
-                    >
-                      Impressum
-                    </a>
-                  </li>
-                  <li>
-                    <Link
-                      prefetch
-                      className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                      href="/datenschutz"
-                    >
-                      Datenschutz
-                    </Link>
-                  </li>
-                </ul>
-              </ul>
-            </footer>
           </div>
+          <footer className=" border-t border-black py-5 ">
+            <ul
+              aria-label="Links zu andererseits.org, Impressum und Datenschutz"
+              className="flex w-full flex-col items-center justify-center gap-3"
+            >
+              <a
+                target="blank"
+                className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                href="https://andererseits.org/"
+                title="Zu andererseits.org, öffnet in neuem Fenster"
+              >
+                <span className="font-sans font-medium">andererseits.org</span>
+              </a>
+              <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
+                <li>
+                  <a
+                    target="blank"
+                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                    href="https://andererseits.org/impressum/"
+                    title="Zum Impressum, öffnet in neuem Fenster"
+                  >
+                    Impressum
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    prefetch
+                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
+                    href="/datenschutz"
+                  >
+                    Datenschutz
+                  </Link>
+                </li>
+              </ul>
+            </ul>
+          </footer>
         </div>
         <EasterEgg />
       </body>

@@ -82,8 +82,6 @@ export default async function WahlkabineResultDetails({
         </nav>
       </section>
 
-      <hr />
-
       <section
         aria-labelledby="details-page-questions-overview-title"
         className="flex flex-col gap-10 py-16"

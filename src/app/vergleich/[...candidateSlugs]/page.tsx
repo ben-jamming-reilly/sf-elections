@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ShareButton } from "~/app/ui/share-button";
 import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
@@ -27,11 +25,10 @@ export default async function CandidateComparison({
     notFound();
   }
 
-
   const [candidates, glossarEntries] = await Promise.all([
     getCandidatesFromSlugs(params.candidateSlugs),
     getGlossarEntries(),
-  ])
+  ]);
 
   const randomCandidates = candidates.sort(
     (c) => Math.random() - Math.random(),

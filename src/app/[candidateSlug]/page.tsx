@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { getCandidateFromSlug } from "./get-candidate-from-slug";
 import { ShareButton } from "../ui/share-button";
 import Link from "next/link";
-import Image from "next/image";
 import { BackButton } from "../ui/back-button";
 import { getCandidates } from "../get-candidates";
 import { QuestionWithAnswers } from "../ui/question-with-answers";
@@ -78,7 +77,7 @@ export default async function CandidateProfile({
               {randomOtherCandidates.map((c) => (
                 <Link
                   key={c.id}
-                  className="mx-0 px-3 outline-offset-4 outline-black"
+                  className="mx-0 px-3 outline-offset-4 outline-black notouch:hover:font-semibold"
                   href={`vergleich/${candidate.slug}/${c.slug}`}
                   title={`Vergleiche ${candidate.name} mit ${c.name}`}
                   prefetch={false}
@@ -87,7 +86,7 @@ export default async function CandidateProfile({
                 </Link>
               ))}
               <Link
-                className="px-3 outline-offset-4 outline-black"
+                className="px-3 outline-offset-4 outline-black notouch:hover:font-semibold"
                 href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
                 title="Vergleiche alle Parteien"
               >
