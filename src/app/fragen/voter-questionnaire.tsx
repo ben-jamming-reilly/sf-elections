@@ -359,6 +359,12 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
   );
   const [message, setMessage] = useState<string | null>(null);
 
+  useEffect(() => {
+    fetch(
+      "https://assets.mailerlite.com/jsonp/345641/forms/118855395671279343/takel",
+    );
+  }, []);
+
   return (
     <section
       aria-describedby="newsletter-cta-title"
@@ -396,116 +402,141 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
         <br /> Mehr Infos zum Datenschutz bei{" "}
         <span className="italic">andererseits</span> und unserem
         Newsletterprogramm findest Du hier:
-        <br />
-        <ul className="my-3 ml-4 list-disc space-y-1">
-          {[
-            {
-              text: "Privacy Policy – MailerLite",
-              href: "https://www.mailerlite.com/legal/privacy-policy",
-            },
-            {
-              text: "Datenschutz – andererseits",
-              href: "https://andererseits.org/datenschutz",
-            },
-          ].map((link) => (
-            <li key={link.href}>
-              <a
-                className="font-semibold text-black underline"
-                target="blank"
-                rel="noreferrer noopener"
-                href={link.href}
-              >
-                {link.text}
-              </a>
-            </li>
-          ))}
-        </ul>
       </p>
+      <ul className="my-3 ml-4 list-disc space-y-1">
+        {[
+          {
+            text: "Privacy Policy – MailerLite",
+            href: "https://www.mailerlite.com/legal/privacy-policy",
+          },
+          {
+            text: "Datenschutz – andererseits",
+            href: "https://andererseits.org/datenschutz",
+          },
+        ].map((link) => (
+          <li key={link.href}>
+            <a
+              className="font-semibold text-black underline"
+              target="blank"
+              rel="noreferrer noopener"
+              href={link.href}
+            >
+              {link.text}
+            </a>
+          </li>
+        ))}
+      </ul>
 
       <p>Bist Du dabei? Dann melde Dich jetzt kostenlos an.</p>
 
-      <form
-        aria-label="Newsletter Anmeldungsformular"
-        className="py-5"
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          const formData = new FormData(e.target as HTMLFormElement);
-
-          setState("loading");
-
-          fetch("/api/newsletter-signup", {
-            method: "POST",
-            body: JSON.stringify({
-              email: formData.get("newsletter_email"),
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then(async (response) => {
-              const data = (await response.json()) as NewsletterSignupResponse;
-
-              if (response.ok) {
-                setState("success");
-                setMessage("Du bist erfolgreich angemeldet!");
-              } else {
-                throw new Error(data.message);
-              }
-            })
-            .catch((error) => {
-              setState("error");
-              console.log(error.message);
-              setMessage("Ein Fehler ist passiert. Bitte probiere es nochmal.");
-            });
-        }}
+      <div
+        id="mlb2-14086309"
+        className="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-14086309 w-full py-5"
       >
-        <div className="relative">
-          <label className="sr-only" htmlFor="newsletter_email">
-            Deine E-Mail Adresse
-          </label>
-          <input
-            name="newsletter_email"
-            type="email"
-            placeholder="Deine E-Mail Adresse"
-            className="w-full rounded-[100px] border-2 border-black px-6 py-3 text-black caret-black outline-offset-4  outline-black focus-visible:outline-2"
-          />
-          <button
-            type="submit"
-            className="absolute right-0 top-0 flex items-center justify-center  rounded-[100px] border-2 border-black bg-[#FBFF95] px-6 py-3 text-black outline-offset-4  outline-black transition-all focus-visible:outline-2 notouch:hover:bg-black notouch:hover:text-[#FBFF95]"
-          >
-            <span className={clsx(state === "loading" && "invisible")}>
-              Ich bin dabei!
-            </span>
-            <span className="absolute left-1/2 top-1/2 h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2">
-              {state === "loading" && <Loading size={30} />}
-            </span>
-          </button>
+        <div className="ml-form-align-center ">
+          <div className="ml-form-embedWrapper embedForm !max-w-full">
+            <div className="ml-form-embedBody ml-form-embedBodyDefault row-form">
+              <form
+                className="ml-block-form relative flex  flex-row"
+                action="https://assets.mailerlite.com/jsonp/345641/forms/118855395671279343/subscribe"
+                data-code=""
+                method="post"
+                target="_blank"
+              >
+                <div className="ml-form-formContent flex-grow">
+                  <div className="ml-form-fieldRow ml-last-item !w-full">
+                    <div className="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <input
+                        aria-label="email"
+                        aria-required="true"
+                        type="email"
+                        className="form-control !w-full !rounded-[100px] !border-2 !border-black !px-6 !py-3 !text-black !caret-black !outline-offset-4  !outline-black focus-visible:!outline-2"
+                        data-inputmask=""
+                        name="fields[email]"
+                        placeholder="Deine Email Addresse"
+                        autoComplete="email"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <input type="hidden" name="ml-submit" value="1" />
+
+                <div className="ml-form-embedSubmit flex-shrink">
+                  <button
+                    onClick={(e) => {
+                      setState("loading");
+
+                      window.setTimeout(() => {
+                        setState("success");
+                      }, 1000);
+                    }}
+                    type="submit"
+                    className="primary absolute right-0 top-0 !flex !h-full !w-fit !items-center !justify-center !rounded-[100px] !border-2 !border-black !bg-[#FBFF95] !px-6 !py-3 !text-black !outline-offset-4  !outline-black !transition-all focus-visible:!outline-2 notouch:hover:!bg-black notouch:hover:!text-[#FBFF95]"
+                  >
+                    <span className={clsx(state === "loading" && "invisible")}>
+                      Ich bin dabei!
+                    </span>
+                    <span className="absolute left-1/2 top-1/2 h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2">
+                      {state === "loading" && <Loading size={30} />}
+                    </span>
+                  </button>
+
+                  <button
+                    disabled
+                    style={{ display: "none" }}
+                    type="button"
+                    className="loading"
+                  >
+                    <div className="ml-form-embedSubmitLoad"></div>
+                    <span className="sr-only">Loading...</span>
+                  </button>
+                </div>
+
+                <input type="hidden" name="anticsrf" value="true" />
+              </form>
+            </div>
+
+            {state === "error" && (
+              <p
+                aria-label="Fehlermeldung"
+                className="mt-5 flex items-center gap-2 font-semibold text-red-500"
+              >
+                <XMarkIcon
+                  aria-hidden
+                  className="inline-block h-5 w-5 stroke-2"
+                />
+                {message}
+              </p>
+            )}
+
+            {state === "success" && (
+              <p
+                aria-label="Erfolgsmeldung"
+                className="mt-5 flex items-start justify-start gap-2  "
+              >
+                <ThumbUpIcon
+                  aria-hidden
+                  className="mt-1 inline-block h-5 w-5 stroke-2 text-green-500"
+                />
+
+                <div>
+                  <h4 className="text-lg font-semibold text-green-500">
+                    Bitte bestätige die Anmeldung zu Emails von andererseits mit
+                    dem Link in deinem Postfach.
+                  </h4>
+                </div>
+              </p>
+            )}
+          </div>
         </div>
+      </div>
 
-        {state === "error" && (
-          <p
-            aria-label="Fehlermeldung"
-            className="mt-5 flex items-center gap-2 font-semibold text-red-500"
-          >
-            <XMarkIcon aria-hidden className="inline-block h-5 w-5 stroke-2" />
-            {message}
-          </p>
-        )}
-
-        {state === "success" && (
-          <p
-            aria-label="Erfolgsmeldung"
-            className="mt-5 flex items-center gap-2 font-semibold text-green-500"
-          >
-            <ThumbUpIcon
-              aria-hidden
-              className="inline-block h-5 w-5 stroke-2"
-            />
-            {message}
-          </p>
-        )}
-      </form>
+      <script
+        async
+        src="https://groot.mailerlite.com/js/w/webforms.min.js?v2d8fb22bb5b3677f161552cd9e774127"
+        type="text/javascript"
+      ></script>
 
       <p className="">
         Du möchtest keinen Newsletter bekommen? <br />

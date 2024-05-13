@@ -6,6 +6,7 @@ import Image from "next/image";
 import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 import "./globals.css";
+import "./mailerlite.css";
 
 export const metadata: Metadata = {
   title: "Wahl-Checker EU 2024 von andereseits",
