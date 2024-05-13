@@ -88,6 +88,12 @@ export default async function Home() {
             Was ist <span className="italic">andererseits</span>?
           </h2>
           <p>
+            Der Wahl-Checker wird von der Medienhaus andererseits GmbH
+            veröffentlicht und wurde in Kooperation mit dem Verein andererseits
+            - für Inklusion im Journalismus und mit Unterstützung der
+            Hil-Foundation entwickelt.
+          </p>
+          <p>
             <span className="italic">andererseits</span> ist ein Magazin für
             Behinderung und Gesellschaft. Bei{" "}
             <span className="italic">andererseits</span> machen Menschen mit und
