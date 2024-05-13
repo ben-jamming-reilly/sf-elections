@@ -104,6 +104,7 @@ export default async function CandidateProfile({
               .map((answer, index) => (
                 <QuestionWithAnswers
                   key={answer.id}
+                  voterType="candidate"
                   glossarEntries={glossarEntries}
                   candidateLinkBase={`/${params.candidateSlug}`}
                   voterAnswer={answer}

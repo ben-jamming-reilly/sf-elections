@@ -14,6 +14,11 @@ import { GlossaredText } from "./glossared-text";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
+import {
+  optionLabelForValue,
+  optionLabelForYesNoValue,
+  weightingLabelForValue,
+} from "~/data/answers";
 
 // TODO: remove direct database type
 // TODO: refactor naming to use main answer vs comparision answers
@@ -25,7 +30,9 @@ export const QuestionWithAnswers = ({
   candidateLinkBase, // For linking to the candidate comparison page with the voter hash
   textOpenByDefault = false,
   glossarEntries,
+  voterType = "voter",
 }: {
+  voterType: "voter" | "candidate";
   question: {
     id: number;
     title: string;
@@ -68,8 +75,10 @@ export const QuestionWithAnswers = ({
       </h2>
 
       {voterAnswer && (
-        <section aria-label="Dein Antwort" className="mb-6">
-          <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
+        <section className="mb-6">
+          {voterType === "voter" && (
+            <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
+          )}
           {voterAnswer.option !== null && voterAnswer.weighting !== null ? (
             <div className="flex flex-row gap-3">
               <OptionResult value={voterAnswer.option} type={question.type} />
@@ -98,7 +107,8 @@ export const QuestionWithAnswers = ({
       {candidatesAnswers && !isSingleComparison ? (
         <section aria-label="Antworten der Parteien auf einen Blick">
           <h3 className="mb-3 mt-5 font-semibold">
-            Das haben die Parteien gesagt:
+            Das haben die {voterType === "candidate" ? "anderen" : ""} Parteien
+            gesagt:
           </h3>
           <ul className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 md:w-fit">
             {candidatesAnswers.map((candidate) => {
@@ -112,6 +122,7 @@ export const QuestionWithAnswers = ({
 
               return (
                 <li
+                  aria-label={`Antwort von ${candidate.name}: ${optionLabelForYesNoValue(candidateAnswer.option!)}`}
                   key={`candidate-${candidateAnswer.questionId}-${candidate.id}`}
                   className="relative h-[70px] w-full sm:h-[60px] md:w-[260px]"
                 >
@@ -203,6 +214,7 @@ export const QuestionWithAnswers = ({
 
                     return (
                       <li
+                        aria-label={`Antwort von ${candidate.name}: ${optionLabelForYesNoValue(candidateAnswer.option!)} – ${weightingLabelForValue(candidateAnswer.weighting!)}`}
                         key={`candidate-details-${candidateAnswer.questionId}-${candidate.id}`}
                         className="relative space-y-4 border-t border-black pb-10 pt-12 md:pt-4"
                       >
