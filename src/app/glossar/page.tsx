@@ -60,12 +60,12 @@ export default async function Glossar() {
       <header className="sticky top-0 z-20 bg-white py-3 md:top-[90px]">
         <nav
           aria-label="Navigation zu den Anfangsbuchstaben"
-          className="flex w-full snap-x snap-proximity scroll-mx-4 justify-center overflow-x-auto rounded-[30px] border border-black"
+          className="flex w-full flex-wrap justify-center gap-y-3 rounded-[30px] border border-black px-3 py-2"
         >
           {aToZFiltered.map((letter) => (
             <Link
               key={`glossar-nav-${letter}`}
-              className="snap-center px-[8.5px] text-[18px] leading-[40px] outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black"
+              className="px-[8.5px] text-[18px] leading-[18px] outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black"
               href={`#${letter}`}
               title={`Zum Anfangsbuchstaben ${letter}`}
             >
