@@ -9,6 +9,7 @@ import "./globals.css";
 import "./mailerlite.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://wahlchecker.at"),
   title: "Wahl-Checker EU 2024 von andereseits",
   description: "Finde heraus welche Partei zu Dir passt!",
   openGraph: {
