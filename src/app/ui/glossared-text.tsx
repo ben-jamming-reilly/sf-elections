@@ -42,7 +42,7 @@ const ReplacedText = ({
 
         return (
           <a
-            key={`glossar-${id}-${index}`}
+            key={`glossar-${id}-${match}-${index}`}
             onClick={(e) => {
               e.preventDefault();
               onClick(entry);

@@ -84,16 +84,16 @@ export const QuestionWithAnswers = ({
               aria-label={
                 voterType === "voter" ? "Deine Antwort" : "Antwort der Partei"
               }
-              className="flex w-full flex-row gap-3"
+              className="grid w-full grid-cols-2 flex-row gap-3 sm:flex"
             >
               <li
-                className="h-full w-full max-w-full flex-shrink"
+                className="inline-flex flex-shrink items-stretch justify-stretch"
                 aria-label={optionLabelForYesNoValue(voterAnswer.option)}
               >
                 <OptionResult value={voterAnswer.option} type={question.type} />
               </li>
               <li
-                className="h-full w-full max-w-full flex-shrink"
+                className="inline-flex flex-shrink items-stretch justify-stretch"
                 aria-label={weightingLabelForValue(voterAnswer.weighting!)}
               >
                 <WeightingResult value={voterAnswer.weighting!} />
