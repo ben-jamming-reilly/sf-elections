@@ -44,12 +44,6 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
       },
-      {
-        url: "https://wahlchecker.at/shareable-square.png",
-        alt: "Wahl-Checker EU 2024 von andereseits",
-        width: 1200,
-        height: 1200,
-      },
     ],
   },
 };
