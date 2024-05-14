@@ -75,7 +75,7 @@ export const QuestionWithAnswers = ({
       </h2>
 
       {voterAnswer && (
-        <section className="mb-6">
+        <section className="mb-6 w-full">
           {voterType === "voter" && (
             <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
           )}
@@ -84,12 +84,18 @@ export const QuestionWithAnswers = ({
               aria-label={
                 voterType === "voter" ? "Deine Antwort" : "Antwort der Partei"
               }
-              className="flex flex-row gap-3"
+              className="flex w-full flex-row gap-3"
             >
-              <li aria-label={optionLabelForYesNoValue(voterAnswer.option)}>
+              <li
+                className="h-full w-full max-w-full flex-shrink"
+                aria-label={optionLabelForYesNoValue(voterAnswer.option)}
+              >
                 <OptionResult value={voterAnswer.option} type={question.type} />
               </li>
-              <li aria-label={weightingLabelForValue(voterAnswer.weighting!)}>
+              <li
+                className="h-full w-full max-w-full flex-shrink"
+                aria-label={weightingLabelForValue(voterAnswer.weighting!)}
+              >
                 <WeightingResult value={voterAnswer.weighting!} />
               </li>
             </ul>

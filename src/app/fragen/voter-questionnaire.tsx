@@ -28,6 +28,7 @@ import { GlossarEntry } from "@prisma/client";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { GlossaredText } from "../ui/glossared-text";
 import { Button } from "../ui/button";
+import useMediaQuery from "~/hooks/useMediaQuery";
 
 const variants = {
   enter: (direction: number) => {
@@ -351,6 +352,7 @@ export const VoterQuestionnaire = ({
 };
 
 const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
+  const isMobile = useMediaQuery("(max-width: 640px)");
   const [state, setState] = useState<"idle" | "loading" | "error" | "success">(
     "idle",
   );
@@ -367,6 +369,18 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
       aria-describedby="newsletter-cta-title"
       className="mx-auto w-[672px] max-w-full space-y-5 text-[1.125rem] leading-[1.6875rem]"
     >
+      <div className="flex items-center justify-center pb-10">
+        <Button
+          prefetch
+          as="Link"
+          href={linkToNextPage}
+          variant="primary"
+          roundness="large"
+        >
+          Zum Ergebnis
+          <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
+        </Button>
+      </div>
       <h1
         id="newsletter-cta-title"
         className="text-[2.25rem] leading-[2.75rem]"
@@ -382,11 +396,8 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
         Journalist*innen mit und ohne Behinderung gemeinsam. Gleichberechtigt,
         kritisch und fair bezahlt.
         <br />
-        Wenn Du uns Deine E-Mail Adresse gibst, dann schicken wir Dir unseren
-        Leitfaden. <br />
-        Darin erzählen Dir Redakteur*innen von{" "}
-        <span className="italic">andererseits</span>, wie Du sensibel über
-        Behinderung sprechen kannst.
+        Wenn Du uns Deine E-Mail Adresse gibst, dann schicken wir dir unseren
+        Leitfaden zu sensibler Sprache.
       </p>
 
       <p>
@@ -453,7 +464,9 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
                         className="form-control !w-full !rounded-[100px] !border-2 !border-black !px-6 !py-3 !text-black !caret-black !outline-offset-4  !outline-black focus-visible:!outline-2"
                         data-inputmask=""
                         name="fields[email]"
-                        placeholder="Deine Email Addresse"
+                        placeholder={
+                          isMobile ? "Email Addresse" : "Deine Email Addresse"
+                        }
                         autoComplete="email"
                       />
                     </div>
@@ -543,7 +556,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
         Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Checker:
       </p>
 
-      <div className="flex items-center justify-center py-5">
+      <div className="flex items-center justify-center pt-10">
         <Button
           prefetch
           as="Link"
