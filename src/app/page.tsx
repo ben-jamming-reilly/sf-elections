@@ -11,14 +11,14 @@ export default async function Home() {
     <div className="flex h-full flex-col gap-10">
       <section
         aria-label="Erklärtext zum Wahl-Checker"
-        className="mx-auto w-[900px] max-w-full text-[18px] leading-[27px]"
+        className="mx-auto w-[900px] max-w-full text-[1.125rem] leading-[1.6875rem]"
       >
-        <h1 className="my-5 font-sans text-[36px] leading-[44px]">
+        <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
           Wahl-Checker EU-Wahl 2024:
           <br /> Was sagen die Parteien?
         </h1>
 
-        <div className="space-y-4 text-[18px] leading-[24px]">
+        <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
           <p>
             {/* @ts-expect-error */}
             <GlossaredTextServer text="Vom 6. bis 9. Juni 2024 ist die Europa-Wahl." />
@@ -35,7 +35,7 @@ export default async function Home() {
             <GlossaredTextServer text="Das EU-Parlament arbeitet an den Regeln mit, die die EU für alle Mitglieds-Länder macht." />
           </p>
 
-          <h2 className="pt-5 text-[28px] leading-[34px]">
+          <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
             Was ist der Wahl-Checker?
           </h2>
           <p>
@@ -74,7 +74,7 @@ export default async function Home() {
             <GlossaredTextServer text="Du kannst den Wahl-Checker auch mit einem Screen-Reader benutzen." />
           </p>
 
-          <h2 className="pt-5 text-[28px] leading-[34px]">
+          <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
             Was ist <span className="italic">andererseits</span>?
           </h2>
           <p>
@@ -99,7 +99,9 @@ export default async function Home() {
             </a>
           </p>
 
-          <h2 className="pt-5 text-[28px] leading-[34px]">Daten-Schutz</h2>
+          <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
+            Daten-Schutz
+          </h2>
           <p>
             Der Wahl-Checker ist anonym. Das heißt: Wir wissen nicht, wer Du
             bist und wie Du abgestimmt hast. Mehr Infos zum Datenschutz findest

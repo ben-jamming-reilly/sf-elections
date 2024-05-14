@@ -53,7 +53,7 @@ export default async function Glossar() {
     <div className="w-[820px] max-w-full">
       {toolbar}
 
-      <h1 className="my-5 text-center text-[36px] leading-[44px]">
+      <h1 className="my-5 text-center text-[2.25rem] leading-[2.75rem]">
         Wort-Erklärungen
       </h1>
 
@@ -65,7 +65,7 @@ export default async function Glossar() {
           {aToZFiltered.map((letter) => (
             <Link
               key={`glossar-nav-${letter}`}
-              className="px-[8.5px] text-[18px] leading-[18px] outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black"
+              className="px-[8.5px] text-[1.125rem] leading-[1.125rem] outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black"
               href={`#${letter}`}
               title={`Zum Anfangsbuchstaben ${letter}`}
             >
@@ -88,7 +88,9 @@ export default async function Glossar() {
               id={`${letter}`}
               className="absolute -top-[120px] z-10"
             ></span>
-            <h2 className="text-[28px] font-light leading-[34px]">{letter}</h2>
+            <h2 className="text-[1.75rem] font-light leading-[2.125rem]">
+              {letter}
+            </h2>
             <div className="flex flex-col gap-6">
               {glossarEntries
                 .filter((entry) =>
@@ -102,11 +104,11 @@ export default async function Glossar() {
                   >
                     <dt
                       id={`glossar-entry-${entry.id}-title`}
-                      className="text-[18px] font-medium leading-[24px]"
+                      className="text-[1.125rem] font-medium leading-[1.5rem]"
                     >
                       {entry.term}
                     </dt>
-                    <dd className="mt-2 text-[18px] leading-[24px]">
+                    <dd className="mt-2 text-[1.125rem] leading-[1.5rem]">
                       {entry.definition}
                     </dd>
                   </dl>

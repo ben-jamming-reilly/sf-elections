@@ -211,9 +211,9 @@ export const VoterQuestionnaire = ({
                   x: { duration: 0.2 },
                   opacity: { duration: 0.2 },
                 }}
-                className="flex flex-col gap-2 text-[28px] leading-[34px] md:mb-3 md:min-h-[3.5em] md:text-2xl lg:min-h-[3em] xl:min-h-[2.5em]"
+                className="flex flex-col gap-2 text-[1.75rem] leading-[2.125rem] md:mb-3 md:min-h-[3.5em] md:text-2xl lg:min-h-[3em] xl:min-h-[2.5em]"
               >
-                <span className="block text-[18px] font-medium leading-[21px]">
+                <span className="block text-[1.125rem] font-medium leading-[1.3125rem]">
                   Frage {activeIndex + 1}:
                 </span>
                 <h1 className="hyphens-auto font-sans font-light">
@@ -260,7 +260,7 @@ export const VoterQuestionnaire = ({
                         }}
                         data-active={option.value === activeQuestion.option}
                         className={clsx(
-                          "-200 group relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[22px] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
+                          "-200 group relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[1.375rem] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
                           option.value === 1 && "bg-[#99EB8B]",
                           option.value === 0 && "bg-[#FBFF95]",
                           option.value === -1 && "bg-[#FFA06E]",
@@ -368,9 +368,12 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
   return (
     <section
       aria-describedby="newsletter-cta-title"
-      className="mx-auto w-[672px] max-w-full space-y-5 text-[18px] leading-[27px]"
+      className="mx-auto w-[672px] max-w-full space-y-5 text-[1.125rem] leading-[1.6875rem]"
     >
-      <h1 id="newsletter-cta-title" className="text-[36px] leading-[44px]">
+      <h1
+        id="newsletter-cta-title"
+        className="text-[2.25rem] leading-[2.75rem]"
+      >
         Richtige Worte?
       </h1>
       <p>

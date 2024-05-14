@@ -16,7 +16,7 @@ export const YesNoResult = ({
     <p
       aria-label={optionLabelForYesNoValue(value)}
       className={clsx(
-        "group z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black px-1 py-3 text-center text-[18px] leading-[22px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2 md:text-[22px] md:leading-[26px]",
+        "group z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black px-1 py-3 text-center text-[1.125rem] leading-[1.375rem] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2 md:text-[1.375rem] md:leading-[26px]",
         value === 1 && "bg-[#99EB8B]",
         value === 0 && "bg-[#FBFF95]",
         value === -1 && "bg-[#FFA06E]",

@@ -172,7 +172,7 @@ export const QuestionWithAnswers = ({
               roundness="large"
               variant="secondary"
               className={clsx(
-                "mx-auto inline-flex w-fit items-center px-6 py-3 text-[18px] font-semibold leading-[22px]",
+                "mx-auto inline-flex w-fit items-center px-6 py-3 text-[1.125rem] font-semibold leading-[1.375rem]",
                 isSingleComparison && "hidden",
               )}
             >

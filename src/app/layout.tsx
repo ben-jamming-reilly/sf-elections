@@ -127,7 +127,7 @@ export default function RootLayout({
                   />
                 </Link>
               </div>
-              <div className="w-full hyphens-manual py-3 text-center text-[24px] leading-[28px] text-black outline-offset-2 outline-black focus-visible:outline-2 md:w-fit md:py-0  xs:text-[28px] xs:leading-[34px]">
+              <div className="w-full hyphens-manual py-3 text-center text-[1.5rem] leading-[1.75rem] text-black outline-offset-2 outline-black focus-visible:outline-2 md:w-fit md:py-0  xs:text-[1.75rem] xs:leading-[2.125rem]">
                 Wahl-Checker EU 2024
               </div>
             </div>

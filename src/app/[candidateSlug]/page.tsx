@@ -68,7 +68,7 @@ export default async function CandidateProfile({
 
           <nav
             aria-label="Vergleichseiten mit den anderen Parteien"
-            className="flex flex-col items-center gap-1 py-6 text-[18px] leading-[21px]"
+            className="flex flex-col items-center gap-1 py-6 text-[1.125rem] leading-[1.3125rem]"
           >
             <h2 className="mb-3 block font-medium uppercase ">
               Vergleichen mit:
