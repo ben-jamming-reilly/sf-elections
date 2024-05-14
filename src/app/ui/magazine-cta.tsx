@@ -9,7 +9,7 @@ export const MagazineCta = () => {
     >
       <div className="max-w-[400px]">
         <h2 className="text-[1.75rem] font-semibold leading-[2.125rem]">
-          Mehr über die EU Wahl kannst Du in unserem gedruckten Magazin lesen.
+          Mehr über die EU-Wahl kannst Du in unserem gedruckten Magazin lesen.
         </h2>
       </div>
 

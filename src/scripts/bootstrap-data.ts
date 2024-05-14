@@ -129,6 +129,8 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
     });
     console.log(`Glossar created with ${glossarDataParsed.length} entries`);
 
+    return;
+
     const parties = partiesDataParsed.reduce(
       (acc, partyData) => {
         for (const party of PARTIES) {
@@ -209,7 +211,7 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
       console.log(notMatchedQuestions.map((question) => question.title));
 
     console.log("Deleting parties and voters");
-    await prisma.voterCandidateMatch.deleteMany();
+    // await prisma.voterCandidateMatch.deleteMany();
     await prisma.voterQuestionAnswer.deleteMany();
     await prisma.voter.deleteMany();
     await prisma.candidateQuestionAnswer.deleteMany();
