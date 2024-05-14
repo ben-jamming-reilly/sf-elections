@@ -9,6 +9,7 @@ import { constructComparision } from "./construct-comparision";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/page";
+import { MagazineCta } from "~/app/ui/magazine-cta";
 
 export const revalidate = false;
 
@@ -94,6 +95,8 @@ export default async function CandidateComparison({
             />
           ))}
       </section>
+
+      <MagazineCta />
 
       {toolbar}
     </div>

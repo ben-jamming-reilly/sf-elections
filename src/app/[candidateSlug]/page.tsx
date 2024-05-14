@@ -7,6 +7,7 @@ import { getCandidates } from "../get-candidates";
 import { QuestionWithAnswers } from "../ui/question-with-answers";
 import { PartyLogo } from "../ui/party-logo";
 import { getGlossarEntries } from "../glossar/page";
+import { MagazineCta } from "../ui/magazine-cta";
 
 export const revalidate = 18000; // 5 hours
 
@@ -118,6 +119,8 @@ export default async function CandidateProfile({
           {candidate.name} hat die Wahlkabine noch nicht beantwortet.
         </p>
       )}
+
+      <MagazineCta />
 
       {toolbar}
     </section>
