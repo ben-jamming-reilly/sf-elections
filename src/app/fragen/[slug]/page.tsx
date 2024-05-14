@@ -150,7 +150,10 @@ export default async function WahlkabineResult({
           variant="primary"
           roundness="large"
         >
-          <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
+          <ArrowRightIcon
+            aria-hidden="true"
+            className="ml-1 inline h-5 w-5 stroke-2"
+          />
           Zu den Antworten
         </Button>
       </section>

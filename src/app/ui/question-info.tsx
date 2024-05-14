@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { GlossaredText } from "./glossared-text";
 import { GlossarEntry } from "@prisma/client";
 

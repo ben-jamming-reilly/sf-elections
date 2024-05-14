@@ -28,7 +28,10 @@ export const QuestionaireButton = () => {
                 as="a"
                 href={`/fragen/${slug}`}
               >
-                <ClipboardDocumentCheckIcon className="ml-1 inline h-5 w-5 stroke-2" />
+                <ClipboardDocumentCheckIcon
+                  aria-hidden="true"
+                  className="ml-1 inline h-5 w-5 stroke-2"
+                />
                 Dein Ergebnis
               </Button>
 
@@ -40,7 +43,10 @@ export const QuestionaireButton = () => {
                   reset();
                 }}
               >
-                <ArrowPathRoundedSquareIcon className="ml-1 inline h-5 w-5 stroke-2" />
+                <ArrowPathRoundedSquareIcon
+                  aria-hidden="true"
+                  className="ml-1 inline h-5 w-5 stroke-2"
+                />
                 Neustarten
               </Button>
             </div>
@@ -51,7 +57,10 @@ export const QuestionaireButton = () => {
               as="Link"
               href="/fragen"
             >
-              <ArrowRightIcon className="ml-1 inline h-5 w-5 stroke-2" />
+              <ArrowRightIcon
+                aria-hidden="true"
+                className="ml-1 inline h-5 w-5 stroke-2"
+              />
               Zu den Fragen
             </Button>
           )}

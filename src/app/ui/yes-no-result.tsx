@@ -28,13 +28,22 @@ export const YesNoResult = ({
       {!hideIcon && (
         <>
           {value === 1 && (
-            <ThumbUpIcon className="h-10 w-10 p-1 text-transparent " />
+            <ThumbUpIcon
+              aria-hidden="true"
+              className="h-10 w-10 p-1 text-transparent "
+            />
           )}
           {value === 0 && (
-            <ThumbSideIcon className="h-10 w-10 p-1 text-transparent " />
+            <ThumbSideIcon
+              aria-hidden="true"
+              className="h-10 w-10 p-1 text-transparent "
+            />
           )}
           {value === -1 && (
-            <ThumbDownIcon className="h-10 w-10 p-1 text-transparent " />
+            <ThumbDownIcon
+              aria-hidden="true"
+              className="h-10 w-10 p-1 text-transparent "
+            />
           )}
         </>
       )}

@@ -20,7 +20,7 @@ export const DownloadImageLink = ({
       target="_blank"
       href={href}
     >
-      <ArrowDownTrayIcon className="h-4 w-4 stroke-2" />
+      <ArrowDownTrayIcon aria-hidden="true" className="h-4 w-4 stroke-2" />
       {children}
     </Button>
   );

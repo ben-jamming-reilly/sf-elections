@@ -203,7 +203,7 @@ const GlossarModal = ({
           ref={closeButtonRef}
           className="p- absolute right-5 top-5 transition-all focus-visible:outline-2 focus-visible:outline-black notouch:hover:bg-black notouch:hover:text-white notouch:hover:active:scale-95"
         >
-          <XMarkIcon className="h-8 w-8" />
+          <XMarkIcon aria-hidden="true" className="h-8 w-8" />
         </button>
         <h2 className="mb-2 text-xl font-semibold">{`${entry.term}:`}</h2>
         <p>{entry.definition}</p>

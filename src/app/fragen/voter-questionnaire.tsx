@@ -22,15 +22,12 @@ import {
 } from "~/stores/questionnaire-store-voter";
 import { QuestionCategoryLabel } from "../ui/question-category-label";
 import { useHasHydrated } from "~/hooks/useHasHydrated";
-import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { ThumbDownIcon, ThumbSideIcon, ThumbUpIcon } from "../ui/yes-no-result";
 import { GlossarEntry } from "@prisma/client";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { GlossaredText } from "../ui/glossared-text";
 import { Button } from "../ui/button";
-import Image from "next/image";
-import { NewsletterSignupResponse } from "../api/newsletter-signup/route";
 
 const variants = {
   enter: (direction: number) => {

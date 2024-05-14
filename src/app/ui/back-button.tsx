@@ -12,7 +12,7 @@ export const BackButton = ({
 }) => {
   return (
     <Button as="a" roundness="small" variant="secondary" href={href}>
-      <ArrowLeftCircleIcon className="h-5 w-5 stroke-2" />
+      <ArrowLeftCircleIcon aria-hidden="true" className="h-5 w-5 stroke-2" />
       {children}
     </Button>
   );

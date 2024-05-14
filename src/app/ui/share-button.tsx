@@ -54,7 +54,7 @@ export const ShareButton = ({
           "flex items-center justify-center gap-2 transition-opacity",
         )}
       >
-        <ShareIcon className="h-4 w-4 stroke-2" />
+        <ShareIcon aria-hidden="true" className="h-4 w-4 stroke-2" />
         {children}
       </div>
     </Button>

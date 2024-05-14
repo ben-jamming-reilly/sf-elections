@@ -17,7 +17,7 @@ export default function Error() {
         href="/"
         className="inline-flex  items-center  justify-center gap-2 rounded-md  border border-brand px-3 py-2 text-lg text-brand transition-all active:scale-95 notouch:hover:bg-brand  notouch:hover:text-white"
       >
-        <ArrowLeftCircleIcon className="h-5 w-5 stroke-2" />
+        <ArrowLeftCircleIcon aria-hidden="true" className="h-5 w-5 stroke-2" />
         Zur Startseite
       </Link>
     </div>
