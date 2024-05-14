@@ -73,8 +73,8 @@ export const GlossaredText = ({
 
   return (
     <>
-      <span className="sr-only">{text}</span>
-      <span aria-hidden="true">
+      {/* <span className="sr-only">{text}</span> */}
+      <span>
         <ReplacedText
           text={text}
           glossarEntries={glossarEntries}

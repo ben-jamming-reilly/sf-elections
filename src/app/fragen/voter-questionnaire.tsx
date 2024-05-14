@@ -506,7 +506,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
                 className="mt-5 flex items-center gap-2 font-semibold text-red-500"
               >
                 <XMarkIcon
-                  aria-hidden
+                  aria-hidden="true"
                   className="inline-block h-5 w-5 stroke-2"
                 />
                 {message}
@@ -519,7 +519,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
                 className="mt-5 flex items-start justify-start gap-2  "
               >
                 <ThumbUpIcon
-                  aria-hidden
+                  aria-hidden="true"
                   className="mt-1 inline-block h-5 w-5 stroke-2 text-green-500"
                 />
 

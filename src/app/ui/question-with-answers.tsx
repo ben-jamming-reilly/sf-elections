@@ -32,7 +32,7 @@ export const QuestionWithAnswers = ({
   glossarEntries,
   voterType = "voter",
 }: {
-  voterType: "voter" | "candidate";
+  voterType?: "voter" | "candidate";
   question: {
     id: number;
     title: string;
@@ -59,7 +59,7 @@ export const QuestionWithAnswers = ({
 
   return (
     <article
-      aria-labelledby={`aria-label-question-${question.order}`}
+      aria-labelledby={`aria-label-question-${question.order + 1}`}
       key={`question-with-answers-${question.id}`}
       className="w-full"
     >
@@ -129,6 +129,7 @@ export const QuestionWithAnswers = ({
                   <PartyLogo
                     className="absolute left-0 top-0 z-20 h-full w-[75px] rounded-[100px]  border-2 sm:w-2/3 xxs:w-[100px] xxs:rounded-[200px] xs:w-2/3"
                     href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
+                    title={`Zur ${candidate.name} Seite`}
                     src={`/${candidate.profileImg}`}
                     alt={`${candidate.name}`}
                     priority
@@ -221,6 +222,7 @@ export const QuestionWithAnswers = ({
                         <PartyLogo
                           className="group absolute -top-[30px] left-1/2 h-[60px] w-[170px] -translate-x-1/2 sm:w-[150px] md:-top-[44px] md:left-auto md:right-10 md:h-[88px] md:translate-x-0 xl:-top-[30px] xl:h-[60px]"
                           href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
+                          title={`Zur ${candidate.name} Seite`}
                           src={`/${candidate.profileImg}`}
                           priority
                         />

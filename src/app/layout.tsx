@@ -138,14 +138,14 @@ export default function RootLayout({
                 <span
                   id="content"
                   className="absolute -top-20 left-0"
-                  aria-hidden
+                  aria-hidden="true"
                 ></span>
                 {children}
               </main>
             </div>
           </div>
           <footer className=" border-t border-black py-5 ">
-            <ul
+            <div
               aria-label="Links zu andererseits.org, Impressum und Datenschutz"
               className="flex w-full flex-col items-center justify-center gap-3"
             >
@@ -178,7 +178,7 @@ export default function RootLayout({
                   </Link>
                 </li>
               </ul>
-            </ul>
+            </div>
           </footer>
         </div>
         <EasterEgg />

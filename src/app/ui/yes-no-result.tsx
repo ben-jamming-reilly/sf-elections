@@ -13,7 +13,7 @@ export const YesNoResult = ({
   className?: string;
 }) => {
   return (
-    <p
+    <div
       aria-label={optionLabelForYesNoValue(value)}
       className={clsx(
         "group z-10 flex h-full w-[260px] max-w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black px-1 py-3 text-center text-[1.125rem] leading-[1.375rem] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2 md:text-[1.375rem] md:leading-[26px]",
@@ -23,7 +23,9 @@ export const YesNoResult = ({
         className,
       )}
     >
-      {!hideLabel && <span aria-hidden>{optionLabelForYesNoValue(value)}</span>}
+      {!hideLabel && (
+        <span aria-hidden="true">{optionLabelForYesNoValue(value)}</span>
+      )}
       {!hideIcon && (
         <>
           {value === 1 && (
@@ -37,7 +39,7 @@ export const YesNoResult = ({
           )}
         </>
       )}
-    </p>
+    </div>
   );
 };
 
