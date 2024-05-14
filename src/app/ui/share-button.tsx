@@ -33,12 +33,20 @@ export const ShareButton = ({
       roundness="small"
       onClick={async (e) => {
         try {
-          if (navigator.share) {
-            await navigator.share({
-              title,
-              text,
-              url: window.location.href,
-            });
+          const blob = await fetch("/shareable-wide.png").then((r) => r.blob());
+          const data: ShareData = {
+            title,
+            text,
+            url: window.location.href,
+            files: [
+              new File([blob], "shareable-wide.png", {
+                type: "image/png",
+              }),
+            ],
+          };
+
+          if (navigator.canShare(data)) {
+            await navigator.share(data);
             setCopied(true);
           } else {
             await navigator.clipboard.writeText(window.location.href);

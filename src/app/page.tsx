@@ -74,7 +74,23 @@ export default async function Home() {
             <GlossaredTextServer text="Du kannst den Wahl-Checker auch mit einem Screen-Reader benutzen." />
           </p>
 
-          <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
+          <nav
+            aria-label="Zu den Fragen oder Wort-Erklärungen"
+            className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl md:flex-row"
+          >
+            <Button
+              roundness="large"
+              className=""
+              as="a"
+              variant="secondary"
+              href="/glossar"
+            >
+              Wort-Erklärungen
+            </Button>
+            <QuestionaireButton />
+          </nav>
+
+          <h2 className=" text-[1.75rem] leading-[2.125rem]">
             Was ist <span className="italic">andererseits</span>?
           </h2>
           <p>
@@ -112,22 +128,6 @@ export default async function Home() {
           </p>
         </div>
       </section>
-
-      <nav
-        aria-label="Zu den Fragen oder Wort-Erklärungen"
-        className="mx-auto flex w-fit flex-col gap-5 text-2xl md:flex-row"
-      >
-        <Button
-          roundness="large"
-          className=""
-          as="a"
-          variant="secondary"
-          href="/glossar"
-        >
-          Wort-Erklärungen
-        </Button>
-        <QuestionaireButton />
-      </nav>
     </div>
   );
 }

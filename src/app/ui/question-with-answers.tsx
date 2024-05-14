@@ -187,7 +187,10 @@ export const QuestionWithAnswers = ({
               )}
             >
               Mehr Infos:
-              <ChevronRightIcon className="ml-1 h-6 w-6 stroke-[1.5px] transition-all group-open:rotate-90" />
+              <ChevronRightIcon
+                aria-hidden="true"
+                className="ml-1 h-6 w-6 stroke-[1.5px] transition-all group-open:rotate-90"
+              />
             </Button>
             <AnimatePresence mode="wait">
               {detailsOpen && (

@@ -48,7 +48,7 @@ export default async function WahlkabineResultDetails({
       </ShareButton>
       <DownloadImageLink
         title="wahlchecker-andererseits.jpg"
-        href={`/shareable-wide.jpg`}
+        href={`/shareable-wide.png`}
       >
         Bild zum Teilen
       </DownloadImageLink>
