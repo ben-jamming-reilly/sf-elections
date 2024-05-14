@@ -19,7 +19,9 @@ const ReplacedText = ({
 
   let parts: Array<ReactNode> | string = text;
   const hasMatched: Record<string, boolean> = {};
-  for (const entry of glossarEntries) {
+  for (const entry of glossarEntries.sort(
+    (a, b) => b.term.length - a.term.length,
+  )) {
     const synonyms =
       entry.synonyms !== ""
         ? entry.synonyms.split(",").concat(entry.term)
