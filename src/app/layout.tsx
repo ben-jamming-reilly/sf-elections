@@ -10,18 +10,44 @@ import "./mailerlite.css";
 
 export const metadata: Metadata = {
   title: "Wahl-Checker EU 2024 von andereseits",
-  description: "",
-  twitter: {
-    card: "summary_large_image",
-    title: "Wahl-Checker EU 2024 von andereseits",
-    description: "",
-    site: "wahlchecker.at",
+  description: "Finde heraus welche Partei zu Dir passt!",
+  openGraph: {
     images: [
       {
-        url: "wahlchecker.at/opengraph-image",
+        url: "https://wahlchecker.at/shareable-wide.png",
         alt: "Wahl-Checker EU 2024 von andereseits",
         width: 1200,
         height: 630,
+      },
+      {
+        url: "https://wahlchecker.at/shareable-square.png",
+        alt: "Wahl-Checker EU 2024 von andereseits",
+        width: 1200,
+        height: 1200,
+      },
+    ],
+    title: "Wahl-Checker EU 2024 von andereseits",
+    description: "Finde heraus welche Partei zu Dir passt!",
+    siteName: "wahlchecker.at",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wahl-Checker EU 2024 von andereseits",
+    description: "Finde heraus welche Partei zu Dir passt!",
+    creator: "@andererseits",
+    site: "wahlchecker.at",
+    images: [
+      {
+        url: "https://wahlchecker.at/shareable-wide.png",
+        alt: "Wahl-Checker EU 2024 von andereseits",
+        width: 1200,
+        height: 630,
+      },
+      {
+        url: "https://wahlchecker.at/shareable-square.png",
+        alt: "Wahl-Checker EU 2024 von andereseits",
+        width: 1200,
+        height: 1200,
       },
     ],
   },

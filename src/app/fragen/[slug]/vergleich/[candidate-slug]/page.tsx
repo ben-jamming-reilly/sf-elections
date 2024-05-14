@@ -48,10 +48,10 @@ export default async function WahlkabineResultCandidate({
         Teilen
       </ShareButton>
       <DownloadImageLink
-        title={`wahlchecker-andererseits-vergleich-${candidate.name}.jpg`}
-        href={`/api/og/generate/instagram/result-comparision?slug=${params.slug}&candidateSlug=${candidate.slug}`}
+        title="wahlchecker-andererseits.jpg"
+        href={`/shareable-wide.jpg`}
       >
-        Bild herunterladen
+        Bild zum Teilen
       </DownloadImageLink>
     </aside>
   );

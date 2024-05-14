@@ -21,7 +21,7 @@ export const DownloadImageLink = ({
       href={href}
     >
       <ArrowDownTrayIcon className="h-4 w-4 stroke-2" />
-      Bild herunterladen
+      {children}
     </Button>
   );
 };

@@ -45,10 +45,10 @@ export default async function WahlkabineResult({
       <BackButton href={`/`}>Zur Startseite</BackButton>
       <ShareButton title="Wahl-Checker EU 2024">Teilen</ShareButton>
       <DownloadImageLink
-        title="andererseits-Wahl-Checker EU-resultat.jpg"
-        href={`/api/og/generate/instagram/result?slug=${params.slug}`}
+        title="wahlchecker-andererseits.jpg"
+        href={`/shareable-wide.jpg`}
       >
-        Bild herunterladen
+        Bild zum Teilen
       </DownloadImageLink>
     </aside>
   );
