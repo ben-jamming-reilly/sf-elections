@@ -72,19 +72,22 @@ export const ShareButton = ({
             initial={{
               opacity: 0,
               y: 10,
+              scale: 0.95,
               x: "-50%",
             }}
             animate={{
               opacity: 1,
               y: 0,
+              scale: 1,
               x: "-50%",
             }}
             exit={{
               opacity: 0,
               y: 10,
+              scale: 0.95,
               x: "-50%",
             }}
-            className="absolute left-1/2 top-[calc(100%+10px)] w-fit rounded-sm bg-black px-2 py-1 text-white"
+            className="absolute left-1/2 top-[calc(100%+10px)] w-fit rounded-lg bg-black px-2 py-1 text-white"
           >
             Link&nbsp;kopiert
           </motion.span>
