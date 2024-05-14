@@ -320,7 +320,7 @@ export const VoterQuestionnaire = ({
                 disabled={!hasPrevious}
                 onClick={handlePrev}
                 type="prev"
-                className={clsx(!hasPrevious && "hidden sm:invisible sm:block")}
+                className={clsx(!hasPrevious && "hidden xs:invisible xs:block")}
               />
               <span className="text-lg">
                 {activeIndex + 1} / {questionsWithAnswers.length}
