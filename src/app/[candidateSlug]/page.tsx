@@ -140,15 +140,5 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   return {
     title: `${candidate.name} | Wahl-Checker EU 2024 von andereseits`,
     description: `15 Fragen beantwortet von ${candidate.name}.`,
-    twitter: {
-      card: "summary_large_image",
-      site: "wahlchecker.at/",
-      images: [
-        {
-          url: `https;//wahlchecker.at/${params.candidateSlug}/opengraph-image`,
-          alt: "Wahl-Checker EU 2024 von andereseits",
-        },
-      ],
-    },
   };
 }

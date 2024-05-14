@@ -3,21 +3,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Datenschutz | Wahl-Checker EU 2024 von andereseits",
-  description: "",
-  twitter: {
-    card: "summary_large_image",
-    title: "Datenschutz | Wahl-Checker EU 2024 von andereseits",
-    description: "",
-    site: "wahlchecker.at",
-    images: [
-      {
-        url: "wahlchecker.at/opengraph-image",
-        alt: "Datenschutz | Wahl-Checker EU 2024 von andereseits",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
+  description:
+    "Unsere Datenschutzerklärung für Wahl-Checker EU 2024 von andereseits",
 };
 
 export default function Datenschutz({}: {}) {

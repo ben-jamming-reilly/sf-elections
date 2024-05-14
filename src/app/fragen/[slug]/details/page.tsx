@@ -130,20 +130,6 @@ export async function generateMetadata({
 
   return {
     title: `Mein Wahl-Checker EU Ergebnis `,
-    description: ``,
-    twitter: {
-      card: "summary_large_image",
-      site: "wahlchecker.at",
-      title: `Mein Wahl-Checker EU Ergebnis `,
-      description: ``,
-      images: [
-        {
-          url: `https;//wahlchecker.at/fragen/${params.slug}/opengraph-image`,
-          alt: "Wahl-Checker EU 2024 von andereseits",
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
+    description: `Schau Dir an, welche Parteien ähnlich wie Du auf die 15 Fragen geantwortet haben.`,
   };
 }
