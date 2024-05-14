@@ -80,10 +80,19 @@ export const QuestionWithAnswers = ({
             <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
           )}
           {voterAnswer.option !== null && voterAnswer.weighting !== null ? (
-            <div className="flex flex-row gap-3">
-              <OptionResult value={voterAnswer.option} type={question.type} />
-              <WeightingResult value={voterAnswer.weighting!} />
-            </div>
+            <ul
+              aria-label={
+                voterType === "voter" ? "Deine Antwort" : "Antwort der Partei"
+              }
+              className="flex flex-row gap-3"
+            >
+              <li aria-label={optionLabelForYesNoValue(voterAnswer.option)}>
+                <OptionResult value={voterAnswer.option} type={question.type} />
+              </li>
+              <li aria-label={weightingLabelForValue(voterAnswer.weighting!)}>
+                <WeightingResult value={voterAnswer.weighting!} />
+              </li>
+            </ul>
           ) : (
             <div className="w-full">
               <QuestionUnansweredResult />
