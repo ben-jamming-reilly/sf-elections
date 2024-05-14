@@ -80,8 +80,7 @@ export default async function Home() {
           <p>
             Der Wahl-Checker wird von der Medienhaus andererseits GmbH
             veröffentlicht und wurde in Kooperation mit dem Verein andererseits
-            - für Inklusion im Journalismus und mit Unterstützung der
-            Hil-Foundation entwickelt.
+            - für Inklusion im Journalismus und der Hil-Foundation entwickelt.
           </p>
           <p>
             <span className="italic">andererseits</span> ist ein Magazin für
