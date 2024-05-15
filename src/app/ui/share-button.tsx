@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { ReactNode, useEffect, useState } from "react";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { Button } from "./button";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const ShareButton = ({
   children,
@@ -31,6 +32,7 @@ export const ShareButton = ({
       as="button"
       variant="secondary"
       roundness="small"
+      className="relative"
       onClick={async (e) => {
         try {
           const blob = await fetch("/shareable-wide.png").then((r) => r.blob());
@@ -45,9 +47,8 @@ export const ShareButton = ({
             ],
           };
 
-          if (navigator.canShare(data)) {
+          if (navigator.canShare && navigator.canShare(data)) {
             await navigator.share(data);
-            setCopied(true);
           } else {
             await navigator.clipboard.writeText(window.location.href);
             setCopied(true);
@@ -65,6 +66,33 @@ export const ShareButton = ({
         <ShareIcon aria-hidden="true" className="h-4 w-4 stroke-2" />
         {children}
       </div>
+      <AnimatePresence>
+        {copied && (
+          <motion.span
+            initial={{
+              opacity: 0,
+              y: 10,
+              scale: 0.95,
+              x: "-50%",
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              x: "-50%",
+            }}
+            exit={{
+              opacity: 0,
+              y: 10,
+              scale: 0.95,
+              x: "-50%",
+            }}
+            className="absolute left-1/2 top-[calc(100%+10px)] w-fit rounded-lg bg-black px-2 py-1 text-white"
+          >
+            Link&nbsp;kopiert
+          </motion.span>
+        )}
+      </AnimatePresence>
     </Button>
   );
 };

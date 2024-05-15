@@ -9,6 +9,7 @@ import { constructComparision } from "./construct-comparision";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/page";
+import { MagazineCta } from "~/app/ui/magazine-cta";
 
 export const revalidate = false;
 
@@ -95,6 +96,8 @@ export default async function CandidateComparison({
           ))}
       </section>
 
+      <MagazineCta />
+
       {toolbar}
     </div>
   );
@@ -120,15 +123,6 @@ export async function generateMetadata({
     description: `Vergleich zwischen ${candidates
       .map((c) => c.name)
       .join(" und ")}`,
-    openGraph: {
-      images: [
-        {
-          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
-            ",",
-          )}`,
-        },
-      ],
-    },
     twitter: {
       card: "summary_large_image",
       site: "wahlchecker.at",
@@ -138,16 +132,6 @@ export async function generateMetadata({
       description: `Vergleich zwischen ${candidates
         .map((c) => c.name)
         .join(" und ")}`,
-      images: [
-        {
-          url: `${BASE_URL}/api/og?type=vergleich&candidateSlugs=${params.candidateSlugs.join(
-            ",",
-          )}`,
-          alt: "EU-Whalinfos 2024 – andereseits.org",
-          width: 1200,
-          height: 630,
-        },
-      ],
     },
   };
 }

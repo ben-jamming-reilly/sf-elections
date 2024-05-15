@@ -258,7 +258,7 @@ export const VoterQuestionnaire = ({
                         }}
                         data-active={option.value === activeQuestion.option}
                         className={clsx(
-                          "-200 group relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[1.375rem] leading-[26px] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
+                          "-200 group relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-[100px] border-2 border-black py-3 text-center text-[1.375rem] leading-[1.625rem] text-black outline-offset-4 outline-black transition-all focus-visible:outline-2",
                           option.value === 1 && "bg-[#99EB8B]",
                           option.value === 0 && "bg-[#FBFF95]",
                           option.value === -1 && "bg-[#FFA06E]",
@@ -320,7 +320,7 @@ export const VoterQuestionnaire = ({
                 disabled={!hasPrevious}
                 onClick={handlePrev}
                 type="prev"
-                className={clsx(!hasPrevious && "hidden sm:invisible sm:block")}
+                className={clsx(!hasPrevious && "hidden xs:invisible xs:block")}
               />
               <span className="text-lg">
                 {activeIndex + 1} / {questionsWithAnswers.length}

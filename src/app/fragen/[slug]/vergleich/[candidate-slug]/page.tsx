@@ -7,6 +7,7 @@ import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/page";
+import { MagazineCta } from "~/app/ui/magazine-cta";
 
 export type WahlkabineResultCandidate = {
   params: {
@@ -97,6 +98,8 @@ export default async function WahlkabineResultCandidate({
           ))}
       </section>
 
+      <MagazineCta />
+
       {toolbar}
     </div>
   );
@@ -111,21 +114,7 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   }
 
   return {
-    title: `Vergleich mit ${candidate.name} - wahlchecker.at`,
+    title: `Vergleich mit ${candidate.name} | Wahl-Checker EU 2024 von andereseits`,
     description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
-    twitter: {
-      card: "summary_large_image",
-      site: "wahlchecker.at",
-      title: `Vergleich mit ${candidate.name} - wahlchecker.at`,
-      description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
-      images: [
-        {
-          url: `https;//wahlchecker.at/fragen/${params.slug}/vergleich/${params["candidate-slug"]}/opengraph-image`,
-          alt: "SPÖ Vorsitzbefragungs-Kabine",
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
   };
 }

@@ -96,7 +96,7 @@ export const CATEGORIES = [
     hex: "#005CB9",
   },
   {
-    label: "DIE ZUKUNFT DER EU",
+    label: "Die Zukunft der EU",
     hex: "#CC00CC",
   },
 ];

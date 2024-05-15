@@ -3,6 +3,7 @@ import Link from "next/link";
 import { QuestionaireButton } from "./questionaire-button";
 import { Button } from "./ui/button";
 import { GlossaredTextServer } from "./ui/glossared-text.server";
+import { MagazineCta } from "./ui/magazine-cta";
 
 export const revalidate = false;
 
@@ -127,6 +128,8 @@ export default async function Home() {
             </Link>
           </p>
         </div>
+
+        <MagazineCta />
       </section>
     </div>
   );

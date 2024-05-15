@@ -19,7 +19,9 @@ const ReplacedText = ({
 
   let parts: Array<ReactNode> | string = text;
   const hasMatched: Record<string, boolean> = {};
-  for (const entry of glossarEntries) {
+  for (const entry of glossarEntries.sort(
+    (a, b) => b.term.length - a.term.length,
+  )) {
     const synonyms =
       entry.synonyms !== ""
         ? entry.synonyms.split(",").concat(entry.term)
@@ -42,7 +44,7 @@ const ReplacedText = ({
 
         return (
           <a
-            key={`glossar-${id}-${index}`}
+            key={`glossar-${id}-${match}-${index}`}
             onClick={(e) => {
               e.preventDefault();
               onClick(entry);
@@ -177,7 +179,7 @@ const GlossarModal = ({
       transition={{
         duration: 0.1,
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2 shadow-xl"
+      className="fixed inset-0 z-50 flex  items-center justify-center  bg-black bg-opacity-50 p-2 shadow-xl"
     >
       <motion.div
         transition={{
@@ -195,7 +197,7 @@ const GlossarModal = ({
           opacity: 0,
           scale: prefersReducedMotion ? 1 : 0.9,
         }}
-        className="relative w-[440px] rounded-[30px] bg-white p-6 py-10 md:p-10"
+        className="relative max-h-full w-[440px] overflow-y-auto rounded-[30px] bg-white p-6 py-10 md:p-10"
       >
         <button
           aria-label="Schließen"
@@ -205,8 +207,8 @@ const GlossarModal = ({
         >
           <XMarkIcon aria-hidden="true" className="h-8 w-8" />
         </button>
-        <h2 className="mb-2 text-xl font-semibold">{`${entry.term}:`}</h2>
-        <p>{entry.definition}</p>
+        <h2 className="mb-2 text-2xl font-semibold">{`${entry.term}:`}</h2>
+        <p className="text-[1.375rem] leading-[1.625rem]">{entry.definition}</p>
       </motion.div>
     </motion.div>
   );
