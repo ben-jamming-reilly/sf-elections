@@ -214,7 +214,7 @@ export const VoterQuestionnaire = ({
                 <span className="block text-[1.125rem] font-medium leading-[1.3125rem]">
                   Frage {activeIndex + 1}:
                 </span>
-                <h1 className="hyphens-auto font-sans font-light">
+                <h1 className="font-sans font-light">
                   <GlossaredText
                     text={activeQuestion.title}
                     glossarEntries={glossarEntries}

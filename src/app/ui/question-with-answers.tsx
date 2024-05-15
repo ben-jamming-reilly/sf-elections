@@ -69,7 +69,7 @@ export const QuestionWithAnswers = ({
       <div className="mt-3 text-lg">Frage {question.order + 1}:</div>
       <h2
         id={`aria-label-question-${question.order + 1}`}
-        className="mb-5 hyphens-auto font-sans text-2xl"
+        className="mb-5 font-sans text-2xl"
       >
         <GlossaredText glossarEntries={glossarEntries} text={question.title} />
       </h2>
