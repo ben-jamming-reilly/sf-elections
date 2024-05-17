@@ -72,7 +72,7 @@ export default async function Home() {
             {/* @ts-expect-error */}
             <GlossaredTextServer text="Wir haben außerdem Erklärungen zu wichtigen Wörtern geschrieben. Die Wörter sind gelb markiert. Wenn Du ein gelb markiertes Wort anklickst, kannst Du die Erklärung lesen. Du findest alle Erklärungen auch auf der Seite „Wort-Erklärungen“." />{" "}
             {/* @ts-expect-error */}
-            
+          </p>
 
           <nav
             aria-label="Zu den Fragen oder Wort-Erklärungen"
