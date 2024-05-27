@@ -72,7 +72,6 @@ export default async function Home() {
             {/* @ts-expect-error */}
             <GlossaredTextServer text="Wir haben außerdem Erklärungen zu wichtigen Wörtern geschrieben. Die Wörter sind gelb markiert. Wenn Du ein gelb markiertes Wort anklickst, kannst Du die Erklärung lesen. Du findest alle Erklärungen auch auf der Seite „Wort-Erklärungen“." />{" "}
             {/* @ts-expect-error */}
-            <GlossaredTextServer text="Du kannst den Wahl-Checker auch mit einem Screen-Reader benutzen." />
           </p>
 
           <nav
