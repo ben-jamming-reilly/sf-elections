@@ -141,7 +141,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
   }
 
   return {
-    title: `${candidate.name} | Wahl-Checker EU 2024 von andereseits`,
+    title: `${candidate.name} | Wahl-Checker EU 2024 von andererseits`,
     description: `15 Fragen beantwortet von ${candidate.name}.`,
   };
 }

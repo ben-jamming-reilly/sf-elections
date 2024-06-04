@@ -6,12 +6,12 @@ import { unstable_cache } from "next/cache";
 
 export async function generateMetadata() {
   return {
-    title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andereseits`,
+    title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andererseits`,
     description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
     twitter: {
       card: "summary_large_image",
       site: "wahlchecker.at",
-      title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andereseits`,
+      title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andererseits`,
       description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
     },
   };

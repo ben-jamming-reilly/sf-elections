@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Datenschutz | Wahl-Checker EU 2024 von andereseits",
+  title: "Datenschutz | Wahl-Checker EU 2024 von andererseits",
   description:
-    "Unsere Datenschutzerklärung für Wahl-Checker EU 2024 von andereseits",
+    "Unsere Datenschutzerklärung für Wahl-Checker EU 2024 von andererseits",
 };
 
 export default function Datenschutz({}: {}) {

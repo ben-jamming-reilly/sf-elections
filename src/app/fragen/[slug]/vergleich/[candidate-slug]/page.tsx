@@ -114,7 +114,7 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   }
 
   return {
-    title: `Vergleich mit ${candidate.name} | Wahl-Checker EU 2024 von andereseits`,
+    title: `Vergleich mit ${candidate.name} | Wahl-Checker EU 2024 von andererseits`,
     description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
   };
 }

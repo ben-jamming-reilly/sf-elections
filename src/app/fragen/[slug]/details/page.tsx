@@ -44,7 +44,7 @@ export default async function WahlkabineResultDetails({
       className="flex flex-row flex-wrap justify-center gap-5 pb-5"
     >
       <BackButton href={`/fragen/${params.slug}/`}>Zur Übersicht</BackButton>
-      <ShareButton title="Wahl-Checker EU 2024 von andereseits">
+      <ShareButton title="Wahl-Checker EU 2024 von andererseits">
         Teilen
       </ShareButton>
       <DownloadImageLink

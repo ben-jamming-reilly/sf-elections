@@ -3,7 +3,7 @@ import { VoterQuestionnaire } from "./voter-questionnaire";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Fragen | Wahl-Checker EU 2024 von andereseits",
+  title: "Fragen | Wahl-Checker EU 2024 von andererseits",
   description: "15 Fragen zur EU-Wahl 2024 beantwortet von 7 Parteien.",
 };
 

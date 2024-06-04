@@ -45,7 +45,7 @@ export default async function CandidateComparison({
         title={`Vergleich zwischen ${randomCandidates
           .map((c) => c.name)
           .join(" und ")}`}
-        text="Wahl-Checker EU 2024 von andereseits"
+        text="Wahl-Checker EU 2024 von andererseits"
       >
         Seite teilen
       </ShareButton>
