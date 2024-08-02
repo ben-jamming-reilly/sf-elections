@@ -6,7 +6,7 @@ import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
-import { getGlossarEntries } from "~/app/glossar/page";
+import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 
 export type WahlkabineResultDetailsProps = {
