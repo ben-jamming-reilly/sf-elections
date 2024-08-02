@@ -9,7 +9,11 @@ export const metadata: Metadata = {
 
 export const revalidate = 18000; // 5 hours
 
-export default async function Wahlkabine() {
+export default async function Wahlkabine({
+  params,
+}: {
+  params: { electionSlug: string };
+}) {
   const [questions, glossarEntries] = await Promise.all([
     prisma.question.findMany({
       orderBy: { order: "asc" },
@@ -20,6 +24,7 @@ export default async function Wahlkabine() {
   return (
     <div className="pt-5">
       <VoterQuestionnaire
+        electionSlug={params.electionSlug}
         questions={questions.map((q) => ({
           ...q,
           option: null,

@@ -3,7 +3,7 @@
 // Next.js 13.3 bugs out when the `opengraph-image.tsx` file convention conflicts a dynamic route like `/[...slug].tsx` or `/[slug]/[candidate-slug].tsx`. This is a workaround.
 
 import { NextResponse } from "next/server";
-import type { CandidateComparisonProps } from "~/app/vergleich/[...candidateSlugs]/page";
+import type { CandidateComparisonProps } from "~/app/[electionSlug]/vergleich/[...candidateSlugs]/page";
 import { FetchCandidatesResponse } from "./fetch-candidates/route";
 import { cacheHeader } from "pretty-cache-header";
 import { BASE_URL } from "./baseUrl";

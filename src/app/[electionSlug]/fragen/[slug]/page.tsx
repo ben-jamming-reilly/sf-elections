@@ -13,6 +13,7 @@ import { MagazineCta } from "~/app/ui/magazine-cta";
 export type WahlkabineResultProps = {
   params: {
     slug: string;
+    electionSlug: string;
   };
 };
 
@@ -43,7 +44,7 @@ export default async function WahlkabineResult({
       aria-label="Zurück & Teilen"
       className="flex flex-row flex-wrap justify-center gap-5"
     >
-      <BackButton href={`/`}>Zur Startseite</BackButton>
+      <BackButton href={`/${params.electionSlug}`}>Zur Startseite</BackButton>
       <ShareButton title="Wahl-Checker EU 2024">Teilen</ShareButton>
       <DownloadImageLink
         title="wahlchecker-andererseits.jpg"
@@ -95,7 +96,7 @@ export default async function WahlkabineResult({
                   src={`/${match.candidate.profileImg}`}
                   alt=""
                   title={`Vergleiche Deine Antworten mit ${match.candidate.name}`}
-                  href={`/fragen/${params.slug}/vergleich/${match.candidate.slug}`}
+                  href={`/${params.electionSlug}/fragen/${params.slug}/vergleich/${match.candidate.slug}`}
                   className="z-20 -mt-[2px] h-[calc(100%+4px)] w-[120px] border-2 sm:w-[180px] xs:w-[150px]"
                 />
 
@@ -147,7 +148,7 @@ export default async function WahlkabineResult({
 
         <Button
           as="Link"
-          href={`/fragen/${params.slug}/details`}
+          href={`/${params.electionSlug}/fragen/${params.slug}/details`}
           variant="primary"
           roundness="large"
         >
@@ -158,7 +159,7 @@ export default async function WahlkabineResult({
           Zu den Antworten
         </Button>
 
-        <MagazineCta />
+        <MagazineCta electionSlug={params.electionSlug} />
       </section>
     </div>
   );

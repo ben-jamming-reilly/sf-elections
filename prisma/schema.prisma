@@ -8,15 +8,30 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model Election {
+  id          Int         @id @default(autoincrement())
+  name        String
+  slug        String      @unique
+  description String?
+  isActive    Boolean     @default(true)
+  candidates  Candidate[]
+  questions   Question[]
+  voters      Voter[]
+}
+
 model Candidate {
   id           Int                       @id @default(autoincrement())
-  slug         String                    @unique
+  slug         String
   name         String
   profileImg   String?                   @unique
   description  String
   hasFinished  Boolean                   @default(false)
+  electionId   Int
+  election     Election                  @relation(fields: [electionId], references: [id])
   answers      CandidateQuestionAnswer[]
   voterMatches VoterCandidateMatch[]
+
+  @@unique([electionId, slug])
 }
 
 model Voter {
@@ -27,17 +42,19 @@ model Voter {
   state            String?
   hasAcceptedTos   Boolean?
   createdAt        DateTime              @default(now())
+  electionId       Int
+  election         Election              @relation(fields: [electionId], references: [id])
   answers          VoterQuestionAnswer[]
   candidateMatches VoterCandidateMatch[]
 }
 
 model VoterCandidateMatch {
-  id                 Int       @id @default(autoincrement())
-  voter              Voter     @relation(fields: [voterId], references: [id])
-  voterId            Int
-  candidate          Candidate @relation(fields: [candidateId], references: [id])
-  candidateId        Int
-  score Int
+  id          Int       @id @default(autoincrement())
+  voter       Voter     @relation(fields: [voterId], references: [id])
+  voterId     Int
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+  candidateId Int
+  score       Int
 
   @@index([voterId, candidateId])
   @@index([voterId])
@@ -53,7 +70,7 @@ model CandidateQuestionAnswer {
   option                    Int?
   weighting                 Int?
   text                      String    @default("")
-  textSimpleLanguage        String?    @default("")
+  textSimpleLanguage        String?   @default("")
   changedQuestionDisclaimer String?
 
   @@index([candidateId, questionId])
@@ -83,6 +100,8 @@ model Question {
   description String                    @default("")
   type        String                    @default("YesNo")
   order       Int
+  electionId  Int
+  election    Election                  @relation(fields: [electionId], references: [id])
   voters      VoterQuestionAnswer[]
   candidates  CandidateQuestionAnswer[]
 }

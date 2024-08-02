@@ -13,6 +13,7 @@ export type WahlkabineResultCandidate = {
   params: {
     slug: string;
     "candidate-slug": string;
+    electionSlug: string;
   };
 };
 
@@ -29,7 +30,10 @@ export default async function WahlkabineResultCandidate({
 }: WahlkabineResultCandidate) {
   const [voterWithAnswers, candidate, glossarEntries] = await Promise.all([
     getVoterViaHash(params.slug),
-    getCandidateWithQuestions(params["candidate-slug"]),
+    getCandidateWithQuestions({
+      slug: params["candidate-slug"],
+      electionSlug: params.electionSlug,
+    }),
     getGlossarEntries(),
   ]);
 
@@ -42,7 +46,9 @@ export default async function WahlkabineResultCandidate({
       aria-label="Zurück & Teilen"
       className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
     >
-      <BackButton href={`/fragen/${params.slug}`}>Zur Übersicht</BackButton>
+      <BackButton href={`/${params.electionSlug}/fragen/${params.slug}`}>
+        Zur Übersicht
+      </BackButton>
       <ShareButton
         title={`Mein Vergleich zu ${candidate.name} für die EU-Wahl 2024!`}
       >
@@ -69,7 +75,7 @@ export default async function WahlkabineResultCandidate({
         <div className="relative flex flex-col">
           <PartyLogo
             key={candidate.id}
-            href={`/${candidate.slug}`}
+            href={`/${params.electionSlug}/${candidate.slug}`}
             priority
             className=""
             title={`Zur ${candidate.name} Seite`}
@@ -98,7 +104,7 @@ export default async function WahlkabineResultCandidate({
           ))}
       </section>
 
-      <MagazineCta />
+      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </div>
@@ -107,7 +113,10 @@ export default async function WahlkabineResultCandidate({
 
 export async function generateMetadata({ params }: WahlkabineResultCandidate) {
   const voterWithAnswers = await getVoterViaHash(params.slug);
-  const candidate = await getCandidateWithQuestions(params["candidate-slug"]);
+  const candidate = await getCandidateWithQuestions({
+    slug: params["candidate-slug"],
+    electionSlug: params.electionSlug,
+  });
 
   if (!candidate || !candidate.hasFinished || !voterWithAnswers) {
     notFound();

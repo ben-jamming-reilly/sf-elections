@@ -124,11 +124,11 @@ export default function RootLayout({
                 </Link>
               </div>
               <div className="w-full hyphens-manual py-3 text-center text-[1.5rem] leading-[1.75rem] text-black outline-offset-2 outline-black focus-visible:outline-2 md:w-fit md:py-0  xs:text-[1.75rem] xs:leading-[2.125rem]">
-                Wahl-Checker EU 2024
+                Wahl-Checker
               </div>
             </div>
           </header>
-          <div className="flex w-full flex-grow flex-grow flex-col gap-5 md:gap-10 ">
+          <div className="flex w-full flex-grow flex-col gap-5 md:gap-10 ">
             <div className="mx-auto max-w-full lg:w-[1000px]">
               <main className="relative flex-grow px-3 py-10 xxs:px-4 xs:px-5">
                 <span

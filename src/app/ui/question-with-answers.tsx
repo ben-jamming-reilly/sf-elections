@@ -1,6 +1,6 @@
 "use client";
 
-import { CandidatesWithQuestions } from "../fragen/[slug]/get-candidates-with-questions";
+import { CandidatesWithQuestions } from "../[electionSlug]/fragen/[slug]/get-candidates-with-questions";
 import { OptionResult } from "./option-result";
 import { QuestionCategoryLabel } from "./question-category-label";
 import { QuestionUnansweredResult } from "./question-unanswered-result";

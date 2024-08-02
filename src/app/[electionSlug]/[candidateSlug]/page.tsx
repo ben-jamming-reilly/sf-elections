@@ -1,25 +1,28 @@
 import { notFound } from "next/navigation";
 import { getCandidateFromSlug } from "./get-candidate-from-slug";
-import { ShareButton } from "../ui/share-button";
+import { ShareButton } from "../../ui/share-button";
 import Link from "next/link";
-import { BackButton } from "../ui/back-button";
-import { getCandidates } from "../get-candidates";
-import { QuestionWithAnswers } from "../ui/question-with-answers";
-import { PartyLogo } from "../ui/party-logo";
-import { getGlossarEntries } from "../glossar/page";
-import { MagazineCta } from "../ui/magazine-cta";
+import { BackButton } from "../../ui/back-button";
+import { getCandidates } from "../../get-candidates";
+import { QuestionWithAnswers } from "../../ui/question-with-answers";
+import { PartyLogo } from "../../ui/party-logo";
+import { getGlossarEntries } from "../../glossar/page";
+import { MagazineCta } from "../../ui/magazine-cta";
 
 export const revalidate = 18000; // 5 hours
 
 export type CandidateProfileProps = {
-  params: { candidateSlug: string };
+  params: { candidateSlug: string; electionSlug: string };
 };
 
 export default async function CandidateProfile({
   params,
 }: CandidateProfileProps) {
   const [candidate, candidates, glossarEntries] = await Promise.all([
-    getCandidateFromSlug(params.candidateSlug),
+    getCandidateFromSlug({
+      candidateSlug: params.candidateSlug,
+      electionSlug: params.electionSlug,
+    }),
     getCandidates(),
     getGlossarEntries(),
   ]);
@@ -120,7 +123,7 @@ export default async function CandidateProfile({
         </p>
       )}
 
-      <MagazineCta />
+      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </section>
@@ -134,7 +137,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: CandidateProfileProps) {
-  const candidate = await getCandidateFromSlug(params.candidateSlug);
+  const candidate = await getCandidateFromSlug({
+    candidateSlug: params.candidateSlug,
+    electionSlug: params.electionSlug,
+  });
 
   if (!candidate) {
     notFound();

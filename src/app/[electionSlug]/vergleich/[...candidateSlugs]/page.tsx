@@ -16,6 +16,7 @@ export const revalidate = false;
 export type CandidateComparisonProps = {
   params: {
     candidateSlugs: string[];
+    electionSlug: string;
   };
 };
 
@@ -40,7 +41,7 @@ export default async function CandidateComparison({
       aria-label="Zur Startseite und Teilen"
       className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
     >
-      <BackButton href={`/`}>Zur Startseite</BackButton>
+      <BackButton href={`/${params.electionSlug}`}>Zur Startseite</BackButton>
       <ShareButton
         title={`Vergleich zwischen ${randomCandidates
           .map((c) => c.name)
@@ -68,7 +69,7 @@ export default async function CandidateComparison({
               className="relative flex flex-col items-center justify-center"
             >
               <PartyLogo
-                href={`/${candidate.slug}`}
+                href={`/${params.electionSlug}/${candidate.slug}`}
                 priority
                 className=""
                 title={`Zur ${candidate.name} Seite`}
@@ -89,6 +90,7 @@ export default async function CandidateComparison({
           .map((answer, index) => (
             <QuestionWithAnswers
               key={answer.id}
+              candidateLinkBase={`/${params.electionSlug}`}
               question={answer.question}
               candidatesAnswers={candidates}
               glossarEntries={glossarEntries}
@@ -96,7 +98,7 @@ export default async function CandidateComparison({
           ))}
       </section>
 
-      <MagazineCta />
+      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </div>

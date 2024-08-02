@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCandidateFromSlug } from "~/app/[candidateSlug]/get-candidate-from-slug";
+import { getCandidateFromSlug } from "~/app/[electionSlug]/[candidateSlug]/get-candidate-from-slug";
 import { getCandidates } from "~/app/get-candidates";
 
 export type FetchCandidateBySlugResponse = ReturnType<

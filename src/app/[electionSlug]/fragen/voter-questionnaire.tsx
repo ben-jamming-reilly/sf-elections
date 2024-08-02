@@ -13,21 +13,25 @@ import {
   useState,
 } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
-import { Loading } from "../ui/loading";
+import { Loading } from "../../ui/loading";
 import { Pagination } from "./pagination";
 import { getOptionsBasedOnType, weightings } from "~/data/answers";
 import {
   VoterAnsweredQuestion,
   useVoterQuestionnaireStore,
 } from "~/stores/questionnaire-store-voter";
-import { QuestionCategoryLabel } from "../ui/question-category-label";
+import { QuestionCategoryLabel } from "../../ui/question-category-label";
 import { useHasHydrated } from "~/hooks/useHasHydrated";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import { ThumbDownIcon, ThumbSideIcon, ThumbUpIcon } from "../ui/yes-no-result";
+import {
+  ThumbDownIcon,
+  ThumbSideIcon,
+  ThumbUpIcon,
+} from "../../ui/yes-no-result";
 import { GlossarEntry } from "@prisma/client";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { GlossaredText } from "../ui/glossared-text";
-import { Button } from "../ui/button";
+import { GlossaredText } from "../../ui/glossared-text";
+import { Button } from "../../ui/button";
 import useMediaQuery from "~/hooks/useMediaQuery";
 
 const variants = {
@@ -61,9 +65,11 @@ const isQuestionAnswered = (question: VoterAnsweredQuestion) => {
 export const VoterQuestionnaire = ({
   questions,
   glossarEntries,
+  electionSlug,
 }: {
   questions: VoterAnsweredQuestion[];
   glossarEntries: GlossarEntry[];
+  electionSlug: string;
 }) => {
   const router = useRouter();
   const hasHydrated = useHasHydrated();
@@ -157,7 +163,9 @@ export const VoterQuestionnaire = ({
   }
 
   if (hasHydrated && slug) {
-    return <AfterSubmitPage linkToNextPage={`/fragen/${slug}`} />;
+    return (
+      <AfterSubmitPage linkToNextPage={`/${electionSlug}/fragen/${slug}`} />
+    );
   }
 
   return (

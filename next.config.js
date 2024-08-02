@@ -34,6 +34,30 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/fragen/:slug',
+        destination: '/eu-2024/fragen/:slug',
+        permanent: true,
+      },
+      {
+        source: '/fragen/:slug/details',
+        destination: '/eu-2024/fragen/:slug/details',
+        permanent: true,
+      },
+      {
+        source: '/fragen/:slug/details/:candidateSlug',
+        destination: '/eu-2024/fragen/:slug/details/:candidateSlug',
+        permanent: true,
+      },
+      {
+        source: '/vergleich/:candidateSlugs*',
+        destination: '/eu-2024/vergleich/:candidateSlugs*',
+        permanent: true,
+      },
+    ]
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -1,4 +1,4 @@
-import { Loading } from "../ui/loading";
+import { Loading } from "../../ui/loading";
 
 export default function VoterWahlkabineLoading() {
   return (
