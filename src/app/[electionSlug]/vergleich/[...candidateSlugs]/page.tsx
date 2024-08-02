@@ -3,7 +3,6 @@ import { ShareButton } from "~/app/ui/share-button";
 import { getCandidatesFromSlugs } from "./get-candidates-from-slugs";
 import { Metadata } from "next";
 import { BackButton } from "~/app/ui/back-button";
-import { BASE_URL } from "~/app/api/og/baseUrl";
 import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
