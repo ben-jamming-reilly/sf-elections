@@ -1,24 +1,30 @@
 import { unstable_cache } from "next/cache";
-import { cache } from "react";
 import { prisma } from "~/lib/prisma";
 
 export type CandidatesWithQuestions = Awaited<
   ReturnType<typeof getCandidatesWithQuestions>
 >;
 
-export const getCandidatesWithQuestions = unstable_cache(async () => {
-  return await prisma.candidate.findMany({
-    where: {
-      hasFinished: true,
-    },
-    include: {
-      answers: {
-        include: {
-          question: true,
+export const getCandidatesWithQuestions = unstable_cache(
+  async ({ electionSlug }: { electionSlug: string }) => {
+    return await prisma.candidate.findMany({
+      where: {
+        hasFinished: true,
+        election: {
+          slug: electionSlug,
         },
       },
-    },
-  });
-}, ["candidatesWithQuestions"], {
-  revalidate: 18000,
-});
+      include: {
+        answers: {
+          include: {
+            question: true,
+          },
+        },
+      },
+    });
+  },
+  undefined,
+  {
+    revalidate: 18000,
+  },
+);

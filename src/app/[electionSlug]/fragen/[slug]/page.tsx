@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
 import { getVoterViaHash } from "../get-voter-via-hash";
 import { ShareButton } from "~/app/ui/share-button";
-import { getCandidatesWithQuestions } from "./get-candidates-with-questions";
 import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { Button } from "~/app/ui/button";
-import { ArrowRightIcon, BookOpenIcon } from "@heroicons/react/24/solid";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 
@@ -30,10 +29,7 @@ const MAX_POINTS = 15 * 27;
 export default async function WahlkabineResult({
   params,
 }: WahlkabineResultProps) {
-  const [voterWithAnswers, candidates] = await Promise.all([
-    getVoterViaHash(params.slug),
-    getCandidatesWithQuestions(),
-  ]);
+  const voterWithAnswers = await getVoterViaHash(params.slug);
 
   if (!voterWithAnswers) {
     notFound();

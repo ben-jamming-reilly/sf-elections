@@ -30,6 +30,7 @@ export const QuestionWithAnswers = ({
   candidateLinkBase, // For linking to the candidate comparison page with the voter hash
   textOpenByDefault = false,
   glossarEntries,
+  isQuestionnaire,
   voterType = "voter",
 }: {
   voterType?: "voter" | "candidate";
@@ -50,11 +51,12 @@ export const QuestionWithAnswers = ({
   candidatesAnswers?: CandidatesWithQuestions;
   candidateLinkBase?: string;
   textOpenByDefault?: boolean;
+  isQuestionnaire?: boolean;
   glossarEntries: GlossarEntry[];
 }) => {
   const isSingleComparison = candidatesAnswers?.length === 1;
   const [detailsOpen, setDetailsOpen] = useState(
-    isSingleComparison ? true : textOpenByDefault,
+    isSingleComparison || !isQuestionnaire ? true : textOpenByDefault,
   );
 
   return (
@@ -101,7 +103,7 @@ export const QuestionWithAnswers = ({
             </ul>
           ) : (
             <div className="w-full">
-              <QuestionUnansweredResult />
+              {isQuestionnaire ? <QuestionUnansweredResult /> : null}
             </div>
           )}
         </section>
@@ -119,7 +121,7 @@ export const QuestionWithAnswers = ({
         </div>
       ) : null}
 
-      {candidatesAnswers && !isSingleComparison ? (
+      {candidatesAnswers && !isSingleComparison && isQuestionnaire ? (
         <section aria-label="Antworten der Parteien auf einen Blick">
           <h3 className="mb-3 mt-5 font-semibold">
             Das haben die {voterType === "candidate" ? "anderen" : ""} Parteien
@@ -159,7 +161,7 @@ export const QuestionWithAnswers = ({
                     />
                   ) : (
                     <div className="flex w-full items-center justify-center">
-                      <QuestionUnansweredResult />
+                      {isQuestionnaire ? <QuestionUnansweredResult /> : null}
                     </div>
                   )}
                 </li>
@@ -258,7 +260,9 @@ export const QuestionWithAnswers = ({
                           </div>
                         ) : (
                           <div className="flex w-full items-center justify-center">
-                            <QuestionUnansweredResult />
+                            {isQuestionnaire ? (
+                              <QuestionUnansweredResult />
+                            ) : null}
                           </div>
                         )}
 

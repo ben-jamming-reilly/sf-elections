@@ -9,6 +9,7 @@ import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
+import { getElection } from "../../get-electom";
 
 export const revalidate = false;
 
@@ -26,10 +27,20 @@ export default async function CandidateComparison({
     notFound();
   }
 
-  const [candidates, glossarEntries] = await Promise.all([
-    getCandidatesFromSlugs(params.candidateSlugs),
+  const [candidates, glossarEntries, election] = await Promise.all([
+    getCandidatesFromSlugs({
+      candidateSlugs: params.candidateSlugs,
+      electionSlug: params.electionSlug,
+    }),
     getGlossarEntries(),
+    getElection({
+      electionSlug: params.electionSlug,
+    }),
   ]);
+
+  if (!candidates || !election) {
+    notFound();
+  }
 
   const randomCandidates = candidates.sort(
     (c) => Math.random() - Math.random(),
@@ -93,6 +104,7 @@ export default async function CandidateComparison({
               question={answer.question}
               candidatesAnswers={candidates}
               glossarEntries={glossarEntries}
+              isQuestionnaire={election.isQuestionnaire}
             />
           ))}
       </section>
@@ -104,8 +116,12 @@ export default async function CandidateComparison({
   );
 }
 
-export async function generateStaticParams() {
-  const candidates = await getCandidates();
+export async function generateStaticParams({
+  params,
+}: CandidateComparisonProps) {
+  const candidates = await getCandidates({
+    electionSlug: params.electionSlug,
+  });
 
   const comboPairs = constructComparision(
     candidates.sort((c) => Math.random() - Math.random()),
@@ -117,7 +133,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: CandidateComparisonProps): Promise<Metadata> {
-  const candidates = await getCandidatesFromSlugs(params.candidateSlugs);
+  const candidates = await getCandidatesFromSlugs({
+    candidateSlugs: params.candidateSlugs,
+    electionSlug: params.electionSlug,
+  });
 
   return {
     title: `Vergleich zwischen ${candidates.map((c) => c.name).join(" und ")}`,

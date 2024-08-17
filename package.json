@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "import-glossary": "ts-node src/scripts/import-glossar.ts",
+    "import-election": "ts-node src/scripts/import-election.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.17",
@@ -44,6 +46,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "prisma": "^5.12.1",
-    "tailwindcss": "^3.3.1"
+    "tailwindcss": "^3.3.1",
+    "ts-node": "^10.9.2"
   }
 }

@@ -87,7 +87,9 @@ export async function POST(request: Request) {
           },
         },
       }),
-      getCandidatesWithQuestions(),
+      getCandidatesWithQuestions({
+        electionSlug: questionWithElection.election.slug,
+      }),
       trackPlausibleEvent({
         event: "Fragebogen abgeschickt",
         url: request.url,

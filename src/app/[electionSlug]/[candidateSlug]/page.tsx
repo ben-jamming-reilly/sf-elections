@@ -8,6 +8,7 @@ import { QuestionWithAnswers } from "../../ui/question-with-answers";
 import { PartyLogo } from "../../ui/party-logo";
 import { getGlossarEntries } from "../../glossar/get-glossar-entries";
 import { MagazineCta } from "../../ui/magazine-cta";
+import { getElection } from "../get-electom";
 
 export const revalidate = 18000; // 5 hours
 
@@ -18,16 +19,21 @@ export type CandidateProfileProps = {
 export default async function CandidateProfile({
   params,
 }: CandidateProfileProps) {
-  const [candidate, candidates, glossarEntries] = await Promise.all([
+  const [candidate, candidates, glossarEntries, election] = await Promise.all([
     getCandidateFromSlug({
       candidateSlug: params.candidateSlug,
       electionSlug: params.electionSlug,
     }),
-    getCandidates(),
+    getCandidates({
+      electionSlug: params.electionSlug,
+    }),
     getGlossarEntries(),
+    getElection({
+      electionSlug: params.electionSlug,
+    }),
   ]);
 
-  if (!candidate) {
+  if (!candidate || !election) {
     notFound();
   }
 
@@ -40,11 +46,9 @@ export default async function CandidateProfile({
       aria-label="Zur Startseite und Teilen"
       className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
     >
-      <BackButton href={`/`}>Zur Startseite</BackButton>
+      <BackButton href={`/${election.slug}`}>Zur Startseite</BackButton>
 
-      <ShareButton
-        title={`Vorsitzbefragungs-Kabinen Antworten von ${candidate.name}`}
-      >
+      <ShareButton title={`Wahlchecker Antworten von ${candidate.name}`}>
         Teilen
       </ShareButton>
     </aside>
@@ -113,6 +117,7 @@ export default async function CandidateProfile({
                   candidateLinkBase={`/${params.candidateSlug}`}
                   voterAnswer={answer}
                   question={answer.question}
+                  isQuestionnaire={election.isQuestionnaire}
                 />
               ))}
           </section>
@@ -130,8 +135,10 @@ export default async function CandidateProfile({
   );
 }
 
-export async function generateStaticParams() {
-  const candidates = await getCandidates();
+export async function generateStaticParams({ params }: CandidateProfileProps) {
+  const candidates = await getCandidates({
+    electionSlug: params.electionSlug,
+  });
 
   return candidates.map((c) => ({ candidateSlug: c.slug }));
 }

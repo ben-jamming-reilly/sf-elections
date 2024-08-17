@@ -4,14 +4,28 @@ import { QuestionaireButton } from "../questionaire-button";
 import { Button } from "../ui/button";
 import { GlossaredTextServer } from "../ui/glossared-text.server";
 import { MagazineCta } from "../ui/magazine-cta";
+import { notFound } from "next/navigation";
+import { getElectionWithCandidates } from "./get-election-with-candidates";
 
 export const revalidate = false;
+
+type ElectionWithCandidates = NonNullable<
+  Awaited<ReturnType<typeof getElectionWithCandidates>>
+>;
 
 export default async function ElectionHome({
   params,
 }: {
   params: { electionSlug: string };
 }) {
+  const election = await getElectionWithCandidates({
+    electionSlug: params.electionSlug,
+  });
+
+  if (!election) {
+    notFound();
+  }
+
   return (
     <div className="flex h-full flex-col gap-10">
       <section
@@ -19,17 +33,17 @@ export default async function ElectionHome({
         className="mx-auto w-[900px] max-w-full text-[1.125rem] leading-[1.6875rem]"
       >
         {params.electionSlug === "eu-2024" && (
-          <EU2024Election electionSlug={params.electionSlug} />
+          <EU2024Election election={election} />
         )}
         {params.electionSlug === "nr-2024" && (
-          <NR2024Election electionSlug={params.electionSlug} />
+          <NR2024Election election={election} />
         )}
       </section>
     </div>
   );
 }
 
-const EU2024Election = ({ electionSlug }: { electionSlug: string }) => {
+const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
@@ -104,7 +118,19 @@ const EU2024Election = ({ electionSlug }: { electionSlug: string }) => {
           >
             Wort-Erklärungen
           </Button>
-          <QuestionaireButton electionSlug={electionSlug} />
+          {election.isQuestionnaire && (
+            <QuestionaireButton electionSlug={election.slug} />
+          )}
+          {!election.isQuestionnaire && (
+            <Button
+              roundness="large"
+              variant="secondary"
+              as="a"
+              href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
+            >
+              Antworten vergleichen
+            </Button>
+          )}
         </nav>
 
         <h2 className=" text-[1.75rem] leading-[2.125rem]">
@@ -143,12 +169,12 @@ const EU2024Election = ({ electionSlug }: { electionSlug: string }) => {
         </p>
       </div>
 
-      <MagazineCta electionSlug={electionSlug} />
+      <MagazineCta electionSlug={election.slug} />
     </div>
   );
 };
 
-const NR2024Election = ({ electionSlug }: { electionSlug: string }) => {
+const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
@@ -159,18 +185,13 @@ const NR2024Election = ({ electionSlug }: { electionSlug: string }) => {
       <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Vom 6. bis 9. Juni 2024 ist die Europa-Wahl." />
+          <GlossaredTextServer text="Am 29.9 2024 ist die Nationalrats-Wahl." />
         </p>
 
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Rund 450 Millionen Menschen in Europa dürfen entscheiden, wer sie im EU-Parlament vertreten soll." />
+          <GlossaredTextServer text="Rund 5 Millionen Menschen in Österreich dürfen entscheiden, wer sie im Nationalrat vertreten soll." />
           <br />
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="EU ist kurz für: Europäische Union. In der EU arbeiten 27 Länder aus Europa zusammen." />
-          <br />
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="Das EU-Parlament arbeitet an den Regeln mit, die die EU für alle Mitglieds-Länder macht." />
         </p>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
@@ -192,7 +213,7 @@ const NR2024Election = ({ electionSlug }: { electionSlug: string }) => {
           <GlossaredTextServer text="die es für die EU-Wahl 2024 aber nicht gibt." />{" "}
           {/* @ts-expect-error */}
           <GlossaredTextServer
-            text="Im Wahl-Checker stehen 15 Fragen zu wichtigen Themen, um die sich
+            text="Im Wahl-Checker stehen 8 Fragen zu wichtigen Themen, um die sich
             die EU kümmert. Zum Beispiel Klima-Schutz, Flüchtlinge, Arbeit und
             Inklusion. Du kannst zu jeder Frage Deine Meinung sagen: „Ja“ oder
             „Nein“ oder „Ich weiß es nicht“. Du kannst auch sagen, wie wichtig
@@ -223,7 +244,19 @@ const NR2024Election = ({ electionSlug }: { electionSlug: string }) => {
           >
             Wort-Erklärungen
           </Button>
-          <QuestionaireButton electionSlug={electionSlug} />
+          {election.isQuestionnaire && (
+            <QuestionaireButton electionSlug={election.slug} />
+          )}
+          {!election.isQuestionnaire && (
+            <Button
+              roundness="large"
+              variant="secondary"
+              as="a"
+              href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
+            >
+              Antworten vergleichen
+            </Button>
+          )}
         </nav>
 
         <h2 className=" text-[1.75rem] leading-[2.125rem]">
@@ -262,7 +295,7 @@ const NR2024Election = ({ electionSlug }: { electionSlug: string }) => {
         </p>
       </div>
 
-      <MagazineCta electionSlug={electionSlug} />
+      <MagazineCta electionSlug={election.slug} />
     </div>
   );
 };

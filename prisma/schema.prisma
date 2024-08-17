@@ -14,6 +14,7 @@ model Election {
   slug        String      @unique
   description String?
   isActive    Boolean     @default(true)
+  isQuestionnaire Boolean @default(true)
   candidates  Candidate[]
   questions   Question[]
   voters      Voter[]
@@ -23,7 +24,7 @@ model Candidate {
   id           Int                       @id @default(autoincrement())
   slug         String
   name         String
-  profileImg   String?                   @unique
+  profileImg   String?
   description  String
   hasFinished  Boolean                   @default(false)
   electionId   Int

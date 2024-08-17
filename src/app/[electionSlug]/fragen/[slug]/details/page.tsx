@@ -8,6 +8,7 @@ import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
+import { getElection } from "~/app/[electionSlug]/get-electom";
 
 export type WahlkabineResultDetailsProps = {
   params: {
@@ -27,13 +28,19 @@ export const dynamicParams = true;
 export default async function WahlkabineResultDetails({
   params,
 }: WahlkabineResultDetailsProps) {
-  const [voterWithAnswers, candidates, glossarEntries] = await Promise.all([
-    getVoterViaHash(params.slug),
-    getCandidatesWithQuestions(),
-    getGlossarEntries(),
-  ]);
+  const [voterWithAnswers, candidates, glossarEntries, election] =
+    await Promise.all([
+      getVoterViaHash(params.slug),
+      getCandidatesWithQuestions({
+        electionSlug: params.electionSlug,
+      }),
+      getGlossarEntries(),
+      getElection({
+        electionSlug: params.electionSlug,
+      }),
+    ]);
 
-  if (!voterWithAnswers) {
+  if (!voterWithAnswers || !election) {
     notFound();
   }
 
@@ -113,6 +120,7 @@ export default async function WahlkabineResultDetails({
                 question={answer.question}
                 candidatesAnswers={randomCandidates}
                 glossarEntries={glossarEntries}
+                isQuestionnaire={election.isQuestionnaire}
               />
             ))}
         </div>
