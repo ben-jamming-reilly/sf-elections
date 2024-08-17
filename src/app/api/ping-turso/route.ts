@@ -1,6 +1,6 @@
 export const GET = async (request: Request) => {
   try {
-    const data = await fetch(
+    const response = await fetch(
       `https://andererseits-wahlkabine-arthouse.turso.io/v2/pipeline`,
       {
         method: "POST",
@@ -15,10 +15,9 @@ export const GET = async (request: Request) => {
           ],
         }),
       },
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    );
+
+    const data = await response.json();
 
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error) {
