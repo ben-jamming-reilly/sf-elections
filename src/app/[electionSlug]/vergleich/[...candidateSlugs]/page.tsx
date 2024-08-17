@@ -127,7 +127,10 @@ export async function generateStaticParams({
     candidates.sort((c) => Math.random() - Math.random()),
   );
 
-  return comboPairs.map((c) => ({ params: { candidateSlug: c.slug } }));
+  return comboPairs.map((c) => ({
+    candidateSlug: c.slug,
+    electionSlug: params.electionSlug,
+  }));
 }
 
 export async function generateMetadata({

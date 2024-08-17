@@ -140,7 +140,10 @@ export async function generateStaticParams({ params }: CandidateProfileProps) {
     electionSlug: params.electionSlug,
   });
 
-  return candidates.map((c) => ({ candidateSlug: c.slug }));
+  return candidates.map((c) => ({
+    electionSlug: params.electionSlug,
+    candidateSlug: c.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: CandidateProfileProps) {
