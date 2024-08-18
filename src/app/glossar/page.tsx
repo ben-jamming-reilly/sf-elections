@@ -1,8 +1,6 @@
-import { prisma } from "~/lib/prisma";
 import { BackButton } from "../ui/back-button";
 import Link from "next/link";
-import { cache } from "react";
-import { unstable_cache } from "next/cache";
+import { getGlossarEntries } from "./get-glossar-entries";
 
 export async function generateMetadata() {
   return {
@@ -17,17 +15,8 @@ export async function generateMetadata() {
   };
 }
 
-export const getGlossarEntries = unstable_cache(
-  async () => {
-    return prisma.glossarEntry.findMany();
-  },
-  ["glossarEntries"],
-  {
-    revalidate: 18000,
-  },
-);
-
-export const revalidate = 18000; // 5 hours
+export const revalidate = 0;
+// export const revalidate = 18000; // 5 hours
 
 const aToZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 

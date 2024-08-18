@@ -12,7 +12,11 @@ import {
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid";
 import { Button } from "./ui/button";
 
-export const QuestionaireButton = () => {
+export const QuestionaireButton = ({
+  electionSlug,
+}: {
+  electionSlug: string;
+}) => {
   const hasHydrated = useHasHydrated();
   const [slug, reset] = useVoterQuestionnaireStore((s) => [s.slug, s.reset]);
 
@@ -26,7 +30,7 @@ export const QuestionaireButton = () => {
                 variant="primary"
                 roundness="large"
                 as="a"
-                href={`/fragen/${slug}`}
+                href={`${electionSlug}/fragen/${slug}`}
               >
                 <ClipboardDocumentCheckIcon
                   aria-hidden="true"
@@ -55,7 +59,7 @@ export const QuestionaireButton = () => {
               variant="primary"
               roundness="large"
               as="Link"
-              href="/fragen"
+              href={`${electionSlug}/fragen`}
             >
               <ArrowRightIcon
                 aria-hidden="true"

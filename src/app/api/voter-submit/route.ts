@@ -2,8 +2,8 @@ import { headers } from "next/headers";
 import { NextResponse, userAgent } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
-import { getCandidatesWithQuestions } from "~/app/fragen/[slug]/get-candidates-with-questions";
-import { rateCandidate } from "~/app/fragen/[slug]/rate-candidates";
+import { getCandidatesWithQuestions } from "~/app/[electionSlug]/fragen/[slug]/get-candidates-with-questions";
+import { rateCandidate } from "~/app/[electionSlug]/fragen/[slug]/rate-candidates";
 import { trackPlausibleEvent } from "~/lib/plausible";
 import { prisma } from "~/lib/prisma";
 
@@ -37,11 +37,37 @@ export async function POST(request: Request) {
       data.questionsWithAnswers,
     );
 
+    const questionId = validatedQuestionsWithAnswers?.[0]?.id;
+
+    if (!questionId) {
+      return NextResponse.json(
+        { error: "No questionId found" },
+        { status: 400 },
+      );
+    }
+
+    const questionWithElection = await prisma.question.findUnique({
+      where: {
+        id: questionId,
+      },
+      include: {
+        election: true,
+      },
+    });
+
+    if (!questionWithElection?.election?.id) {
+      return NextResponse.json(
+        { error: "Election not found" },
+        { status: 400 },
+      );
+    }
+
     const [voter, candidates] = await Promise.all([
       prisma.voter.create({
         data: {
           hash: hash,
           hasAcceptedTos: true,
+          electionId: questionWithElection.election.id,
           answers: {
             createMany: {
               data: validatedQuestionsWithAnswers.map((answer) => ({
@@ -61,7 +87,9 @@ export async function POST(request: Request) {
           },
         },
       }),
-      getCandidatesWithQuestions(),
+      getCandidatesWithQuestions({
+        electionSlug: questionWithElection.election.slug,
+      }),
       trackPlausibleEvent({
         event: "Fragebogen abgeschickt",
         url: request.url,

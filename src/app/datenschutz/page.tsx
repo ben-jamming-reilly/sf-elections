@@ -239,5 +239,4 @@ export default function Datenschutz({}: {}) {
   );
 }
 
-export const runtime = "edge";
 export const revalidate = false;
