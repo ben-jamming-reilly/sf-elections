@@ -1,9 +1,9 @@
-import { getElectionRaw } from "~/app/[electionSlug]/get-electom";
+import { getElection } from "~/app/[electionSlug]/get-electom";
 import { prisma } from "~/lib/prisma";
 
 export const GET = async (request: Request) => {
   try {
-    const data = await getElectionRaw({
+    const data = await getElection({
       electionSlug: "eu-2024",
     });
     return new Response(JSON.stringify(data), { status: 200 });
