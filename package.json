@@ -9,7 +9,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
-    "import-glossary": "ts-node src/scripts/import-glossar.ts",
+    "import-glossary": "ts-node src/scripts/import-glossary.ts",
     "import-election": "ts-node src/scripts/import-election.ts"
   },
   "dependencies": {

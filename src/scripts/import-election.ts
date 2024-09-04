@@ -3,7 +3,17 @@ import { parse } from "csv-parse/sync";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 
-const PARTIES = ["FPÖ", "NEOS", "KPÖ", "SPÖ", "ÖVP", "Grüne", "Bier"] as const;
+const PARTIES = [
+  "FPÖ",
+  "NEOS",
+  "KPÖ",
+  "SPÖ",
+  "ÖVP",
+  "GRÜNE",
+  "BIER",
+  "KEINE",
+  "LISTE MADELEINE PETROVIC",
+] as const;
 
 type Parties = (typeof PARTIES)[number];
 
@@ -136,18 +146,34 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
             "Wertung ÖVP": weighingsValidator,
             "Erklärung ÖVP": z.string().trim(),
             "Erklärung ÖVP (einfach)": z.string().trim().optional().nullable(),
-            "Antwort Grüne": optionsValidator,
-            "Wertung Grüne": weighingsValidator,
-            "Erklärung Grüne": z.string().trim(),
-            "Erklärung Grüne (einfach)": z
+            "Antwort GRÜNE": optionsValidator,
+            "Wertung GRÜNE": weighingsValidator,
+            "Erklärung GRÜNE": z.string().trim(),
+            "Erklärung GRÜNE (einfach)": z
               .string()
               .trim()
               .optional()
               .nullable(),
-            "Antwort Bier": optionsValidator,
-            "Wertung Bier": weighingsValidator,
-            "Erklärung Bier": z.string().trim(),
-            "Erklärung Bier (einfach)": z.string().trim().optional().nullable(),
+            "Antwort BIER": optionsValidator,
+            "Wertung BIER": weighingsValidator,
+            "Erklärung BIER": z.string().trim(),
+            "Erklärung BIER (einfach)": z.string().trim().optional().nullable(),
+            "Antwort KEINE": optionsValidator,
+            "Wertung KEINE": weighingsValidator,
+            "Erklärung KEINE": z.string().trim(),
+            "Erklärung KEINE (einfach)": z
+              .string()
+              .trim()
+              .optional()
+              .nullable(),
+            "Antwort LISTE MADELEINE PETROVIC": optionsValidator,
+            "Wertung LISTE MADELEINE PETROVIC": weighingsValidator,
+            "Erklärung LISTE MADELEINE PETROVIC": z.string().trim(),
+            "Erklärung LISTE MADELEINE PETROVIC (einfach)": z
+              .string()
+              .trim()
+              .optional()
+              .nullable(),
           }),
         )
         .parse(partiesData);
@@ -199,7 +225,7 @@ type WeighingsType = z.infer<typeof weighingsValidator>;
           title: party.Frage,
           category: party.Kategorie,
           description: "",
-          type: "YesNo",
+          type: "Text",
           order: index,
           electionId: election.id,
         })),

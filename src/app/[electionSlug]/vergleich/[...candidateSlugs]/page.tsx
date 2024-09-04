@@ -9,7 +9,7 @@ import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
-import { getElection } from "../../get-electom";
+import { getElection } from "../../get-electon";
 
 export const revalidate = false;
 

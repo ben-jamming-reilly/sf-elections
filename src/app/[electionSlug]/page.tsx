@@ -178,57 +178,80 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
-        Wahl-Checker NR-Wahl 2024:
-        <br /> Was sagen die Parteien?
+        Nationalratswahl 2024: Was sagen die Parteien?
       </h1>
 
       <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
         <p>
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="Am 29.9 2024 ist die Nationalrats-Wahl." />
+          Am 29.9. sind National-Rats-Wahlen in Österreich.
+          <br />
+          Man kann 9 Parteien wählen.
+          <br />
+          Parteien sind Gruppen von Menschen,
+          <br />
+          die ähnliche Ziele und Meinungen haben. <br />
+          Die Parteien sagen unterschiedliche Dinge.
+          <br />
+          Sie sagen sie oft sehr schwierig.
         </p>
 
         <p>
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="Rund 5 Millionen Menschen in Österreich dürfen entscheiden, wer sie im Nationalrat vertreten soll." />
+          Wir bei <em className="italic">andererseits</em> glauben:
           <br />
+          Alle Menschen haben ein Recht auf unabhängige Informationen.
+          <br />
+          Also haben wir zehn Fragen an die Parteien geschickt.
+          <br />
+          Und ihre Antworten in Leichter Sprache aufgeschrieben.
+          <br />
+          Wir helfen Dir dabei zu verstehen, was die Parteien sagen.
         </p>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
-          Was ist der Wahl-Checker?
+          Transparenz: Was ist Journalismus?
         </h2>
         <p>
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="Der Wahl-Checker ist eine Orientierungs-Hilfe. Er ist so ähnlich wie die" />{" "}
-          "
+          Journalismus bedeutet: Alle Antworten einordnen und überprüfen.
+          <br />
+          Aber wir haben die Antworten der Parteien nicht eingeordnet.
+          <br />
+          Du kannst bei den Antworten nur lesen, was die Parteien sagen. <br />
+          Du kannst nicht lesen, was sie wirklich machen.
+          <br /> Deshalb ist der Wahl-Checker kein Journalismus.
+        </p>
+
+        <p>
+          Der Wahl-Checker ist eine Hilfe, um die Parteien besser zu verstehen.
+          <br />
+          Wenige Parteien geben Informationen in Leichter Sprache.
+          <br />
+          Nur die Parteien Wandl und die SPÖ haben in Leichter Sprache
+          geantwortet.
+        </p>
+
+        <p>
+          In unserem Journalismus schreiben wir oft darüber, was die Politik
+          macht.
+        </p>
+
+        <p>
+          Journalismus von andererseits findest Du in unserem{" "}
           <a
-            href="https://wahlkabine.at"
             target="_blank"
-            title="Zu wahlkabine.at, öffnet in neuem Fenster"
+            href="https://andererseits.org/abo"
             className="font-semibold underline"
           >
-            Wahlkabine
+            Magazin
+          </a>{" "}
+          in Leichter Sprache und auf{" "}
+          <a
+            target="_blank"
+            href="https://andererseits.org"
+            className="font-semibold underline"
+          >
+            andererseits.org
           </a>
-          ", {/* @ts-expect-error */}
-          <GlossaredTextServer text="die es für die EU-Wahl 2024 aber nicht gibt." />{" "}
-          {/* @ts-expect-error */}
-          <GlossaredTextServer
-            text="Im Wahl-Checker stehen 8 Fragen zu wichtigen Themen, um die sich
-            die EU kümmert. Zum Beispiel Klima-Schutz, Flüchtlinge, Arbeit und
-            Inklusion. Du kannst zu jeder Frage Deine Meinung sagen: „Ja“ oder
-            „Nein“ oder „Ich weiß es nicht“. Du kannst auch sagen, wie wichtig
-            Dir jedes Thema ist."
-          />
-        </p>
-
-        <p>
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="Danach kannst Du Deine Meinung vergleichen mit den Meinungen von den 7 Parteien, die man bei der Europa-Wahl in Österreich wählen kann." />
-        </p>
-
-        <p>
-          {/* @ts-expect-error */}
-          <GlossaredTextServer text="Wir haben außerdem Erklärungen zu wichtigen Wörtern geschrieben. Die Wörter sind gelb markiert. Wenn Du ein gelb markiertes Wort anklickst, kannst Du die Erklärung lesen. Du findest alle Erklärungen auch auf der Seite „Wort-Erklärungen“." />{" "}
+          .
         </p>
 
         <nav
@@ -258,31 +281,6 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
             </Button>
           )}
         </nav>
-
-        <h2 className=" text-[1.75rem] leading-[2.125rem]">
-          Was ist <span className="italic">andererseits</span>?
-        </h2>
-        <p>
-          Der Wahl-Checker wird von der Medienhaus andererseits GmbH
-          veröffentlicht und wurde in Kooperation mit dem Verein andererseits -
-          für Inklusion im Journalismus und der Hil-Foundation entwickelt.
-        </p>
-        <p>
-          <span className="italic">andererseits</span> ist ein Magazin für
-          Behinderung und Gesellschaft. Bei{" "}
-          <span className="italic">andererseits</span> machen Menschen mit und
-          ohne Behinderung Journalismus. Das Team arbeitet gleichberechtigt,
-          kritisch und fair bezahlt. <br />
-          Hier erfährst du mehr über{" "}
-          <span className="italic">andererseits</span>:{" "}
-          <a
-            target="_blank"
-            href="https://andererseits.org"
-            className="font-semibold underline"
-          >
-            andererseits.org
-          </a>
-        </p>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">Daten-Schutz</h2>
         <p>

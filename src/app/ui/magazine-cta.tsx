@@ -11,8 +11,13 @@ export const MagazineCta = ({ electionSlug }: { electionSlug: string }) => {
         <h2 className="text-[1.75rem] font-semibold leading-[2.125rem]">
           {electionSlug === "eu-2024" &&
             "Mehr über die EU-Wahl kannst Du in unserem gedruckten Magazin lesen."}
-          {electionSlug === "nr-2024" &&
-            "Mehr über die NR-Wahl kannst Du in unserem gedruckten Magazin lesen."}
+          {electionSlug === "nr-2024" && (
+            <span>
+              andererseits arbeitet unabhängig.
+              <br />
+              Du möchtest mehr verständliche Informationen?
+            </span>
+          )}
         </h2>
       </div>
 
@@ -26,7 +31,8 @@ export const MagazineCta = ({ electionSlug }: { electionSlug: string }) => {
           aria-hidden="true"
           className="ml-1 inline h-5 w-5 stroke-2"
         />
-        Jetzt bestellen
+        {electionSlug === "nr-2024" && "Jetzt unterstützen"}
+        {electionSlug === "eu-2024" && "Jetzt bestellen"}
       </Button>
     </aside>
   );

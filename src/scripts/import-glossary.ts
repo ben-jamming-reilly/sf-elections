@@ -25,6 +25,21 @@ import { prisma } from "../lib/prisma";
 
     console.log("Deleting glossar");
     await prisma.glossarEntry.deleteMany();
+
+    // console.log("Finding duplicate glossar entries");
+    // glossarDataParsed
+    //   .map((entry) => entry.Begriff)
+    //   .forEach((term) => {
+    //     const count = glossarDataParsed.filter(
+    //       (entry) => entry.Begriff === term,
+    //     ).length;
+
+    //     if (count > 1) {
+    //       console.log(`Duplicate glossar entry found: ${term}`);
+    //     }
+    //   });
+
+    console.log("Creating glossar");
     await prisma.glossarEntry.createMany({
       data: glossarDataParsed.map((entry) => ({
         definition: entry.Erklärung,

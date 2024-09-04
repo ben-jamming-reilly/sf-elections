@@ -73,16 +73,20 @@ export const GlossaredText = ({
 }) => {
   const [activeEntry, setActiveEntry] = useState<GlossarEntry | null>(null);
 
-  return (
-    <>
-      {/* <span className="sr-only">{text}</span> */}
-      <span>
-        <ReplacedText
-          text={text}
-          glossarEntries={glossarEntries}
-          onClick={(entry) => setActiveEntry(entry)}
-        />
-        {/* {partsClean.map((word, index) => {
+  const lines = text.split("\n");
+
+  return lines.map((line, index) => {
+    return (
+      <>
+        {index !== 0 && <br />}
+        {/* <span className="sr-only">{text}</span> */}
+        <span>
+          <ReplacedText
+            text={line}
+            glossarEntries={glossarEntries}
+            onClick={(entry) => setActiveEntry(entry)}
+          />
+          {/* {partsClean.map((word, index) => {
           const glossarEntry = glossarEntries.find((entry) =>
             matchTermAndSynonyms(entry, word),
           );
@@ -107,17 +111,18 @@ export const GlossaredText = ({
           return word;
         })} */}
 
-        <AnimatePresence>
-          {activeEntry && (
-            <GlossarModal
-              entry={activeEntry}
-              onClose={() => setActiveEntry(null)}
-            />
-          )}
-        </AnimatePresence>
-      </span>
-    </>
-  );
+          <AnimatePresence>
+            {activeEntry && (
+              <GlossarModal
+                entry={activeEntry}
+                onClose={() => setActiveEntry(null)}
+              />
+            )}
+          </AnimatePresence>
+        </span>
+      </>
+    );
+  });
 };
 
 let timeout: number;
