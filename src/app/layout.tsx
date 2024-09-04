@@ -7,6 +7,7 @@ import EasterEgg from "./easter-egg";
 import clsx from "clsx";
 import "./globals.css";
 import "./mailerlite.css";
+import { SocialBar } from "./ui/social-bar";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://wahlchecker.at"),
@@ -106,8 +107,8 @@ export default function RootLayout({
         </a>
         <div className={`z-10 flex min-h-full w-full flex-col`}>
           <header className="top-0 z-40 w-full border-b border-black bg-white md:sticky md:h-[90px]">
-            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-y-2 px-3 py-4 font-sans md:flex-row md:px-10 lg:w-[1320px]">
-              <div className="flex items-end">
+            <div className="mx-auto flex max-w-full flex-col items-center justify-between gap-x-7 gap-y-2 px-3 py-4 font-sans md:flex-row md:px-10 lg:w-[1320px]">
+              <div className="flex w-fit flex-shrink-0 items-start">
                 <Link
                   className="bg-white  px-2 py-1 outline-offset-4 outline-black focus-visible:outline-2"
                   href="/"
@@ -123,9 +124,10 @@ export default function RootLayout({
                   />
                 </Link>
               </div>
-              <div className="w-full hyphens-manual py-3 text-center text-[1.5rem] leading-[1.75rem] text-black outline-offset-2 outline-black focus-visible:outline-2 md:w-fit md:py-0  xs:text-[1.75rem] xs:leading-[2.125rem]">
+              <div className="flex w-full flex-grow justify-center hyphens-manual py-3 text-center text-[1.5rem] leading-[1.75rem] text-black outline-offset-2 outline-black focus-visible:outline-2 md:py-0 lg:justify-start  xs:text-[1.75rem] xs:leading-[2.125rem]">
                 Wahl-Checker
               </div>
+              <SocialBar />
             </div>
           </header>
           <div className="flex w-full flex-grow flex-col gap-5 md:gap-10 ">
@@ -142,9 +144,10 @@ export default function RootLayout({
           </div>
           <footer className=" border-t border-black py-5 ">
             <div
-              aria-label="Links zu andererseits.org, Impressum und Datenschutz"
+              aria-label="Links zu Sozialen Medien andererseits.org, Impressum und Datenschutz"
               className="flex w-full flex-col items-center justify-center gap-3"
             >
+              <SocialBar />
               <a
                 target="blank"
                 className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
