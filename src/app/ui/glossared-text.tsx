@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { GlossarEntry } from "@prisma/client";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ReactNode, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import reactStringReplace from "react-string-replace";
 
 const ReplacedText = ({
@@ -17,7 +18,7 @@ const ReplacedText = ({
 }) => {
   const id = useId();
 
-  let parts: Array<ReactNode> | string = text;
+  let parts: Array<ReactNode> = [text];
   const hasMatched: Record<string, boolean> = {};
   for (const entry of glossarEntries.sort(
     (a, b) => b.term.length - a.term.length,
@@ -61,7 +62,13 @@ const ReplacedText = ({
     }
   }
 
-  return <>{parts}</>;
+  return (
+    <>
+      {reactStringReplace(parts, "\n", (match, index) => {
+        return <br key={`br-${id}-${index}`} />;
+      })}
+    </>
+  );
 };
 
 export const GlossaredText = ({
@@ -73,56 +80,32 @@ export const GlossaredText = ({
 }) => {
   const [activeEntry, setActiveEntry] = useState<GlossarEntry | null>(null);
 
-  const lines = text.split("\n");
+  return (
+    <>
+      {/* <span className="sr-only">{text}</span> */}
+      <span>
+        <ReplacedText
+          text={text}
+          glossarEntries={glossarEntries}
+          onClick={(entry) => setActiveEntry(entry)}
+        />
 
-  return lines.map((line, index) => {
-    return (
-      <>
-        {index !== 0 && <br />}
-        {/* <span className="sr-only">{text}</span> */}
-        <span>
-          <ReplacedText
-            text={line}
-            glossarEntries={glossarEntries}
-            onClick={(entry) => setActiveEntry(entry)}
-          />
-          {/* {partsClean.map((word, index) => {
-          const glossarEntry = glossarEntries.find((entry) =>
-            matchTermAndSynonyms(entry, word),
-          );
-
-          if (glossarEntry) {
-            return (
-              <a
-                key={`glossar-${id}-${index}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveEntry(glossarEntry);
-                }}
-                href="#"
-                aria-hidden="false"
-                title={`Wort-Erklärung für ${word}`}
-                className="relative bg-[#FFFF00] px-[2px] py-[1px] font-semibold outline-offset-2  outline-black focus-visible:outline-4"
-              >
-                {word}
-              </a>
-            );
-          }
-          return word;
-        })} */}
-
-          <AnimatePresence>
-            {activeEntry && (
-              <GlossarModal
-                entry={activeEntry}
-                onClose={() => setActiveEntry(null)}
-              />
-            )}
-          </AnimatePresence>
-        </span>
-      </>
-    );
-  });
+        {typeof document !== "undefined"
+          ? createPortal(
+              <AnimatePresence>
+                {activeEntry && (
+                  <GlossarModal
+                    entry={activeEntry}
+                    onClose={() => setActiveEntry(null)}
+                  />
+                )}
+              </AnimatePresence>,
+              document.body,
+            )
+          : null}
+      </span>
+    </>
+  );
 };
 
 let timeout: number;
