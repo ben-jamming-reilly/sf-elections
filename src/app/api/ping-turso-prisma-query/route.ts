@@ -1,4 +1,4 @@
-import { getElection } from "~/app/[electionSlug]/get-electom";
+import { getElection } from "~/app/[electionSlug]/get-election";
 import { prisma } from "~/lib/prisma";
 
 export const GET = async (request: Request) => {

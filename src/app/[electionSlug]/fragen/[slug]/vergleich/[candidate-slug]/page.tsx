@@ -8,7 +8,7 @@ import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
-import { getElection } from "~/app/[electionSlug]/get-electom";
+import { getElection } from "~/app/[electionSlug]/get-election";
 
 export type WahlkabineResultCandidate = {
   params: {

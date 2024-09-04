@@ -8,7 +8,7 @@ import { QuestionWithAnswers } from "../../ui/question-with-answers";
 import { PartyLogo } from "../../ui/party-logo";
 import { getGlossarEntries } from "../../glossar/get-glossar-entries";
 import { MagazineCta } from "../../ui/magazine-cta";
-import { getElection } from "../get-electon";
+import { getElection } from "../get-election";
 
 export const revalidate = 18000; // 5 hours
 
