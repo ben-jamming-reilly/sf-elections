@@ -44,7 +44,7 @@ export default async function CandidateProfile({
   const toolbar = (
     <aside
       aria-label="Zur Startseite und Teilen"
-      className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
+      className="flex flex-row flex-wrap items-center justify-center gap-5 pb-5"
     >
       <BackButton href={`/${election.slug}`}>Zur Startseite</BackButton>
 

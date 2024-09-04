@@ -46,16 +46,19 @@ export default async function CandidateComparison({
     (c) => Math.random() - Math.random(),
   );
 
+  const candidatesTitle =
+    randomCandidates.length === election.candidates.length
+      ? "allen Parteien"
+      : `Vergleich zwischen ${randomCandidates.map((c) => c.name).join(" & ")}`;
+
   const toolbar = (
     <aside
       aria-label="Zur Startseite und Teilen"
-      className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
+      className="flex flex-wrap items-center justify-center gap-5 pb-5"
     >
       <BackButton href={`/${params.electionSlug}`}>Zur Startseite</BackButton>
       <ShareButton
-        title={`Vergleich zwischen ${randomCandidates
-          .map((c) => c.name)
-          .join(" und ")}`}
+        title={`Vergleich zwischen ${candidatesTitle}`}
         text="Wahl-Checker EU 2024 von andererseits"
       >
         Seite teilen
@@ -68,7 +71,7 @@ export default async function CandidateComparison({
       {toolbar}
       <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
         Vergleich zwischen <br />
-        {`${randomCandidates.map((c) => c.name).join(" & ")}`}
+        {candidatesTitle}
       </h1>
 
       <section className="my-10">

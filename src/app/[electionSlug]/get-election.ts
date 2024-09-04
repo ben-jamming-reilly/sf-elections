@@ -10,6 +10,9 @@ export const getElectionRaw = async ({
     where: {
       slug: electionSlug,
     },
+    include: {
+      candidates: true,
+    },
   });
 
   return election;

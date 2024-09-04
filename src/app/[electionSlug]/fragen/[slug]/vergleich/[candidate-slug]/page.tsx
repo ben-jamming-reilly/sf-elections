@@ -49,7 +49,7 @@ export default async function WahlkabineResultCandidate({
   const toolbar = (
     <aside
       aria-label="Zurück & Teilen"
-      className="flex flex-col items-center justify-center gap-5 pb-5 sm:flex-row"
+      className="flex flex-row flex-wrap items-center justify-center gap-5 pb-5"
     >
       <BackButton href={`/${params.electionSlug}/fragen/${params.slug}`}>
         Zur Übersicht
