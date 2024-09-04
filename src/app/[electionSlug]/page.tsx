@@ -178,7 +178,8 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
-        Nationalratswahl 2024: Was sagen die Parteien?
+        Nationalratswahl 2024:
+        <br /> Was sagen die Parteien?
       </h1>
 
       <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
@@ -205,6 +206,15 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           Und ihre Antworten in Leichter Sprache aufgeschrieben.
           <br />
           Wir helfen Dir dabei zu verstehen, was die Parteien sagen.
+        </p>
+
+        <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
+          Du möchtest mehr Infos in Einfacher Sprache?
+        </h2>
+        <p>
+          Melde Dich jetzt für unseren kostenlosen Newsletter an: “Freitagmorgen
+          mit andererseits” Der Newsletter, der dir hilft Behinderungen zu
+          verstehen und erklärt, warum Barrierefreiheit für alle wichtig ist.
         </p>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
