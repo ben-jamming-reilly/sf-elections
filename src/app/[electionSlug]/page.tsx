@@ -7,6 +7,7 @@ import { MagazineCta } from "../ui/magazine-cta";
 import { notFound } from "next/navigation";
 import { getElectionWithCandidates } from "./get-election-with-candidates";
 import { MailerliteInput } from "../ui/mailerlite-input";
+import { NewsletterCta } from "../ui/newsletter-cta";
 
 export const revalidate = false;
 
@@ -31,7 +32,7 @@ export default async function ElectionHome({
     <div className="flex h-full flex-col gap-10">
       <section
         aria-label="Erklärtext zum Wahl-Checker"
-        className="mx-auto w-[900px] max-w-full text-[1.125rem] leading-[1.6875rem]"
+        className="mx-auto w-full max-w-[800px] text-[1.125rem] leading-[1.6875rem]"
       >
         {params.electionSlug === "eu-2024" && (
           <EU2024Election election={election} />
@@ -207,54 +208,7 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           Wir helfen Dir dabei zu verstehen, was die Parteien sagen.
         </p>
 
-        <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
-          Du möchtest mehr Infos in Einfacher Sprache?
-        </h2>
-        <p>
-          Melde Dich jetzt für unseren kostenlosen Newsletter an: “Freitagmorgen
-          mit andererseits”
-          <br />
-          Der Newsletter, der dir hilft Behinderungen zu verstehen und erklärt,
-          warum Barrierefreiheit für alle wichtig ist.
-        </p>
-
-        <div className="max-w-[700px]">
-          <MailerliteInput action="https://assets.mailerlite.com/jsonp/345641/forms/118855395671279343/subscribe" />
-        </div>
-
-        <p>
-          Damit gibst Du uns auch die Erlaubnis, Dir unseren wöchentlichen
-          Newsletter, Neuigkeiten und Werbung von{" "}
-          <span className="italic">andererseits</span> zu schicken. Du kannst
-          Dich jederzeit abmelden.
-        </p>
-        <p>
-          Infos zum Datenschutz bei <span className="italic">andererseits</span>{" "}
-          und unserem Newsletterprogramm findest Du hier:
-        </p>
-        <ul className="my-3 ml-4 list-disc space-y-1">
-          {[
-            {
-              text: "Privacy Policy – MailerLite",
-              href: "https://www.mailerlite.com/legal/privacy-policy",
-            },
-            {
-              text: "Datenschutz – andererseits",
-              href: "https://andererseits.org/datenschutz",
-            },
-          ].map((link) => (
-            <li key={link.href}>
-              <a
-                className="font-semibold text-black underline"
-                target="blank"
-                rel="noreferrer noopener"
-                href={link.href}
-              >
-                {link.text}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <NewsletterCta />
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
           Transparenz: Was ist Journalismus?
@@ -322,7 +276,7 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           {!election.isQuestionnaire && (
             <Button
               roundness="large"
-              variant="secondary"
+              variant="primary"
               as="a"
               href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
             >

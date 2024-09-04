@@ -4,7 +4,7 @@ import { Button } from "./button";
 export const MagazineCta = ({ electionSlug }: { electionSlug: string }) => {
   return (
     <aside
-      className="mx-auto my-10 flex w-[800px] max-w-full flex-col items-start gap-8 bg-[#fef9ca] px-8 py-8 text-[#016956] md:flex-row md:items-end"
+      className="mx-auto my-10 flex w-[900px] max-w-full flex-col items-start justify-between gap-8 bg-[#fef9ca] px-8 py-8 text-[#016956] md:flex-row md:items-end"
       aria-label="EU Wahl Magazin von andererseits"
     >
       <div className="max-w-[400px]">
