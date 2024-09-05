@@ -10,10 +10,12 @@ export const ShareButton = ({
   children,
   title,
   text,
+  electionSlug,
 }: {
   children: ReactNode;
   title: string;
   text?: string;
+  electionSlug?: string;
 }) => {
   const [copied, setCopied] = useState(false);
 
@@ -35,11 +37,13 @@ export const ShareButton = ({
       className="relative"
       onClick={async (e) => {
         try {
-          const blob = await fetch("/shareable-wide.png").then((r) => r.blob());
+          const blob = await fetch(`/shareable-wide-${electionSlug}.png`).then(
+            (r) => r.blob(),
+          );
           const data: ShareData = {
             title,
-            text,
-            url: window.location.href,
+            text: window.location.href,
+            // url: window.location.href,
             files: [
               new File([blob], "shareable-wide.png", {
                 type: "image/png",

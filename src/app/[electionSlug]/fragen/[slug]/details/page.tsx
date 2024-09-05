@@ -55,12 +55,15 @@ export default async function WahlkabineResultDetails({
       <BackButton href={`/${params.electionSlug}/fragen/${params.slug}/`}>
         Zur Übersicht
       </BackButton>
-      <ShareButton title="Wahl-Checker EU 2024 von andererseits">
+      <ShareButton
+        electionSlug={params.electionSlug}
+        title={`Wahl-Checker von andererseits zur ${election.name}`}
+      >
         Teilen
       </ShareButton>
       <DownloadImageLink
         title="wahlchecker-andererseits.jpg"
-        href={`/shareable-wide.png`}
+        href={`/shareable-wide-${params.electionSlug}.png`}
       >
         Bild zum Teilen
       </DownloadImageLink>

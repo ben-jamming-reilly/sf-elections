@@ -49,7 +49,10 @@ export default async function CandidateProfile({
     >
       <BackButton href={`/${election.slug}`}>Zur Startseite</BackButton>
 
-      <ShareButton title={`Wahlchecker Antworten von ${candidate.name}`}>
+      <ShareButton
+        electionSlug={params.electionSlug}
+        title={`Wahlchecker Antworten von ${candidate.name} zu ${election.name}`}
+      >
         Teilen
       </ShareButton>
     </aside>
@@ -67,7 +70,7 @@ export default async function CandidateProfile({
           <section className="my-8 flex w-full justify-center">
             <div className="relative">
               <PartyLogo
-                href={`/${candidate.slug}`}
+                href={`/${params.electionSlug}/${candidate.slug}`}
                 priority
                 title={`Zur ${candidate.name} Seite`}
                 src={`/${candidate.profileImg}`}

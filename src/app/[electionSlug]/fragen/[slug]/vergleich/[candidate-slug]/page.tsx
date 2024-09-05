@@ -56,13 +56,14 @@ export default async function WahlkabineResultCandidate({
         Zur Übersicht
       </BackButton>
       <ShareButton
-        title={`Mein Vergleich zu ${candidate.name} für die EU-Wahl 2024!`}
+        electionSlug={params.electionSlug}
+        title={`Mein Vergleich zu ${candidate.name} für die ${election.name}!`}
       >
         Teilen
       </ShareButton>
       <DownloadImageLink
         title="wahlchecker-andererseits.jpg"
-        href={`/shareable-wide.png`}
+        href={`/shareable-wide-${params.electionSlug}.png`}
       >
         Bild zum Teilen
       </DownloadImageLink>

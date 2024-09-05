@@ -59,8 +59,9 @@ export default async function CandidateComparison({
     >
       <BackButton href={`/${params.electionSlug}`}>Zur Startseite</BackButton>
       <ShareButton
-        title={`Vergleich zwischen ${candidatesTitle}`}
-        text="Wahl-Checker EU 2024 von andererseits"
+        electionSlug={params.electionSlug}
+        title={`Vergleich zwischen ${candidatesTitle} bei der ${election.name}`}
+        text="Wahl-Checker von andererseits"
       >
         Seite teilen
       </ShareButton>
