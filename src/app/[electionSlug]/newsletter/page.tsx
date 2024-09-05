@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { MailerliteInput } from "../ui/mailerlite-input";
+import { MailerliteInput } from "../../ui/mailerlite-input";
+import { getMailerliteFormId, MAILERLITE_ACCOUNT_ID } from "~/app/utils.index";
 
 export const revalidate = false;
 
@@ -8,6 +9,11 @@ export default async function Newsletter({
 }: {
   params: { electionSlug: string };
 }) {
+  const mailerLiteId = getMailerliteFormId(
+    params.electionSlug,
+    "nr-election-2024",
+  );
+
   return (
     <div className="flex h-full flex-col gap-10">
       <section
@@ -26,7 +32,9 @@ export default async function Newsletter({
         </p>
 
         <div className="max-w-[700px]">
-          <MailerliteInput action="https://assets.mailerlite.com/jsonp/345641/forms/118855395671279343/subscribe" />
+          <MailerliteInput
+            action={`https://assets.mailerlite.com/jsonp/${MAILERLITE_ACCOUNT_ID}/forms/${mailerLiteId}/subscribe`}
+          />
         </div>
 
         <p>

@@ -208,7 +208,7 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           Wir helfen Dir dabei zu verstehen, was die Parteien sagen.
         </p>
 
-        <NewsletterCta />
+        <NewsletterCta electionSlug={election.slug} />
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
           Transparenz: Was ist Journalismus?
