@@ -7,6 +7,10 @@ import { ReactNode, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import reactStringReplace from "react-string-replace";
 
+const generateKey = (pre: string) => {
+  return `${pre}_${new Date().getTime()}`;
+};
+
 const ReplacedText = ({
   text,
   glossarEntries,
@@ -43,6 +47,8 @@ const ReplacedText = ({
 
         hasMatched[match] = true;
 
+        console.log(`glossar-${id}-${match}-${index}`);
+
         return (
           <a
             key={`glossar-${id}-${match}-${index}`}
@@ -64,8 +70,10 @@ const ReplacedText = ({
 
   return (
     <>
-      {reactStringReplace(parts, "\n", (match, index) => {
-        return <br key={`br-${id}-${index}`} />;
+      {reactStringReplace(parts, "\n", (match, index, offset) => {
+        // I have no idea how to actually create unique content bases keys here
+        // Without this stupid construction a new line break is added everytime a user clicks on the glossar entry
+        return <br key={`br-${id}-${index}-${offset}-${generateKey(match)}`} />;
       })}
     </>
   );
@@ -82,7 +90,6 @@ export const GlossaredText = ({
 
   return (
     <>
-      {/* <span className="sr-only">{text}</span> */}
       <span>
         <ReplacedText
           text={text}
