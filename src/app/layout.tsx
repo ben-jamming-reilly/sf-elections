@@ -8,46 +8,14 @@ import clsx from "clsx";
 import "./globals.css";
 import "./mailerlite.css";
 import { SocialBar } from "./ui/social-bar";
+import { metaTagsPerElectionSlug } from "./utils.index";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://wahlchecker.at"),
-  title: "Wahl-Checker EU 2024 von andererseits",
-  description: "Finde heraus welche Partei zu Dir passt!",
-  openGraph: {
-    images: [
-      {
-        url: "https://wahlchecker.at/shareable-wide.png",
-        alt: "Wahl-Checker EU 2024 von andererseits",
-        width: 1200,
-        height: 630,
-      },
-      {
-        url: "https://wahlchecker.at/shareable-square.png",
-        alt: "Wahl-Checker EU 2024 von andererseits",
-        width: 1200,
-        height: 1200,
-      },
-    ],
-    title: "Wahl-Checker EU 2024 von andererseits",
-    description: "Finde heraus welche Partei zu Dir passt!",
-    siteName: "wahlchecker.at",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Wahl-Checker EU 2024 von andererseits",
-    description: "Finde heraus welche Partei zu Dir passt!",
-    creator: "@andererseits",
-    site: "wahlchecker.at",
-    images: [
-      {
-        url: "https://wahlchecker.at/shareable-wide.png",
-        alt: "Wahl-Checker EU 2024 von andererseits",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-};
+export async function generateMetadata() {
+  return metaTagsPerElectionSlug({
+    title: `Wahl-Checker von andererseits`,
+    description: `Finde heraus welche Partei zu Dir passt!`,
+  });
+}
 
 const interFont = Inter({
   weight: ["300", "400", "500", "600", "700"],
@@ -90,6 +58,15 @@ export default function RootLayout({
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
+        />
+        <meta name="og:site_name" content="wahlchecker.at" />
+        <meta name="twitter:image" content="/shareable-wide.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="wahlchecker.at" />
+        <meta name="twitter:creator" content="@andererseits" />
+        <meta
+          name="keywords"
+          content="Orientierungshilfe, Wahl, Meinung, Partei, Parteien, Wählen, Politik, unabhängig, barrierefrei"
         />
         <link rel="icon" href="/favicon2.ico" />
         <link rel="manifest" href="/site.webmanifest" />

@@ -9,6 +9,7 @@ import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 import { getElection } from "~/app/[electionSlug]/get-election";
+import { metaTagsPerElectionSlug } from "~/app/utils.index";
 
 export type WahlkabineResultCandidate = {
   params: {
@@ -128,8 +129,9 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
     notFound();
   }
 
-  return {
-    title: `Vergleich mit ${candidate.name} | Wahl-Checker EU 2024 von andererseits`,
+  return metaTagsPerElectionSlug({
+    electionSlug: voterWithAnswers.election.slug,
+    title: `Mein Ergebnis für ${voterWithAnswers.election.name} – Wahl-Checker von andererseits`,
     description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
-  };
+  });
 }

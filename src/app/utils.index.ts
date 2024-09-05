@@ -32,3 +32,49 @@ export const getMailerliteFormId = (
 ) => {
   return getValueFromRecord(mailerliteFormIds, electionSlug, fallbackSlug);
 };
+
+export const metaTagsPerElectionSlug = ({
+  electionSlug,
+  title,
+  description,
+}: {
+  electionSlug?: string;
+  title: string;
+  description: string;
+}) => {
+  const slug = electionSlug ? `${electionSlug}` : "";
+  return {
+    title,
+    description,
+    openGraph: {
+      images: [
+        {
+          url: `https://wahlchecker.at/shareable-wide${slug}.png`,
+          alt: description,
+          width: 1200,
+          height: 630,
+        },
+        {
+          url: `https://wahlchecker.at/shareable-square${slug}.png`,
+          alt: description,
+          width: 1200,
+          height: 1200,
+        },
+      ],
+      title,
+      description,
+    },
+    twitter: {
+      title,
+      description,
+      images: [
+        {
+          url: `https://wahlchecker.at/shareable-wide${slug}.png`,
+          alt: description,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
+};

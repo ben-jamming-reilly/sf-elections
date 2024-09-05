@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { prisma } from "~/lib/prisma";
 import { redirect } from "next/navigation";
+import { metaTagsPerElectionSlug } from "./utils.index";
 
 export const revalidate = false;
 
@@ -45,4 +46,11 @@ export default async function Home() {
       </section>
     </div>
   );
+}
+
+export async function generateMetadata() {
+  return metaTagsPerElectionSlug({
+    title: `Wort-Erklärungen – Wahl-Checker von andererseits`,
+    description: `Begriffe und Erklärungen.`,
+  });
 }

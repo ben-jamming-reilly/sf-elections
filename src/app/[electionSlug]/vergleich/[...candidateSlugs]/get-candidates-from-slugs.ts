@@ -20,6 +20,7 @@ export const getCandidatesFromSlugs = cache(
         hasFinished: true,
       },
       include: {
+        election: true,
         answers: {
           include: {
             question: true,

@@ -35,6 +35,7 @@ export const getCandidateFromSlug = cache(
             question: true,
           },
         },
+        election: true,
       },
     });
 

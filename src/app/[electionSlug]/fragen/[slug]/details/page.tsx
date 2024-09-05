@@ -9,6 +9,7 @@ import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 import { getElection } from "~/app/[electionSlug]/get-election";
+import { metaTagsPerElectionSlug } from "~/app/utils.index";
 
 export type WahlkabineResultDetailsProps = {
   params: {
@@ -142,8 +143,9 @@ export async function generateMetadata({
     notFound();
   }
 
-  return {
-    title: `Mein Wahl-Checker EU Ergebnis `,
-    description: `Schau Dir an, welche Parteien ähnlich wie Du auf die 15 Fragen geantwortet haben.`,
-  };
+  return metaTagsPerElectionSlug({
+    electionSlug: voterWithAnswers.election.slug,
+    title: `Mein Ergebnis für ${voterWithAnswers.election.name} – Wahl-Checker von andererseits`,
+    description: `Schau Dir an, wie ähnlich ich zu den Parteien war.`,
+  });
 }

@@ -12,6 +12,7 @@ export const getVoterViaHash = cache(async (hash: string) => {
           question: true,
         },
       },
+      election: true,
       candidateMatches: {
         include: {
           candidate: true,

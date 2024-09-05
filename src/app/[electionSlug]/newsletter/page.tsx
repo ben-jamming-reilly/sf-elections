@@ -1,6 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
+import { Metadata } from "next";
 import { MailerliteInput } from "../../ui/mailerlite-input";
-import { getMailerliteFormId, MAILERLITE_ACCOUNT_ID } from "~/app/utils.index";
+import {
+  getMailerliteFormId,
+  MAILERLITE_ACCOUNT_ID,
+  metaTagsPerElectionSlug,
+} from "~/app/utils.index";
 
 export const revalidate = false;
 
@@ -73,4 +78,16 @@ export default async function Newsletter({
       </section>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { electionSlug: string };
+}): Promise<Metadata> {
+  return metaTagsPerElectionSlug({
+    electionSlug: params.electionSlug,
+    title: `Newsletter – Wahl-Checker von andererseits`,
+    description: `Melde Dich für unseren kostenlosen Newsletter an.`,
+  });
 }

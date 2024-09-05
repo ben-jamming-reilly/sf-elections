@@ -8,6 +8,7 @@ import { Button } from "~/app/ui/button";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { MagazineCta } from "~/app/ui/magazine-cta";
+import { metaTagsPerElectionSlug } from "~/app/utils.index";
 
 export type WahlkabineResultProps = {
   params: {
@@ -168,8 +169,9 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
     notFound();
   }
 
-  return {
-    title: `Mein Wahl-Checker EU Ergebnis`,
-    description: `Schau Dir an, welche Parteien ähnlich wie Du auf die 15 Fragen geantwortet haben.`,
-  };
+  return metaTagsPerElectionSlug({
+    electionSlug: voterWithAnswers.election.slug,
+    title: `Mein Ergebnis für ${voterWithAnswers.election.name} – Wahl-Checker von andererseits`,
+    description: `Schau Dir an, wie ähnlich ich zu den Parteien war.`,
+  });
 }

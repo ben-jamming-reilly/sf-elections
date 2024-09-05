@@ -12,6 +12,7 @@ export const getElectionWithCandidatesRaw = async ({
     },
     include: {
       candidates: true,
+      questions: true,
     },
   });
 

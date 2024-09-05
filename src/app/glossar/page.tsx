@@ -1,18 +1,13 @@
 import { BackButton } from "../ui/back-button";
 import Link from "next/link";
 import { getGlossarEntries } from "./get-glossar-entries";
+import { metaTagsPerElectionSlug } from "../utils.index";
 
 export async function generateMetadata() {
-  return {
-    title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andererseits`,
-    description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
-    twitter: {
-      card: "summary_large_image",
-      site: "wahlchecker.at",
-      title: `Wort-Erklärungen | Wahl-Checker EU 2024 von andererseits`,
-      description: `Begriffe und Erklärungen zur EU-Wahl 2024.`,
-    },
-  };
+  return metaTagsPerElectionSlug({
+    title: `Wort-Erklärungen – Wahl-Checker von andererseits`,
+    description: `Begriffe und Erklärungen.`,
+  });
 }
 
 export const revalidate = 0;

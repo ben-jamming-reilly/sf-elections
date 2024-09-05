@@ -3,11 +3,36 @@ import { VoterQuestionnaire } from "./voter-questionnaire";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { getElectionWithCandidates } from "../get-election-with-candidates";
+import { getElections } from "~/app/get-elections";
+import { metaTagsPerElectionSlug } from "~/app/utils.index";
 
-export const metadata: Metadata = {
-  title: "Fragen | Wahl-Checker EU 2024 von andererseits",
-  description: "15 Fragen zur EU-Wahl 2024 beantwortet von 7 Parteien.",
-};
+export async function generateStaticParams() {
+  const elections = await getElections();
+
+  return elections.map((election) => ({
+    electionSlug: election.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { electionSlug: string };
+}): Promise<Metadata> {
+  const election = await getElectionWithCandidates({
+    electionSlug: params.electionSlug,
+  });
+
+  if (!election) {
+    notFound();
+  }
+
+  return metaTagsPerElectionSlug({
+    electionSlug: election.slug,
+    title: `${election.name} Fragen – Wahl-Checker von andererseits`,
+    description: `${election.questions.length} Fragen beantwortet von ${election.candidates.length} Parteien.`,
+  });
+}
 
 export const revalidate = 18000; // 5 hours
 

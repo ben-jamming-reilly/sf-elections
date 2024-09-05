@@ -10,6 +10,7 @@ import { PartyLogo } from "~/app/ui/party-logo";
 import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 import { getElection } from "../../get-election";
+import { metaTagsPerElectionSlug } from "~/app/utils.index";
 
 export const revalidate = false;
 
@@ -144,20 +145,11 @@ export async function generateMetadata({
     electionSlug: params.electionSlug,
   });
 
-  return {
-    title: `Vergleich zwischen ${candidates.map((c) => c.name).join(" und ")}`,
+  return metaTagsPerElectionSlug({
+    electionSlug: candidates[0]?.election.slug,
+    title: `${candidates[0]?.election.name} – Vergleich zwischen den Parteien`,
     description: `Vergleich zwischen ${candidates
       .map((c) => c.name)
-      .join(" und ")}`,
-    twitter: {
-      card: "summary_large_image",
-      site: "wahlchecker.at",
-      title: `Vergleich zwischen ${candidates
-        .map((c) => c.name)
-        .join(" und ")}`,
-      description: `Vergleich zwischen ${candidates
-        .map((c) => c.name)
-        .join(" und ")}`,
-    },
-  };
+      .join(", ")}`,
+  });
 }

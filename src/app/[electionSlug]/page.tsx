@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { getElectionWithCandidates } from "./get-election-with-candidates";
 import { MailerliteInput } from "../ui/mailerlite-input";
 import { NewsletterCta } from "../ui/newsletter-cta";
+import { Metadata } from "next";
 
 export const revalidate = false;
 
@@ -300,3 +301,52 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
     </div>
   );
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { electionSlug: string };
+}): Promise<Metadata> {
+  const election = await getElectionWithCandidates({
+    electionSlug: params.electionSlug,
+  });
+
+  if (!election) {
+    notFound();
+  }
+
+  return {
+    title: `${election.name} – Wahl-Checker von andererseits`,
+    description: "Finde heraus welche Partei zu Dir passt!",
+    openGraph: {
+      images: [
+        {
+          url: `https://wahlchecker.at/shareable-wide-${election.slug}.png`,
+          alt: `${election.name} – Wahl-Checker von andererseits`,
+          width: 1200,
+          height: 630,
+        },
+        {
+          url: `https://wahlchecker.at/shareable-square-${election.slug}.png`,
+          alt: `${election.name} – Wahl-Checker von andererseits`,
+          width: 1200,
+          height: 1200,
+        },
+      ],
+      title: `${election.name} – Wahl-Checker von andererseits`,
+      description: "Finde heraus welche Partei zu Dir passt!",
+    },
+    twitter: {
+      title: `${election.name} – Wahl-Checker von andererseits`,
+      description: "Finde heraus welche Partei zu Dir passt!",
+      images: [
+        {
+          url: `https://wahlchecker.at/shareable-wide-${election.slug}.png`,
+          alt: `${election.name} – Wahl-Checker von andererseits`,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
+}
