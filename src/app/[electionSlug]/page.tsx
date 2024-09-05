@@ -6,9 +6,10 @@ import { GlossaredTextServer } from "../ui/glossared-text.server";
 import { MagazineCta } from "../ui/magazine-cta";
 import { notFound } from "next/navigation";
 import { getElectionWithCandidates } from "./get-election-with-candidates";
-import { MailerliteInput } from "../ui/mailerlite-input";
 import { NewsletterCta } from "../ui/newsletter-cta";
 import { Metadata } from "next";
+import { metaTagsPerElectionSlug } from "../utils.index";
+import { getElections } from "../get-elections";
 
 export const revalidate = false;
 
@@ -237,10 +238,11 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           </Button>
         </nav>
 
+        <NewsletterCta electionSlug={election.slug} />
+
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
           Transparenz: Was ist Journalismus?
         </h2>
-        <NewsletterCta electionSlug={election.slug} />
 
         <p>
           Journalismus bedeutet: Alle Antworten einordnen und überprüfen.
@@ -315,38 +317,17 @@ export async function generateMetadata({
     notFound();
   }
 
-  return {
+  return metaTagsPerElectionSlug({
+    electionSlug: election.slug,
     title: `${election.name} – Wahl-Checker von andererseits`,
     description: "Finde heraus welche Partei zu Dir passt!",
-    openGraph: {
-      images: [
-        {
-          url: `https://wahlchecker.at/shareable-wide-${election.slug}.png`,
-          alt: `${election.name} – Wahl-Checker von andererseits`,
-          width: 1200,
-          height: 630,
-        },
-        {
-          url: `https://wahlchecker.at/shareable-square-${election.slug}.png`,
-          alt: `${election.name} – Wahl-Checker von andererseits`,
-          width: 1200,
-          height: 1200,
-        },
-      ],
-      title: `${election.name} – Wahl-Checker von andererseits`,
-      description: "Finde heraus welche Partei zu Dir passt!",
-    },
-    twitter: {
-      title: `${election.name} – Wahl-Checker von andererseits`,
-      description: "Finde heraus welche Partei zu Dir passt!",
-      images: [
-        {
-          url: `https://wahlchecker.at/shareable-wide-${election.slug}.png`,
-          alt: `${election.name} – Wahl-Checker von andererseits`,
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-  };
+  });
 }
+
+export const generateStaticParams = async () => {
+  const elections = await getElections();
+
+  return elections.map((election) => ({
+    electionSlug: election.slug,
+  }));
+};
