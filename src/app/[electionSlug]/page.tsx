@@ -210,17 +210,8 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
 
         <nav
           aria-label="Zu den Fragen oder Wort-Erklärungen"
-          className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl md:flex-row"
+          className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl sm:mx-0 md:flex-row"
         >
-          <Button
-            roundness="large"
-            className=""
-            as="a"
-            variant="secondary"
-            href="/glossar"
-          >
-            Wort-Erklärungen
-          </Button>
           {election.isQuestionnaire && (
             <QuestionaireButton electionSlug={election.slug} />
           )}
@@ -234,6 +225,15 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
               Antworten vergleichen
             </Button>
           )}
+          <Button
+            roundness="large"
+            className=""
+            as="a"
+            variant="secondary"
+            href="/glossar"
+          >
+            Wort-Erklärungen
+          </Button>
         </nav>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
