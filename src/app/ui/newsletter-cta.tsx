@@ -1,5 +1,5 @@
 import { Button } from "./button";
-import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 
 export const NewsletterCta = ({ electionSlug }: { electionSlug: string }) => {
   return (
@@ -9,7 +9,7 @@ export const NewsletterCta = ({ electionSlug }: { electionSlug: string }) => {
     >
       <div className="max-w-[400px]">
         <h2 className="text-[1.75rem] font-semibold leading-[2.125rem]">
-          <span>Willst du mehr Verständnis?</span>
+          <span>Willst Du mehr Infos?</span>
         </h2>
       </div>
 
@@ -23,7 +23,7 @@ export const NewsletterCta = ({ electionSlug }: { electionSlug: string }) => {
           aria-hidden="true"
           className="ml-1 inline h-5 w-5 stroke-2"
         />
-        Newsletter abonnieren
+        andererseits kennenlernen!
       </Button>
     </aside>
   );

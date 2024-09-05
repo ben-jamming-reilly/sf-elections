@@ -208,11 +208,39 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           Wir helfen Dir dabei zu verstehen, was die Parteien sagen.
         </p>
 
-        <NewsletterCta electionSlug={election.slug} />
+        <nav
+          aria-label="Zu den Fragen oder Wort-Erklärungen"
+          className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl md:flex-row"
+        >
+          <Button
+            roundness="large"
+            className=""
+            as="a"
+            variant="secondary"
+            href="/glossar"
+          >
+            Wort-Erklärungen
+          </Button>
+          {election.isQuestionnaire && (
+            <QuestionaireButton electionSlug={election.slug} />
+          )}
+          {!election.isQuestionnaire && (
+            <Button
+              roundness="large"
+              variant="primary"
+              as="a"
+              href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
+            >
+              Antworten vergleichen
+            </Button>
+          )}
+        </nav>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
           Transparenz: Was ist Journalismus?
         </h2>
+        <NewsletterCta electionSlug={election.slug} />
+
         <p>
           Journalismus bedeutet: Alle Antworten einordnen und überprüfen.
           <br />
@@ -257,39 +285,11 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           .
         </p>
 
-        <nav
-          aria-label="Zu den Fragen oder Wort-Erklärungen"
-          className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl md:flex-row"
-        >
-          <Button
-            roundness="large"
-            className=""
-            as="a"
-            variant="secondary"
-            href="/glossar"
-          >
-            Wort-Erklärungen
-          </Button>
-          {election.isQuestionnaire && (
-            <QuestionaireButton electionSlug={election.slug} />
-          )}
-          {!election.isQuestionnaire && (
-            <Button
-              roundness="large"
-              variant="primary"
-              as="a"
-              href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
-            >
-              Antworten vergleichen
-            </Button>
-          )}
-        </nav>
-
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">Daten-Schutz</h2>
         <p>
           Der Wahl-Checker ist anonym. Das heißt: Wir wissen nicht, wer Du bist
-          und wie Du abgestimmt hast. Mehr Infos zum Datenschutz findest Du
-          hier:{" "}
+          und wie Du abgestimmt hast.
+          <br /> Mehr Infos zum Datenschutz findest Du hier:{" "}
           <Link href="/datenschutz" className="font-semibold underline">
             wahlchecker.at/datenschutz
           </Link>

@@ -32,6 +32,10 @@ const nextConfig = {
         source: "/wahlkabine/:path*",
         destination: "/:path*",
       },
+      {
+        source: "/",
+        destination: "/eu-2024",
+      }
     ];
   },
   async redirects() {
