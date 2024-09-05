@@ -42,7 +42,7 @@ export const metaTagsPerElectionSlug = ({
   title: string;
   description: string;
 }) => {
-  const slug = electionSlug ? `${electionSlug}` : "";
+  const slug = electionSlug ? `-${electionSlug}` : "";
   return {
     title,
     description,
