@@ -34,7 +34,7 @@ const nextConfig = {
       },
       {
         source: "/",
-        destination: "/eu-2024",
+        destination: "/nr-2024",
       }
     ];
   },
