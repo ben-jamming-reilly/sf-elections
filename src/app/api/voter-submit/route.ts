@@ -2,8 +2,8 @@ import { headers } from "next/headers";
 import { NextResponse, userAgent } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { ZodError, z } from "zod";
-import { getCandidatesWithQuestions } from "~/app/[electionSlug]/fragen/[slug]/get-candidates-with-questions";
-import { rateCandidate } from "~/app/[electionSlug]/fragen/[slug]/rate-candidates";
+import { getCandidatesWithQuestions } from "~/app/[electionSlug]/questions/[slug]/get-candidates-with-questions";
+import { rateCandidate } from "~/app/[electionSlug]/questions/[slug]/rate-candidates";
 import { trackPlausibleEvent } from "~/lib/plausible";
 import { prisma } from "~/lib/prisma";
 

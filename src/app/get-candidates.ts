@@ -17,5 +17,5 @@ export const getCandidatesRaw = async ({
 };
 
 export const getCandidates = unstable_cache(getCandidatesRaw, undefined, {
-  revalidate: 18000,
+  revalidate: 60,
 });

@@ -6,7 +6,7 @@ import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
-import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
+import { getGlossarEntries } from "~/app/glossary/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 import { getElection } from "~/app/[electionSlug]/get-election";
 import { metaTagsPerElectionSlug } from "~/app/utils.index";
@@ -52,35 +52,34 @@ export default async function WahlkabineResultDetails({
       aria-label="Zurück & Teilen"
       className="flex flex-row flex-wrap justify-center gap-5 pb-5"
     >
-      <BackButton href={`/${params.electionSlug}/fragen/${params.slug}/`}>
-        Zur Übersicht
+      <BackButton href={`/${params.electionSlug}/questions/${params.slug}/`}>
+        Back to Overview
       </BackButton>
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Wahl-Checker von andererseits zur ${election.name}`}
+        title={`Election Checker for ${election.name}`}
       >
-        Teilen
+        Share
       </ShareButton>
       <DownloadImageLink
-        title="wahlchecker-andererseits.jpg"
+        title="election-checker-andererseits.jpg"
         href={`/shareable-wide-${params.electionSlug}.png`}
       >
-        Bild zum Teilen
+        Download Image
       </DownloadImageLink>
     </aside>
   );
-
   return (
     <div>
       {toolbar}
 
       <section>
         <h1 className="my-5 pb-4 text-center text-4xl">
-          Zu den Antworten von den Parteien:
+          The candidates answers:
         </h1>
 
         <nav
-          aria-label="Links zu den Antworten der einzelnen Parteien"
+          aria-label="Links to the answers of each party"
           className="mx-auto my-10 grid w-[724px] max-w-full grid-cols-2 flex-row flex-wrap place-items-center items-center justify-evenly gap-x-3 gap-y-6 xs:flex"
         >
           {randomCandidates.map((candidate, index) => (
@@ -89,8 +88,8 @@ export default async function WahlkabineResultDetails({
               href={`/${params.electionSlug}/${candidate.slug}`}
               priority
               className=""
-              title={`Zur ${candidate.name} Seite`}
-              src={`/${candidate.profileImg}`}
+              title={`To the ${candidate.name} page`}
+              src={`${candidate.profileImg}`}
               alt=""
             />
           ))}
@@ -103,14 +102,14 @@ export default async function WahlkabineResultDetails({
       >
         <div className="max-w-[80ch] space-y-3">
           <h2 id="details-page-questions-overview-title" className="text-3xl">
-            Hier kannst Du Deine Antworten mit allen Parteien vergleichen
+            Here you can compare your answers with all parties
           </h2>
           <p>
-            Die Parteien haben außerdem geschrieben, was der Grund für ihre
-            Meinung ist. Das kannst Du lesen, wenn Du auf „Mehr Infos“ klickst.
-            Wir haben die Gründe auch in einfacher Sprache erklärt.
+            The parties have also written the explainations for their opinions.
+            You can read this by clicking on &quot;More Info.&quot; We have also
+            explained the reasons in simple language.
             <br />
-            <br /> Die Reihenfolge der Parteien ist zufällig.
+            <br /> The order of the parties is random.
           </p>
         </div>
         <div>
@@ -119,7 +118,7 @@ export default async function WahlkabineResultDetails({
             .map((answer, index) => (
               <QuestionWithAnswers
                 key={answer.id}
-                candidateLinkBase={`/${params.electionSlug}/fragen/${params.slug}/vergleich`}
+                candidateLinkBase={`/${params.electionSlug}/questions/${params.slug}/compare`}
                 voterAnswer={answer}
                 question={answer.question}
                 candidatesAnswers={randomCandidates}
@@ -129,8 +128,6 @@ export default async function WahlkabineResultDetails({
             ))}
         </div>
       </section>
-
-      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </div>

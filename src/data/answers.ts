@@ -4,31 +4,31 @@ export type ScaleOptionValueType = (typeof options)[number]["value"];
 
 export const options = [
   {
-    label: "voll zu",
+    label: "fully",
     value: 2,
   },
   {
-    label: "eher zu",
+    label: "rather too",
     value: 1,
   },
   {
-    label: "eher nicht zu",
+    label: "rather not",
     value: -1,
   },
   {
-    label: "gar nicht zu",
+    label: "not at all",
     value: -2,
   },
 ] as const;
 
 export const yesNoOptions = [
   {
-    label: "Ja",
+    label: "Yes",
     value: 1, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
-  { label: "Ich weiß es nicht", value: 0 },
+  { label: "I am not sure", value: 0 },
   {
-    label: "Nein",
+    label: "No",
     value: -1, // Settings a different value to be able to differnentiate. Can normalise afterwards.
   },
 ] as const;
@@ -56,19 +56,19 @@ export type WeightingValueType = (typeof weightings)[number]["value"];
 
 export const weightings = [
   {
-    label: "sehr wichtig",
+    label: "very important",
     value: 3,
   },
   {
-    label: "wichtig",
+    label: "important",
     value: 2,
   },
   {
-    label: "nicht so wichtig",
+    label: "not so important",
     value: 1,
   },
   {
-    label: "egal",
+    label: "does not matter",
     value: 0,
   },
 ] as const;
@@ -80,23 +80,23 @@ export const weightingLabelForValue = (value: number) => {
 
 export const CATEGORIES = [
   {
-    label: "Umwelt und Klima-Schutz",
+    label: "Environment and climate protection",
     hex: "#066700",
   },
   {
-    label: "Arbeit und Inklusion",
+    label: "Work and inclusion",
     hex: "#D51414",
   },
   {
-    label: "Flucht und Asyl",
+    label: "Flight and asylum",
     hex: "#BB6BD9",
   },
   {
-    label: "Krieg und Verteidigung",
+    label: "War and defense",
     hex: "#005CB9",
   },
   {
-    label: "Die Zukunft der EU",
+    label: "Other",
     hex: "#CC00CC",
   },
 ];

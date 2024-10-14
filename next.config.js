@@ -6,6 +6,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+
+  images: {
+    remotePatterns: [
+      {
+        hostname: "www.sf.gov",
+      },
+    ],
+  },
   async rewrites() {
     return [
       {
@@ -35,32 +43,32 @@ const nextConfig = {
       {
         source: "/",
         destination: "/nr-2024",
-      }
+      },
     ];
   },
   async redirects() {
     return [
       {
-        source: '/fragen/:slug',
-        destination: '/eu-2024/fragen/:slug',
+        source: "/fragen/:slug",
+        destination: "/eu-2024/fragen/:slug",
         permanent: true,
       },
       {
-        source: '/fragen/:slug/details',
-        destination: '/eu-2024/fragen/:slug/details',
+        source: "/fragen/:slug/details",
+        destination: "/eu-2024/fragen/:slug/details",
         permanent: true,
       },
       {
-        source: '/fragen/:slug/details/:candidateSlug',
-        destination: '/eu-2024/fragen/:slug/details/:candidateSlug',
+        source: "/fragen/:slug/details/:candidateSlug",
+        destination: "/eu-2024/fragen/:slug/details/:candidateSlug",
         permanent: true,
       },
       {
-        source: '/vergleich/:candidateSlugs*',
-        destination: '/eu-2024/vergleich/:candidateSlugs*',
+        source: "/vergleich/:candidateSlugs*",
+        destination: "/eu-2024/vergleich/:candidateSlugs*",
         permanent: true,
       },
-    ]
+    ];
   },
   eslint: {
     ignoreDuringBuilds: true,

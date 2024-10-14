@@ -23,6 +23,7 @@ export const getElectionWithCandidates = unstable_cache(
   getElectionWithCandidatesRaw,
   undefined,
   {
-    revalidate: 18000,
+    // revalidate: 18000,
+    revalidate: 60,
   },
 );

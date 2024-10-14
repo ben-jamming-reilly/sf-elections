@@ -5,19 +5,11 @@ import clsx from "clsx";
 const socialGroups = [
   {
     type: "instagram",
-    link: "https://instagram.com/redaktionandererseits",
-  },
-  {
-    type: "facebook",
-    link: "https://www.facebook.com/redaktionandererseits",
+    link: "https://www.instagram.com/benjamin_really/",
   },
   {
     type: "twitter",
-    link: "https://twitter.com/andererseits",
-  },
-  {
-    type: "linkedin",
-    link: "https://www.linkedin.com/company/medienhaus-andererseits-gmbh",
+    link: "https://twitter.com/benjamin_really",
   },
 ] as const;
 

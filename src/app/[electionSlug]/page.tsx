@@ -36,12 +36,9 @@ export default async function ElectionHome({
         aria-label="Erklärtext zum Wahl-Checker"
         className="mx-auto w-full max-w-[800px] text-[1.125rem] leading-[1.6875rem]"
       >
-        {params.electionSlug === "eu-2024" && (
-          <EU2024Election election={election} />
-        )}
-        {params.electionSlug === "nr-2024" && (
-          <NR2024Election election={election} />
-        )}
+        {/* <EU2024Election election={election} /> */}
+
+        <NR2024Election election={election} />
       </section>
     </div>
   );
@@ -51,66 +48,60 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
-        Wahl-Checker EU-Wahl 2024:
-        <br /> Was sagen die Parteien?
+        EU Election Checker 2024:
+        <br /> What do the parties say?
       </h1>
 
       <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Vom 6. bis 9. Juni 2024 ist die Europa-Wahl." />
+          <GlossaredTextServer text="From June 6 to 9, 2024, the European Elections will take place." />
         </p>
 
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Rund 450 Millionen Menschen in Europa dürfen entscheiden, wer sie im EU-Parlament vertreten soll." />
+          <GlossaredTextServer text="Around 450 million people in Europe can decide who should represent them in the EU Parliament." />
           <br />
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="EU ist kurz für: Europäische Union. In der EU arbeiten 27 Länder aus Europa zusammen." />
+          <GlossaredTextServer text="EU stands for: European Union. In the EU, 27 countries from Europe collaborate." />
           <br />
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Das EU-Parlament arbeitet an den Regeln mit, die die EU für alle Mitglieds-Länder macht." />
+          <GlossaredTextServer text="The EU Parliament helps create rules that the EU makes for all member countries." />
         </p>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
-          Was ist der Wahl-Checker?
+          What is the Election Checker?
         </h2>
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Der Wahl-Checker ist eine Orientierungs-Hilfe. Er ist so ähnlich wie die" />{" "}
+          <GlossaredTextServer text="The Election Checker is a guidance tool. It is similar to the" />{" "}
           "
           <a
             href="https://wahlkabine.at"
             target="_blank"
-            title="Zu wahlkabine.at, öffnet in neuem Fenster"
+            title="To wahlkabine.at, opens in a new window"
             className="font-semibold underline"
           >
-            Wahlkabine
+            Voting Booth
           </a>
           ", {/* @ts-expect-error */}
-          <GlossaredTextServer text="die es für die EU-Wahl 2024 aber nicht gibt." />{" "}
+          <GlossaredTextServer text="which does not exist for the EU Elections 2024." />{" "}
           {/* @ts-expect-error */}
-          <GlossaredTextServer
-            text="Im Wahl-Checker stehen 15 Fragen zu wichtigen Themen, um die sich
-          die EU kümmert. Zum Beispiel Klima-Schutz, Flüchtlinge, Arbeit und
-          Inklusion. Du kannst zu jeder Frage Deine Meinung sagen: „Ja“ oder
-          „Nein“ oder „Ich weiß es nicht“. Du kannst auch sagen, wie wichtig
-          Dir jedes Thema ist."
-          />
+          <GlossaredTextServer text="The Election Checker contains 15 questions on important topics that the EU deals with. For example, climate protection, refugees, work, and inclusion. You can express your opinion on each question: “Yes” or “No” or “I don’t know”. You can also indicate how important each topic is to you." />
         </p>
 
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Danach kannst Du Deine Meinung vergleichen mit den Meinungen von den 7 Parteien, die man bei der Europa-Wahl in Österreich wählen kann." />
+          <GlossaredTextServer text="After that, you can compare your opinions with the opinions of the 7 parties that can be elected in the European Elections in Austria." />
         </p>
 
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="Wir haben außerdem Erklärungen zu wichtigen Wörtern geschrieben. Die Wörter sind gelb markiert. Wenn Du ein gelb markiertes Wort anklickst, kannst Du die Erklärung lesen. Du findest alle Erklärungen auch auf der Seite „Wort-Erklärungen“." />{" "}
+          <GlossaredTextServer text="We have also written explanations for important words. The words are marked in yellow. If you click on a yellow-marked word, you can read the explanation. You can also find all explanations on the 'Word Explanations' page." />{" "}
         </p>
 
         <nav
-          aria-label="Zu den Fragen oder Wort-Erklärungen"
+          aria-label="To the questions or word explanations"
           className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl md:flex-row"
         >
           <Button
@@ -120,7 +111,7 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
             variant="secondary"
             href="/glossar"
           >
-            Wort-Erklärungen
+            Word Explanations
           </Button>
           {election.isQuestionnaire && (
             <QuestionaireButton electionSlug={election.slug} />
@@ -132,26 +123,26 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
               as="a"
               href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
             >
-              Antworten vergleichen
+              Compare Answers
             </Button>
           )}
         </nav>
 
         <h2 className=" text-[1.75rem] leading-[2.125rem]">
-          Was ist <span className="italic">andererseits</span>?
+          What is <span className="italic">andererseits</span>?
         </h2>
         <p>
-          Der Wahl-Checker wird von der Medienhaus andererseits GmbH
-          veröffentlicht und wurde in Kooperation mit dem Verein andererseits -
-          für Inklusion im Journalismus und der Hil-Foundation entwickelt.
+          The Election Checker is published by andererseits GmbH and was
+          developed in cooperation with the association andererseits - for
+          inclusion in journalism and the Hil Foundation.
         </p>
         <p>
-          <span className="italic">andererseits</span> ist ein Magazin für
-          Behinderung und Gesellschaft. Bei{" "}
-          <span className="italic">andererseits</span> machen Menschen mit und
-          ohne Behinderung Journalismus. Das Team arbeitet gleichberechtigt,
-          kritisch und fair bezahlt. <br />
-          Hier erfährst du mehr über{" "}
+          <span className="italic">andererseits</span> is a magazine for
+          disability and society. In{" "}
+          <span className="italic">andererseits</span>, people with and without
+          disabilities do journalism. The team works equally, critically, and is
+          fairly paid. <br />
+          Here you can learn more about{" "}
           <span className="italic">andererseits</span>:{" "}
           <a
             target="_blank"
@@ -162,18 +153,18 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           </a>
         </p>
 
-        <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">Daten-Schutz</h2>
+        <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
+          Data Protection
+        </h2>
         <p>
-          Der Wahl-Checker ist anonym. Das heißt: Wir wissen nicht, wer Du bist
-          und wie Du abgestimmt hast. Mehr Infos zum Datenschutz findest Du
-          hier:{" "}
+          The Election Checker is anonymous. That means: We don’t know who you
+          are and how you voted. More information on data protection can be
+          found here:{" "}
           <Link href="/datenschutz" className="font-semibold underline">
             wahlchecker.at/datenschutz
           </Link>
         </p>
       </div>
-
-      <MagazineCta electionSlug={election.slug} />
     </div>
   );
 };
@@ -182,36 +173,31 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
-        Nationalratswahl 2024:
-        <br /> Was sagen die Parteien?
+        {election.name}
+        <br /> What do the candidates say?
       </h1>
 
       <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
         <p>
-          Am 29.9. sind National-Rats-Wahlen in Österreich.
+          On November, 5th there is an election for the {election.name}
           <br />
-          Man kann 9 Parteien wählen.
+          You can vote for {election.candidates.length} candidates.
           <br />
-          Parteien sind Gruppen von Menschen,
-          <br />
-          die ähnliche Ziele und Meinungen haben. <br />
-          Die Parteien sagen oft sehr schwierige Dinge.
+          Candidates who appear to have similar goals and opinions.
         </p>
 
         <p>
-          Wir bei <em className="italic">andererseits</em> glauben:
+          Everyone has the right to independent information.
           <br />
-          Alle Menschen haben ein Recht auf unabhängige Informationen.
+          So I've combed the internet.
           <br />
-          Also haben wir zehn Fragen an die Parteien geschickt.
+          And wrote down their answers in simple language.
           <br />
-          Und ihre Antworten in Leichter Sprache aufgeschrieben.
-          <br />
-          Wir helfen Dir dabei zu verstehen, was die Parteien sagen.
+          So you can understand what each candidate stands for.
         </p>
 
         <nav
-          aria-label="Zu den Fragen oder Wort-Erklärungen"
+          aria-label="To the questions or word explanations"
           className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl sm:mx-0 md:flex-row"
         >
           {election.isQuestionnaire && (
@@ -222,9 +208,9 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
               roundness="large"
               variant="primary"
               as="a"
-              href={`/${election.slug}/vergleich/${election.candidates.map((c) => c.slug).join("/")}`}
+              href={`/${election.slug}/compare/${election.candidates.map((c) => c.slug).join("/")}`}
             >
-              Antworten vergleichen
+              Compare Answers
             </Button>
           )}
           <Button
@@ -232,74 +218,45 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
             className=""
             as="a"
             variant="secondary"
-            href="/glossar"
+            href="/glossary"
           >
-            Wort-Erklärungen
+            Word Explanations
           </Button>
         </nav>
 
-        <NewsletterCta electionSlug={election.slug} />
-
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
-          Transparenz: Was ist Journalismus?
+          Transparency: This not is Journalism?
         </h2>
 
         <p>
-          Journalismus bedeutet: Alle Antworten einordnen und überprüfen.
+          Journalism means: contextualizing and checking all answers.
           <br />
-          Aber wir haben die Antworten der Parteien nicht eingeordnet.
+          You can only read what the candidates' opinions are.
           <br />
-          Du kannst bei den Antworten nur lesen, was die Parteien sagen. <br />
-          Du kannst nicht lesen, was sie wirklich machen.
-          <br /> Deshalb ist der Wahl-Checker kein Journalismus.
+          And not what they have actually done.
+          <br />
+          So take it with a grain of salt, okay?
         </p>
 
         <p>
-          Der Wahl-Checker ist eine Hilfe, um die Parteien besser zu verstehen.
+          Few candidates provide information in simple language.
           <br />
-          Wenige Parteien geben Informationen in Leichter Sprache.
-          <br />
-          Nur die Parteien Wandl und die SPÖ haben in Leichter Sprache
-          geantwortet.
+          This tool is to help better understand the positions of the
+          candidates.
         </p>
 
+        <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
+          Data Protection
+        </h2>
         <p>
-          In unserem Journalismus schreiben wir oft darüber, was die Politik
-          macht.
-        </p>
-
-        <p>
-          Journalismus von andererseits findest Du in unserem{" "}
-          <a
-            target="_blank"
-            href="https://andererseits.org/abo"
-            className="font-semibold underline"
-          >
-            Magazin
-          </a>{" "}
-          in Leichter Sprache und auf{" "}
-          <a
-            target="_blank"
-            href="https://andererseits.org"
-            className="font-semibold underline"
-          >
-            andererseits.org
-          </a>
-          .
-        </p>
-
-        <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">Daten-Schutz</h2>
-        <p>
-          Der Wahl-Checker ist anonym. Das heißt: Wir wissen nicht, wer Du bist
-          und wie Du abgestimmt hast.
-          <br /> Mehr Infos zum Datenschutz findest Du hier:{" "}
-          <Link href="/datenschutz" className="font-semibold underline">
-            wahlchecker.at/datenschutz
+          The Election Checker is anonymous. That means: We do not know who you
+          are and how you voted.
+          <br /> More information about data protection can be found here:{" "}
+          <Link href="/privacy" className="font-semibold underline">
+            privacy policy
           </Link>
         </p>
       </div>
-
-      <MagazineCta electionSlug={election.slug} />
     </div>
   );
 };

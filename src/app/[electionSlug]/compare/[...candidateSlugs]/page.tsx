@@ -7,7 +7,7 @@ import { getCandidates } from "~/app/get-candidates";
 import { constructComparision } from "./construct-comparision";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
-import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
+import { getGlossarEntries } from "~/app/glossary/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 import { getElection } from "../../get-election";
 import { metaTagsPerElectionSlug } from "~/app/utils.index";
@@ -88,7 +88,7 @@ export default async function CandidateComparison({
                 priority
                 className=""
                 title={`Zur ${candidate.name} Seite`}
-                src={`/${candidate.profileImg}`}
+                src={`${candidate.profileImg}`}
                 alt=""
               />
             </li>

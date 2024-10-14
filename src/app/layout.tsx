@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -80,7 +80,7 @@ export default function RootLayout({
           className="sr-only left-0 top-0 z-50 text-black outline-offset-4 outline-black focus-visible:not-sr-only focus-visible:fixed focus-visible:outline-2"
           href="#content"
         >
-          Zum Inhalt springen
+          Skip to content
         </a>
         <div className={`z-10 flex min-h-full w-full flex-col`}>
           <header className="top-0 z-40 w-full border-b border-black bg-white md:sticky md:h-[90px]">
@@ -91,18 +91,11 @@ export default function RootLayout({
                   href="/"
                   title="Zur Startseite"
                 >
-                  <Image
-                    src="/andererseits-logo.svg"
-                    height={36}
-                    priority
-                    width={182}
-                    className="flex-1 object-contain"
-                    alt="andererseits"
-                  />
+                  <h1 className="text-3xl">SF Elections</h1>
                 </Link>
               </div>
               <div className="flex w-full flex-grow justify-center hyphens-manual py-3 text-center text-[1.5rem] leading-[1.75rem] text-black outline-offset-2 outline-black focus-visible:outline-2 md:justify-start md:py-0  xs:text-[1.75rem] xs:leading-[2.125rem]">
-                Wahl-Checker
+                Election checker
               </div>
               <SocialBar />
             </div>
@@ -125,14 +118,6 @@ export default function RootLayout({
               className="flex w-full flex-col items-center justify-center gap-3"
             >
               <SocialBar />
-              <a
-                target="blank"
-                className="underline-offset-2 outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                href="https://andererseits.org/"
-                title="Zu andererseits.org, öffnet in neuem Fenster"
-              >
-                <span className="font-sans font-medium">andererseits.org</span>
-              </a>
               <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
                 <li>
                   <a
@@ -141,16 +126,16 @@ export default function RootLayout({
                     href="https://andererseits.org/impressum/"
                     title="Zum Impressum, öffnet in neuem Fenster"
                   >
-                    Impressum
+                    Legal notice
                   </a>
                 </li>
                 <li>
                   <Link
                     prefetch
                     className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                    href="/datenschutz"
+                    href="/privacy"
                   >
-                    Datenschutz
+                    Privacy Policy
                   </Link>
                 </li>
               </ul>

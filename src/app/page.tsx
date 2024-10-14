@@ -26,11 +26,11 @@ export default async function Home() {
         className="mx-auto w-[900px] max-w-full text-[1.125rem] leading-[1.6875rem]"
       >
         <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
-          Wahl-Checker
+          Election Checker
         </h1>
 
         <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
-          {elections.map((election) => (
+          {activeElections.map((election) => (
             <Link
               key={election.id}
               href={`/${election.slug}`}
@@ -38,7 +38,7 @@ export default async function Home() {
             >
               <h2 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
                 {election.name}:
-                <br /> Was sagen die Parteien?
+                <br /> What do the candidates say?
               </h2>
             </Link>
           ))}
@@ -50,7 +50,7 @@ export default async function Home() {
 
 export async function generateMetadata() {
   return metaTagsPerElectionSlug({
-    title: `Wort-Erklärungen – Wahl-Checker von andererseits`,
-    description: `Begriffe und Erklärungen.`,
+    title: `Simple Explanations – Election Checker`,
+    description: `Terms and Explanations.`,
   });
 }

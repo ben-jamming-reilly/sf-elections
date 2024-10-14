@@ -19,5 +19,5 @@ export const getElectionRaw = async ({
 };
 
 export const getElection = unstable_cache(getElectionRaw, undefined, {
-  revalidate: 18000,
+  revalidate: 60,
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { CandidatesWithQuestions } from "../[electionSlug]/fragen/[slug]/get-candidates-with-questions";
+import { CandidatesWithQuestions } from "../[electionSlug]/questions/[slug]/get-candidates-with-questions";
 import { OptionResult } from "./option-result";
 import { QuestionCategoryLabel } from "./question-category-label";
 import { QuestionUnansweredResult } from "./question-unanswered-result";
@@ -68,7 +68,7 @@ export const QuestionWithAnswers = ({
       {question.category && (
         <QuestionCategoryLabel category={question.category} />
       )}
-      <div className="mt-3 text-lg">Frage {question.order + 1}:</div>
+      <div className="mt-3 text-lg">Question {question.order + 1}:</div>
       <h2
         id={`aria-label-question-${question.order + 1}`}
         className="mb-5 font-sans text-2xl"
@@ -79,12 +79,12 @@ export const QuestionWithAnswers = ({
       {voterAnswer && (
         <section className="mb-6 w-full">
           {voterType === "voter" && (
-            <h3 className="mb-3 font-semibold">Du hast gesagt:</h3>
+            <h3 className="mb-3 font-semibold">You said:</h3>
           )}
           {voterAnswer.option !== null && voterAnswer.weighting !== null ? (
             <ul
               aria-label={
-                voterType === "voter" ? "Deine Antwort" : "Antwort der Partei"
+                voterType === "voter" ? "Your Answer" : "Candidate's Answer"
               }
               className="grid w-full grid-cols-2 flex-row gap-3 sm:flex"
             >
@@ -122,10 +122,10 @@ export const QuestionWithAnswers = ({
       ) : null}
 
       {candidatesAnswers && !isSingleComparison && isQuestionnaire ? (
-        <section aria-label="Antworten der Parteien auf einen Blick">
+        <section aria-label="Party Responses at a Glance">
           <h3 className="mb-3 mt-5 font-semibold">
-            Das haben die {voterType === "candidate" ? "anderen" : ""} Parteien
-            gesagt:
+            This is what the {voterType === "candidate" ? "other" : ""} parties
+            said:
           </h3>
           <ul className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 md:w-fit">
             {candidatesAnswers.map((candidate) => {
@@ -139,15 +139,15 @@ export const QuestionWithAnswers = ({
 
               return (
                 <li
-                  aria-label={`Antwort von ${candidate.name}: ${optionLabelForYesNoValue(candidateAnswer.option!)}`}
+                  aria-label={`Response from ${candidate.name}: ${optionLabelForYesNoValue(candidateAnswer.option!)}`}
                   key={`candidate-${candidateAnswer.questionId}-${candidate.id}`}
                   className="relative h-[70px] w-full sm:h-[60px] md:w-[260px]"
                 >
                   <PartyLogo
                     className="absolute left-0 top-0 z-20 h-full w-[75px] rounded-[100px]  border-2 sm:w-2/3 xxs:w-[100px] xxs:rounded-[200px] xs:w-2/3"
                     href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
-                    title={`Zur ${candidate.name} Seite`}
-                    src={`/${candidate.profileImg}`}
+                    title={`Go to ${candidate.name} page`}
+                    src={`${candidate.profileImg}`}
                     alt={`${candidate.name}`}
                     priority
                   />
@@ -175,8 +175,8 @@ export const QuestionWithAnswers = ({
         <section
           aria-label={
             isSingleComparison
-              ? "Antwort der Partei"
-              : "Antworten der Parteien im Detail"
+              ? "Party's Answer"
+              : "Detailed Responses from Parties"
           }
           className="mt-5"
         >
@@ -194,7 +194,7 @@ export const QuestionWithAnswers = ({
                 isSingleComparison && "hidden",
               )}
             >
-              Mehr Infos:
+              More Info:
               <ChevronRightIcon
                 aria-hidden="true"
                 className="ml-1 h-6 w-6 stroke-[1.5px] transition-all group-open:rotate-90"
@@ -235,15 +235,15 @@ export const QuestionWithAnswers = ({
 
                     return (
                       <li
-                        aria-label={`Antwort von ${candidate.name}: ${optionLabelForYesNoValue(candidateAnswer.option!)} – ${weightingLabelForValue(candidateAnswer.weighting!)}`}
+                        aria-label={`Response from ${candidate.name}: ${optionLabelForYesNoValue(candidateAnswer.option!)} – ${weightingLabelForValue(candidateAnswer.weighting!)}`}
                         key={`candidate-details-${candidateAnswer.questionId}-${candidate.id}`}
                         className="relative space-y-4 border-t border-black pb-10 pt-12 md:pt-4"
                       >
                         <PartyLogo
                           className="group absolute -top-[30px] left-1/2 h-[60px] w-[170px] -translate-x-1/2 sm:w-[150px] md:-top-[44px] md:left-auto md:right-10 md:h-[88px] md:translate-x-0 xl:-top-[30px] xl:h-[60px]"
                           href={`${candidateLinkBase ?? ""}/${candidate.slug}`}
-                          title={`Zur ${candidate.name} Seite`}
-                          src={`/${candidate.profileImg}`}
+                          title={`Go to ${candidate.name} page`}
+                          src={`${candidate.profileImg}`}
                           priority
                         />
 

@@ -156,14 +156,14 @@ export const VoterQuestionnaire = ({
   if (hasHydrated && isSaving) {
     return (
       <div className="mx-auto flex max-w-[800px] flex-col items-center justify-center py-10">
-        <p className="md:text-xl">Ergebnis wird geladen...</p>
+        <p className="md:text-xl">Result is loading...</p>
       </div>
     );
   }
 
   if (hasHydrated && slug) {
     return (
-      <AfterSubmitPage linkToNextPage={`/${electionSlug}/fragen/${slug}`} />
+      <AfterSubmitPage linkToNextPage={`/${electionSlug}/questions/${slug}`} />
     );
   }
 
@@ -219,7 +219,7 @@ export const VoterQuestionnaire = ({
                 className="flex flex-col gap-2 text-[1.75rem] leading-[2.125rem] md:mb-3 md:min-h-[3.5em] md:text-2xl lg:min-h-[3em] xl:min-h-[2.5em]"
               >
                 <span className="block text-[1.125rem] font-medium leading-[1.3125rem]">
-                  Frage {activeIndex + 1}:
+                  Question {activeIndex + 1}:
                 </span>
                 <h1 className="font-sans font-light">
                   <GlossaredText
@@ -235,7 +235,7 @@ export const VoterQuestionnaire = ({
               className="max-md:my-3 my-6 flex w-full flex-col gap-5 md:gap-10"
             >
               <div className="flex flex-col gap-2">
-                <h2 className="font-sans text-lg">Ich stimme:</h2>
+                <h2 className="font-sans text-lg">I vote:</h2>
                 <ul
                   className={clsx(
                     "grid w-full",
@@ -272,13 +272,13 @@ export const VoterQuestionnaire = ({
                         )}
                       >
                         {option.label}
-                        {option.label === "Ja" && (
+                        {option.label === "Yes" && (
                           <ThumbUpIcon className="h-10 w-auto p-1 text-transparent transition-all group-data-[active=true]:text-black notouch:group-hover:text-black" />
                         )}
-                        {option.label === "Ich weiß es nicht" && (
+                        {option.label === "I am not sure" && (
                           <ThumbSideIcon className="h-10 w-auto p-1 text-transparent transition-all group-data-[active=true]:text-black notouch:group-hover:text-black" />
                         )}
-                        {option.label === "Nein" && (
+                        {option.label === "No" && (
                           <ThumbDownIcon className="h-10 w-auto p-1 text-transparent transition-all group-data-[active=true]:text-black notouch:group-hover:text-black" />
                         )}
                       </button>
@@ -288,7 +288,7 @@ export const VoterQuestionnaire = ({
               </div>
 
               <div className="flex flex-col gap-2">
-                <h2 className="text-lg">Das ist mir:</h2>
+                <h2 className="text-lg">This is:</h2>
                 <ul className="grid w-full grid-cols-1 grid-rows-4 md:grid-cols-4 md:grid-rows-1">
                   {weightings.map((weighting, index) => (
                     <li
@@ -323,7 +323,7 @@ export const VoterQuestionnaire = ({
 
             <div className="flex w-full flex-col items-center justify-between gap-4 xs:flex-row">
               <NavigationButton
-                label={"Zurück"}
+                label={"Back"}
                 disabled={!hasPrevious}
                 onClick={handlePrev}
                 type="prev"
@@ -334,7 +334,7 @@ export const VoterQuestionnaire = ({
               </span>
               <NavigationButton
                 buttonRef={nextButtonRef}
-                label={hasNext ? "Weiter" : isSaving ? "..." : "Fertig"}
+                label={hasNext ? "Next" : isSaving ? "..." : "Finish"}
                 disabled={
                   hasNext
                     ? !activeQuestion || !isQuestionAnswered(activeQuestion)
@@ -372,7 +372,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
           variant="primary"
           roundness="large"
         >
-          Zum Ergebnis
+          View Result
           <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
         </Button>
       </div>
@@ -380,34 +380,34 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
         id="newsletter-cta-title"
         className="text-[2.25rem] leading-[2.75rem]"
       >
-        Richtige Worte?
+        Right Words?
       </h1>
       <p>
-        Behinderung, Beeinträchtigung, besondere Bedürfnisse? Weißt Du manchmal
-        auch nicht so ganz, wie Du über Behinderung sprechen sollst?
+        Disability, impairment, special needs? Do you sometimes feel unsure
+        about how to talk about disability?
       </p>
       <p>
-        Bei <span className="italic">andererseits</span> arbeiten
-        Journalist*innen mit und ohne Behinderung gemeinsam. Gleichberechtigt,
-        kritisch und fair bezahlt.
+        At <span className="italic">andererseits</span>, journalists with and
+        without disabilities work together. Equally, critically, and fairly
+        paid.
         <br />
-        Wenn Du uns Deine E-Mail Adresse gibst, dann schicken wir dir unseren
-        Leitfaden zu sensibler Sprache.
+        If you give us your email address, we will send you our guide to
+        sensitive language.
       </p>
 
       <p>
-        Damit gibst Du uns auch die Erlaubnis, Dir unseren wöchentlichen
-        Newsletter, Neuigkeiten und Werbung von{" "}
-        <span className="italic">andererseits</span> zu schicken. Du kannst Dich
-        jederzeit abmelden.
+        By doing so, you also give us permission to send you our weekly
+        newsletter, news, and advertisements from{" "}
+        <span className="italic">andererseits</span>. You can unsubscribe at any
+        time.
       </p>
 
       <p>
-        Auch wenn Du uns deine E-Mail Adresse gibst, wissen wir nicht, wie Du
-        gestimmt hast.
-        <br /> Mehr Infos zum Datenschutz bei{" "}
-        <span className="italic">andererseits</span> und unserem
-        Newsletterprogramm findest Du hier:
+        Even if you provide us with your email address, we do not know how you
+        voted.
+        <br /> More information about data protection at{" "}
+        <span className="italic">andererseits</span> and our newsletter program
+        can be found here:
       </p>
       <ul className="my-3 ml-4 list-disc space-y-1">
         {[
@@ -416,7 +416,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
             href: "https://www.mailerlite.com/legal/privacy-policy",
           },
           {
-            text: "Datenschutz – andererseits",
+            text: "Privacy Policy – andererseits",
             href: "https://andererseits.org/datenschutz",
           },
         ].map((link) => (
@@ -433,15 +433,6 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
         ))}
       </ul>
 
-      <p>Bist Du dabei? Dann melde Dich jetzt kostenlos an.</p>
-
-      <MailerliteInput action="https://assets.mailerlite.com/jsonp/345641/forms/118855395671279343/subscribe" />
-
-      <p className="">
-        Du möchtest keinen Newsletter bekommen? <br />
-        Hier kommst Du direkt zu Deinem Ergebnis vom Wahl-Checker:
-      </p>
-
       <div className="flex items-center justify-center pt-10">
         <Button
           prefetch
@@ -450,7 +441,7 @@ const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
           variant="primary"
           roundness="large"
         >
-          Zum Ergebnis
+          View Result
           <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
         </Button>
       </div>

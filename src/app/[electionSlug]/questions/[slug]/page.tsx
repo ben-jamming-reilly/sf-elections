@@ -32,27 +32,29 @@ export default async function WahlkabineResult({
 }: WahlkabineResultProps) {
   const voterWithAnswers = await getVoterViaHash(params.slug);
 
+  console.log(voterWithAnswers);
+
   if (!voterWithAnswers) {
     notFound();
   }
 
   const toolbar = (
     <aside
-      aria-label="Zurück & Teilen"
+      aria-label="Back & Share"
       className="flex flex-row flex-wrap justify-center gap-5"
     >
-      <BackButton href={`/${params.electionSlug}`}>Zur Startseite</BackButton>
+      <BackButton href={`/${params.electionSlug}`}>To Homepage</BackButton>
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Wahl-Checker ${voterWithAnswers.election.name}`}
+        title={`Election Checker ${voterWithAnswers.election.name}`}
       >
-        Teilen
+        Share
       </ShareButton>
       <DownloadImageLink
-        title="wahlchecker-andererseits.jpg"
+        title="electionchecker-andererseits.jpg"
         href={`/shareable-wide-${params.electionSlug}.png`}
       >
-        Bild zum Teilen
+        Download Image
       </DownloadImageLink>
     </aside>
   );
@@ -62,25 +64,25 @@ export default async function WahlkabineResult({
       {toolbar}
 
       <section
-        aria-label="Ergebnis Übersicht"
+        aria-label="Results Overview"
         className="my-10 flex w-[900px] max-w-full flex-col items-center gap-10"
       >
         <div className="w-full">
-          <h1 className="mb-3 text-4xl">Dein Ergebnis</h1>
+          <h1 className="mb-3 text-4xl">Your Result</h1>
           <div className="space-y-3">
             <p>
-              Du hast 15 Fragen über die EU-Politik beantwortet. Hier kannst Du
-              sehen, welche Parteien eine ähnliche Meinung zu den Fragen haben
-              wie Du.
+              You answered {voterWithAnswers.answers.length} questions about the{" "}
+              {voterWithAnswers.election.name}. Here you can see which
+              candidates have similar views as you do.
             </p>
             <p>
-              Wir haben die Antworten von den Parteien mit Deinen Antworten
-              verglichen. Und wir haben verglichen, wie wichtig die einzelnen
-              Fragen für Dich und die Parteien sind.
+              We compared the candidates answers to your answers. And we
+              compared how important the individual questions are for you and
+              the candidates.
             </p>
             <p>
-              Je größer der grüne Balken ist, desto mehr ähnliche Meinungen hast
-              Du mit einer Partei.
+              The larger the green bar, the more similar opinions you share with
+              a party.
             </p>
           </div>
         </div>
@@ -90,18 +92,17 @@ export default async function WahlkabineResult({
             .sort((a, b) => b.score - a.score)
             .map((match) => (
               <article
-                aria-label={`Kandidat: ${match.candidate.name} - Übereinstimmung: ${match.score}/${MAX_POINTS} Punkten`}
+                aria-label={`Candidate: ${match.candidate.name} - Match: ${match.score}/${MAX_POINTS} Points`}
                 key={`candidate-match-overview-${match.candidate.id}`}
                 className="relative -mt-[2px] flex h-[60px] w-full flex-row items-center justify-center overflow-clip  rounded-[200px] border-2 border-black px-3 [--radius-offset:60px] sm:px-7 md:[--radius-offset:90px] xs:[--radius-offset:75px]"
               >
                 <PartyLogo
-                  src={`/${match.candidate.profileImg}`}
+                  src={`${match.candidate.profileImg}`}
                   alt=""
-                  title={`Vergleiche Deine Antworten mit ${match.candidate.name}`}
-                  href={`/${params.electionSlug}/fragen/${params.slug}/vergleich/${match.candidate.slug}`}
+                  title={`Compare Your Answers with ${match.candidate.name}`}
+                  href={`/${params.electionSlug}/questions/${params.slug}/compare/${match.candidate.slug}`}
                   className="z-20 -mt-[2px] h-[calc(100%+4px)] w-[120px] border-2 sm:w-[180px] xs:w-[150px]"
                 />
-
                 <div
                   aria-hidden="true"
                   className={clsx(
@@ -110,7 +111,6 @@ export default async function WahlkabineResult({
                     match.score < 0 && "right-1/2 bg-[#FFA06E]",
                   )}
                 />
-
                 <div
                   aria-hidden="true"
                   className={clsx(
@@ -136,21 +136,22 @@ export default async function WahlkabineResult({
 
         <div className="w-full space-y-3">
           <p>
-            <strong className="font-semibold">Wichtig:</strong>
-            <br /> Das Ergebnis ist keine Wahl-Empfehlung. Es bedeutet nicht,
-            dass Du die Partei mit der größten Ähnlichkeit im Wahl-Checker
-            wählen sollst. Das Ergebnis zeigt nur, welche Parteien auf die 15
-            Fragen ähnlich geantwortet haben wie Du.
+            <strong className="font-semibold">Important:</strong>
+            <br /> The result is not a voting recommendation. It does not mean
+            you should vote for the candidate with the highest similarity in the
+            Election Checker. The result only shows which parties gave similar
+            answers to the {voterWithAnswers.answers.length} questions as you
+            did.
           </p>
           <p>
-            Auf der nächsten Seite kannst Du Dir die Antworten von allen
-            Parteien anschauen und mit Deinen Antworten vergleichen.
+            On the next page, you can look at the answers from all candidates
+            and compare them with your answers.
           </p>
         </div>
 
         <Button
           as="Link"
-          href={`/${params.electionSlug}/fragen/${params.slug}/details`}
+          href={`/${params.electionSlug}/questions/${params.slug}/details`}
           variant="primary"
           roundness="large"
         >
@@ -158,10 +159,8 @@ export default async function WahlkabineResult({
             aria-hidden="true"
             className="ml-1 inline h-5 w-5 stroke-2"
           />
-          Zu den Antworten
+          To the Answers
         </Button>
-
-        <MagazineCta electionSlug={params.electionSlug} />
       </section>
     </div>
   );
@@ -176,7 +175,7 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
 
   return metaTagsPerElectionSlug({
     electionSlug: voterWithAnswers.election.slug,
-    title: `Mein Ergebnis für ${voterWithAnswers.election.name} – Wahl-Checker von andererseits`,
-    description: `Schau Dir an, wie ähnlich ich zu den Parteien war.`,
+    title: `My result for ${voterWithAnswers.election.name} – Election Checker`,
+    description: `Look at how similar I was to the candidates.`,
   });
 }

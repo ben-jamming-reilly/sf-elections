@@ -7,7 +7,7 @@ export type CandidatesWithQuestions = Awaited<
 
 export const getCandidatesWithQuestions = unstable_cache(
   async ({ electionSlug }: { electionSlug: string }) => {
-    return await prisma.candidate.findMany({
+    const candidates = await prisma.candidate.findMany({
       where: {
         hasFinished: true,
         election: {
@@ -22,9 +22,11 @@ export const getCandidatesWithQuestions = unstable_cache(
         },
       },
     });
+
+    return candidates;
   },
   undefined,
   {
-    revalidate: 18000,
+    revalidate: 5,
   },
 );

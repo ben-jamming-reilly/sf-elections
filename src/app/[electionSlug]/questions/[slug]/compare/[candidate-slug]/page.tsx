@@ -6,7 +6,7 @@ import { BackButton } from "~/app/ui/back-button";
 import { DownloadImageLink } from "~/app/ui/download-image-link";
 import { QuestionWithAnswers } from "~/app/ui/question-with-answers";
 import { PartyLogo } from "~/app/ui/party-logo";
-import { getGlossarEntries } from "~/app/glossar/get-glossar-entries";
+import { getGlossarEntries } from "~/app/glossary/get-glossar-entries";
 import { MagazineCta } from "~/app/ui/magazine-cta";
 import { getElection } from "~/app/[electionSlug]/get-election";
 import { metaTagsPerElectionSlug } from "~/app/utils.index";
@@ -49,33 +49,32 @@ export default async function WahlkabineResultCandidate({
 
   const toolbar = (
     <aside
-      aria-label="Zurück & Teilen"
+      aria-label="Back & Share"
       className="flex flex-row flex-wrap items-center justify-center gap-5 pb-5"
     >
-      <BackButton href={`/${params.electionSlug}/fragen/${params.slug}`}>
-        Zur Übersicht
+      <BackButton href={`/${params.electionSlug}/question/${params.slug}`}>
+        Overview
       </BackButton>
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Mein Vergleich zu ${candidate.name} für die ${election.name}!`}
+        title={`My comparison to ${candidate.name} for the ${election.name}!`}
       >
-        Teilen
+        Share
       </ShareButton>
       <DownloadImageLink
         title="wahlchecker-andererseits.jpg"
         href={`/shareable-wide-${params.electionSlug}.png`}
       >
-        Bild zum Teilen
+        Share Image
       </DownloadImageLink>
     </aside>
   );
-
   return (
     <div>
       {toolbar}
 
       <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
-        Vergleiche Deine Antworten mit {candidate.name}
+        Compare Your Answers with {candidate.name}
       </h1>
 
       <section className="mt-10 flex justify-center">
@@ -85,15 +84,15 @@ export default async function WahlkabineResultCandidate({
             href={`/${params.electionSlug}/${candidate.slug}`}
             priority
             className=""
-            title={`Zur ${candidate.name} Seite`}
-            src={`/${candidate.profileImg}`}
+            title={`Go to ${candidate.name}'s page`}
+            src={`${candidate.profileImg}`}
             alt=""
           />
         </div>
       </section>
 
       <section
-        aria-label={`Deine Antworten im Vergleich zu ${candidate.name}`}
+        aria-label={`Your answers compared to ${candidate.name}`}
         className="flex flex-col items-center gap-4 py-8"
       >
         {voterWithAnswers.answers
@@ -111,8 +110,6 @@ export default async function WahlkabineResultCandidate({
             />
           ))}
       </section>
-
-      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </div>

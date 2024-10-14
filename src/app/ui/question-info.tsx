@@ -36,7 +36,7 @@ export const QuestionInfo = ({
             <>
               <hr />
               <p>
-                <strong>Erklärung in einfacher Sprache:</strong> <br />
+                <strong>Explanation in Simple Language:</strong> <br />
                 <GlossaredText
                   glossarEntries={glossarEntries}
                   text={textSimpleLanguage}

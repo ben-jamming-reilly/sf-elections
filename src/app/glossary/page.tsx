@@ -25,11 +25,8 @@ export default async function Glossar() {
   );
 
   const toolbar = (
-    <section
-      aria-label="Zurück zur Startseite"
-      className="mb-14 flex justify-center"
-    >
-      <BackButton href={`/`}>Zur Startseite</BackButton>
+    <section aria-label="Back to Home" className="mb-14 flex justify-center">
+      <BackButton href={`/`}>Back to Home</BackButton>
     </section>
   );
 
@@ -38,20 +35,20 @@ export default async function Glossar() {
       {toolbar}
 
       <h1 className="my-5 text-center text-[2.25rem] leading-[2.75rem]">
-        Wort-Erklärungen
+        Glossary
       </h1>
 
       <header className="sticky top-0 z-20 bg-white py-3 md:top-[90px]">
         <nav
-          aria-label="Navigation zu den Anfangsbuchstaben"
+          aria-label="Navigation to Alphabet Letters"
           className="flex w-full flex-wrap justify-center gap-y-3 rounded-[30px] border border-black px-3 py-2"
         >
           {aToZFiltered.map((letter) => (
             <Link
-              key={`glossar-nav-${letter}`}
-              className="px-[8.5px] text-[1.125rem] leading-[1.125rem] outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black"
+              key={`glossary-nav-${letter}`}
+              className="px-[8.5px] text-[1.125rem] leading-[1.125rem] outline-offset-4 outline-black focus-visible:outline-2 notouch:hover:text-black"
               href={`#${letter}`}
-              title={`Zum Anfangsbuchstaben ${letter}`}
+              title={`Go to letter ${letter}`}
             >
               {letter}
             </Link>
@@ -64,8 +61,8 @@ export default async function Glossar() {
       >
         {aToZFiltered.map((letter) => (
           <div
-            aria-label={`Begriffe mit ${letter}`}
-            key={`glossar-section-${letter}`}
+            aria-label={`Terms starting with ${letter}`}
+            key={`glossary-section-${letter}`}
             className="relative z-10 "
           >
             <span
@@ -82,12 +79,12 @@ export default async function Glossar() {
                 )
                 .map((entry) => (
                   <dl
-                    aria-labelledby={`glossar-entry-${entry.id}-title`}
-                    key={`glossar-entry-${entry.id}`}
+                    aria-labelledby={`glossary-entry-${entry.id}-title`}
+                    key={`glossary-entry-${entry.id}`}
                     className="mt-5"
                   >
                     <dt
-                      id={`glossar-entry-${entry.id}-title`}
+                      id={`glossary-entry-${entry.id}-title`}
                       className="text-[1.125rem] font-medium leading-[1.5rem]"
                     >
                       {entry.term}

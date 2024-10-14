@@ -7,6 +7,6 @@ export const getGlossarEntries = unstable_cache(
   },
   ["glossarEntries"],
   {
-    revalidate: 18000,
+    revalidate: 60,
   },
 );

@@ -6,8 +6,7 @@ import { BackButton } from "../../ui/back-button";
 import { getCandidates } from "../../get-candidates";
 import { QuestionWithAnswers } from "../../ui/question-with-answers";
 import { PartyLogo } from "../../ui/party-logo";
-import { getGlossarEntries } from "../../glossar/get-glossar-entries";
-import { MagazineCta } from "../../ui/magazine-cta";
+import { getGlossarEntries } from "../../glossary/get-glossar-entries";
 import { getElection } from "../get-election";
 import { metaTagsPerElectionSlug } from "~/app/utils.index";
 
@@ -44,16 +43,16 @@ export default async function CandidateProfile({
 
   const toolbar = (
     <aside
-      aria-label="Zur Startseite und Teilen"
+      aria-label="Back to Homepage and Share"
       className="flex flex-row flex-wrap items-center justify-center gap-5 pb-5"
     >
-      <BackButton href={`/${election.slug}`}>Zur Startseite</BackButton>
+      <BackButton href={`/${election.slug}`}>To the homepage</BackButton>
 
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Wahlchecker Antworten von ${candidate.name} zu ${election.name}`}
+        title={`Election Checker answers from ${candidate.name} for ${election.name}`}
       >
-        Teilen
+        Share
       </ShareButton>
     </aside>
   );
@@ -64,7 +63,7 @@ export default async function CandidateProfile({
       {candidate.hasFinished ? (
         <div className="mb-5">
           <h1 className="my-5 pb-4 text-center text-4xl">
-            Die Antworten von {candidate.name}
+            The answers from {candidate.name}
           </h1>
 
           <section className="my-8 flex w-full justify-center">
@@ -72,8 +71,8 @@ export default async function CandidateProfile({
               <PartyLogo
                 href={`/${params.electionSlug}/${candidate.slug}`}
                 priority
-                title={`Zur ${candidate.name} Seite`}
-                src={`/${candidate.profileImg}`}
+                title={`Go to ${candidate.name} page`}
+                src={`${candidate.profileImg}`}
               />
             </div>
           </section>
@@ -82,16 +81,14 @@ export default async function CandidateProfile({
             aria-label="Vergleichseiten mit den anderen Parteien"
             className="flex flex-col items-center gap-1 py-6 text-[1.125rem] leading-[1.3125rem]"
           >
-            <h2 className="mb-3 block font-medium uppercase ">
-              Vergleichen mit:
-            </h2>
+            <h2 className="mb-3 block font-medium uppercase ">Compare with:</h2>
             <div className="flex flex-row flex-wrap justify-center gap-y-3 divide-x divide-black">
               {randomOtherCandidates.map((c) => (
                 <Link
                   key={c.id}
                   className="mx-0 px-3 outline-offset-4 outline-black notouch:hover:font-semibold"
-                  href={`vergleich/${candidate.slug}/${c.slug}`}
-                  title={`Vergleiche ${candidate.name} mit ${c.name}`}
+                  href={`compare/${candidate.slug}/${c.slug}`}
+                  title={`Compare ${candidate.name} with ${c.name}`}
                   prefetch={false}
                 >
                   {c.name}
@@ -99,10 +96,10 @@ export default async function CandidateProfile({
               ))}
               <Link
                 className="px-3 outline-offset-4 outline-black notouch:hover:font-semibold"
-                href={`/vergleich/${candidates.map((c) => c.slug).join("/")}`}
-                title="Vergleiche alle Parteien"
+                href={`/compare/${candidates.map((c) => c.slug).join("/")}`}
+                title="Compare all parties"
               >
-                ALLE
+                ALL
               </Link>
             </div>
           </nav>
@@ -127,12 +124,8 @@ export default async function CandidateProfile({
           </section>
         </div>
       ) : (
-        <p className="my-2">
-          {candidate.name} hat die Wahlkabine noch nicht beantwortet.
-        </p>
+        <p className="my-2">{candidate.name} has no answers yet.</p>
       )}
-
-      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </section>
@@ -162,7 +155,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
 
   return metaTagsPerElectionSlug({
     electionSlug: candidate.election.slug,
-    title: `${candidate.name} zur ${candidate.election.name} – Wahl-Checker von andererseits`,
-    description: `Schau Dir die Antworten von ${candidate.name} zur ${candidate.election.name} an.`,
+    title: `${candidate.name} for ${candidate.election.name} – Election Checker`,
+    description: `Check out the answers from ${candidate.name} for ${candidate.election.name}.`,
   });
 }

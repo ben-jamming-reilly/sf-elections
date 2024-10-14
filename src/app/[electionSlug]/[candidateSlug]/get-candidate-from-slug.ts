@@ -43,6 +43,7 @@ export const getCandidateFromSlug = cache(
       return null;
     }
 
+
     return candidate;
   },
 );
