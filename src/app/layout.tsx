@@ -12,8 +12,8 @@ import { metaTagsPerElectionSlug } from "./utils.index";
 
 export async function generateMetadata() {
   return metaTagsPerElectionSlug({
-    title: `Wahl-Checker von andererseits`,
-    description: `Finde heraus welche Partei zu Dir passt!`,
+    title: `Election Checker`,
+    description: `Find out which candidate suits you best!`,
   });
 }
 

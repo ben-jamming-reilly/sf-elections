@@ -145,7 +145,7 @@ export async function generateMetadata({
 
   return metaTagsPerElectionSlug({
     electionSlug: voterWithAnswers.election.slug,
-    title: `Mein Ergebnis für ${voterWithAnswers.election.name} – Wahl-Checker von andererseits`,
-    description: `Schau Dir an, wie ähnlich ich zu den Parteien war.`,
+    title: `My result for ${voterWithAnswers.election.name} – Vote Checker`,
+    description: `Look at how similar I was to the candidates.`,
   });
 }

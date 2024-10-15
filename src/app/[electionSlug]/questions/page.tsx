@@ -29,8 +29,8 @@ export async function generateMetadata({
 
   return metaTagsPerElectionSlug({
     electionSlug: election.slug,
-    title: `${election.name} Fragen – Wahl-Checker von andererseits`,
-    description: `${election.questions.length} Fragen beantwortet von ${election.candidates.length} Parteien.`,
+    title: `${election.name} Questions – Vote Checker`,
+    description: `${election.questions.length} questions answered by ${election.candidates.length}.`,
   });
 }
 

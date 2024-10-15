@@ -13,7 +13,7 @@ export default async function Home() {
     return <div>No elections found</div>;
   }
 
-  const activeElections = elections.filter((e) => e.isActive);
+  const activeElections = elections.filter((e) => e.isActive).sort((e) => e.id);
 
   if (activeElections.length === 1) {
     redirect(`/${activeElections[0].slug}`);

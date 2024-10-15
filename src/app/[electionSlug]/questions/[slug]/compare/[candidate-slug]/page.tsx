@@ -19,7 +19,7 @@ export type WahlkabineResultCandidate = {
   };
 };
 
-export const revalidate = 18000; // 5 hours
+// export const revalidate = 18000; // 5 hours
 
 export function generateStaticParams() {
   return [];
@@ -129,7 +129,7 @@ export async function generateMetadata({ params }: WahlkabineResultCandidate) {
 
   return metaTagsPerElectionSlug({
     electionSlug: voterWithAnswers.election.slug,
-    title: `Mein Ergebnis für ${voterWithAnswers.election.name} – Wahl-Checker von andererseits`,
-    description: `Meine Antworten im Vergleich zu ${candidate.name}.`,
+    title: `My result for ${voterWithAnswers.election.name} – Vote Checker`,
+    description: `My answers compared to ${candidate.name}.`,
   });
 }

@@ -1,4 +1,10 @@
-# andererseits EU Wahlkabine 2024
+# SF Elections
+
+It can be tough to understand what people actually advocate for. So here is a website that list all 
+
+
+
+Forked from andererseits-wahlkabine
 
 ## Scripts
 

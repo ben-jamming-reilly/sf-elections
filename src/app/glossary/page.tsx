@@ -5,8 +5,8 @@ import { metaTagsPerElectionSlug } from "../utils.index";
 
 export async function generateMetadata() {
   return metaTagsPerElectionSlug({
-    title: `Wort-Erklärungen – Wahl-Checker von andererseits`,
-    description: `Begriffe und Erklärungen.`,
+    title: `Word explanations – Election Checker`,
+    description: `Terms and explanations`,
   });
 }
 

@@ -49,21 +49,21 @@ export default async function CandidateComparison({
 
   const candidatesTitle =
     randomCandidates.length === election.candidates.length
-      ? "allen Parteien"
-      : `Vergleich zwischen ${randomCandidates.map((c) => c.name).join(" & ")}`;
+      ? "All Candidates"
+      : `${randomCandidates.map((c) => c.name).join(" & ")}`;
 
   const toolbar = (
     <aside
-      aria-label="Zur Startseite und Teilen"
+      aria-label="Back to homepage and share"
       className="flex flex-wrap items-center justify-center gap-5 pb-5"
     >
-      <BackButton href={`/${params.electionSlug}`}>Zur Startseite</BackButton>
+      <BackButton href={`/${params.electionSlug}`}>Back to homepage</BackButton>
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Vergleich zwischen ${candidatesTitle} bei der ${election.name}`}
-        text="Wahl-Checker von andererseits"
+        title={`Comparison between ${candidatesTitle} during the ${election.name}`}
+        text="Election checker by andererseits"
       >
-        Seite teilen
+        Share page
       </ShareButton>
     </aside>
   );
@@ -72,7 +72,7 @@ export default async function CandidateComparison({
     <div>
       {toolbar}
       <h1 className="my-5 border-b-2 border-black pb-4 text-center text-4xl">
-        Vergleich zwischen <br />
+        Compare between <br />
         {candidatesTitle}
       </h1>
 
@@ -87,7 +87,7 @@ export default async function CandidateComparison({
                 href={`/${params.electionSlug}/${candidate.slug}`}
                 priority
                 className=""
-                title={`Zur ${candidate.name} Seite`}
+                title={`To ${candidate.name} page`}
                 src={`${candidate.profileImg}`}
                 alt=""
               />
@@ -97,7 +97,7 @@ export default async function CandidateComparison({
       </section>
 
       <section
-        aria-label="Die Antworten der Parteien im Vergleich"
+        aria-label="A comparison of the candidates' answers”"
         className="flex flex-col gap-10 py-10"
       >
         {candidates[0]?.answers
@@ -113,8 +113,6 @@ export default async function CandidateComparison({
             />
           ))}
       </section>
-
-      <MagazineCta electionSlug={params.electionSlug} />
 
       {toolbar}
     </div>
@@ -148,9 +146,7 @@ export async function generateMetadata({
 
   return metaTagsPerElectionSlug({
     electionSlug: candidates[0]?.election.slug,
-    title: `${candidates[0]?.election.name} – Vergleich zwischen den Parteien`,
-    description: `Vergleich zwischen ${candidates
-      .map((c) => c.name)
-      .join(", ")}`,
+    title: `${candidates[0]?.election.name} – Compare Candidates`,
+    description: `Compare between ${candidates.map((c) => c.name).join(", ")}`,
   });
 }

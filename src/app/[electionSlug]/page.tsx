@@ -276,8 +276,8 @@ export async function generateMetadata({
 
   return metaTagsPerElectionSlug({
     electionSlug: election.slug,
-    title: `${election.name} – Wahl-Checker von andererseits`,
-    description: "Finde heraus welche Partei zu Dir passt!",
+    title: `${election.name} – Vote Checker`,
+    description: "Find out which party suits you best!",
   });
 }
 
