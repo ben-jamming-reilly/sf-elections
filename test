@@ -1,0 +1,4 @@
+
+> andererseits-wahlkabine@0.1.0 scrape /Users/ben/ben-jamming-reilly/sf-elections
+> ts-node src/scripts/scrape.ts
+

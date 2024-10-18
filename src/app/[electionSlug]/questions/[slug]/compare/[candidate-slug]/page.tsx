@@ -52,7 +52,7 @@ export default async function WahlkabineResultCandidate({
       aria-label="Back & Share"
       className="flex flex-row flex-wrap items-center justify-center gap-5 pb-5"
     >
-      <BackButton href={`/${params.electionSlug}/question/${params.slug}`}>
+      <BackButton href={`/${params.electionSlug}/questions/${params.slug}`}>
         Overview
       </BackButton>
       <ShareButton

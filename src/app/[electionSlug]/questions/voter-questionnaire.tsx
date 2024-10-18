@@ -2,16 +2,8 @@
 
 import clsx from "clsx";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useRouter } from "next/navigation";
-import {
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { redirect, useRouter } from "next/navigation";
+import { ReactNode, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { usePrevious } from "~/hooks/usePrevious";
 import { Loading } from "../../ui/loading";
 import { Pagination } from "./pagination";
@@ -31,7 +23,6 @@ import {
 import { GlossarEntry } from "@prisma/client";
 import { GlossaredText } from "../../ui/glossared-text";
 import { Button } from "../../ui/button";
-import { MailerliteInput } from "~/app/ui/mailerlite-input";
 
 const variants = {
   enter: (direction: number) => {
@@ -162,9 +153,11 @@ export const VoterQuestionnaire = ({
   }
 
   if (hasHydrated && slug) {
-    return (
-      <AfterSubmitPage linkToNextPage={`/${electionSlug}/questions/${slug}`} />
-    );
+    return redirect(`/${electionSlug}/questions/${slug}`);
+
+    // return (
+    //   <AfterSubmitPage linkToNextPage={`/${electionSlug}/questions/${slug}`} />
+    // );
   }
 
   return (
@@ -355,97 +348,6 @@ export const VoterQuestionnaire = ({
         </AnimatePresence>
       ) : null}
     </>
-  );
-};
-
-const AfterSubmitPage = ({ linkToNextPage }: { linkToNextPage: string }) => {
-  return (
-    <section
-      aria-describedby="newsletter-cta-title"
-      className="mx-auto w-[672px] max-w-full space-y-5 text-[1.125rem] leading-[1.6875rem]"
-    >
-      <div className="flex items-center justify-center pb-10">
-        <Button
-          prefetch
-          as="Link"
-          href={linkToNextPage}
-          variant="primary"
-          roundness="large"
-        >
-          View Result
-          <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
-        </Button>
-      </div>
-      <h1
-        id="newsletter-cta-title"
-        className="text-[2.25rem] leading-[2.75rem]"
-      >
-        Right Words?
-      </h1>
-      <p>
-        Disability, impairment, special needs? Do you sometimes feel unsure
-        about how to talk about disability?
-      </p>
-      <p>
-        At <span className="italic">andererseits</span>, journalists with and
-        without disabilities work together. Equally, critically, and fairly
-        paid.
-        <br />
-        If you give us your email address, we will send you our guide to
-        sensitive language.
-      </p>
-
-      <p>
-        By doing so, you also give us permission to send you our weekly
-        newsletter, news, and advertisements from{" "}
-        <span className="italic">andererseits</span>. You can unsubscribe at any
-        time.
-      </p>
-
-      <p>
-        Even if you provide us with your email address, we do not know how you
-        voted.
-        <br /> More information about data protection at{" "}
-        <span className="italic">andererseits</span> and our newsletter program
-        can be found here:
-      </p>
-      <ul className="my-3 ml-4 list-disc space-y-1">
-        {[
-          {
-            text: "Privacy Policy – MailerLite",
-            href: "https://www.mailerlite.com/legal/privacy-policy",
-          },
-          {
-            text: "Privacy Policy – andererseits",
-            href: "https://andererseits.org/datenschutz",
-          },
-        ].map((link) => (
-          <li key={link.href}>
-            <a
-              className="font-semibold text-black underline"
-              target="blank"
-              rel="noreferrer noopener"
-              href={link.href}
-            >
-              {link.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex items-center justify-center pt-10">
-        <Button
-          prefetch
-          as="Link"
-          href={linkToNextPage}
-          variant="primary"
-          roundness="large"
-        >
-          View Result
-          <ArrowRightIcon className="inline-block h-5 w-5 stroke-2" />
-        </Button>
-      </div>
-    </section>
   );
 };
 

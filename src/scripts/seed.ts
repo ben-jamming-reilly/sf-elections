@@ -188,6 +188,35 @@ const MayorQuestions: Question[] = [
     order: 1,
     type: "YesNo",
   },
+  {
+    id: 3,
+    title: "Should there be more street sweep?",
+    category: "Policing",
+    description: "",
+    electionId: 10,
+    order: 2,
+    type: "YesNo",
+  },
+  {
+    id: 4,
+    title:
+      "Should there be tax incentive for businesses to require their workers to work downtown?",
+    category: "Business",
+    description: "",
+    electionId: 10,
+    order: 2,
+    type: "YesNo",
+  },
+  {
+    id: 5,
+    title:
+      "Should San Francisco force people with severe drug addictions to go into treatment programs?",
+    category: "Homelessness",
+    description: "",
+    electionId: 10,
+    order: 2,
+    type: "YesNo",
+  },
 ];
 
 const MayorCandidates: Candidate[] = [
@@ -315,7 +344,7 @@ const MayorAnswers: Omit<CandidateQuestionAnswer, "id">[] = [
   {
     candidateId: 1,
     questionId: 1,
-    option: 1,
+    option: -1,
     text: "",
     textSimpleLanguage: "",
     weighting: 2,
@@ -390,12 +419,21 @@ const MayorAnswers: Omit<CandidateQuestionAnswer, "id">[] = [
     weighting: 2,
     changedQuestionDisclaimer: "",
   },
+  {
+    candidateId: 4,
+    questionId: 3,
+    option: -1,
+    text: "",
+    textSimpleLanguage: "",
+    weighting: 2,
+    changedQuestionDisclaimer: "",
+  },
 
   // Asha Safia
   {
     candidateId: 5,
     questionId: 1,
-    option: 1,
+    option: -1,
     text: "",
     textSimpleLanguage: "",
     weighting: 1,

@@ -1,8 +1,8 @@
 # SF Elections
 
-It can be tough to understand what people actually advocate for. So here is a website that list all 
+It can be tough to understand what people actually advocate for.
 
-
+So here is a website that list elections and candidate
 
 Forked from andererseits-wahlkabine
 
