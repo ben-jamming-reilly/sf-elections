@@ -117,7 +117,7 @@ model GlossarEntry {
 }
 
 model PageCache {
-  url      String @id
-  policies Json
-  createdAt  DateTime @default(now())
+  url       String @id
+  policies  Json
+  createdAt DateTime @default(now())
 }

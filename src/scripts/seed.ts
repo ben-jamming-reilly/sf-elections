@@ -450,9 +450,7 @@ const MayorAnswers: Omit<CandidateQuestionAnswer, "id">[] = [
   },
 ];
 
-async function seed() {
-  // Clear Data
-
+export async function clearData() {
   await prisma.voterQuestionAnswer.deleteMany({});
   await prisma.voterCandidateMatch.deleteMany({});
   await prisma.candidateQuestionAnswer.deleteMany({});
@@ -460,17 +458,6 @@ async function seed() {
   await prisma.candidate.deleteMany({});
   await prisma.voter.deleteMany({}); // Add this line to delete voters
   await prisma.election.deleteMany({});
-  // Add Elections
-  await prisma.election.createMany({ data: SFElections });
-
-  // Add Mayoral Questions
-  await prisma.question.createMany({ data: MayorQuestions });
-
-  // Add Mayoral Candidates
-  await prisma.candidate.createMany({ data: MayorCandidates });
-
-  // Add Answers
-  await prisma.candidateQuestionAnswer.createMany({ data: MayorAnswers });
 }
 
-seed();
+
