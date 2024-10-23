@@ -12,7 +12,7 @@ import { metaTagsPerElectionSlug } from "./utils.index";
 
 export async function generateMetadata() {
   return metaTagsPerElectionSlug({
-    title: `Election Checker`,
+    title: `Voting Quiz`,
     description: `Find out which candidate suits you best!`,
   });
 }
@@ -66,7 +66,7 @@ export default function RootLayout({
         <meta name="twitter:creator" content="@andererseits" />
         <meta
           name="keywords"
-          content="Orientierungshilfe, Wahl, Meinung, Partei, Parteien, Wählen, Politik, unabhängig, barrierefrei"
+          content="guidance, election, opinion, party, candidates, voting, politics, independent, accessible"
         />
         <link rel="icon" href="/favicon2.ico" />
         <link rel="manifest" href="/site.webmanifest" />
@@ -95,7 +95,7 @@ export default function RootLayout({
                 </Link>
               </div>
               <div className="flex w-full flex-grow justify-center hyphens-manual py-3 text-center text-[1.5rem] leading-[1.75rem] text-black outline-offset-2 outline-black focus-visible:outline-2 md:justify-start md:py-0  xs:text-[1.75rem] xs:leading-[2.125rem]">
-                Election checker
+                Voting Quiz
               </div>
               <SocialBar />
             </div>
@@ -119,16 +119,6 @@ export default function RootLayout({
             >
               <SocialBar />
               <ul className="flex flex-col flex-wrap items-center justify-center gap-3 text-xs font-medium uppercase tracking-widest sm:flex-row">
-                <li>
-                  <a
-                    target="blank"
-                    className="underline-offset-2  outline-offset-4 outline-black focus-visible:outline-2  notouch:hover:text-black notouch:hover:underline"
-                    href="https://andererseits.org/impressum/"
-                    title="Zum Impressum, öffnet in neuem Fenster"
-                  >
-                    Legal notice
-                  </a>
-                </li>
                 <li>
                   <Link
                     prefetch

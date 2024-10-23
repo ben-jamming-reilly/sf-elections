@@ -124,8 +124,8 @@ export const QuestionWithAnswers = ({
       {candidatesAnswers && !isSingleComparison && isQuestionnaire ? (
         <section aria-label="Party Responses at a Glance">
           <h3 className="mb-3 mt-5 font-semibold">
-            This is what the {voterType === "candidate" ? "other" : ""} parties
-            said:
+            This is what the {voterType === "candidate" ? "other" : ""}{" "}
+            candidates said:
           </h3>
           <ul className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 md:w-fit">
             {candidatesAnswers.map((candidate) => {
@@ -176,7 +176,7 @@ export const QuestionWithAnswers = ({
           aria-label={
             isSingleComparison
               ? "Party's Answer"
-              : "Detailed Responses from Parties"
+              : "Detailed Responses from candidates"
           }
           className="mt-5"
         >

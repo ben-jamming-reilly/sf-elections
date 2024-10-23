@@ -50,7 +50,7 @@ export default async function CandidateProfile({
 
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Election Checker answers from ${candidate.name} for ${election.name}`}
+        title={`Voting Quiz answers from ${candidate.name} for ${election.name}`}
       >
         Share
       </ShareButton>
@@ -97,7 +97,7 @@ export default async function CandidateProfile({
               <Link
                 className="px-3 outline-offset-4 outline-black notouch:hover:font-semibold"
                 href={`/compare/${candidates.map((c) => c.slug).join("/")}`}
-                title="Compare all parties"
+                title="Compare all candidates"
               >
                 ALL
               </Link>
@@ -155,7 +155,7 @@ export async function generateMetadata({ params }: CandidateProfileProps) {
 
   return metaTagsPerElectionSlug({
     electionSlug: candidate.election.slug,
-    title: `${candidate.name} for ${candidate.election.name} – Election Checker`,
+    title: `${candidate.name} for ${candidate.election.name} – Voting Quiz`,
     description: `Check out the answers from ${candidate.name} for ${candidate.election.name}.`,
   });
 }

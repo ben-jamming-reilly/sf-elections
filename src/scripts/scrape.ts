@@ -96,7 +96,6 @@ async function scrapeElection(electionSrc: ElectionCandidateSrc) {
       .map((policy) => `- ${policy.opinion}\n  Topic: ${policy.topic}`)
       .join("\n");
 
-    // Candidate with their policies
     allPoliciesContext += `${candidate.name}:\n${text}\n`;
   }
 
@@ -121,7 +120,7 @@ async function scrapeElection(electionSrc: ElectionCandidateSrc) {
     .map((question) => `- ${question.title}`)
     .join("\n");
 
-  // Now
+  // Have each candidate answer the questions
   await Promise.all(
     candidatePolicies.map(async ({ candidate, policies }) => {
       const policyText = policies

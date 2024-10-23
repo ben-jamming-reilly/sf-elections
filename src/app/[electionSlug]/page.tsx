@@ -48,8 +48,8 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
   return (
     <div>
       <h1 className="my-5 font-sans text-[2.25rem] leading-[2.75rem]">
-        EU Election Checker 2024:
-        <br /> What do the parties say?
+        EU Voting Quiz 2024:
+        <br /> What do the candidates say?
       </h1>
 
       <div className="space-y-4 text-[1.125rem] leading-[1.5rem]">
@@ -70,11 +70,11 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
         </p>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
-          What is the Election Checker?
+          What is the Voting Quiz?
         </h2>
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="The Election Checker is a guidance tool. It is similar to the" />{" "}
+          <GlossaredTextServer text="The Voting Quiz is a guidance tool. It is similar to the" />{" "}
           "
           <a
             href="https://wahlkabine.at"
@@ -87,12 +87,12 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           ", {/* @ts-expect-error */}
           <GlossaredTextServer text="which does not exist for the EU Elections 2024." />{" "}
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="The Election Checker contains 15 questions on important topics that the EU deals with. For example, climate protection, refugees, work, and inclusion. You can express your opinion on each question: “Yes” or “No” or “I don’t know”. You can also indicate how important each topic is to you." />
+          <GlossaredTextServer text="The Voting Quiz contains 15 questions on important topics that the EU deals with. For example, climate protection, refugees, work, and inclusion. You can express your opinion on each question: “Yes” or “No” or “I don’t know”. You can also indicate how important each topic is to you." />
         </p>
 
         <p>
           {/* @ts-expect-error */}
-          <GlossaredTextServer text="After that, you can compare your opinions with the opinions of the 7 parties that can be elected in the European Elections in Austria." />
+          <GlossaredTextServer text="After that, you can compare your opinions with the opinions of the 7 candidates that can be elected in the European Elections in Austria." />
         </p>
 
         <p>
@@ -101,10 +101,10 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
         </p>
 
         <nav
-          aria-label="To the questions or word explanations"
+          aria-label="To the Quiz or word explanations"
           className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl md:flex-row"
         >
-          <Button
+          {/* <Button
             roundness="large"
             className=""
             as="a"
@@ -112,7 +112,7 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
             href="/glossar"
           >
             Word Explanations
-          </Button>
+          </Button> */}
           {election.isQuestionnaire && (
             <QuestionaireButton electionSlug={election.slug} />
           )}
@@ -132,9 +132,9 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           What is <span className="italic">andererseits</span>?
         </h2>
         <p>
-          The Election Checker is published by andererseits GmbH and was
-          developed in cooperation with the association andererseits - for
-          inclusion in journalism and the Hil Foundation.
+          The Voting Quiz is published by andererseits GmbH and was developed in
+          cooperation with the association andererseits - for inclusion in
+          journalism and the Hil Foundation.
         </p>
         <p>
           <span className="italic">andererseits</span> is a magazine for
@@ -157,9 +157,9 @@ const EU2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           Data Protection
         </h2>
         <p>
-          The Election Checker is anonymous. That means: We don’t know who you
-          are and how you voted. More information on data protection can be
-          found here:{" "}
+          The Voting Quiz is anonymous. That means: We don’t know who you are
+          and how you voted. More information on data protection can be found
+          here:{" "}
           <Link href="/datenschutz" className="font-semibold underline">
             wahlchecker.at/datenschutz
           </Link>
@@ -181,23 +181,19 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
         <p>
           On November, 5th there is an election for the {election.name}
           <br />
-          You can vote for {election.candidates.length} candidates.
-          <br />
           Candidates who appear to have similar goals and opinions.
         </p>
 
         <p>
           Everyone has the right to independent information.
           <br />
-          So I've combed the internet.
-          <br />
-          And wrote down their answers in simple language.
+          So I wrote down their opinions in simple language.
           <br />
           So you can understand what each candidate stands for.
         </p>
 
         <nav
-          aria-label="To the questions or word explanations"
+          aria-label="To the Quiz or word explanations"
           className="mx-auto flex w-fit flex-col gap-5 py-10 text-2xl sm:mx-0 md:flex-row"
         >
           {election.isQuestionnaire && (
@@ -213,7 +209,7 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
               Compare Answers
             </Button>
           )}
-          <Button
+          {/* <Button
             roundness="large"
             className=""
             as="a"
@@ -221,7 +217,7 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
             href="/glossary"
           >
             Word Explanations
-          </Button>
+          </Button> */}
         </nav>
 
         <h2 className="pt-5 text-[1.75rem] leading-[2.125rem]">
@@ -249,8 +245,8 @@ const NR2024Election = ({ election }: { election: ElectionWithCandidates }) => {
           Data Protection
         </h2>
         <p>
-          The Election Checker is anonymous. That means: We do not know who you
-          are and how you voted.
+          The Voting Quiz is anonymous. That means: We do not know who you are
+          and how you voted.
           <br /> More information about data protection can be found here:{" "}
           <Link href="/privacy" className="font-semibold underline">
             privacy policy

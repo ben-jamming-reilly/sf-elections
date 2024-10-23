@@ -65,7 +65,7 @@ export const QuestionaireButton = ({
                 aria-hidden="true"
                 className="ml-1 inline h-5 w-5 stroke-2"
               />
-              To the Questions
+              Take the Quiz
             </Button>
           )}
         </>

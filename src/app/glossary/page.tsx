@@ -5,7 +5,7 @@ import { metaTagsPerElectionSlug } from "../utils.index";
 
 export async function generateMetadata() {
   return metaTagsPerElectionSlug({
-    title: `Word explanations – Election Checker`,
+    title: `Word explanations – Voting Quiz`,
     description: `Terms and explanations`,
   });
 }

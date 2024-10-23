@@ -1,12 +1,15 @@
-import { networkFor, SocialIcon } from "react-social-icons";
+import { SocialIcon } from "react-social-icons";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import clsx from "clsx";
+import Link from "next/link";
+import Image from "next/image";
 
 const socialGroups = [
   {
-    type: "instagram",
-    link: "https://www.instagram.com/benjamin_really/",
+    type: "website",
+    link: "https://benjaminreilly.com/",
   },
+
   {
     type: "twitter",
     link: "https://twitter.com/benjamin_really",
@@ -24,21 +27,34 @@ export const SocialBar = ({ className }: { className?: string }) => {
           <Tooltip.Provider>
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
-                <SocialIcon
-                  url={social.link}
-                  bgColor="#fff"
-                  fgColor="#000"
-                  className="rounded-full outline-black"
-                  network={social.type}
-                  style={{
-                    width: "2.5rem",
-                    height: "2.5rem",
-                  }}
-                />
+                {social.type === "website" ? (
+                  <Link href={social.link}>
+                    <div
+                      style={{
+                        width: "2.5rem",
+                        height: "2.5rem",
+                      }}
+                    >
+                      <Image fill src="/globe.svg" alt="" />
+                    </div>
+                  </Link>
+                ) : (
+                  <SocialIcon
+                    url={social.link}
+                    bgColor="#fff"
+                    fgColor="#000"
+                    className="rounded-full outline-black"
+                    network={social.type}
+                    style={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                    }}
+                  />
+                )}
               </Tooltip.Trigger>
 
               <Tooltip.Portal>
-                <Tooltip.Content className="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade z-50 select-none rounded-[4px] bg-black px-[15px] py-[10px] text-[15px] text-sm leading-none text-white shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]">
+                <Tooltip.Content className="z-50 select-none rounded-[4px] bg-black px-[15px] py-[10px] text-[15px] text-sm leading-none text-white shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity] data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade">
                   <span className="">
                     {social.type.slice(0, 1).toUpperCase() +
                       social.type.slice(1)}

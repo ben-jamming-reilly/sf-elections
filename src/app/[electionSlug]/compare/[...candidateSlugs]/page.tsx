@@ -61,7 +61,7 @@ export default async function CandidateComparison({
       <ShareButton
         electionSlug={params.electionSlug}
         title={`Comparison between ${candidatesTitle} during the ${election.name}`}
-        text="Election checker by andererseits"
+        text="Voting Quiz by andererseits"
       >
         Share page
       </ShareButton>

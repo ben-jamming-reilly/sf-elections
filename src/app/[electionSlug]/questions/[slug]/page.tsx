@@ -46,7 +46,7 @@ export default async function WahlkabineResult({
       <BackButton href={`/${params.electionSlug}`}>To Homepage</BackButton>
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Election Checker ${voterWithAnswers.election.name}`}
+        title={`Voting Quiz ${voterWithAnswers.election.name}`}
       >
         Share
       </ShareButton>
@@ -139,7 +139,7 @@ export default async function WahlkabineResult({
             <strong className="font-semibold">Important:</strong>
             <br /> The result is not a voting recommendation. It does not mean
             you should vote for the candidate with the highest similarity in the
-            Election Checker. The result only shows which parties gave similar
+            Voting Quiz. The result only shows which candidates gave similar
             answers to the {voterWithAnswers.answers.length} questions as you
             did.
           </p>
@@ -175,7 +175,7 @@ export async function generateMetadata({ params }: WahlkabineResultProps) {
 
   return metaTagsPerElectionSlug({
     electionSlug: voterWithAnswers.election.slug,
-    title: `My result for ${voterWithAnswers.election.name} – Election Checker`,
+    title: `My result for ${voterWithAnswers.election.name} – Voting Quiz`,
     description: `Look at how similar I was to the candidates.`,
   });
 }

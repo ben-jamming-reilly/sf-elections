@@ -57,7 +57,7 @@ export default async function WahlkabineResultDetails({
       </BackButton>
       <ShareButton
         electionSlug={params.electionSlug}
-        title={`Election Checker for ${election.name}`}
+        title={`Voting Quiz for ${election.name}`}
       >
         Share
       </ShareButton>
@@ -74,9 +74,7 @@ export default async function WahlkabineResultDetails({
       {toolbar}
 
       <section>
-        <h1 className="my-5 pb-4 text-center text-4xl">
-          The candidates answers:
-        </h1>
+        <h1 className="my-5 pb-4 text-center text-4xl">Candidates Answers</h1>
 
         <nav
           aria-label="Links to the answers of each party"
@@ -102,14 +100,14 @@ export default async function WahlkabineResultDetails({
       >
         <div className="max-w-[80ch] space-y-3">
           <h2 id="details-page-questions-overview-title" className="text-3xl">
-            Here you can compare your answers with all parties
+            Here you can compare your answers with all candidates
           </h2>
           <p>
-            The parties have also written the explainations for their opinions.
+            The candidates also have written explainations for their opinions.
             You can read this by clicking on &quot;More Info.&quot; We have also
             explained the reasons in simple language.
             <br />
-            <br /> The order of the parties is random.
+            <br /> The order of the candidates is random.
           </p>
         </div>
         <div>
