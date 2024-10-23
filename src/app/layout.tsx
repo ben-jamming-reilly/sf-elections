@@ -91,6 +91,7 @@ export default function RootLayout({
                   href="/"
                   title="Zur Startseite"
                 >
+                  <Image fill src="/globe.svg" alt="" />
                   <h1 className="text-3xl">SF Elections</h1>
                 </Link>
               </div>
