@@ -89,9 +89,9 @@ export default function RootLayout({
                 <Link
                   className="bg-white  px-2 py-1 outline-offset-4 outline-black focus-visible:outline-2"
                   href="/"
-                  title="Zur Startseite"
+                  title="SF Elections"
                 >
-                  <Image fill src="/globe.svg" alt="" />
+                  {/* <Image fill src="/globe.svg" alt="" /> */}
                   <h1 className="text-3xl">SF Elections</h1>
                 </Link>
               </div>
